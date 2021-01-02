@@ -1,0 +1,101 @@
+extensions:
+	cache: Nette\Bridges\CacheDI\CacheExtension(%tempDir%)
+	datasource: Orisai\DataSources\Bridge\NetteDI\DataSourceExtension
+	dbal: OriCMF\Core\SQL\DI\DbalExtension
+	decorator: Nette\DI\Extensions\DecoratorExtension
+	di: Nette\DI\Extensions\DIExtension(%debugMode%)
+	inject: Nette\DI\Extensions\InjectExtension
+	migrations: Nextras\Migrations\Bridges\NetteDI\MigrationsExtension
+	orm: Nextras\Orm\Bridges\NetteDI\OrmExtension
+	time: OriNette\Time\DI\TimeExtension
+	tracy: Tracy\Bridges\Nette\TracyExtension(%debugMode%, %consoleMode%)
+
+dbal:
+	debug: %debug.panels.dbal%
+
+di:
+	debugger: %debug.panels.di.container%
+	export:
+		tags: false
+
+migrations:
+	driver: pgsql
+	dbal: nextras
+	withDummyData: %debugMode%
+	groups:
+		ori.core.structure:
+			directory: %vendorDir%/orisai/cmf-core/src/upgrade/migrations/structures
+
+orm:
+	model: Nextras\Orm\Model\Model
+	repositoryFinder: Nextras\Orm\Bridges\NetteDI\DIRepositoryFinder
+
+parameters:
+	debug:
+		panels:
+			dbal: false
+			di:
+				container: false
+	application:
+		name: null
+		build:
+			name: null
+			version: null
+			stable: false
+
+services:
+	# Cache
+	ori.core.cache:
+		factory: Nette\Caching\Cache
+
+	# Logging
+	ori.core.logger:
+		factory: Psr\Log\NullLogger
+		type: Psr\Log\LoggerInterface
+
+	# Config
+	ori.core.config.application:
+		factory: OriCMF\Core\Config\ApplicationConfig
+		arguments: [%application.name%]
+	ori.core.config.build:
+		factory: OriCMF\Core\Config\BuildConfig
+		arguments: [%application.build.name%, %application.build.version%, %application.build.stable%]
+
+	# User
+	ori.core.email.mapper:
+		factory: OriCMF\Core\Email\Mapper\EmailPgsqlMapper
+		type: OriCMF\Core\Email\Mapper\EmailMapper
+	ori.core.email.repository:
+		factory: OriCMF\Core\Email\EmailRepository
+
+	ori.core.password.mapper:
+		factory: OriCMF\Core\Password\Mapper\PasswordPgsqlMapper
+		type: OriCMF\Core\Password\Mapper\PasswordMapper
+	ori.core.password.repository:
+		factory: OriCMF\Core\Password\PasswordRepository
+
+	ori.core.person.mapper:
+		factory: OriCMF\Core\Person\Mapper\PersonPgsqlMapper
+		type: OriCMF\Core\Person\Mapper\PersonMapper
+	ori.core.person.repository:
+		factory: OriCMF\Core\Person\PersonRepository
+
+	ori.core.role.mapper:
+		factory: OriCMF\Core\Role\Mapper\RolePgsqlMapper
+		type: OriCMF\Core\Role\Mapper\RoleMapper
+	ori.core.role.repository:
+		factory: OriCMF\Core\Role\RoleRepository
+
+	ori.core.user.mapper:
+		factory: OriCMF\Core\User\Mapper\UserPgsqlMapper
+		type: OriCMF\Core\User\Mapper\UserMapper
+	ori.core.user.repository:
+		factory: OriCMF\Core\User\UserRepository
+
+	# Auth
+	ori.core.auth.password.encoder:
+		factory: Orisai\Auth\Passwords\SodiumPasswordEncoder
+
+tracy:
+	netteMailer: false
+	strictMode: true
