@@ -11,7 +11,7 @@ use Symfony\Component\Uid\Ulid;
  * @property-read string            $id {primary}
  * @property-read DateTimeImmutable $createdAt {default now}
  * @property string                 $email
- * @property-read Person            $person {1:1 Person, oneSided=true, cascade=[persist]}
+ * @property-read Person            $person {1:1 Person, isMain=true, oneSided=true, cascade=[persist]}
  */
 final class Email extends Entity
 {

@@ -11,7 +11,7 @@ use Symfony\Component\Uid\Ulid;
  * @property-read string            $id {primary}
  * @property-read DateTimeImmutable $createdAt {default now}
  * @property string                 $passwordHash
- * @property-read User              $user {1:1 User, oneSided=true, cascade=[persist]}
+ * @property-read User              $user {1:1 User, isMain=true, oneSided=true, cascade=[persist]}
  */
 final class Password extends Entity
 {

@@ -11,7 +11,7 @@ use Symfony\Component\Uid\Ulid;
 /**
  * @property-read string            $id {primary}
  * @property-read DateTimeImmutable $createdAt {default now}
- * @property-read Person            $person {1:1 Person::$account, isMain=true, cascade=[persist]}
+ * @property-read Person            $person {1:1 Person::$user, isMain=true, cascade=[persist]}
  * @property-read array<Role>       $roles {m:m Role, isMain=true, oneSided=true, cascade=[persist]}
  */
 final class User extends Entity

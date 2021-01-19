@@ -12,7 +12,7 @@ use function random_int;
 /**
  * @property-read string            $id {primary}
  * @property-read DateTimeImmutable $createdAt {default now}
- * @property User|null              $account {1:1 Account::$person, cascade=[persist, remove]}
+ * @property User|null              $user {1:1 User::$person, cascade=[persist, remove]}
  * @property string                 $firstName
  * @property string                 $lastName
  * @property string                 $nickName
