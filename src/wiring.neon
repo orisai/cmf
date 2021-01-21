@@ -1,5 +1,6 @@
 extensions:
 	cache: Nette\Bridges\CacheDI\CacheExtension(%tempDir%)
+	console: OriNette\Console\DI\ConsoleExtension
 	datasource: Orisai\DataSources\Bridge\NetteDI\DataSourceExtension
 	dbal: OriCMF\Core\SQL\DI\DbalExtension
 	decorator: Nette\DI\Extensions\DecoratorExtension
@@ -9,6 +10,11 @@ extensions:
 	orm: Nextras\Orm\Bridges\NetteDI\OrmExtension
 	time: OriNette\Time\DI\TimeExtension
 	tracy: Tracy\Bridges\Nette\TracyExtension(%debugMode%, %consoleMode%)
+
+console:
+	catchExceptions: %catchExceptions.console%
+	name: %application.name%
+	version: %application.build.version%
 
 dbal:
 	debug: %debug.panels.dbal%
@@ -31,6 +37,8 @@ orm:
 	repositoryFinder: Nextras\Orm\Bridges\NetteDI\DIRepositoryFinder
 
 parameters:
+	catchExceptions:
+		console: true
 	debug:
 		panels:
 			dbal: false
