@@ -21,6 +21,7 @@ final class Role extends Entity
 
 		$this->setReadOnlyValue('id', (new Ulid())->toRfc4122());
 		$this->name = $name;
+		$this->privileges = [];
 	}
 
 }
