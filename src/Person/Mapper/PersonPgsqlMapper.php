@@ -9,7 +9,7 @@ final class PersonPgsqlMapper extends DbalMapper implements PersonMapper
 
 	public function getTableName(): string
 	{
-		return 'ori.core.people';
+		return 'ori_core.people';
 	}
 
 }
