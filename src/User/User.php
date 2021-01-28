@@ -4,15 +4,16 @@ namespace OriCMF\Core\User;
 
 use DateTimeImmutable;
 use Nextras\Orm\Entity\Entity;
+use Nextras\Orm\Relationships\ManyHasMany;
 use OriCMF\Core\Person\Person;
 use OriCMF\Core\Role\Role;
 use Symfony\Component\Uid\Ulid;
 
 /**
- * @property-read string            $id {primary}
- * @property-read DateTimeImmutable $createdAt {default now}
- * @property-read Person            $person {1:1 Person::$user, isMain=true, cascade=[persist]}
- * @property-read array<Role>       $roles {m:m Role, isMain=true, oneSided=true, cascade=[persist]}
+ * @property-read string                  $id {primary}
+ * @property-read DateTimeImmutable       $createdAt {default now}
+ * @property-read Person                  $person {1:1 Person::$user, isMain=true, cascade=[persist]}
+ * @property-read ManyHasMany&array<Role> $roles {m:m Role, isMain=true, oneSided=true, cascade=[persist]}
  */
 final class User extends Entity
 {
