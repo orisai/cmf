@@ -17,10 +17,15 @@ CREATE TABLE ori_core.emails
     "id"         uuid PRIMARY KEY,
     "created_at" timestamptz  NOT NULL,
     "email"      varchar(250) NOT NULL UNIQUE,
+    "is_primary" bool         NOT NULL,
     "person_id"  uuid         NOT NULL
 );
 
 CREATE INDEX emails_person_id_key ON ori_core.emails (person_id);
+
+CREATE UNIQUE INDEX emails_is_primary_key
+    ON ori_core.emails ("person_id", "is_primary")
+    WHERE "is_primary" IS TRUE;
 
 CREATE TABLE ori_core.passwords
 (
