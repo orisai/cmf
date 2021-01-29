@@ -14,11 +14,11 @@ CREATE TABLE ori_core.users
 
 CREATE TABLE ori_core.emails
 (
-    "id"         uuid PRIMARY KEY,
-    "created_at" timestamptz  NOT NULL,
-    "email"      varchar(250) NOT NULL UNIQUE,
-    "is_primary" bool         NOT NULL,
-    "person_id"  uuid         NOT NULL
+    "id"            uuid PRIMARY KEY,
+    "created_at"    timestamptz  NOT NULL,
+    "email_address" varchar(250) NOT NULL UNIQUE,
+    "is_primary"    bool         NOT NULL,
+    "person_id"     uuid         NOT NULL
 );
 
 CREATE INDEX emails_person_id_key ON ori_core.emails (person_id);
