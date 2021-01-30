@@ -8,6 +8,7 @@ extensions:
 	inject: Nette\DI\Extensions\InjectExtension
 	migrations: Nextras\Migrations\Bridges\NetteDI\MigrationsExtension
 	orm: Nextras\Orm\Bridges\NetteDI\OrmExtension
+	ormInitializer: OriCMF\Core\ORM\DI\OrmInitializerExtension
 	time: OriNette\Time\DI\TimeExtension
 	tracy: Tracy\Bridges\Nette\TracyExtension(%debugMode%, %consoleMode%)
 
