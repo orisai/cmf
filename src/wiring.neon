@@ -39,7 +39,7 @@ orm:
 
 parameters:
 	catchExceptions:
-		console: true
+		console: false
 	debug:
 		panels:
 			dbal: false
