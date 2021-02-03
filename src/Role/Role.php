@@ -4,13 +4,15 @@ namespace OriCMF\Core\Role;
 
 use DateTimeImmutable;
 use Nextras\Orm\Entity\Entity;
+use OriCMF\Core\ORM\JsonWrapper;
 use Symfony\Component\Uid\Ulid;
 
 /**
  * @property-read string            $id {primary}
  * @property-read DateTimeImmutable $createdAt {default now}
  * @property string                 $name
- * @property array<string>			$privileges
+ * @property array<string>          $privileges {wrapper JsonWrapper}
+ * @uses JsonWrapper
  */
 final class Role extends Entity
 {

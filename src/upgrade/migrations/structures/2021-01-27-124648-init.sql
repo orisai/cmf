@@ -49,7 +49,7 @@ CREATE TABLE ori_core.roles
     "id"         uuid PRIMARY KEY,
     "created_at" timestamptz    NOT NULL,
     "name"       varchar(250)   NOT NULL UNIQUE,
-    "privileges" varchar(250)[] NOT NULL
+    "privileges" jsonb NOT NULL
 );
 
 CREATE TABLE ori_core.user_roles
