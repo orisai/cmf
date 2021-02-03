@@ -5,17 +5,20 @@ namespace OriCMF\Core\Person;
 use DateTimeImmutable;
 use Nette\Utils\Strings;
 use Nextras\Orm\Entity\Entity;
+use Nextras\Orm\Relationships\OneHasMany;
+use OriCMF\Core\Email\Email;
 use OriCMF\Core\User\User;
 use Symfony\Component\Uid\Ulid;
 use function random_int;
 
 /**
- * @property-read string            $id {primary}
- * @property-read DateTimeImmutable $createdAt {default now}
- * @property User|null              $user {1:1 User::$person, cascade=[persist, remove]}
- * @property string                 $firstName
- * @property string                 $lastName
- * @property string                 $nickName
+ * @property-read string             $id {primary}
+ * @property-read DateTimeImmutable  $createdAt {default now}
+ * @property User|null               $user {1:1 User::$person, cascade=[persist, remove]}
+ * @property string                  $firstName
+ * @property string                  $lastName
+ * @property string                  $nickName
+ * @property OneHasMany&array<Email> $emails {1:m Email::$person, cascade=[persist, remove]}
  */
 final class Person extends Entity
 {

@@ -12,7 +12,7 @@ use Symfony\Component\Uid\Ulid;
  * @property-read DateTimeImmutable $createdAt {default now}
  * @property string                 $emailAddress
  * @property bool                   $isPrimary
- * @property-read Person            $person {1:1 Person, isMain=true, oneSided=true, cascade=[persist]}
+ * @property-read Person            $person {m:1 Person::$emails, cascade=[persist]}
  */
 final class Email extends Entity
 {
