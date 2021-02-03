@@ -33,4 +33,9 @@ final class Person extends Entity
 		$this->nickName = Strings::webalize("$firstName.$lastName." . random_int(100, 9_999));
 	}
 
+	public function getPrimaryEmail(): ?Email
+	{
+		return $this->emails->toCollection()->getBy(['isPrimary' => true]);
+	}
+
 }
