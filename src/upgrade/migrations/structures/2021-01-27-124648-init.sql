@@ -15,10 +15,10 @@ CREATE TABLE ori_core.users
 CREATE TABLE ori_core.emails
 (
     "id"            uuid PRIMARY KEY,
-    "created_at"    timestamptz  NOT NULL,
-    "email_address" varchar(250) NOT NULL UNIQUE,
-    "is_primary"    bool         NOT NULL,
-    "person_id"     uuid         NOT NULL
+    "created_at"    timestamptz                      NOT NULL,
+    "email_address" varchar(250) COLLATE "und-x-icu" NOT NULL UNIQUE,
+    "is_primary"    bool                             NOT NULL,
+    "person_id"     uuid                             NOT NULL
 );
 
 CREATE INDEX emails_person_id_key ON ori_core.emails (person_id);
@@ -30,26 +30,26 @@ CREATE UNIQUE INDEX emails_is_primary_key
 CREATE TABLE ori_core.passwords
 (
     "id"            uuid PRIMARY KEY,
-    "created_at"    timestamptz  NOT NULL,
-    "password_hash" varchar(250) NOT NULL,
-    "user_id"       uuid         NOT NULL UNIQUE
+    "created_at"    timestamptz                      NOT NULL,
+    "password_hash" varchar(250) COLLATE "und-x-icu" NOT NULL,
+    "user_id"       uuid                             NOT NULL UNIQUE
 );
 
 CREATE TABLE ori_core.people
 (
     "id"         uuid PRIMARY KEY,
-    "created_at" timestamptz  NOT NULL,
-    "first_name" varchar(250) NOT NULL,
-    "last_name"  varchar(250) NOT NULL,
-    "nick_name"  varchar(250) NOT NULL UNIQUE
+    "created_at" timestamptz                      NOT NULL,
+    "first_name" varchar(250) COLLATE "und-x-icu" NOT NULL,
+    "last_name"  varchar(250) COLLATE "und-x-icu" NOT NULL,
+    "nick_name"  varchar(250) COLLATE "und-x-icu" NOT NULL UNIQUE
 );
 
 CREATE TABLE ori_core.roles
 (
     "id"         uuid PRIMARY KEY,
-    "created_at" timestamptz    NOT NULL,
-    "name"       varchar(250)   NOT NULL UNIQUE,
-    "privileges" jsonb NOT NULL
+    "created_at" timestamptz                      NOT NULL,
+    "name"       varchar(250) COLLATE "und-x-icu" NOT NULL UNIQUE,
+    "privileges" jsonb                            NOT NULL
 );
 
 CREATE TABLE ori_core.user_roles
