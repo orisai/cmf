@@ -16,7 +16,7 @@ CREATE TABLE ori_core.emails
 (
     "id"            uuid PRIMARY KEY,
     "created_at"    timestamptz                      NOT NULL,
-    "email_address" varchar(254) COLLATE "und-x-icu" NOT NULL UNIQUE,
+    "email_address" varchar(254) COLLATE "und-x-icu" NOT NULL UNIQUE CHECK ("email_address" IS NORMALIZED),
     "is_primary"    bool                             NOT NULL,
     "person_id"     uuid                             NOT NULL
 );
@@ -41,7 +41,7 @@ CREATE TABLE ori_core.people
     "created_at" timestamptz                      NOT NULL,
     "first_name" varchar(250) COLLATE "und-x-icu" NOT NULL,
     "last_name"  varchar(250) COLLATE "und-x-icu" NOT NULL,
-    "nick_name"  varchar(250) COLLATE "und-x-icu" NOT NULL UNIQUE
+    "nick_name"  varchar(250) COLLATE "und-x-icu" NOT NULL UNIQUE CHECK ("nick_name" IS NORMALIZED)
 );
 
 CREATE TABLE ori_core.roles
