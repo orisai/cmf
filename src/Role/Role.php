@@ -4,7 +4,7 @@ namespace OriCMF\Core\Role;
 
 use DateTimeImmutable;
 use Nextras\Orm\Entity\Entity;
-use OriCMF\Core\ORM\JsonWrapper;
+use OriCMF\Core\ORM\Wrapper\JsonWrapper;
 use Symfony\Component\Uid\Ulid;
 
 /**

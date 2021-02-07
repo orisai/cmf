@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace OriCMF\Core\ORM;
+namespace OriCMF\Core\ORM\Wrapper;
 
 use Nette\Utils\Json;
 use Nextras\Orm\Entity\ImmutableValuePropertyWrapper;
