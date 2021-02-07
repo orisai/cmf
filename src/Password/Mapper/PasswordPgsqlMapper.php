@@ -9,7 +9,7 @@ final class PasswordPgsqlMapper extends DbalMapper implements PasswordMapper
 
 	public function getTableName(): string
 	{
-		return 'ori_core.passwords';
+		return 'ori.passwords';
 	}
 
 }

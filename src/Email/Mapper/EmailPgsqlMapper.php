@@ -9,7 +9,7 @@ final class EmailPgsqlMapper extends DbalMapper implements EmailMapper
 
 	public function getTableName(): string
 	{
-		return 'ori_core.emails';
+		return 'ori.emails';
 	}
 
 }

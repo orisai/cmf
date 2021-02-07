@@ -13,7 +13,7 @@ final class UserPgsqlMapper extends DbalMapper implements UserMapper
 
 	public function getTableName(): string
 	{
-		return 'ori_core.users';
+		return 'ori.users';
 	}
 
 	/**
@@ -22,7 +22,7 @@ final class UserPgsqlMapper extends DbalMapper implements UserMapper
 	public function getManyHasManyParameters(PropertyMetadata $sourceProperty, IMapper $targetMapper): array
 	{
 		if ($targetMapper instanceof RoleMapper) {
-			return ['ori_core.user_roles', ['user_id', 'role_id']];
+			return ['ori.user_roles', ['user_id', 'role_id']];
 		}
 
 		assert($targetMapper instanceof DbalMapper);
