@@ -16,7 +16,7 @@ CREATE TABLE ori_core.emails
 (
     "id"            uuid PRIMARY KEY,
     "created_at"    timestamptz                      NOT NULL,
-    "email_address" varchar(250) COLLATE "und-x-icu" NOT NULL UNIQUE,
+    "email_address" varchar(254) COLLATE "und-x-icu" NOT NULL UNIQUE,
     "is_primary"    bool                             NOT NULL,
     "person_id"     uuid                             NOT NULL
 );
