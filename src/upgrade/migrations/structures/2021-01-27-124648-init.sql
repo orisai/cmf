@@ -1,9 +1,9 @@
 DROP SCHEMA IF EXISTS ori CASCADE;
 CREATE SCHEMA ori;
 
--- ------
+-- ----------
 -- collations
--- ------
+-- ----------
 
 CREATE COLLATION ori.strict (
     provider = "icu",
@@ -28,6 +28,21 @@ CREATE COLLATION ori.ignore_case_and_accents (
     locale = "und@colStrength=primary",
     deterministic = false
 );
+
+-- ----------
+-- extensions
+-- ----------
+
+CREATE EXTENSION IF NOT EXISTS unaccent;
+
+-- ---------------------
+-- search configurations
+-- ---------------------
+
+CREATE TEXT SEARCH CONFIGURATION ori.ignore_accents ( COPY = simple );
+ALTER TEXT SEARCH CONFIGURATION ori.ignore_accents
+    ALTER MAPPING FOR hword, hword_part, word
+        WITH unaccent, simple;
 
 -- ------
 -- tables
