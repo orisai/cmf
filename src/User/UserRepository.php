@@ -8,6 +8,7 @@ use Nextras\Orm\Entity\Entity;
 use Nextras\Orm\Repository\IDependencyProvider;
 use Nextras\Orm\Repository\Repository;
 use OriCMF\Core\ORM\Functions\ArrayAggregateFunction;
+use OriCMF\Core\ORM\Functions\InsensitiveLikeSearchFunction;
 use OriCMF\Core\User\Mapper\UserMapper;
 
 final class UserRepository extends Repository
@@ -34,6 +35,10 @@ final class UserRepository extends Repository
 	{
 		if ($name === ArrayAggregateFunction::class) {
 			return new ArrayAggregateFunction();
+		}
+
+		if ($name === InsensitiveLikeSearchFunction::class) {
+			return new InsensitiveLikeSearchFunction();
 		}
 
 		return parent::createCollectionFunction($name);
