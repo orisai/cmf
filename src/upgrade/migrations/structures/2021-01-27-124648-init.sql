@@ -89,10 +89,11 @@ CREATE TABLE ori.people
 
 CREATE TABLE ori.roles
 (
-    "id"         uuid PRIMARY KEY,
-    "created_at" timestamptz                     NOT NULL,
-    "name"       varchar(250) COLLATE ori.strict NOT NULL UNIQUE,
-    "privileges" jsonb                           NOT NULL
+    "id"           uuid PRIMARY KEY,
+    "created_at"   timestamptz                     NOT NULL,
+    "name"         varchar(250) COLLATE ori.strict NOT NULL UNIQUE,
+    "is_immutable" bool                            NOT NULL,
+    "privileges"   jsonb                           NOT NULL
 );
 
 CREATE TABLE ori.user_roles
