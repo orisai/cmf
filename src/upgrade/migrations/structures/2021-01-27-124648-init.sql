@@ -72,10 +72,10 @@ CREATE UNIQUE INDEX emails_is_primary_key
 
 CREATE TABLE ori.passwords
 (
-    "id"            uuid PRIMARY KEY,
-    "created_at"    timestamptz                     NOT NULL,
-    "password_hash" varchar(250) COLLATE ori.strict NOT NULL,
-    "user_id"       uuid                            NOT NULL UNIQUE
+    "id"               uuid PRIMARY KEY,
+    "created_at"       timestamptz                     NOT NULL,
+    "encoded_password" varchar(250) COLLATE ori.strict NOT NULL,
+    "user_id"          uuid                            NOT NULL UNIQUE
 );
 
 CREATE TABLE ori.people
