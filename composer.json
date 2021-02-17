@@ -47,7 +47,9 @@
 		"orisai/utils": "^1.0.0",
 		"symfony/console": "^5.2.0",
 		"symfony/uid": "^5.2.0",
-		"tracy/tracy": "^2.8.0"
+		"tracy/tracy": "^2.8.0",
+		"webmozart/glob": "^4.3.0",
+		"webmozart/path-util": "^2.3.0"
 	},
 	"require-dev": {
 		"infection/infection": "^0.20.0",
