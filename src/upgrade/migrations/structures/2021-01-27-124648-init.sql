@@ -109,33 +109,33 @@ CREATE TABLE ori.user_roles
 -- ------------
 
 ALTER TABLE ori.users
-    ADD CONSTRAINT "people_fkey"
+    ADD CONSTRAINT "person_id_fkey"
         FOREIGN KEY ("person_id")
             REFERENCES ori.people ("id")
             ON UPDATE RESTRICT
             ON DELETE RESTRICT;
 
 ALTER TABLE ori.passwords
-    ADD CONSTRAINT "users_fkey"
+    ADD CONSTRAINT "user_id_fkey"
         FOREIGN KEY ("user_id")
             REFERENCES ori.users ("id")
             ON UPDATE RESTRICT
             ON DELETE RESTRICT;
 
 ALTER TABLE ori.emails
-    ADD CONSTRAINT "people_fkey"
+    ADD CONSTRAINT "person_id_fkey"
         FOREIGN KEY ("person_id")
             REFERENCES ori.people ("id")
             ON UPDATE RESTRICT
             ON DELETE RESTRICT;
 
 ALTER TABLE ori.user_roles
-    ADD CONSTRAINT "users_fkey"
+    ADD CONSTRAINT "user_id_fkey"
         FOREIGN KEY ("user_id")
             REFERENCES ori.users ("id")
             ON UPDATE RESTRICT
             ON DELETE RESTRICT,
-    ADD CONSTRAINT "roles_fkey"
+    ADD CONSTRAINT "role_id_fkey"
         FOREIGN KEY ("role_id")
             REFERENCES ori.roles ("id")
             ON UPDATE RESTRICT
