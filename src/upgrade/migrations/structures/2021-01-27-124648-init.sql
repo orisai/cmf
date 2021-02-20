@@ -64,7 +64,8 @@ CREATE TABLE ori.emails
     "person_id"     uuid                                             NOT NULL
 );
 
-CREATE INDEX emails_person_id_key ON ori.emails (person_id);
+CREATE INDEX emails_person_id_key
+    ON ori.emails (person_id);
 
 CREATE UNIQUE INDEX emails_is_primary_key
     ON ori.emails ("person_id", "is_primary")
