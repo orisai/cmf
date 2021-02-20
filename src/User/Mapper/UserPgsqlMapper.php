@@ -4,9 +4,6 @@ namespace OriCMF\Core\User\Mapper;
 
 use Nextras\Orm\Entity\Reflection\PropertyMetadata;
 use Nextras\Orm\Mapper\Dbal\DbalMapper;
-use Nextras\Orm\Mapper\IMapper;
-use OriCMF\Core\Role\Mapper\RoleMapper;
-use function assert;
 
 final class UserPgsqlMapper extends DbalMapper implements UserMapper
 {
@@ -19,13 +16,11 @@ final class UserPgsqlMapper extends DbalMapper implements UserMapper
 	/**
 	 * @return array{string,array{string,string}}
 	 */
-	public function getManyHasManyParameters(PropertyMetadata $sourceProperty, IMapper $targetMapper): array
+	public function getManyHasManyParameters(PropertyMetadata $sourceProperty, DbalMapper $targetMapper): array
 	{
-		if ($targetMapper instanceof RoleMapper) {
+		if ($sourceProperty->name === 'roles') {
 			return ['ori.user_roles', ['user_id', 'role_id']];
 		}
-
-		assert($targetMapper instanceof DbalMapper);
 
 		return parent::getManyHasManyParameters($sourceProperty, $targetMapper);
 	}
