@@ -70,6 +70,29 @@ services:
 		factory: OriCMF\Core\Config\BuildConfig
 		arguments: [%application.build.name%, %application.build.version%, %application.build.stable%]
 
+	# Filesystem
+	ori.core.filesystem.internal.adapter:
+		factory: League\Flysystem\Local\LocalFilesystemAdapter
+		type: League\Flysystem\FilesystemAdapter
+		arguments:
+			location: %dataDir%
+	ori.core.filesystem.internal:
+		factory: OriCMF\Core\Files\InternalFileSystem
+		type: OriCMF\Core\Files\InternalFileSystem
+		arguments:
+			- @ori.core.filesystem.internal.adapter
+
+	ori.core.filesystem.public.adapter:
+		factory: League\Flysystem\Local\LocalFilesystemAdapter
+		type: League\Flysystem\FilesystemAdapter
+		arguments:
+			location: %wwwDir%/u
+	ori.core.filesystem.public:
+		factory: OriCMF\Core\Files\PublicFileSystem
+		type: OriCMF\Core\Files\PublicFileSystem
+		arguments:
+			- @ori.core.filesystem.public.adapter
+
 	# User
 	ori.core.email.mapper:
 		factory: OriCMF\Core\Email\Mapper\EmailPgsqlMapper

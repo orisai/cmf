@@ -30,6 +30,7 @@
 	],
 	"require": {
 		"php": ">=7.4.0 <8.2.0",
+		"league/flysystem": "^2.0.4",
 		"monolog/monolog": "^2.2.0",
 		"nette/di": "^3.0.7",
 		"nette/neon": "^3.2.0",
