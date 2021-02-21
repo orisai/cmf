@@ -60,7 +60,7 @@ CREATE TABLE ori.emails
     "id"            uuid PRIMARY KEY,
     "created_at"    timestamptz                                      NOT NULL,
     "email_address" varchar(254) COLLATE ori.ignore_case_and_accents NOT NULL UNIQUE CHECK ("email_address" IS NORMALIZED),
-    "is_primary"    bool                                             NOT NULL,
+    "type"          varchar(100) COLLATE ori.ignore_case             NOT NULL,
     "person_id"     uuid                                             NOT NULL
 );
 
@@ -68,8 +68,8 @@ CREATE INDEX emails_person_id_key
     ON ori.emails (person_id);
 
 CREATE UNIQUE INDEX emails_is_primary_key
-    ON ori.emails ("person_id", "is_primary")
-    WHERE "is_primary" IS TRUE;
+    ON ori.emails ("person_id", "type")
+    WHERE "type" = 'primary';
 
 CREATE TABLE ori.passwords
 (

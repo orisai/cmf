@@ -35,7 +35,7 @@ final class Person extends Entity
 
 	public function getPrimaryEmail(): ?Email
 	{
-		return $this->emails->toCollection()->getBy(['isPrimary' => true]);
+		return $this->emails->toCollection()->getBy(['type' => Email::TYPE_PRIMARY]);
 	}
 
 }
