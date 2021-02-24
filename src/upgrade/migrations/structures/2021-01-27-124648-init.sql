@@ -85,7 +85,7 @@ CREATE TABLE ori.people
     "created_at" timestamptz                                      NOT NULL,
     "first_name" varchar(250) COLLATE ori.strict                  NOT NULL,
     "last_name"  varchar(250) COLLATE ori.strict                  NOT NULL,
-    "nick_name"  varchar(250) COLLATE ori.ignore_case_and_accents NOT NULL UNIQUE CHECK ("nick_name" IS NORMALIZED)
+    "user_name"  varchar(250) COLLATE ori.ignore_case_and_accents NOT NULL UNIQUE CHECK ("user_name" IS NORMALIZED)
 );
 
 CREATE TABLE ori.roles

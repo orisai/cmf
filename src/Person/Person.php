@@ -17,7 +17,7 @@ use function random_int;
  * @property User|null               $user {1:1 User::$person, cascade=[persist, remove]}
  * @property string                  $firstName
  * @property string                  $lastName
- * @property string                  $nickName
+ * @property string                  $userName
  * @property OneHasMany&array<Email> $emails {1:m Email::$person, cascade=[persist, remove]}
  */
 final class Person extends Entity
@@ -30,7 +30,7 @@ final class Person extends Entity
 		$this->setReadOnlyValue('id', (new Ulid())->toRfc4122());
 		$this->firstName = $firstName;
 		$this->lastName = $lastName;
-		$this->nickName = Strings::webalize("$firstName.$lastName." . random_int(100, 9_999));
+		$this->userName = Strings::webalize("$firstName.$lastName." . random_int(100, 9_999));
 	}
 
 	public function getPrimaryEmail(): ?Email
