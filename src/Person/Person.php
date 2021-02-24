@@ -38,4 +38,9 @@ final class Person extends Entity
 		return $this->emails->toCollection()->getBy(['type' => Email::TYPE_PRIMARY]);
 	}
 
+	public function getFullName(): string
+	{
+		return "{$this->firstName} {$this->lastName}";
+	}
+
 }
