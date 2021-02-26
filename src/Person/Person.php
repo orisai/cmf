@@ -15,32 +15,25 @@ use function random_int;
  * @property-read string             $id {primary}
  * @property-read DateTimeImmutable  $createdAt {default now}
  * @property User|null               $user {1:1 User::$person, cascade=[persist, remove]}
- * @property string                  $firstName
- * @property string                  $lastName
+ * @property string                  $fullName
  * @property string                  $userName
  * @property OneHasMany&array<Email> $emails {1:m Email::$person, cascade=[persist, remove]}
  */
 final class Person extends Entity
 {
 
-	public function __construct(string $firstName, string $lastName)
+	public function __construct(string $fullName)
 	{
 		parent::__construct();
 
 		$this->setReadOnlyValue('id', (new Ulid())->toRfc4122());
-		$this->firstName = $firstName;
-		$this->lastName = $lastName;
-		$this->userName = Strings::webalize("$firstName.$lastName." . random_int(100, 9_999));
+		$this->fullName = $fullName;
+		$this->userName = Strings::webalize("$fullName." . random_int(100, 9_999));
 	}
 
 	public function getPrimaryEmail(): ?Email
 	{
 		return $this->emails->toCollection()->getBy(['type' => Email::TYPE_PRIMARY]);
-	}
-
-	public function getFullName(): string
-	{
-		return "{$this->firstName} {$this->lastName}";
 	}
 
 }

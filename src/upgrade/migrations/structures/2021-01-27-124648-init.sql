@@ -83,8 +83,7 @@ CREATE TABLE ori.people
 (
     "id"         uuid PRIMARY KEY,
     "created_at" timestamptz                                      NOT NULL,
-    "first_name" varchar(250) COLLATE ori.strict                  NOT NULL,
-    "last_name"  varchar(250) COLLATE ori.strict                  NOT NULL,
+    "full_name"  varchar(500) COLLATE ori.strict                  NOT NULL,
     "user_name"  varchar(250) COLLATE ori.ignore_case_and_accents NOT NULL UNIQUE CHECK ("user_name" IS NORMALIZED)
 );
 
