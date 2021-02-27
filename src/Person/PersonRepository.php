@@ -4,10 +4,10 @@ namespace OriCMF\Core\Person;
 
 use Nextras\Orm\Entity\Entity;
 use Nextras\Orm\Repository\IDependencyProvider;
-use Nextras\Orm\Repository\Repository;
+use OriCMF\Core\ORM\BaseRepository;
 use OriCMF\Core\Person\Mapper\PersonMapper;
 
-final class PersonRepository extends Repository
+final class PersonRepository extends BaseRepository
 {
 
 	public function __construct(PersonMapper $mapper, ?IDependencyProvider $dependencyProvider = null)

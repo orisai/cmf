@@ -4,10 +4,10 @@ namespace OriCMF\Core\Password;
 
 use Nextras\Orm\Entity\Entity;
 use Nextras\Orm\Repository\IDependencyProvider;
-use Nextras\Orm\Repository\Repository;
+use OriCMF\Core\ORM\BaseRepository;
 use OriCMF\Core\Password\Mapper\PasswordMapper;
 
-final class PasswordRepository extends Repository
+final class PasswordRepository extends BaseRepository
 {
 
 	public function __construct(PasswordMapper $mapper, ?IDependencyProvider $dependencyProvider = null)
