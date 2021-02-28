@@ -7,6 +7,7 @@ use Nextras\Orm\Collection\Functions\IQueryBuilderFunction;
 use Nextras\Orm\Repository\Repository;
 use OriCMF\Core\ORM\Functions\ArrayAggregateFunction;
 use OriCMF\Core\ORM\Functions\InsensitiveLikeSearchFunction;
+use OriCMF\Core\ORM\Functions\JsonAnyKeyOrValueExistsFunction;
 
 abstract class BaseRepository extends Repository
 {
@@ -23,6 +24,10 @@ abstract class BaseRepository extends Repository
 
 		if ($name === InsensitiveLikeSearchFunction::class) {
 			return new InsensitiveLikeSearchFunction();
+		}
+
+		if ($name === JsonAnyKeyOrValueExistsFunction::class) {
+			return new JsonAnyKeyOrValueExistsFunction();
 		}
 
 		return parent::createCollectionFunction($name);
