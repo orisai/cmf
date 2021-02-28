@@ -24,6 +24,7 @@ final class DbalExtension extends CompilerExtension
 		return Expect::structure([
 			'debug' => Expect::bool(false),
 			'panelQueryExplain' => Expect::bool(true),
+			'sqlProcessorFactory' => Expect::anyOf(Expect::string(), Expect::type(Statement::class)),
 			'connections' => Expect::arrayOf(
 				Expect::structure([
 					'autowired' => Expect::bool(true),
@@ -43,7 +44,6 @@ final class DbalExtension extends CompilerExtension
 					'database' => Expect::string(),
 					'connectionTz' => Expect::string(IDriver::TIMEZONE_AUTO_PHP_NAME),
 					'nestedTransactionsWithSavepoint' => Expect::bool(true),
-					'sqlProcessorFactory' => Expect::anyOf(Expect::string(), Expect::type(Statement::class)),
 
 					// mysql only
 					'charset' => Expect::string(),
@@ -70,6 +70,8 @@ final class DbalExtension extends CompilerExtension
 		$builder = $this->getContainerBuilder();
 		$config = $this->config;
 
+		$sqlProcessorFactory = $config->sqlProcessorFactory;
+
 		foreach ($config->connections as $connectionName => $connectionConfig) {
 			$autowired = $connectionConfig['autowired'];
 			// Remove from Connection config compile-time only values
@@ -80,6 +82,10 @@ final class DbalExtension extends CompilerExtension
 				if ($value === null) {
 					unset($connectionConfig[$key]);
 				}
+			}
+
+			if ($sqlProcessorFactory !== null) {
+				$connectionConfig['sqlProcessorFactory'] = $sqlProcessorFactory;
 			}
 
 			$definition = $builder->addDefinition($this->prefix('connection.' . $connectionName))

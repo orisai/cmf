@@ -6,7 +6,7 @@ use Nextras\Dbal\QueryBuilder\QueryBuilder;
 use Nextras\Orm\Collection\Functions\IQueryBuilderFunction;
 use Nextras\Orm\Collection\Helpers\DbalExpressionResult;
 use Nextras\Orm\Collection\Helpers\DbalQueryBuilderHelper;
-use function array_key_last;
+use function array_values;
 use function assert;
 use function count;
 use function is_array;
@@ -31,18 +31,7 @@ final class JsonAnyKeyOrValueExistsFunction implements IQueryBuilderFunction
 
 		assert(is_array($value));
 
-		$inlineValue = '';
-		$last = array_key_last($value);
-		foreach ($value as $key => $item) {
-			$inlineValue .= "'{$item}'";
-			if ($key !== $last) {
-				$inlineValue .= ', ';
-			}
-		}
-
-		$inlineValue = "array[{$inlineValue}]";
-
-		return $expression->append('?| %raw', $inlineValue);
+		return $expression->append('?| %arrayExpression', array_values($value));
 	}
 
 }

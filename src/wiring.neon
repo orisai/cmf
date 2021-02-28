@@ -19,6 +19,7 @@ console:
 
 dbal:
 	debug: %debug.panels.dbal%
+	sqlProcessorFactory: @ori.core.sql.processorFactory
 
 di:
 	debugger: %debug.panels.di.container%
@@ -61,6 +62,14 @@ services:
 	ori.core.logger:
 		factory: Psr\Log\NullLogger
 		type: Psr\Log\LoggerInterface
+
+	# SQL
+	ori.core.sql.modifier.arrayExpression:
+		factory: OriCMF\Core\SQL\Modifier\ArrayExpressionModifier
+	ori.core.sql.processorFactory:
+		factory: OriCMF\Core\SQL\SqlProcessorFactory
+		setup:
+			- addModifier(arrayExpression, @ori.core.sql.modifier.arrayExpression)
 
 	# Config
 	ori.core.config.application:
