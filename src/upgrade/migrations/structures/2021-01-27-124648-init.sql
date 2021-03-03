@@ -96,11 +96,11 @@ CREATE TABLE ori.roles
     "privileges"   jsonb                           NOT NULL
 );
 
-CREATE TABLE ori.user_roles
+CREATE TABLE ori.person_roles
 (
-    "user_id" uuid NOT NULL,
-    "role_id" uuid NOT NULL,
-    PRIMARY KEY ("user_id", "role_id")
+    "person_id" uuid NOT NULL,
+    "role_id"   uuid NOT NULL,
+    PRIMARY KEY ("person_id", "role_id")
 );
 
 -- ------------
@@ -128,10 +128,10 @@ ALTER TABLE ori.emails
             ON UPDATE RESTRICT
             ON DELETE RESTRICT;
 
-ALTER TABLE ori.user_roles
-    ADD CONSTRAINT "user_id_fkey"
-        FOREIGN KEY ("user_id")
-            REFERENCES ori.users ("id")
+ALTER TABLE ori.person_roles
+    ADD CONSTRAINT "person_id_fkey"
+        FOREIGN KEY ("person_id")
+            REFERENCES ori.people ("id")
             ON UPDATE RESTRICT
             ON DELETE RESTRICT,
     ADD CONSTRAINT "role_id_fkey"

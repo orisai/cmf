@@ -8,8 +8,7 @@ use Nextras\Orm\Repository\IDependencyProvider;
 use OriCMF\Core\ORM\BaseRepository;
 use OriCMF\Core\ORM\Functions\JsonAnyKeyOrValueExistsFunction;
 use OriCMF\Core\User\Mapper\UserMapper;
-use Orisai\Auth\Authorization\Authorizer;
-use function explode;
+use Orisai\Auth\Authorization\PrivilegeProcessor;
 
 final class UserRepository extends BaseRepository
 {
@@ -34,30 +33,9 @@ final class UserRepository extends BaseRepository
 	{
 		return $this->findBy([
 			JsonAnyKeyOrValueExistsFunction::class,
-			'roles->privileges',
-			$this->getPrivilegeParents($privilege, $includePowerUser),
+			'person->roles->privileges',
+			PrivilegeProcessor::getPrivilegeParents($privilege, $includePowerUser),
 		]);
-	}
-
-	/**
-	 * @return array<string>
-	 */
-	private function getPrivilegeParents(string $privilege, bool $includePowerUser): array
-	{
-		$all = [];
-
-		if ($includePowerUser) {
-			$all[] = Authorizer::ALL_PRIVILEGES;
-		}
-
-		$parts = explode('.', $privilege);
-		$current = null;
-		foreach ($parts as $part) {
-			$current = $current === null ? $part : "{$current}.{$part}";
-			$all[] = $current;
-		}
-
-		return $all;
 	}
 
 }
