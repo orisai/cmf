@@ -30,26 +30,28 @@ final class UserRepository extends BaseRepository
 	/**
 	 * @return ICollection&iterable<User>
 	 */
-	public function findByPrivilege(string $privilege): ICollection
+	public function findByPrivilege(string $privilege, bool $includePowerUser = true): ICollection
 	{
 		return $this->findBy([
 			JsonAnyKeyOrValueExistsFunction::class,
 			'roles->privileges',
-			$this->getPrivilegeParents($privilege),
+			$this->getPrivilegeParents($privilege, $includePowerUser),
 		]);
 	}
 
 	/**
 	 * @return array<string>
 	 */
-	private function getPrivilegeParents(string $privilege): array
+	private function getPrivilegeParents(string $privilege, bool $includePowerUser): array
 	{
-		$parts = explode('.', $privilege);
-		$all = [
-			Authorizer::ALL_PRIVILEGES,
-		];
-		$current = null;
+		$all = [];
 
+		if ($includePowerUser) {
+			$all[] = Authorizer::ALL_PRIVILEGES;
+		}
+
+		$parts = explode('.', $privilege);
+		$current = null;
 		foreach ($parts as $part) {
 			$current = $current === null ? $part : "{$current}.{$part}";
 			$all[] = $current;
