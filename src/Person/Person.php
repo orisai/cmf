@@ -28,7 +28,7 @@ final class Person extends Entity
 
 		$this->setReadOnlyValue('id', (new Ulid())->toRfc4122());
 		$this->fullName = $fullName;
-		$this->userName = Strings::webalize("$fullName." . random_int(100, 9_999));
+		$this->userName = Strings::webalize("$fullName-" . random_int(100, 9_999));
 	}
 
 	public function getPrimaryEmail(): ?Email
