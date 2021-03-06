@@ -60,7 +60,7 @@ CREATE TABLE ori.emails
     "id"            uuid PRIMARY KEY,
     "created_at"    timestamptz                                      NOT NULL,
     "email_address" varchar(254) COLLATE ori.ignore_case_and_accents NOT NULL UNIQUE CHECK ("email_address" IS NORMALIZED),
-    "type"          varchar(100) COLLATE ori.ignore_case             NOT NULL,
+    "type"          varchar(100) COLLATE ori.strict                  NOT NULL,
     "person_id"     uuid                                             NOT NULL
 );
 
