@@ -4,7 +4,7 @@ namespace OriCMF\Core\User\Mapper;
 
 use Nextras\Orm\Mapper\Dbal\DbalMapper;
 
-final class UserPgsqlMapper extends DbalMapper implements UserMapper
+final class UserPostgresMapper extends DbalMapper implements UserMapper
 {
 
 	public function getTableName(): string

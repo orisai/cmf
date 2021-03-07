@@ -5,7 +5,7 @@ namespace OriCMF\Core\Person\Mapper;
 use Nextras\Orm\Entity\Reflection\PropertyMetadata;
 use Nextras\Orm\Mapper\Dbal\DbalMapper;
 
-final class PersonPgsqlMapper extends DbalMapper implements PersonMapper
+final class PersonPostgresMapper extends DbalMapper implements PersonMapper
 {
 
 	public function getTableName(): string

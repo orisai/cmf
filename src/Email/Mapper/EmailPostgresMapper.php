@@ -4,7 +4,7 @@ namespace OriCMF\Core\Email\Mapper;
 
 use Nextras\Orm\Mapper\Dbal\DbalMapper;
 
-final class EmailPgsqlMapper extends DbalMapper implements EmailMapper
+final class EmailPostgresMapper extends DbalMapper implements EmailMapper
 {
 
 	public function getTableName(): string

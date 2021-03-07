@@ -4,7 +4,7 @@ namespace OriCMF\Core\Password\Mapper;
 
 use Nextras\Orm\Mapper\Dbal\DbalMapper;
 
-final class PasswordPgsqlMapper extends DbalMapper implements PasswordMapper
+final class PasswordPostgresMapper extends DbalMapper implements PasswordMapper
 {
 
 	public function getTableName(): string

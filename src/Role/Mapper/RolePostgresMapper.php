@@ -4,7 +4,7 @@ namespace OriCMF\Core\Role\Mapper;
 
 use Nextras\Orm\Mapper\Dbal\DbalMapper;
 
-final class RolePgsqlMapper extends DbalMapper implements RoleMapper
+final class RolePostgresMapper extends DbalMapper implements RoleMapper
 {
 
 	public function getTableName(): string
