@@ -33,7 +33,7 @@ final class UserRepository extends BaseRepository
 	{
 		return $this->findBy([
 			JsonAnyKeyOrValueExistsFunction::class,
-			'person->roles->privileges',
+			'roles->privileges',
 			PrivilegeProcessor::getPrivilegeParents($privilege, $includePowerUser),
 		]);
 	}

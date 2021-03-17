@@ -51,8 +51,9 @@ ALTER TEXT SEARCH CONFIGURATION ori.ignore_accents
 CREATE TABLE ori.users
 (
     "id"         uuid PRIMARY KEY,
-    "created_at" timestamptz NOT NULL,
-    "person_id"  uuid        NOT NULL UNIQUE
+    "created_at" timestamptz                                      NOT NULL,
+    "full_name"  varchar(500) COLLATE ori.strict                  NOT NULL,
+    "user_name"  varchar(250) COLLATE ori.ignore_case_and_accents NOT NULL UNIQUE CHECK ("user_name" IS NORMALIZED)
 );
 
 CREATE TABLE ori.emails
@@ -61,14 +62,14 @@ CREATE TABLE ori.emails
     "created_at"    timestamptz                                      NOT NULL,
     "email_address" varchar(254) COLLATE ori.ignore_case_and_accents NOT NULL UNIQUE CHECK ("email_address" IS NORMALIZED),
     "type"          varchar(100) COLLATE ori.strict                  NOT NULL,
-    "person_id"     uuid                                             NOT NULL
+    "user_id"       uuid                                             NOT NULL
 );
 
-CREATE INDEX emails_person_id_key
-    ON ori.emails (person_id);
+CREATE INDEX emails_user_id_key
+    ON ori.emails (user_id);
 
 CREATE UNIQUE INDEX emails_is_primary_key
-    ON ori.emails ("person_id", "type")
+    ON ori.emails ("user_id", "type")
     WHERE "type" = 'primary';
 
 CREATE TABLE ori.passwords
@@ -77,14 +78,6 @@ CREATE TABLE ori.passwords
     "created_at"       timestamptz                     NOT NULL,
     "encoded_password" varchar(250) COLLATE ori.strict NOT NULL,
     "user_id"          uuid                            NOT NULL UNIQUE
-);
-
-CREATE TABLE ori.people
-(
-    "id"         uuid PRIMARY KEY,
-    "created_at" timestamptz                                      NOT NULL,
-    "full_name"  varchar(500) COLLATE ori.strict                  NOT NULL,
-    "user_name"  varchar(250) COLLATE ori.ignore_case_and_accents NOT NULL UNIQUE CHECK ("user_name" IS NORMALIZED)
 );
 
 CREATE TABLE ori.roles
@@ -96,23 +89,16 @@ CREATE TABLE ori.roles
     "privileges"   jsonb                           NOT NULL
 );
 
-CREATE TABLE ori.person_roles
+CREATE TABLE ori.user_roles
 (
-    "person_id" uuid NOT NULL,
-    "role_id"   uuid NOT NULL,
-    PRIMARY KEY ("person_id", "role_id")
+    "user_id" uuid NOT NULL,
+    "role_id" uuid NOT NULL,
+    PRIMARY KEY ("user_id", "role_id")
 );
 
 -- ------------
 -- foreign keys
 -- ------------
-
-ALTER TABLE ori.users
-    ADD CONSTRAINT "person_id_fkey"
-        FOREIGN KEY ("person_id")
-            REFERENCES ori.people ("id")
-            ON UPDATE RESTRICT
-            ON DELETE RESTRICT;
 
 ALTER TABLE ori.passwords
     ADD CONSTRAINT "user_id_fkey"
@@ -122,16 +108,16 @@ ALTER TABLE ori.passwords
             ON DELETE RESTRICT;
 
 ALTER TABLE ori.emails
-    ADD CONSTRAINT "person_id_fkey"
-        FOREIGN KEY ("person_id")
-            REFERENCES ori.people ("id")
+    ADD CONSTRAINT "user_id_fkey"
+        FOREIGN KEY ("user_id")
+            REFERENCES ori.users ("id")
             ON UPDATE RESTRICT
             ON DELETE RESTRICT;
 
-ALTER TABLE ori.person_roles
-    ADD CONSTRAINT "person_id_fkey"
-        FOREIGN KEY ("person_id")
-            REFERENCES ori.people ("id")
+ALTER TABLE ori.user_roles
+    ADD CONSTRAINT "user_id_fkey"
+        FOREIGN KEY ("user_id")
+            REFERENCES ori.users ("id")
             ON UPDATE RESTRICT
             ON DELETE RESTRICT,
     ADD CONSTRAINT "role_id_fkey"

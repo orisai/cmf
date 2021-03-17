@@ -115,12 +115,6 @@ services:
 	ori.core.password.repository:
 		factory: OriCMF\Core\Password\PasswordRepository
 
-	ori.core.person.mapper:
-		factory: OriCMF\Core\Person\Mapper\PersonPostgresMapper
-		type: OriCMF\Core\Person\Mapper\PersonMapper
-	ori.core.person.repository:
-		factory: OriCMF\Core\Person\PersonRepository
-
 	ori.core.role.mapper:
 		factory: OriCMF\Core\Role\Mapper\RolePostgresMapper
 		type: OriCMF\Core\Role\Mapper\RoleMapper
