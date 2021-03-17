@@ -5,7 +5,6 @@ namespace OriCMF\Core\ORM;
 use Nextras\Orm\Collection\Functions\IArrayFunction;
 use Nextras\Orm\Collection\Functions\IQueryBuilderFunction;
 use Nextras\Orm\Repository\Repository;
-use OriCMF\Core\ORM\Functions\ArrayAggregateFunction;
 use OriCMF\Core\ORM\Functions\InsensitiveLikeSearchFunction;
 use OriCMF\Core\ORM\Functions\JsonAnyKeyOrValueExistsFunction;
 
@@ -18,10 +17,6 @@ abstract class BaseRepository extends Repository
 	 */
 	protected function createCollectionFunction(string $name)
 	{
-		if ($name === ArrayAggregateFunction::class) {
-			return new ArrayAggregateFunction();
-		}
-
 		if ($name === InsensitiveLikeSearchFunction::class) {
 			return new InsensitiveLikeSearchFunction();
 		}
