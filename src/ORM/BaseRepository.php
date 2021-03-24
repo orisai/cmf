@@ -6,6 +6,7 @@ use Nextras\Orm\Collection\Functions\IArrayFunction;
 use Nextras\Orm\Collection\Functions\IQueryBuilderFunction;
 use Nextras\Orm\Collection\ICollection;
 use Nextras\Orm\Entity\IEntity;
+use Nextras\Orm\Exception\NoResultException;
 use Nextras\Orm\Repository\Repository;
 use OriCMF\Core\ORM\Filter\Filter;
 use OriCMF\Core\ORM\Filter\FindFilter;
@@ -58,6 +59,16 @@ abstract class BaseRepository extends Repository
 	public function getByFilter(FindFilter $find): ?IEntity
 	{
 		return $this->getBy($find->getConditions());
+	}
+
+	public function getByFilterChecked(FindFilter $find): IEntity
+	{
+		$entity = $this->getBy($find->getConditions());
+		if ($entity === null) {
+			throw new NoResultException();
+		}
+
+		return $entity;
 	}
 
 }
