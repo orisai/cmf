@@ -7,6 +7,7 @@ use Nextras\Orm\Collection\Expression\LikeExpression;
 use Nextras\Orm\Collection\Functions\IArrayFunction;
 use Nextras\Orm\Collection\Functions\IQueryBuilderFunction;
 use Nextras\Orm\Collection\ICollection;
+use OriCMF\Core\ORM\Functions\InsensitiveLikeSearchFunction;
 use function array_merge;
 use function array_unshift;
 use function count;
@@ -106,6 +107,11 @@ class FindFilter
 	public function createFunction(string $function, $expression, ...$values): array
 	{
 		return array_merge([$function, $expression], $values);
+	}
+
+	public function search(string $property, mixed $value): void
+	{
+		$this->function(InsensitiveLikeSearchFunction::class, $property, $value);
 	}
 
 	/**
