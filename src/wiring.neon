@@ -33,6 +33,8 @@ migrations:
 	groups:
 		ori.core.structure:
 			directory: %vendorDir%/orisai/cmf-core/src/upgrade/migrations/structures
+		ori.core.basicData:
+			directory: %vendorDir%/orisai/cmf-core/src/upgrade/migrations/basic-data
 
 orm:
 	model: Nextras\Orm\Model\Model
