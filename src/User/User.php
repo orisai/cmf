@@ -19,17 +19,23 @@ use function random_int;
  * @property string                       $userName
  * @property OneHasMany&array<Email>      $emails {1:m Email::$user, cascade=[persist, remove]}
  * @property-read ManyHasMany&array<Role> $roles {m:m Role, isMain=true, oneSided=true, cascade=[persist]}
+ * @property-read string|null             $type Distinguish between real users and automatic ones (system, APIs)
  */
 final class User extends Entity
 {
 
-	public function __construct(string $fullName)
+	// Not all possible are listed here, just the common ones
+	public const TYPE_SYSTEM = 'system';
+	public const TYPE_REAL = null;
+
+	public function __construct(string $fullName, ?string $type = self::TYPE_REAL)
 	{
 		parent::__construct();
 		$this->setReadOnlyValue('id', (new Ulid())->toRfc4122());
 
 		$this->fullName = $fullName;
 		$this->userName = Strings::webalize("$fullName-" . random_int(100, 9_999));
+		$this->setReadOnlyValue('type', $type);
 	}
 
 	public function getPrimaryEmail(): ?Email

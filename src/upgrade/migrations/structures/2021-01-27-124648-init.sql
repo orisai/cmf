@@ -53,7 +53,8 @@ CREATE TABLE ori.users
     "id"         uuid PRIMARY KEY,
     "created_at" timestamptz                                      NOT NULL,
     "full_name"  varchar(500) COLLATE ori.strict                  NOT NULL,
-    "user_name"  varchar(250) COLLATE ori.ignore_case_and_accents NOT NULL UNIQUE CHECK ("user_name" IS NORMALIZED)
+    "user_name"  varchar(250) COLLATE ori.ignore_case_and_accents NOT NULL UNIQUE CHECK ("user_name" IS NORMALIZED),
+    "type"       varchar(250) COLLATE ori.strict                  NULL UNIQUE
 );
 
 CREATE TABLE ori.emails
