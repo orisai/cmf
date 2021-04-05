@@ -4,10 +4,9 @@ namespace OriCMF\Core\ORM\Wrapper;
 
 use Brick\DateTime\ZonedDateTime;
 use DateTimeInterface;
-use Nextras\Orm\Entity\ImmutableValuePropertyWrapper;
 use function assert;
 
-final class ZonedDateTimeWrapper extends ImmutableValuePropertyWrapper
+final class ZonedDateTimeWrapper extends ValuePropertyWrapper
 {
 
 	/**

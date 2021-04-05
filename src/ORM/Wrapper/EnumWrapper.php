@@ -3,7 +3,6 @@
 namespace OriCMF\Core\ORM\Wrapper;
 
 use MabeEnum\Enum;
-use Nextras\Orm\Entity\ImmutableValuePropertyWrapper;
 use Orisai\Exceptions\Logic\InvalidArgument;
 use function array_key_first;
 use function assert;
@@ -11,7 +10,7 @@ use function count;
 use function is_string;
 use function is_subclass_of;
 
-final class EnumWrapper extends ImmutableValuePropertyWrapper
+final class EnumWrapper extends ValuePropertyWrapper
 {
 
 	/**

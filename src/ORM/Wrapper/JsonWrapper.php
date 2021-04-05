@@ -3,11 +3,10 @@
 namespace OriCMF\Core\ORM\Wrapper;
 
 use Nette\Utils\Json;
-use Nextras\Orm\Entity\ImmutableValuePropertyWrapper;
 use function assert;
 use function is_string;
 
-final class JsonWrapper extends ImmutableValuePropertyWrapper
+final class JsonWrapper extends ValuePropertyWrapper
 {
 
 	/**
