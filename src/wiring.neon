@@ -66,6 +66,9 @@ services:
 		type: Psr\Log\LoggerInterface
 
 	# SQL
+	ori.core.sql.logger:
+		factory: OriCMF\Core\SQL\SqlLogger
+		type: Nextras\Dbal\ILogger
 	ori.core.sql.modifier.arrayExpression:
 		factory: OriCMF\Core\SQL\Modifier\ArrayExpressionModifier
 	ori.core.sql.processorFactory:

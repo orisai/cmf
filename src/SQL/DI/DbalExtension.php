@@ -10,6 +10,7 @@ use Nextras\Dbal\Bridges\NetteTracy\BluescreenQueryPanel;
 use Nextras\Dbal\Bridges\NetteTracy\ConnectionPanel;
 use Nextras\Dbal\Connection;
 use Nextras\Dbal\Drivers\IDriver;
+use Nextras\Dbal\ILogger;
 use stdClass;
 use Tracy\BlueScreen;
 
@@ -93,19 +94,11 @@ final class DbalExtension extends CompilerExtension
 					'config' => $connectionConfig,
 				])
 				->setAutowired($autowired);
-			//TODO - logger interface
-			//              ->addSetup(new PhpLiteral(<<<'PHP'
-			//?->onQuery[] = function (\Nextras\Dbal\Connection $connection, string $query, float $time): void {
-			//  ?->info("Query:" . $query, ["time" => $time, "connection" => ?]);
-			//};
-			//PHP
-			//              ),
-			//                  [
-			//                      '@self',
-			//                      '@' . LoggerInterface::class,
-			//                      $connectionName,
-			//                  ],
-			//              );
+
+			$definition->addSetup(
+				[self::class, 'setupQueryLogging'],
+				[$definition, '@' . ILogger::class],
+			);
 
 			if ($config->debug) {
 				$definition->addSetup(
@@ -115,6 +108,11 @@ final class DbalExtension extends CompilerExtension
 				$definition->addSetup(ConnectionPanel::class . '::install', ['@self', $config->panelQueryExplain]);
 			}
 		}
+	}
+
+	public static function setupQueryLogging(Connection $connection, ILogger $logger): void
+	{
+		$connection->addLogger($logger);
 	}
 
 }
