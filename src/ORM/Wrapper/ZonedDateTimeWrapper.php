@@ -12,8 +12,12 @@ final class ZonedDateTimeWrapper extends ValuePropertyWrapper
 	/**
 	 * @param mixed $value
 	 */
-	public function convertToRawValue($value): string
+	public function convertToRawValue($value): ?string
 	{
+		if ($value === null) {
+			return null;
+		}
+
 		assert($value instanceof ZonedDateTime);
 
 		return $value->toDateTime()->format('c');
