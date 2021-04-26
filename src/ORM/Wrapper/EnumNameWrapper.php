@@ -10,7 +10,7 @@ use function count;
 use function is_string;
 use function is_subclass_of;
 
-final class EnumWrapper extends ValuePropertyWrapper
+final class EnumNameWrapper extends ValuePropertyWrapper
 {
 
 	/**
