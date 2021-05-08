@@ -17,10 +17,9 @@ abstract class BaseRepository extends Repository
 {
 
 	/**
-	 * @return IQueryBuilderFunction|IArrayFunction
 	 * @todo - make it repository independent
 	 */
-	protected function createCollectionFunction(string $name)
+	protected function createCollectionFunction(string $name): IQueryBuilderFunction|IArrayFunction
 	{
 		if ($name === InsensitiveLikeSearchFunction::class) {
 			return new InsensitiveLikeSearchFunction();
@@ -56,7 +55,7 @@ abstract class BaseRepository extends Repository
 		return $collection;
 	}
 
-	public function getByFilter(FindFilter $find): ?IEntity
+	public function getByFilter(FindFilter $find): IEntity|null
 	{
 		return $this->getBy($find->getConditions());
 	}

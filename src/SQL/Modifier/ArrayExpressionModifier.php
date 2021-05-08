@@ -23,11 +23,7 @@ use function substr;
 final class ArrayExpressionModifier implements ExpressionModifier
 {
 
-	/**
-	 * @param mixed $value
-	 * @return mixed
-	 */
-	public function valueToExpression($value, Connection $connection)
+	public function valueToExpression(mixed $value, Connection $connection): string
 	{
 		assert(is_array($value));
 

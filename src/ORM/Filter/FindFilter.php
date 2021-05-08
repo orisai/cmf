@@ -25,50 +25,32 @@ class FindFilter
 		$this->logicalOperator = $logicalOperator;
 	}
 
-	/**
-	 * @param mixed $value
-	 */
-	public function equal(string $property, $value): void
+	public function equal(string $property, mixed $value): void
 	{
 		$this->operator('', $property, $value);
 	}
 
-	/**
-	 * @param mixed $value
-	 */
-	public function notEqual(string $property, $value): void
+	public function notEqual(string $property, mixed $value): void
 	{
 		$this->operator('!=', $property, $value);
 	}
 
-	/**
-	 * @param mixed $number
-	 */
-	public function greater(string $property, $number): void
+	public function greater(string $property, mixed $number): void
 	{
 		$this->operator('>', $property, $number);
 	}
 
-	/**
-	 * @param mixed $number
-	 */
-	public function greaterOrEqual(string $property, $number): void
+	public function greaterOrEqual(string $property, mixed $number): void
 	{
 		$this->operator('>=', $property, $number);
 	}
 
-	/**
-	 * @param mixed $number
-	 */
-	public function lower(string $property, $number): void
+	public function lower(string $property, mixed $number): void
 	{
 		$this->operator('<', $property, $number);
 	}
 
-	/**
-	 * @param mixed $number
-	 */
-	public function lowerOrEqual(string $property, $number): void
+	public function lowerOrEqual(string $property, mixed $number): void
 	{
 		$this->operator('<=', $property, $number);
 	}
@@ -78,10 +60,7 @@ class FindFilter
 		$this->operator('~', $property, $expression);
 	}
 
-	/**
-	 * @param mixed $value
-	 */
-	public function operator(string $operator, string $property, $value): void
+	public function operator(string $operator, string $property, mixed $value): void
 	{
 		$this->raw([
 			"{$property}{$operator}" => $value,
@@ -91,9 +70,8 @@ class FindFilter
 	/**
 	 * @param class-string<IArrayFunction|IQueryBuilderFunction> $function
 	 * @param string|array<mixed>                                $expression
-	 * @param mixed                                              $values
 	 */
-	public function function(string $function, $expression, ...$values): void
+	public function function(string $function, string|array $expression, mixed ...$values): void
 	{
 		$this->raw($this->createFunction($function, $expression, ...$values));
 	}
@@ -101,10 +79,9 @@ class FindFilter
 	/**
 	 * @param class-string<IArrayFunction|IQueryBuilderFunction> $function
 	 * @param string|array<mixed>                                $expression
-	 * @param mixed                                              $values
 	 * @return array<mixed>
 	 */
-	public function createFunction(string $function, $expression, ...$values): array
+	public function createFunction(string $function, string|array $expression, mixed ...$values): array
 	{
 		return array_merge([$function, $expression], $values);
 	}

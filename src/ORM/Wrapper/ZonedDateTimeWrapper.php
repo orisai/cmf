@@ -9,10 +9,7 @@ use function assert;
 final class ZonedDateTimeWrapper extends ValuePropertyWrapper
 {
 
-	/**
-	 * @param mixed $value
-	 */
-	public function convertToRawValue($value): ?string
+	public function convertToRawValue(mixed $value): string|null
 	{
 		if ($value === null) {
 			return null;
@@ -23,10 +20,7 @@ final class ZonedDateTimeWrapper extends ValuePropertyWrapper
 		return $value->toDateTime()->format('c');
 	}
 
-	/**
-	 * @param mixed $value
-	 */
-	public function convertFromRawValue($value): ZonedDateTime
+	public function convertFromRawValue(mixed $value): ZonedDateTime
 	{
 		assert($value instanceof DateTimeInterface);
 

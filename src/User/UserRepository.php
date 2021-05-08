@@ -13,7 +13,7 @@ use Orisai\Auth\Authorization\PrivilegeProcessor;
 final class UserRepository extends BaseRepository
 {
 
-	public function __construct(UserMapper $mapper, ?IDependencyProvider $dependencyProvider = null)
+	public function __construct(UserMapper $mapper, IDependencyProvider|null $dependencyProvider = null)
 	{
 		parent::__construct($mapper, $dependencyProvider);
 	}

@@ -25,11 +25,11 @@ final class User extends Entity
 {
 
 	// Not all possible are listed here, just the common ones
-	public const TYPE_SYSTEM = 'system';
+	public const
+		TYPE_SYSTEM = 'system',
+		TYPE_REAL = null;
 
-	public const TYPE_REAL = null;
-
-	public function __construct(string $fullName, ?string $type = self::TYPE_REAL)
+	public function __construct(string $fullName, string|null $type = self::TYPE_REAL)
 	{
 		parent::__construct();
 		$this->setReadOnlyValue('id', (new Ulid())->toRfc4122());
@@ -39,7 +39,7 @@ final class User extends Entity
 		$this->setReadOnlyValue('type', $type);
 	}
 
-	public function getPrimaryEmail(): ?Email
+	public function getPrimaryEmail(): Email|null
 	{
 		return $this->emails->toCollection()->getBy(['type' => Email::TYPE_PRIMARY]);
 	}

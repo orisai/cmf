@@ -13,21 +13,14 @@ use function is_subclass_of;
 final class EnumNameWrapper extends ValuePropertyWrapper
 {
 
-	/**
-	 * @param mixed $value
-	 * @return mixed $value
-	 */
-	public function convertToRawValue($value)
+	public function convertToRawValue(mixed $value): string
 	{
 		assert($value instanceof Enum);
 
 		return $value->getName();
 	}
 
-	/**
-	 * @param mixed $value
-	 */
-	public function convertFromRawValue($value): Enum
+	public function convertFromRawValue(mixed $value): Enum
 	{
 		assert(is_string($value));
 

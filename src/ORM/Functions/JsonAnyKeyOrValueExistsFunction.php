@@ -20,7 +20,7 @@ final class JsonAnyKeyOrValueExistsFunction implements IQueryBuilderFunction
 	public function processQueryBuilderExpression(
 		DbalQueryBuilderHelper $helper,
 		QueryBuilder $builder,
-		array $args
+		array $args,
 	): DbalExpressionResult
 	{
 		assert(count($args) === 2);

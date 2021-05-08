@@ -10,7 +10,7 @@ use OriCMF\Core\ORM\BaseRepository;
 final class EmailRepository extends BaseRepository
 {
 
-	public function __construct(EmailMapper $mapper, ?IDependencyProvider $dependencyProvider = null)
+	public function __construct(EmailMapper $mapper, IDependencyProvider|null $dependencyProvider = null)
 	{
 		parent::__construct($mapper, $dependencyProvider);
 	}

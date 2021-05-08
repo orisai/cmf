@@ -10,7 +10,7 @@ abstract class BaseEntity extends Entity
 	/**
 	 * @return $this
 	 */
-	public function setModifiedValue(string $name, mixed $value): self
+	public function setModifiedValue(string $name, mixed $value): static
 	{
 		if (!$this->hasValue($name) || $this->getValue($name) !== $value) {
 			$this->setValue($name, $value);

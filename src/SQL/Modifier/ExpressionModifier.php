@@ -7,10 +7,6 @@ use Nextras\Dbal\Connection;
 interface ExpressionModifier
 {
 
-	/**
-	 * @param mixed $value
-	 * @return mixed
-	 */
-	public function valueToExpression($value, Connection $connection);
+	public function valueToExpression(mixed $value, Connection $connection): mixed;
 
 }

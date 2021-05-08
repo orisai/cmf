@@ -9,9 +9,9 @@ class Filter
 
 	private OrderFilter $order;
 
-	private ?int $limitCount = null;
+	private int|null $limitCount = null;
 
-	private ?int $limitOffset = null;
+	private int|null $limitOffset = null;
 
 	public function __construct()
 	{
@@ -29,7 +29,7 @@ class Filter
 		return $this->order;
 	}
 
-	public function limit(int $count, ?int $offset = null): void
+	public function limit(int $count, int|null $offset = null): void
 	{
 		$this->limitCount = $count;
 		$this->limitOffset = $offset;

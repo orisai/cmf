@@ -9,7 +9,7 @@
 	<arg name="cache" value="./../var/tools/PHP_CodeSniffer/cache.dat"/>
 
 	<!-- Import coding-standard -->
-	<rule ref="./../vendor/orisai/coding-standard/src/ruleset-7.4.xml"/>
+	<rule ref="./../vendor/orisai/coding-standard/src/ruleset-8.0.xml"/>
 
 	<!-- Configure PSR-4 rule -->
 	<rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">

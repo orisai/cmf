@@ -10,7 +10,7 @@ use OriCMF\Core\Password\Mapper\PasswordMapper;
 final class PasswordRepository extends BaseRepository
 {
 
-	public function __construct(PasswordMapper $mapper, ?IDependencyProvider $dependencyProvider = null)
+	public function __construct(PasswordMapper $mapper, IDependencyProvider|null $dependencyProvider = null)
 	{
 		parent::__construct($mapper, $dependencyProvider);
 	}

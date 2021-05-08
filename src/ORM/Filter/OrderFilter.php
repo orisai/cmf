@@ -21,9 +21,13 @@ class OrderFilter
 	/**
 	 * @param class-string<IArrayFunction|IQueryBuilderFunction> $function
 	 * @param string|array<mixed>                                $expression
-	 * @param mixed                                              $values
 	 */
-	public function function(string $function, $expression, string $direction = ICollection::ASC, ...$values): void
+	public function function(
+		string $function,
+		string|array $expression,
+		string $direction = ICollection::ASC,
+		mixed ...$values,
+	): void
 	{
 		$this->raw(
 			$this->createFunction($function, $expression, ...$values),
@@ -34,10 +38,9 @@ class OrderFilter
 	/**
 	 * @param class-string<IArrayFunction|IQueryBuilderFunction> $function
 	 * @param string|array<mixed>                                $expression
-	 * @param mixed                                              $values
 	 * @return array<mixed>
 	 */
-	public function createFunction(string $function, $expression, ...$values): array
+	public function createFunction(string $function, string|array $expression, mixed ...$values): array
 	{
 		return array_merge([$function, $expression], $values);
 	}
@@ -45,7 +48,7 @@ class OrderFilter
 	/**
 	 * @param string|array<mixed> $expression
 	 */
-	public function raw($expression, string $direction = ICollection::ASC): void
+	public function raw(string|array $expression, string $direction = ICollection::ASC): void
 	{
 		$this->order[] = [$expression, $direction];
 	}

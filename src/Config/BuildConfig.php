@@ -5,25 +5,25 @@ namespace OriCMF\Core\Config;
 class BuildConfig
 {
 
-	private ?string $name;
+	private string|null $name;
 
-	private ?string $version;
+	private string|null $version;
 
 	private bool $stable;
 
-	public function __construct(?string $name, ?string $version, bool $stable)
+	public function __construct(string|null $name, string|null $version, bool $stable)
 	{
 		$this->name = $name;
 		$this->version = $version;
 		$this->stable = $stable;
 	}
 
-	public function getName(): ?string
+	public function getName(): string|null
 	{
 		return $this->name;
 	}
 
-	public function getVersion(): ?string
+	public function getVersion(): string|null
 	{
 		return $this->version;
 	}

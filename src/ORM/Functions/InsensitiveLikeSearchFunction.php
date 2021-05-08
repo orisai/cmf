@@ -18,11 +18,7 @@ use function strtr;
 final class InsensitiveLikeSearchFunction extends BaseCompareFunction
 {
 
-	/**
-	 * @param mixed $sourceValue
-	 * @param mixed $targetValue
-	 */
-	protected function evaluateInPhp($sourceValue, $targetValue): bool
+	protected function evaluateInPhp(mixed $sourceValue, mixed $targetValue): bool
 	{
 		$sourceValueNorm = $this->normalize((string) $sourceValue);
 
@@ -45,15 +41,14 @@ final class InsensitiveLikeSearchFunction extends BaseCompareFunction
 		return mb_strtolower(Strings::toAscii($string));
 	}
 
-	/**
-	 * @param mixed $value
-	 */
-	protected function evaluateInDb(DbalExpressionResult $expression, $value): DbalExpressionResult
+	protected function evaluateInDb(DbalExpressionResult $expression, mixed $value): DbalExpressionResult
 	{
 		if (is_array($value)) {
 			if (count($value) === 0) {
 				return new DbalExpressionResult(['1=0'], $expression->isHavingClause);
-			} elseif (count($value) === 1) {
+			}
+
+			if (count($value) === 1) {
 				$value = reset($value);
 			} else {
 				$valueLastKey = array_key_last($value);

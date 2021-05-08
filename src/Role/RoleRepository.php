@@ -10,7 +10,7 @@ use OriCMF\Core\Role\Mapper\RoleMapper;
 final class RoleRepository extends BaseRepository
 {
 
-	public function __construct(RoleMapper $mapper, ?IDependencyProvider $dependencyProvider = null)
+	public function __construct(RoleMapper $mapper, IDependencyProvider|null $dependencyProvider = null)
 	{
 		parent::__construct($mapper, $dependencyProvider);
 	}

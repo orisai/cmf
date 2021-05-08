@@ -27,14 +27,14 @@ final class SqlLogger implements ILogger
 		$this->logger->debug('Disconnected from database');
 	}
 
-	public function onQuery(string $sqlQuery, float $timeTaken, ?Result $result): void
+	public function onQuery(string $sqlQuery, float $timeTaken, Result|null $result): void
 	{
 		$this->logger->info("Query: {$sqlQuery}", [
 			'time' => $timeTaken,
 		]);
 	}
 
-	public function onQueryException(string $sqlQuery, float $timeTaken, ?DriverException $exception): void
+	public function onQueryException(string $sqlQuery, float $timeTaken, DriverException|null $exception): void
 	{
 		$context = [
 			'time' => $timeTaken,

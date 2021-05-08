@@ -9,19 +9,12 @@ use function is_string;
 final class JsonWrapper extends ValuePropertyWrapper
 {
 
-	/**
-	 * @param mixed $value
-	 */
-	public function convertToRawValue($value): string
+	public function convertToRawValue(mixed $value): string
 	{
 		return Json::encode($value);
 	}
 
-	/**
-	 * @param mixed $value
-	 * @return mixed
-	 */
-	public function convertFromRawValue($value)
+	public function convertFromRawValue(mixed $value): mixed
 	{
 		assert(is_string($value));
 
