@@ -26,6 +26,7 @@ final class User extends Entity
 
 	// Not all possible are listed here, just the common ones
 	public const TYPE_SYSTEM = 'system';
+
 	public const TYPE_REAL = null;
 
 	public function __construct(string $fullName, ?string $type = self::TYPE_REAL)

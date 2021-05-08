@@ -6,7 +6,9 @@ class BuildConfig
 {
 
 	private ?string $name;
+
 	private ?string $version;
+
 	private bool $stable;
 
 	public function __construct(?string $name, ?string $version, bool $stable)

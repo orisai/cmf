@@ -6,6 +6,7 @@ class ApplicationConfig
 {
 
 	private ?string $name;
+
 	private BuildConfig $buildConfig;
 
 	public function __construct(?string $name, BuildConfig $buildConfig)
