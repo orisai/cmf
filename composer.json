@@ -30,7 +30,7 @@
 	],
 	"require": {
 		"php": ">=8.0.0 <8.2.0",
-		"brick/date-time": "^0.2.3",
+		"brick/date-time": "^0.3.0",
 		"league/flysystem": "^2.0.4",
 		"marc-mabe/php-enum": "^4.4.0",
 		"monolog/monolog": "^2.2.0",
