@@ -6,6 +6,7 @@ extensions:
 	decorator: Nette\DI\Extensions\DecoratorExtension
 	di: Nette\DI\Extensions\DIExtension(%debugMode%)
 	inject: Nette\DI\Extensions\InjectExtension
+	localization: Orisai\Localization\Bridge\NetteDI\LocalizationExtension
 	migrations: Nextras\Migrations\Bridges\NetteDI\MigrationsExtension
 	orm: Nextras\Orm\Bridges\NetteDI\OrmExtension
 	ormInitializer: OriCMF\Core\ORM\DI\OrmInitializerExtension
@@ -25,6 +26,15 @@ di:
 	debugger: %debug.panels.di.container%
 	export:
 		tags: false
+
+localization:
+	debug:
+		newMessages: %debugMode%
+		panel: %debug.panels.localization%
+	loaders:
+		- factory: Orisai\Localization\Resource\FileLoader
+		  arguments:
+		  	directories: [%vendorDir%/orisai/cmf-core/src/**/translations/**]
 
 migrations:
 	driver: pgsql
@@ -48,6 +58,7 @@ parameters:
 			dbal: false
 			di:
 				container: true
+			localization: false
 	application:
 		name: null
 		build:

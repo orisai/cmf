@@ -1,0 +1,7 @@
+#
+# User
+#
+
+ori.ui.user.state.new: New
+ori.ui.user.state.active: Active
+ori.ui.user.state.disabled: Disabled

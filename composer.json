@@ -44,6 +44,7 @@
 		"orisai/auth": "^1.0.0",
 		"orisai/data-sources": "^1.0.0",
 		"orisai/exceptions": "^1.0.0",
+		"orisai/localization": "^1.0.0",
 		"orisai/nette-console": "^1.0.0",
 		"orisai/nette-di": "^1.0.0",
 		"orisai/nette-time": "^1.0.0",
