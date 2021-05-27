@@ -18,11 +18,8 @@ class FindFilter
 	/** @var array<mixed> */
 	private array $conditions = [];
 
-	private string $logicalOperator;
-
-	public function __construct(string $logicalOperator = ICollection::AND)
+	public function __construct(private string $logicalOperator = ICollection::AND)
 	{
-		$this->logicalOperator = $logicalOperator;
 	}
 
 	public function equal(string $property, mixed $value): void

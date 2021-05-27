@@ -5,14 +5,8 @@ namespace OriCMF\Core\Config;
 class ApplicationConfig
 {
 
-	private string|null $name;
-
-	private BuildConfig $buildConfig;
-
-	public function __construct(string|null $name, BuildConfig $buildConfig)
+	public function __construct(private string|null $name, private BuildConfig $buildConfig)
 	{
-		$this->name = $name;
-		$this->buildConfig = $buildConfig;
 	}
 
 	public function getName(): string|null
