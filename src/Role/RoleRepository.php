@@ -5,7 +5,6 @@ namespace OriCMF\Core\Role;
 use Nextras\Orm\Entity\Entity;
 use Nextras\Orm\Repository\IDependencyProvider;
 use OriCMF\Core\ORM\BaseRepository;
-use OriCMF\Core\Role\Mapper\RoleMapper;
 
 final class RoleRepository extends BaseRepository
 {

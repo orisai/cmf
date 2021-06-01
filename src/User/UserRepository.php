@@ -7,7 +7,6 @@ use Nextras\Orm\Entity\Entity;
 use Nextras\Orm\Repository\IDependencyProvider;
 use OriCMF\Core\ORM\BaseRepository;
 use OriCMF\Core\ORM\Functions\JsonAnyKeyOrValueExistsFunction;
-use OriCMF\Core\User\Mapper\UserMapper;
 use Orisai\Auth\Authorization\PrivilegeProcessor;
 
 final class UserRepository extends BaseRepository

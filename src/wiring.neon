@@ -120,26 +120,26 @@ services:
 
 	# User
 	ori.core.email.mapper:
-		factory: OriCMF\Core\Email\Mapper\EmailPostgresMapper
-		type: OriCMF\Core\Email\Mapper\EmailMapper
+		factory: OriCMF\Core\Email\EmailPostgresMapper
+		type: OriCMF\Core\Email\EmailMapper
 	ori.core.email.repository:
 		factory: OriCMF\Core\Email\EmailRepository
 
 	ori.core.password.mapper:
-		factory: OriCMF\Core\Password\Mapper\PasswordPostgresMapper
-		type: OriCMF\Core\Password\Mapper\PasswordMapper
+		factory: OriCMF\Core\Password\PasswordPostgresMapper
+		type: OriCMF\Core\Password\PasswordMapper
 	ori.core.password.repository:
 		factory: OriCMF\Core\Password\PasswordRepository
 
 	ori.core.role.mapper:
-		factory: OriCMF\Core\Role\Mapper\RolePostgresMapper
-		type: OriCMF\Core\Role\Mapper\RoleMapper
+		factory: OriCMF\Core\Role\RolePostgresMapper
+		type: OriCMF\Core\Role\RoleMapper
 	ori.core.role.repository:
 		factory: OriCMF\Core\Role\RoleRepository
 
 	ori.core.user.mapper:
-		factory: OriCMF\Core\User\Mapper\UserPostgresMapper
-		type: OriCMF\Core\User\Mapper\UserMapper
+		factory: OriCMF\Core\User\UserPostgresMapper
+		type: OriCMF\Core\User\UserMapper
 	ori.core.user.repository:
 		factory: OriCMF\Core\User\UserRepository
 

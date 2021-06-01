@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace OriCMF\Core\Email\Mapper;
+namespace OriCMF\Core\Email;
 
 use Nextras\Orm\Mapper\Dbal\DbalMapper;
 

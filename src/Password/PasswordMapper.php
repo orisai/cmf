@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace OriCMF\Core\Password\Mapper;
+namespace OriCMF\Core\Password;
 
 use Nextras\Orm\Mapper\IMapper;
 

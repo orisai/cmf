@@ -5,7 +5,6 @@ namespace OriCMF\Core\Password;
 use Nextras\Orm\Entity\Entity;
 use Nextras\Orm\Repository\IDependencyProvider;
 use OriCMF\Core\ORM\BaseRepository;
-use OriCMF\Core\Password\Mapper\PasswordMapper;
 
 final class PasswordRepository extends BaseRepository
 {
