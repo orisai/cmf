@@ -1,5 +1,5 @@
 extensions:
-	cache: Nette\Bridges\CacheDI\CacheExtension(%tempDir%)
+	cache: OriCMF\Core\Cache\DI\CacheExtension(%tempDir%/nette)
 	console: OriNette\Console\DI\ConsoleExtension
 	datasource: Orisai\DataSources\Bridge\NetteDI\DataSourceExtension
 	dbal: OriCMF\Core\SQL\DI\DbalExtension
