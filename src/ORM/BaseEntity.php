@@ -4,6 +4,10 @@ namespace OriCMF\Core\ORM;
 
 use Nextras\Orm\Entity\Entity;
 
+/**
+ * @internal Requires not yet available changes https://github.com/nextras/orm/pull/514
+ * @todo - utilize BaseEntity
+ */
 abstract class BaseEntity extends Entity
 {
 
