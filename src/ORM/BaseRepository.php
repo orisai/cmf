@@ -12,21 +12,25 @@ use OriCMF\Core\ORM\Filter\Filter;
 use OriCMF\Core\ORM\Filter\FindFilter;
 use OriCMF\Core\ORM\Functions\InsensitiveLikeSearchFunction;
 use OriCMF\Core\ORM\Functions\JsonAnyKeyOrValueExistsFunction;
+use OriCMF\Core\ORM\Functions\ToManyNotEqualFunction;
+use function in_array;
 
 abstract class BaseRepository extends Repository
 {
+
+	private const FUNCTIONS = [
+		InsensitiveLikeSearchFunction::class,
+		JsonAnyKeyOrValueExistsFunction::class,
+		ToManyNotEqualFunction::class,
+	];
 
 	/**
 	 * @todo - make it repository independent
 	 */
 	protected function createCollectionFunction(string $name): IQueryBuilderFunction|IArrayFunction
 	{
-		if ($name === InsensitiveLikeSearchFunction::class) {
-			return new InsensitiveLikeSearchFunction();
-		}
-
-		if ($name === JsonAnyKeyOrValueExistsFunction::class) {
-			return new JsonAnyKeyOrValueExistsFunction();
+		if (in_array($name, self::FUNCTIONS, true)) {
+			return new $name();
 		}
 
 		return parent::createCollectionFunction($name);
