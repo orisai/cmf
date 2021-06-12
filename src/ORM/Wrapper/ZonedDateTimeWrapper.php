@@ -20,8 +20,12 @@ final class ZonedDateTimeWrapper extends ValuePropertyWrapper
 		return $value->toDateTime()->format('c');
 	}
 
-	public function convertFromRawValue(mixed $value): ZonedDateTime
+	public function convertFromRawValue(mixed $value): ZonedDateTime|null
 	{
+		if ($value === null) {
+			return null;
+		}
+
 		assert($value instanceof DateTimeInterface);
 
 		return ZonedDateTime::fromDateTime($value);
