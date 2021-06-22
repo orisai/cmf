@@ -31,10 +31,8 @@ localization:
 	debug:
 		newMessages: %debugMode%
 		panel: %debug.panels.localization%
-	loaders:
-		- factory: Orisai\Localization\Resource\FileLoader
-		  arguments:
-		  	directories: [%vendorDir%/orisai/cmf-core/src/**/translations/**]
+	directories:
+		- %vendorDir%/orisai/cmf-core/src/**/translations/**
 
 migrations:
 	driver: pgsql
