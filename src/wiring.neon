@@ -17,6 +17,9 @@ console:
 	catchExceptions: %catchExceptions.console%
 	name: %application.name%
 	version: %application.build.version%
+	di:
+		parameters:
+			backup: %consoleMode%
 
 dbal:
 	debug: %debug.panels.dbal%
@@ -25,6 +28,7 @@ dbal:
 di:
 	debugger: %debug.panels.di.container%
 	export:
+		parameters: false
 		tags: false
 		types: false
 
