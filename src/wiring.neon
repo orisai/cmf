@@ -26,6 +26,7 @@ di:
 	debugger: %debug.panels.di.container%
 	export:
 		tags: false
+		types: false
 
 localization:
 	debug:
