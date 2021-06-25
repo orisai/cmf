@@ -3,6 +3,8 @@
 namespace OriCMF\Core\User;
 
 use MabeEnum\Enum;
+use Orisai\Localization\Translator;
+use function array_map;
 
 /**
  * @method static self NEW()
@@ -33,9 +35,9 @@ final class UserState extends Enum
 	/**
 	 * @return array<string, string>
 	 */
-	public static function getValueLabelPairs(): array
+	public static function getValueLabelPairs(Translator $translator): array
 	{
-		return self::LABELS;
+		return array_map(static fn (string $label): string => $translator->translate($label), self::LABELS);
 	}
 
 }
