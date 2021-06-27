@@ -155,4 +155,9 @@ class FindFilter
 		return $conditions;
 	}
 
+	public function isEmpty(): bool
+	{
+		return $this->conditions === [];
+	}
+
 }

@@ -61,4 +61,9 @@ class OrderFilter
 		return $this->order;
 	}
 
+	public function isEmpty(): bool
+	{
+		return $this->order === [];
+	}
+
 }

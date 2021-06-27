@@ -46,4 +46,16 @@ class Filter
 		];
 	}
 
+	public function isLimitEmpty(): bool
+	{
+		return $this->limitCount === null;
+	}
+
+	public function isEmpty(): bool
+	{
+		return $this->find->isEmpty()
+			&& $this->order->isEmpty()
+			&& $this->isLimitEmpty();
+	}
+
 }

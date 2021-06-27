@@ -120,4 +120,14 @@ final class OrderFilterTest extends TestCase
 		);
 	}
 
+	public function testIsEmpty(): void
+	{
+		$order = new OrderFilter();
+
+		self::assertTrue($order->isEmpty());
+
+		$order->property('foo');
+		self::assertFalse($order->isEmpty());
+	}
+
 }

@@ -198,4 +198,14 @@ final class FindFilterTest extends TestCase
 		);
 	}
 
+	public function testIsEmpty(): void
+	{
+		$find = new FindFilter();
+
+		self::assertTrue($find->isEmpty());
+
+		$find->equal('foo', 'bar');
+		self::assertFalse($find->isEmpty());
+	}
+
 }

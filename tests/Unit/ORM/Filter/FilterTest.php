@@ -30,4 +30,24 @@ final class FilterTest extends TestCase
 		self::assertSame([10, null], $filter->getLimit());
 	}
 
+	public function testIsEmpty(): void
+	{
+		$filter = new Filter();
+
+		self::assertTrue($filter->isLimitEmpty());
+		self::assertTrue($filter->isEmpty());
+
+		$filter->limit(1);
+		self::assertFalse($filter->isLimitEmpty());
+		self::assertFalse($filter->isEmpty());
+
+		$filter = new Filter();
+		$filter->find()->equal('foo', 'bar');
+		self::assertFalse($filter->isEmpty());
+
+		$filter = new Filter();
+		$filter->order()->property('foo');
+		self::assertFalse($filter->isEmpty());
+	}
+
 }
