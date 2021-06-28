@@ -34,6 +34,7 @@
 		"brick/math": "^0.9.2",
 		"brick/money": "^0.5.2",
 		"league/flysystem": "^2.0.4",
+		"league/mime-type-detection": "^1.7.0",
 		"marc-mabe/php-enum": "^4.4.0",
 		"monolog/monolog": "^2.2.0",
 		"nette/di": "^3.0.7",

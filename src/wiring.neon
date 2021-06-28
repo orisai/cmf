@@ -121,6 +121,11 @@ services:
 		arguments:
 			- @ori.core.filesystem.public.adapter
 
+	ori.core.filesystem.mimeTypeDetector:
+		factory: League\MimeTypeDetection\FinfoMimeTypeDetector
+		arguments:
+			bufferSampleSize: 1048576 # 1 MB
+
 	# User
 	ori.core.email.mapper:
 		factory: OriCMF\Core\Email\EmailPostgresMapper
