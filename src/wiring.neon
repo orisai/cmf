@@ -151,6 +151,9 @@ services:
 	ori.core.user.repository:
 		factory: OriCMF\Core\User\UserRepository
 
+	# User.Command
+	ori.core.user.command.userRoleAdd: OriCMF\Core\User\Command\UserRoleAddCommand
+
 	# Auth
 	ori.core.auth.password.encoder:
 		factory: Orisai\Auth\Passwords\SodiumPasswordEncoder
