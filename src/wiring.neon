@@ -68,8 +68,28 @@ parameters:
 			name: null
 			version: null
 			stable: false
+	privileges: []
 
 services:
+	# Auth
+	ori.core.auth.password.encoder:
+		factory: Orisai\Auth\Passwords\SodiumPasswordEncoder
+
+	ori.core.auth.policyManager:
+		factory: Orisai\Auth\Bridge\NetteDI\LazyPolicyManager
+		arguments:
+			serviceMap: []
+		autowired: false
+	ori.core.auth.authorizerCreator:
+		factory: OriCMF\Core\Auth\AuthorizerCreator
+		autowired: false
+		arguments:
+			policyManager: @ori.core.auth.policyManager
+		setup:
+			- addPrivileges(%privileges%)
+	ori.core.auth.authorizer:
+		factory: @ori.core.auth.authorizerCreator::create
+
 	# Cache
 	ori.core.cache:
 		factory: Nette\Caching\Cache
@@ -153,10 +173,6 @@ services:
 
 	# User.Command
 	ori.core.user.command.userRoleAdd: OriCMF\Core\User\Command\UserRoleAddCommand
-
-	# Auth
-	ori.core.auth.password.encoder:
-		factory: Orisai\Auth\Passwords\SodiumPasswordEncoder
 
 tracy:
 	netteMailer: false
