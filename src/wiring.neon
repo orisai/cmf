@@ -180,6 +180,14 @@ services:
 	# User.Command
 	ori.core.user.command.userRoleAdd: OriCMF\Core\User\Command\UserRoleAddCommand
 
+	# User.Credentials
+	ori.core.user.credentials.handlerManager:
+		factory: OriCMF\Core\User\Credentials\CredentialHandlerManager
+		arguments:
+			handlers:
+				email: OriCMF\Core\User\Credentials\EmailCredentialHandler()
+				password: OriCMF\Core\User\Credentials\PasswordCredentialHandler()
+
 tracy:
 	netteMailer: false
 	strictMode: true
