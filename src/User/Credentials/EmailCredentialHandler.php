@@ -27,7 +27,10 @@ final class EmailCredentialHandler implements VerifyingCredentialHandler
 		$existing = $this->emailRepository->getBy(['emailAddress' => $credential->emailAddress]);
 
 		if ($existing !== null && $existing->id !== $credential->id) {
-			throw CredentialAlreadyInUse::create($credential, new TranslatableMessage('log.in.alreadyInUse.email'));
+			throw CredentialAlreadyInUse::create(
+				$credential,
+				new TranslatableMessage('ori.core.log.in.alreadyInUse.email'),
+			);
 		}
 
 		$this->model->persist($credential);

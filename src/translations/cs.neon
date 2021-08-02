@@ -1,7 +1,13 @@
 #
+# Login
+#
+
+ori.core.log.in.alreadyInUse.email: Emailová adresa je již využívána jiným účtem.
+
+#
 # User
 #
 
-ori.ui.user.state.new: Nový
-ori.ui.user.state.active: Aktivní
-ori.ui.user.state.disabled: Deaktivovaný
+ori.core.user.state.new: Nový
+ori.core.user.state.active: Aktivní
+ori.core.user.state.disabled: Deaktivovaný

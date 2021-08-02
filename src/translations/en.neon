@@ -1,7 +1,13 @@
 #
+# Login
+#
+
+ori.core.log.in.alreadyInUse.email: Email address is already used by another account.
+
+#
 # User
 #
 
-ori.ui.user.state.new: New
-ori.ui.user.state.active: Active
-ori.ui.user.state.disabled: Disabled
+ori.core.user.state.new: New
+ori.core.user.state.active: Active
+ori.core.user.state.disabled: Disabled
