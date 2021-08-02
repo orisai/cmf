@@ -179,6 +179,7 @@ services:
 
 	# User.Command
 	ori.core.user.command.userRoleAdd: OriCMF\Core\User\Command\UserRoleAddCommand
+	ori.core.user.command.register: OriCMF\Core\User\Command\UserRegisterCommand
 
 	# User.Credentials
 	ori.core.user.credentials.handlerManager:
