@@ -2,7 +2,10 @@
 # Login
 #
 
-ori.core.log.in.alreadyInUse.email: Email address is already used by another account.
+ori.core.log.in.email.alreadyInUse: Email address is already used by another account.
+ori.core.log.in.invalidCredentials: Incorrect credentials
+ori.core.log.in.inactive.newAccount: Your account is not activated yet.
+ori.core.log.in.inactive.deactivatedAccount: Your account was deactivated.
 
 #
 # User

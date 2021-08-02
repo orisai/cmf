@@ -189,6 +189,9 @@ services:
 				email: OriCMF\Core\User\Credentials\EmailCredentialHandler()
 				password: OriCMF\Core\User\Credentials\PasswordCredentialHandler()
 
+	# User.Login
+	ori.core.user.login.verifier: OriCMF\Core\User\Login\LoginVerifier
+
 	# User.Register
 	ori.core.user.register.registrar: OriCMF\Core\User\Register\UserRegistrar
 	ori.core.user.register.getter: OriCMF\Core\User\Register\UserRegistrarGetter
