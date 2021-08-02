@@ -3,13 +3,14 @@
 namespace OriCMF\Core\ORM\Wrapper;
 
 use Brick\DateTime\LocalDate;
+use DateTimeImmutable;
 use DateTimeInterface;
 use function assert;
 
 final class LocalDateWrapper extends ValuePropertyWrapper
 {
 
-	public function convertToRawValue(mixed $value): string|null
+	public function convertToRawValue(mixed $value): DateTimeImmutable|null
 	{
 		if ($value === null) {
 			return null;
@@ -17,7 +18,7 @@ final class LocalDateWrapper extends ValuePropertyWrapper
 
 		assert($value instanceof LocalDate);
 
-		return $value->toDateTime()->format('c');
+		return $value->toDateTimeImmutable();
 	}
 
 	public function convertFromRawValue(mixed $value): LocalDate|null
