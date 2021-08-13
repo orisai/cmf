@@ -8,6 +8,7 @@ extensions:
 	inject: Nette\DI\Extensions\InjectExtension
 	localization: Orisai\Localization\Bridge\NetteDI\LocalizationExtension
 	migrations: Nextras\Migrations\Bridges\NetteDI\MigrationsExtension
+	monolog: OriNette\Monolog\DI\MonologExtension
 	orm: Nextras\Orm\Bridges\NetteDI\OrmExtension
 	ormInitializer: OriCMF\Core\ORM\DI\OrmInitializerExtension
 	time: OriNette\Time\DI\TimeExtension
@@ -48,6 +49,22 @@ migrations:
 			directory: %vendorDir%/orisai/cmf-core/src/upgrade/migrations/structures
 		ori.core.basicData:
 			directory: %vendorDir%/orisai/cmf-core/src/upgrade/migrations/basic-data
+
+monolog:
+	debug: %debugMode%
+
+	channels:
+
+		main:
+			autowired: true
+
+	# No default handlers, just bridge with Tracy
+	handlers: []
+
+	bridge:
+		fromTracy:
+			- main
+		toTracy: true
 
 orm:
 	model: Nextras\Orm\Model\Model
@@ -136,11 +153,6 @@ services:
 		factory: League\MimeTypeDetection\FinfoMimeTypeDetector
 		arguments:
 			bufferSampleSize: 1048576 # 1 MB
-
-	# Logging
-	ori.core.logger:
-		factory: Psr\Log\NullLogger
-		type: Psr\Log\LoggerInterface
 
 	# Password
 	ori.core.password.mapper:
