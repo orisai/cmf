@@ -23,14 +23,14 @@ final class UserRegisterCommand extends Command
 {
 
 	/**
-	 * @var string
+	 * @var string|null
 	 *
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingNativeTypeHint
 	 */
 	protected static $defaultName = 'user:register';
 
 	/**
-	 * @var string
+	 * @var string|null
 	 *
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingNativeTypeHint
 	 */
@@ -48,8 +48,6 @@ final class UserRegisterCommand extends Command
 	protected function configure(): void
 	{
 		parent::configure();
-
-		$this->setDescription(self::$defaultDescription);
 
 		$this->addArgument('fullName', InputArgument::REQUIRED, 'Full name');
 		$this->addArgument('email', InputArgument::REQUIRED, 'Email address');

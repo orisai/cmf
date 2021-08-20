@@ -14,14 +14,14 @@ final class UserRoleAddCommand extends Command
 {
 
 	/**
-	 * @var string
+	 * @var string|null
 	 *
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingNativeTypeHint
 	 */
 	protected static $defaultName = 'user:role:add';
 
 	/**
-	 * @var string
+	 * @var string|null
 	 *
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingNativeTypeHint
 	 */
@@ -39,8 +39,6 @@ final class UserRoleAddCommand extends Command
 	protected function configure(): void
 	{
 		parent::configure();
-
-		$this->setDescription(self::$defaultDescription);
 
 		$this->addArgument('email', InputArgument::REQUIRED, 'Email address');
 		$this->addArgument('role', InputArgument::REQUIRED, 'Role name');

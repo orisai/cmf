@@ -17,14 +17,14 @@ final class RoleCreateCommand extends Command
 {
 
 	/**
-	 * @var string
+	 * @var string|null
 	 *
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingNativeTypeHint
 	 */
 	protected static $defaultName = 'user:role:create';
 
 	/**
-	 * @var string
+	 * @var string|null
 	 *
 	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingNativeTypeHint
 	 */
@@ -42,8 +42,6 @@ final class RoleCreateCommand extends Command
 	protected function configure(): void
 	{
 		parent::configure();
-
-		$this->setDescription(self::$defaultDescription);
 
 		$this->addArgument('role', InputArgument::REQUIRED, 'Role name');
 
