@@ -66,6 +66,11 @@ monolog:
 			- main
 		toTracy: true
 
+	processors:
+		hostname: Monolog\Processor\HostnameProcessor
+		introspection: Monolog\Processor\IntrospectionProcessor
+		web: Monolog\Processor\WebProcessor
+
 orm:
 	model: Nextras\Orm\Model\Model
 	repositoryFinder: Nextras\Orm\Bridges\NetteDI\DIRepositoryFinder
