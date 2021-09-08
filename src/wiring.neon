@@ -5,6 +5,7 @@ extensions:
 	dbal: OriCMF\Core\SQL\DI\DbalExtension
 	decorator: Nette\DI\Extensions\DecoratorExtension
 	di: Nette\DI\Extensions\DIExtension(%debugMode%)
+	httpClient: OriNette\HttpClient\DI\HttpClientExtension
 	inject: Nette\DI\Extensions\InjectExtension
 	localization: Orisai\Localization\Bridge\NetteDI\LocalizationExtension
 	migrations: Nextras\Migrations\Bridges\NetteDI\MigrationsExtension
