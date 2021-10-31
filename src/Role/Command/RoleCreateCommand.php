@@ -16,20 +16,6 @@ use function implode;
 final class RoleCreateCommand extends Command
 {
 
-	/**
-	 * @var string|null
-	 *
-	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingNativeTypeHint
-	 */
-	protected static $defaultName = 'user:role:create';
-
-	/**
-	 * @var string|null
-	 *
-	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingNativeTypeHint
-	 */
-	protected static $defaultDescription = 'Create new user role';
-
 	public function __construct(
 		private IModel $model,
 		private RoleRepository $roleRepository,
@@ -37,6 +23,16 @@ final class RoleCreateCommand extends Command
 	)
 	{
 		parent::__construct();
+	}
+
+	public static function getDefaultName(): string
+	{
+		return 'user:role:create';
+	}
+
+	public static function getDefaultDescription(): string
+	{
+		return 'Create new user role';
 	}
 
 	protected function configure(): void

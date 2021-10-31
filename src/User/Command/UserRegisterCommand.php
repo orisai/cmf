@@ -22,20 +22,6 @@ use function is_bool;
 final class UserRegisterCommand extends Command
 {
 
-	/**
-	 * @var string|null
-	 *
-	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingNativeTypeHint
-	 */
-	protected static $defaultName = 'user:register';
-
-	/**
-	 * @var string|null
-	 *
-	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingNativeTypeHint
-	 */
-	protected static $defaultDescription = 'Register new user';
-
 	public function __construct(
 		private UserRegistrarGetter $userRegistrarGetter,
 		private PasswordEncoder $passwordEncoder,
@@ -43,6 +29,16 @@ final class UserRegisterCommand extends Command
 	)
 	{
 		parent::__construct();
+	}
+
+	public static function getDefaultName(): string
+	{
+		return 'user:register';
+	}
+
+	public static function getDefaultDescription(): string
+	{
+		return 'Register new user';
 	}
 
 	protected function configure(): void

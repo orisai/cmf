@@ -13,20 +13,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 final class UserRoleAddCommand extends Command
 {
 
-	/**
-	 * @var string|null
-	 *
-	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingNativeTypeHint
-	 */
-	protected static $defaultName = 'user:role:add';
-
-	/**
-	 * @var string|null
-	 *
-	 * @phpcsSuppress SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingNativeTypeHint
-	 */
-	protected static $defaultDescription = 'Add role to user';
-
 	public function __construct(
 		private IModel $model,
 		private RoleRepository $roleRepository,
@@ -34,6 +20,16 @@ final class UserRoleAddCommand extends Command
 	)
 	{
 		parent::__construct();
+	}
+
+	public static function getDefaultName(): string
+	{
+		return 'user:role:add';
+	}
+
+	public static function getDefaultDescription(): string
+	{
+		return 'Add role to user';
 	}
 
 	protected function configure(): void
