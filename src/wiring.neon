@@ -34,6 +34,10 @@ di:
 		tags: false
 		types: false
 
+httpClient:
+	debug:
+		panel: %debug.panels.httpClient%
+
 localization:
 	debug:
 		newMessages: %debugMode%
@@ -85,6 +89,7 @@ parameters:
 			dbal: false
 			di:
 				container: true
+			httpClient: false
 			localization: false
 			monolog: false
 	application:
