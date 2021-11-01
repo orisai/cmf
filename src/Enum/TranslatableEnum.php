@@ -3,8 +3,10 @@
 namespace OriCMF\Core\Enum;
 
 use MabeEnum\Enum;
+use Orisai\Exceptions\Logic\InvalidArgument;
 use Orisai\Localization\Translator;
 use function array_map;
+use function is_scalar;
 
 abstract class TranslatableEnum extends Enum
 {
@@ -20,7 +22,14 @@ abstract class TranslatableEnum extends Enum
 		$labels = [];
 
 		foreach (static::getEnumerators() as $enumerator) {
-			$labels[$enumerator->getName()] = $prefix . $enumerator->getValue();
+			$value = $enumerator->getValue();
+
+			if (!is_scalar($value)) {
+				throw InvalidArgument::create()
+					->withMessage('Only enums with scalar values can be translated.');
+			}
+
+			$labels[$enumerator->getName()] = $prefix . $value;
 		}
 
 		return $labels;
