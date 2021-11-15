@@ -110,15 +110,18 @@ services:
 		arguments:
 			serviceMap: []
 		autowired: false
-	ori.core.auth.authorizerCreator:
-		factory: OriCMF\Core\Auth\AuthorizerCreator
+	ori.core.auth.dataCreator:
+		factory: OriCMF\Core\Auth\AuthorizationDataCreator
 		autowired: false
 		arguments:
-			policyManager: @ori.core.auth.policyManager
-		setup:
-			- addPrivileges(%privileges%)
+			privileges: %privileges%
+	ori.core.auth.data:
+		factory: @ori.core.auth.dataCreator::create
+		type: Orisai\Auth\Authorization\AuthorizationData
 	ori.core.auth.authorizer:
-		factory: @ori.core.auth.authorizerCreator::create
+		factory: Orisai\Auth\Authorization\PrivilegeAuthorizer
+		arguments:
+			policyManager: @ori.core.auth.policyManager
 
 	# Cache
 	ori.core.cache:
