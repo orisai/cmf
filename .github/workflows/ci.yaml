@@ -81,11 +81,11 @@ jobs:
     strategy:
       matrix:
         operating-system: [ "ubuntu-latest", "macos-latest", "windows-latest" ]
-        php-version: [ "7.4", "8.0", "8.1" ]
+        php-version: [ "8.0", "8.1" ]
         composer-flags: [ "" ]
         include:
           - operating-system: "ubuntu-latest"
-            php-version: "7.4"
+            php-version: "8.0"
             composer-flags: "--prefer-lowest"
       fail-fast: false
 
