@@ -1,0 +1,13 @@
+localization:
+	locale:
+		default: en
+
+dbal:
+	connections:
+		default:
+			driver: pgsql
+			host: localhost
+			port: 5432
+			username: user
+			password: pass
+			database: ori
