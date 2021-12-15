@@ -1,0 +1,13 @@
+{templateType OriCMF\UI\Control\Head\HeadTemplate}
+	<head>
+		<meta charset="UTF-8">
+		{php if(\Tracy\Debugger::$productionMode === false){echo"\t\t";\Tracy\Debugger::renderLoader();}}
+		{control meta}
+		{control title}
+		{control icons}
+		{control links}
+		{control styles}
+		{control scripts}
+		{control noScript}
+		<script n:nonce n:syntax="off">(function (html){html.className=html.className.replace(/\bno-js\b/,'js')})(document.getElementsByTagName('html')[0]);</script>
+	</head>

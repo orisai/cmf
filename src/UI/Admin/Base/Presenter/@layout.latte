@@ -1,0 +1,12 @@
+{templateType OriCMF\UI\Presenter\Base\BasePresenterTemplate}
+{layout OriCMF\UI\Presenter\Base\BasePresenter::LAYOUT_PATH}
+
+{define container}
+	{ifset content}
+		{include content|indent:2}
+	{else}
+		<p>
+			Define <code>{l}block content{r}</code> or redefine <code>{l}block container{r}</code> to render presenter template
+		</p>
+	{/ifset}
+{/define}

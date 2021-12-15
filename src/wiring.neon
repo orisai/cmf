@@ -1,2 +1,3 @@
 includes:
 	- Core/wiring.neon
+	- UI/wiring.neon

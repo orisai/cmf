@@ -1,0 +1,225 @@
+{templateType OriCMF\UI\Form\Latte\FormInputsTemplate}
+
+{var $inputClasses = Orisai\Utils\Reflection\Classes::getClassList(get_class($input))}
+
+{*TODO
+	- přidat fieldInput (input + label) a fieldErrors makra
+		- pro vložení popisku mezi chybu a input
+	- vylepšit chyby při nepodporovaných inputech
+*}
+
+{var bool $hasBlock = false}
+{foreach $inputClasses as $inputClass}
+	{var $hasBlock = $this->hasBlock("field-$inputClass")}
+
+	{if $hasBlock}
+		{if $input instanceof Nette\Forms\Controls\BaseControl}
+			{formContext $input->getForm()}
+
+			{var $inputName = $input->getName()}
+			{var $parent = $input->getParent()}
+			{while $parent instanceof Nette\Forms\Container && !$parent instanceof Nette\Forms\Form}
+				{var $inputName = $parent->getName() . '-' . $inputName}
+				{do $parent = $parent->getParent()}
+			{/while}
+
+			{include #field-$inputClass $input, $inputName}
+		{else}
+			<span>INPUT TYPE NOT SUPPORTED - HAS TO EXTEND {Nette\Forms\Controls\BaseControl::class}</span>
+		{/if}
+	{/if}
+
+	{breakIf $hasBlock}
+{/foreach}
+
+{if !$hasBlock}
+	<span>INPUT TYPE NOT FOUND - DEFINE field-{$inputClass}</span>
+{/if}
+
+{define field-Nette\Forms\Controls\RadioList Nette\Forms\Controls\RadioList $input, string $inputName}
+	{if $input->isDisabled()}
+		<div class="grid grid-cols-6 gap-2">
+			<div class="col-span-12">
+				{include disabled-field $input->getCaption(), $input->getSelectedItem()}
+			</div>
+		</div>
+	{else}
+		<div class="grid grid-cols-6 gap-2">
+
+			<div class="col-span-12">
+				{include fieldLabel $input, $inputName}
+			</div>
+
+			{foreach $input->items as $key => $label}
+				<div class="col-span-12">
+					<div class="flex items-center justify-between">
+						<div class="
+							flex items-center">
+							<input n:name="$inputName:$key"
+									class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded
+										{if $input->isDisabled()} cursor-not-allowed{/if}"
+							>
+							<label n:name="$inputName:$key"
+									class="ml-2 block text-sm text-gray-900
+										{if $input->isDisabled()} cursor-not-allowed{/if}"
+							>
+								{$label}
+							</label>
+						</div>
+					</div>
+				</div>
+			{/foreach}
+
+			<div class="col-span-12">
+				{include fieldErrors $input}
+			</div>
+
+		</div>
+	{/if}
+{/define}
+
+{define field-Nette\Forms\Controls\CheckboxList Nette\Forms\Controls\CheckboxList $input, string $inputName}
+	<div class="grid grid-cols-6 gap-2">
+
+		<div class="col-span-12">
+			{include fieldLabel $input, $inputName}
+		</div>
+
+		{foreach $input->items as $key => $label}
+			<div class="col-span-12">
+				<div class="flex items-center justify-between">
+					<div class="flex items-center">
+						<input n:name="$inputName:$key"
+								class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded
+									{if $input->isDisabled()} cursor-not-allowed{/if}"
+						>
+						<label n:name="$inputName:$key"
+								class="ml-2 block text-sm text-gray-900
+									{if $input->isDisabled()} cursor-not-allowed{/if}"
+						>
+							{$label}
+						</label>
+					</div>
+				</div>
+			</div>
+		{/foreach}
+
+		<div class="col-span-12">
+			{include fieldErrors $input}
+		</div>
+
+	</div>
+{/define}
+
+{define field-Nette\Forms\Controls\Checkbox Nette\Forms\Controls\Checkbox $input, string $inputName}
+	<div class="flex items-center">
+		<input n:name="$input"
+				class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded
+					{if $input->isDisabled()} cursor-not-allowed{/if}"
+		>
+		<label n:name="$input"
+				class="ml-2 block text-sm text-gray-900
+					{if $input->isDisabled()} cursor-not-allowed{/if}"
+		>
+			{$input->getCaption()}
+		</label>
+	</div>
+{/define}
+
+{define field-Nette\Forms\Controls\TextInput Nette\Forms\Controls\TextInput $input, string $inputName}
+	{if $input->isDisabled()}
+		{include disabled-field $input->getCaption(), $input->getValue()}
+	{else}
+		{include fieldLabel $input, $inputName}
+		<input n:name="$input"
+				class="mt-1 block w-full px-3 py-2 shadow-sm border rounded-md focus:outline-none sm:text-sm
+				{if $input->hasErrors()} text-red-900 placeholder-red-300 border-red-300 focus:border-red-500 focus:ring-red-500
+				{else} border-gray-300 focus:border-indigo-500 focus:ring-indigo-500
+				{/if}"
+		>
+		{if $input->getOption('hint') !== null}
+			<p class="mt-2 text-sm text-gray-500">{$input->getOption('hint')}</p>
+		{/if}
+		{include fieldErrors $input}
+	{/if}
+{/define}
+
+{define field-Nette\Forms\Controls\UploadControl Nette\Forms\Controls\UploadControl $input, string $inputName}
+	{include fieldLabel $input, $inputName}
+	<input n:name="$input"
+			class="mt-1 block w-full px-3 py-2 shadow-sm border rounded-md focus:outline-none sm:text-sm
+				{if $input->hasErrors()} text-red-900 placeholder-red-300 border-red-300 focus:border-red-500 focus:ring-red-500
+				{else} border-gray-300 focus:border-indigo-500 focus:ring-indigo-500
+				{/if}"
+	>
+	{if $input->getOption('hint') !== null}
+		<p class="mt-2 text-sm text-gray-500">{$input->getOption('hint')}</p>
+	{/if}
+	{include fieldErrors $input}
+{/define}
+
+{define field-Nette\Forms\Controls\TextArea Nette\Forms\Controls\TextArea $input, string $inputName}
+	{if $input->isDisabled()}
+		{include disabled-field $input->getCaption(), $input->getValue()}
+	{else}
+		{include fieldLabel $input, $inputName}
+		<textarea n:name="$input"
+				class="mt-1 block w-full px-3 py-2 shadow-sm border rounded-md focus:outline-none sm:text-sm
+					{if $input->hasErrors()} text-red-900 placeholder-red-300 border-red-300 focus:border-red-500 focus:ring-red-500
+					{else} border-gray-300 focus:border-indigo-500 focus:ring-indigo-500
+					{/if}"
+		/>
+		{include fieldErrors $input}
+	{/if}
+{/define}
+
+{define field-Nette\Forms\Controls\SelectBox Nette\Forms\Controls\SelectBox $input, string $inputName}
+	{if $input->isDisabled()}
+		{include disabled-field $input->getCaption(), $input->getSelectedItem()}
+	{else}
+		{include fieldLabel $input, $inputName}
+		{OriCMF\UI\Form\SvelteSelect\SvelteSelect::fromSelect($input)->toHtml()}
+		{include fieldErrors $input}
+	{/if}
+{/define}
+
+{define field-OriCMF\UI\Form\Input\DateInput OriCMF\UI\Form\Input\DateInput $input, string $inputName}
+	{include #field-Nette\Forms\Controls\TextInput $input, $inputName}
+{/define}
+
+{define field-OriCMF\UI\Form\Input\DateTimeLocalInput OriCMF\UI\Form\Input\DateTimeLocalInput $input, string $inputName}
+	{include #field-Nette\Forms\Controls\TextInput $input, $inputName}
+{/define}
+
+{define field-Nette\Forms\Controls\Button Nette\Forms\Controls\Button $input, string $inputName}
+	<button n:name="$input"
+			class="bg-indigo-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+		{$input->getCaption()}
+	</button>
+{/define}
+
+{define field-Nette\Forms\Controls\SubmitButton Nette\Forms\Controls\SubmitButton $input, string $inputName}
+	{include #field-Nette\Forms\Controls\Button $input, $inputName}
+{/define}
+
+{define disabled-field string $label, string $value}
+	<span class="block text-sm font-medium text-gray-700">
+		{$label}
+	</span>
+	<span class="mt-1 block w-full py-2 sm:text-sm">
+		{$value}
+	</span>
+{/define}
+
+{define fieldLabel Nette\Forms\Controls\BaseControl $input, string $inputName}
+	<label n:name="$input"
+			class="block text-sm font-medium text-gray-700">
+		{$input->getCaption()} {if $input->isRequired()}<span class="text-red-600">*</span>{/if}
+	</label>
+{/define}
+
+{define fieldErrors Nette\Forms\Control $input}
+	{foreach $input->getErrors() as $error}
+		<p class="mt-2 text-sm text-red-600">{$error}</p>
+	{/foreach}
+{/define}

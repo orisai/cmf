@@ -1,0 +1,180 @@
+extensions:
+	application: Nette\Bridges\ApplicationDI\ApplicationExtension(%debugMode%)
+	applicationMap: OriNette\Application\ApplicationMap\DI\ApplicationMapExtension
+	http: Nette\Bridges\HttpDI\HttpExtension(%consoleMode%)
+	latte: Nette\Bridges\ApplicationDI\LatteExtension(%buildDir%/latte, %debugMode%)
+	routing: OriCMF\UI\Routing\DI\RoutingExtension
+	session: Nette\Bridges\HttpDI\SessionExtension(%debugMode%, %consoleMode%)
+	ui: OriCMF\UI\Config\DI\UIExtension
+	uiInspector: OriNette\Application\Inspector\DI\InspectorExtension
+	- OriCMF\UI\Template\DI\UITemplateExtension
+	- OriCMF\UI\Template\DI\LatteComponentsExtension
+
+application:
+	catchExceptions: %catchExceptions.ui%
+	debugger: %debug.panels.ui.application%
+	errorPresenter: OriCMF\UI\Error\ErrorForwardPresenter
+	mapping:
+		*: ['', *, *\*Presenter]
+	scanComposer: false
+	scanDirs: false
+	silentLinks: false
+
+applicationMap:
+	enabled: %debug.panels.ui.applicationMap%
+
+decorator:
+	OriCMF\UI\Control\Base\BaseControl:
+		setup:
+			- setBase()
+
+http:
+	csp:
+		base-uri: self
+		form-action: self
+		frame-ancestors: none
+	headers:
+		Referrer-Policy: strict-origin-when-cross-origin
+		X-Content-Type-Options: nosniff
+		X-Frame-Options: DENY
+		X-Powered-By: Orisai CMF
+		X-XSS-Protection: '1; mode=block'
+
+latte:
+	debugger: %debug.panels.latte%
+	strictTypes: true
+
+localization:
+	directories:
+		- %vendorDir%/orisai/cmf-ui/src/**/translations/**
+
+parameters:
+	catchExceptions:
+		ui: false
+	debug:
+		panels:
+			latte: false
+			ui:
+				application: false
+				applicationMap: false
+				inspector: false
+				routing: false
+				session: false
+	privileges:
+		- administration.entry
+
+routing:
+	debug: %debug.panels.ui.routing%
+	providers:
+		ori.core: OriCMF\UI\Routing\CmfUIRouterProvider
+
+services:
+	# Admin
+	ori.ui.admin.auth.identityRenewer:
+		factory: OriCMF\UI\Admin\Auth\AdminIdentityRenewer
+		autowired: false
+	ori.ui.admin.auth.firewall:
+		factory: OriCMF\UI\Admin\Auth\AdminFirewall
+		arguments:
+			storage: @ori.ui.auth.loginStorage
+			renewer: @ori.ui.admin.auth.identityRenewer
+
+	ori.ui.admin.dashboard.presenter:
+		factory: OriCMF\UI\Admin\Dashboard\DashboardPresenter
+	ori.ui.admin.error.presenter:
+		factory: OriCMF\UI\Admin\Error\ErrorPresenter
+	ori.ui.admin.login.presenter:
+		factory: OriCMF\UI\Admin\Login\LoginPresenter
+
+	# Auth
+	ori.ui.auth.loginStorage:
+		factory: Orisai\Auth\Bridge\NetteHttp\SessionLoginStorage
+		autowired: false
+
+	# Control
+	ori.ui.control.body.factory:
+		implement: OriCMF\UI\Control\Body\BodyControlFactory
+	ori.ui.control.breadcrumb.factory:
+		implement: OriCMF\UI\Control\Breadcrumb\BreadcrumbControlFactory
+	ori.ui.control.document.factory:
+		implement: OriCMF\UI\Control\Document\DocumentControlFactory
+	ori.ui.control.head.factory:
+		implement: OriCMF\UI\Control\Head\HeadControlFactory
+	ori.ui.control.icons.factory:
+		implement: OriCMF\UI\Control\Icons\IconsControlFactory
+	ori.ui.control.links.factory:
+		implement: OriCMF\UI\Control\Links\LinksControlFactory
+	ori.ui.control.meta.factory:
+		implement: OriCMF\UI\Control\Meta\MetaControlFactory
+	ori.ui.control.noscript.factory:
+		implement: OriCMF\UI\Control\NoScript\NoScriptControlFactory
+	ori.ui.control.scripts.factory:
+		implement: OriCMF\UI\Control\Scripts\ScriptsControlFactory
+	ori.ui.control.styles.factory:
+		implement: OriCMF\UI\Control\Styles\StylesControlFactory
+	ori.ui.control.title.factory:
+		implement: OriCMF\UI\Control\Title\TitleControlFactory
+
+	# DataGrid
+	pri.ui.dataGrid.factory: OriCMF\UI\DataGrid\DataGridFactory
+
+	# Error
+	ori.ui.error.forward.presenter:
+		factory: OriCMF\UI\Error\ErrorForwardPresenter
+		setup:
+			- addErrorPresenter(':OriCMF\UI\Admin\Error\ErrorPresenter:default', '#(.*)(\\|:)(Admin|Administration)(\\|:)(.*)#')
+
+	# Form
+	ori.ui.form.factory:
+		factory: OriCMF\UI\Form\FormFactory
+
+	# Front
+	ori.ui.front.auth.identityRenewer:
+		factory: OriCMF\UI\Front\Auth\FrontIdentityRenewer
+		autowired: false
+	ori.ui.front.auth.firewall:
+		factory: OriCMF\UI\Front\Auth\FrontFirewall
+		arguments:
+			storage: @ori.ui.auth.loginStorage
+			renewer: @ori.ui.front.auth.identityRenewer
+
+	ori.ui.front.error.presenter:
+		factory: OriCMF\UI\Front\Error\ErrorPresenter
+	ori.ui.front.homepage.presenter:
+		factory: OriCMF\UI\Front\Homepage\HomepagePresenter
+	ori.ui.front.login.presenter:
+		factory: OriCMF\UI\Front\Login\LoginPresenter
+
+	# Presenter
+	application.presenterFactory:
+		factory: OriNette\Application\Mapping\DefaultPresenterFactory
+		type: OriNette\Application\Mapping\PresenterFactory
+		arguments:
+			factory: OriNette\Application\Mapping\StrictPresenterFactoryCallback()
+
+	# Robots
+	ori.ui.robots.presenter:
+		factory: OriCMF\UI\Robots\RobotsPresenter
+
+	# Template
+	ori.ui.template.locator.control:
+		factory: OriCMF\UI\Template\Locator\ControlTemplateLocator
+		arguments:
+			rootDir: %rootDir%
+	ori.ui.template.locator.presenter:
+		factory: OriCMF\UI\Template\Locator\PresenterTemplateLocator
+		arguments:
+			rootDir: %rootDir%
+
+session:
+	autoStart: smart
+	cookiePath: @Nette\Http\IRequest::getUrl()::getBasePath()
+	cookieSamesite: Lax
+	debugger: %debug.panels.ui.session%
+	expiration: 14 days
+	name: SID
+	sid_bits_per_character: 6
+	sid_length: 128
+
+uiInspector:
+	enabled: %debug.panels.ui.inspector%

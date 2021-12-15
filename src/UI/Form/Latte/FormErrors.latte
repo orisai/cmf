@@ -1,0 +1,9 @@
+{templateType OriCMF\UI\Form\Latte\FormErrorsTemplate}
+
+{include formErrors $form}
+
+{define formErrors Nette\Forms\Form $form}
+	<ul n:ifcontent class="mt-2 text-sm text-red-600">
+		<li n:foreach="$form->getOwnErrors() as $error">{$error}</li>
+	</ul>
+{/define}

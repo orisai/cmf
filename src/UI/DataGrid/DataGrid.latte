@@ -1,0 +1,226 @@
+{templateType OriCMF\UI\DataGrid\DataGridTemplate}
+
+{block content}
+	<div data-grid-name="{$control->getUniqueId()}">
+		{snippet rows}
+
+			{form form class: 'ajax'}
+				{var $hasActionsColumn = $this->hasBlock("row-actions") || isset($form['filter'])}
+				{var $hasGlobalActionsColumn = isset($form['actions'])}
+
+				{include table}
+			{/form}
+
+		{/snippet}
+	</div>
+{/block}
+
+{define table}
+	<table class="min-w-full divide-y divide-gray-200">
+		{include table-head}
+		{include table-body}
+		{include table-foot}
+	</table>
+{/define}
+
+{define table-head}
+	<thead class="bg-gray-50">
+		{include row-head-columns}
+		{ifset $form['filter']}
+			{include row-head-filter}
+		{/ifset}
+	</thead>
+{/define}
+
+{define table-body}
+	<tbody class="bg-white divide-y divide-gray-200">
+		{if count($data)}
+			{foreach $data as $row}
+				{var $primary = $control->getCellValue($row, $rowPrimaryKey)}
+				{var string $rowId = $this->global->snippetDriver->getHtmlId("rows-$primary")}
+				{include row, row: $row, rowId: $rowId, iterator: $iterator}
+			{/foreach}
+		{else}
+			{ifset empty-result}
+				{include empty-result}
+			{/ifset}
+		{/if}
+	</tbody>
+{/define}
+
+{define table-foot}
+	<tfoot n:if="isset($paginator) || $hasGlobalActionsColumn">
+		<tr>
+			<th colspan="{=count($columns) + $hasGlobalActionsColumn + $hasActionsColumn}">
+				{if $hasGlobalActionsColumn}
+					{include global-actions}
+				{/if}
+				{ifset $paginator}
+					{include pagination}
+				{/ifset}
+			</th>
+		</tr>
+	</tfoot>
+{/define}
+
+{define global-actions}
+	<div n:ifset="$form[actions]">
+		<div class="relative flex items-stretch w-full p-2">
+			<select n:name="$form[actions][action]" class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"/>
+			<button n:name="$form[actions][process]"
+					class="ml-2 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+				{$form[actions][process]->getCaption()}
+			</button>
+		</div>
+	</div>
+{/define}
+
+{define global-filter-actions}
+	<button n:name="filter"
+			class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+		{$form['filter']['filter']->getCaption()}
+	</button>
+	{if $showFilterCancel}
+		<button n:name="cancel"
+				class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+			{$form['filter']['cancel']->getCaption()}
+		</button>
+	{/if}
+{/define}
+
+{define row-head-columns}
+	<tr>
+		{ifset $form[actions]}
+			<th scope="col" class="pt-3 pb-1"></th>
+		{/ifset}
+		{foreach $columns as $column}
+			<th scope="col"
+				class="px-6 pt-3 pb-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+				<a n:tag-if="$column->canSort()"
+						href="{link sort!, orderColumn: $column->name, orderType: $column->getNewState()}"
+						class="ajax text-indigo-600 hover:text-indigo-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+					<span>
+						{$column->label}
+						{if $column->isAsc()}
+							<em>&#9650;</em>
+						{elseif $column->isDesc()}
+							<em>&#9650;</em>
+						{/if}
+					</span>
+				</a>
+			</th>
+		{/foreach}
+		{if $hasActionsColumn}
+			<th scope="col" class="px-6 pt-3 pb-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+				<span class="sr-only">{_ori.ui.grid.actions}</span>
+			</th>
+		{/if}
+	</tr>
+{/define}
+
+{define row-head-filter}
+	<tr>
+		{ifset $form[actions]}
+			<th class="p-2"></th>
+		{/ifset}
+		{formContainer filter}
+			{foreach $columns as $column}
+				<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+					{if isset($form['filter'][$column->name])}
+						{ifset #"col-filter-{$column->name}"}
+							{include #"col-filter-{$column->name}", column: $column}
+						{else}
+							{include col-filter, column: $column}
+						{/ifset}
+					{/if}
+				</th>
+			{/foreach}
+			<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider text-right">
+				{include global-filter-actions}
+			</th>
+		{/formContainer}
+	</tr>
+{/define}
+
+{define col-filter}
+	{if $form[filter][$column->name] instanceof Nette\Forms\Controls\SelectBox}
+		<select n:name="$column->name"
+				class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"/>
+	{elseif $form[filter][$column->name] instanceof Nette\Forms\Controls\MultiSelectBox}
+		{OriCMF\UI\Form\SvelteSelect\SvelteSelect::fromMultiSelect($form[filter][$column->name])->toHtml()}
+	{else}
+		<input n:name="$column->name"
+				class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+	{/if}
+{/define}
+
+{define row}
+	<tr id={$rowId}>
+		{include row-inner, row: $row}
+	</tr>
+{/define}
+
+{define row-inner}
+	{var $primary = $control->getCellValue($row, $rowPrimaryKey)}
+	{if !$sendOnlyRowParentSnippet}
+		{php $this->global->snippetDriver->enter("rows-$primary", "dynamic");}
+	{/if}
+
+	{ifset $form[actions]}
+		<td class="p-2">
+			{formContainer actions}
+				<input n:name="items:$primary" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+			{/formContainer}
+		</td>
+	{/ifset}
+	{foreach $columns as $column}
+		{var $cell = $control->getCellValue($row, $column->name, FALSE)}
+		{ifset #"col-{$column->name}"}
+			{include #"col-{$column->name}", row: $row, cell: $cell, iterator: $iterator}
+		{else}
+			<td class="px-6 py-1 whitespace-nowrap text-sm text-gray-900">
+				{ifset #"cell-{$column->name}"}
+					{include #"cell-{$column->name}", row: $row, cell: $cell, iterator: $iterator}
+				{else}
+					{$cell}
+				{/ifset}
+			</td>
+		{/ifset}
+	{/foreach}
+	{if $hasActionsColumn}
+		<td class="px-6 py-1 whitespace-nowrap text-sm text-gray-900 text-right">
+			{ifset row-actions}
+				{include row-actions, row: $row, primary: $primary}
+			{/ifset}
+		</td>
+	{/if}
+	{if !$sendOnlyRowParentSnippet}
+		{php $this->global->snippetDriver->leave();}
+	{/if}
+{/define}
+
+{define pagination}
+	<nav class="bg-gray-50 px-4 py-2 flex items-center justify-between sm:px-6" aria-label="Pagination">
+		<div class="hidden sm:block">
+			<p class="text-sm text-gray-500">
+				{_ori.ui.pagination.results, [
+					from: $paginator->getItemCount() === 0 ? $paginator->getOffset() : $paginator->getOffset() + 1,
+					to: $paginator->getOffset() + $paginator->getLength(),
+					total: $paginator->getItemCount()
+				]}
+			</p>
+		</div>
+		<div class="flex-1 flex justify-between sm:justify-end">
+			<a href="{link pagination!, page: $paginator->page - 1}" n:tag-if="!$paginator->isFirst()" class="ajax">
+				<span class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 {if $paginator->isFirst()}opacity-75{/if}">
+					{_ori.ui.pagination.previous}
+				</span>
+			</a>
+			<a href="{link pagination!, page: $paginator->page + 1}" n:tag-if="!$paginator->isLast()" class="ajax">
+				<span class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 {if $paginator->isLast()}opacity-75{/if}">
+					{_ori.ui.pagination.next}
+				</span>
+			</a>
+		</div>
+	</nav>
+{/define}

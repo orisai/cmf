@@ -4,3 +4,19 @@ includes:
 parameters:
 	level: 8
 	resultCachePath: %currentWorkingDirectory%/var/tools/PHPStan/resultCache.src.php
+
+	ignoreErrors:
+		# Intentionally broken
+		- message: '#^Return type (.+) of method (.+)\:\:setTranslator\(\) should be covariant with (.+)#'
+		  path: ../src/UI/Form/Form.php
+		# Layout is string|bool|null, check is correct
+		- message: '#^Strict comparison using === between string and null will always evaluate to false\.$#'
+		  path: ../src/UI/Presenter/Base/BasePresenter.php
+		  count: 1
+		# ¯\_(ツ)_/¯
+		- message: '#^Only booleans are allowed in a ternary operator condition, int given\.$#'
+		  path: ../src/UI/Template/UIMacros.php
+		  count: 1
+		- message: '#^Only booleans are allowed in a ternary operator condition, int given\.$#'
+		  path: ../src/UI/Template/LatteComponentMacros.php
+		  count: 2
