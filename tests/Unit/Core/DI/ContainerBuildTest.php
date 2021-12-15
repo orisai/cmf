@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Tests\OriCMF\Core\Unit\DI;
+namespace Tests\OriCMF\Unit\Core\DI;
 
 use Nette\DI\Container;
 use OriNette\DI\Boot\ManualConfigurator;
@@ -18,7 +18,7 @@ final class ContainerBuildTest extends TestCase
 	{
 		parent::setUp();
 
-		$this->rootDir = dirname(__DIR__, 3);
+		$this->rootDir = dirname(__DIR__, 4);
 		if (PHP_VERSION_ID < 8_01_00) {
 			@mkdir("$this->rootDir/var/build");
 		}
@@ -28,7 +28,7 @@ final class ContainerBuildTest extends TestCase
 	{
 		$configurator = new ManualConfigurator($this->rootDir);
 		$configurator->setForceReloadContainer();
-		$configurator->addConfig(__DIR__ . '/../../../src/wiring.neon');
+		$configurator->addConfig(__DIR__ . '/../../../../src/wiring.neon');
 		$configurator->addConfig(__DIR__ . '/wiring.neon');
 
 		$container = $configurator->createContainer();

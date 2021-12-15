@@ -1,27 +1,21 @@
 {
-	"name": "orisai/cmf-core",
-	"description": "Core of Orisai CMF",
+	"name": "orisai/cmf",
+	"description": "Orisai CMF",
 	"keywords": [
-		"account",
+		"backend",
 		"cmf",
-		"cache",
+		"cms",
 		"console",
 		"core",
-		"dbal",
-		"di",
-		"debugger",
-		"logging",
-		"migrations",
+		"framework",
 		"nette",
 		"nextras",
 		"orisai",
-		"orm",
-		"user",
-		"sql"
+		"platform"
 	],
 	"type": "library",
 	"license": "MPL-2.0",
-	"homepage": "https://github.com/orisai/cmf-core",
+	"homepage": "https://github.com/orisai/cmf",
 	"authors": [
 		{
 			"name": "Marek Bartoš",
@@ -75,12 +69,12 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"OriCMF\\Core\\": "src"
+			"OriCMF\\": "src"
 		}
 	},
 	"autoload-dev": {
 		"psr-4": {
-			"Tests\\OriCMF\\Core\\": "tests"
+			"Tests\\OriCMF\\": "tests"
 		}
 	},
 	"minimum-stability": "dev",

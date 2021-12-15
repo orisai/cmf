@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Tests\OriCMF\Core\Unit\ORM\Filter;
+namespace Tests\OriCMF\Unit\Core\ORM\Filter;
 
 use Nextras\Orm\Collection\Expression\LikeExpression;
 use Nextras\Orm\Collection\Functions\CompareEqualsFunction;

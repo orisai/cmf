@@ -15,8 +15,8 @@
 	<rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">
 		<properties>
 			<property name="rootNamespaces" type="array">
-				<element key="src" value="OriCMF\Core"/>
-				<element key="tests" value="Tests\OriCMF\Core"/>
+				<element key="src" value="OriCMF"/>
+				<element key="tests" value="Tests\OriCMF"/>
 			</property>
 		</properties>
 	</rule>

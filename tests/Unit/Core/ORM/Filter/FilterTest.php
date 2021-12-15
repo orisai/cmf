@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Tests\OriCMF\Core\Unit\ORM\Filter;
+namespace Tests\OriCMF\Unit\Core\ORM\Filter;
 
 use OriCMF\Core\ORM\Filter\Filter;
 use PHPUnit\Framework\TestCase;

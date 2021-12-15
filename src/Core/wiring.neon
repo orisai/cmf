@@ -1,0 +1,243 @@
+extensions:
+	cache: OriCMF\Core\Cache\DI\CacheExtension(%tempDir%/nette)
+	console: OriNette\Console\DI\ConsoleExtension
+	datasource: Orisai\DataSources\Bridge\NetteDI\DataSourceExtension
+	dbal: OriCMF\Core\SQL\DI\DbalExtension
+	decorator: Nette\DI\Extensions\DecoratorExtension
+	di: Nette\DI\Extensions\DIExtension(%debugMode%)
+	httpClient: OriNette\HttpClient\DI\HttpClientExtension
+	inject: Nette\DI\Extensions\InjectExtension
+	localization: Orisai\Localization\Bridge\NetteDI\LocalizationExtension
+	migrations: Nextras\Migrations\Bridges\NetteDI\MigrationsExtension
+	monolog: OriNette\Monolog\DI\MonologExtension
+	orm: Nextras\Orm\Bridges\NetteDI\OrmExtension
+	ormInitializer: OriCMF\Core\ORM\DI\OrmInitializerExtension
+	time: OriNette\Time\DI\TimeExtension
+	tracy: Tracy\Bridges\Nette\TracyExtension(%debugMode%, %consoleMode%)
+
+console:
+	catchExceptions: %catchExceptions.console%
+	name: %application.name%
+	version: %application.build.version%
+	di:
+		parameters:
+			backup: %consoleMode%
+
+dbal:
+	debug: %debug.panels.dbal%
+	sqlProcessorFactory: @ori.core.sql.processorFactory
+
+di:
+	debugger: %debug.panels.di.container%
+	export:
+		parameters: false
+		tags: false
+		types: false
+
+httpClient:
+	debug:
+		panel: %debug.panels.httpClient%
+
+localization:
+	debug:
+		newMessages: %debugMode%
+		panel: %debug.panels.localization%
+	directories:
+		- %vendorDir%/orisai/cmf-core/src/**/translations/**
+
+migrations:
+	driver: pgsql
+	dbal: nextras
+	withDummyData: %debugMode%
+	groups:
+		ori.core.structure:
+			directory: %vendorDir%/orisai/cmf-core/src/upgrade/migrations/structures
+		ori.core.basicData:
+			directory: %vendorDir%/orisai/cmf-core/src/upgrade/migrations/basic-data
+
+monolog:
+	debug: %debugMode%
+
+	channels:
+
+		main:
+			autowired: true
+
+	# No default handlers, just bridge with Tracy
+	handlers: []
+
+	bridge:
+		fromTracy:
+			- main
+		toTracy: true
+		tracyPanel: %debug.panels.monolog%
+
+	processors:
+		hostname: Monolog\Processor\HostnameProcessor
+		introspection: Monolog\Processor\IntrospectionProcessor
+		web: Monolog\Processor\WebProcessor
+
+orm:
+	model: Nextras\Orm\Model\Model
+	repositoryFinder: Nextras\Orm\Bridges\NetteDI\DIRepositoryFinder
+
+parameters:
+	catchExceptions:
+		console: false
+	debug:
+		panels:
+			dbal: false
+			di:
+				container: true
+			httpClient: false
+			localization: false
+			monolog: false
+	application:
+		name: null
+		build:
+			name: null
+			version: null
+			stable: false
+	privileges: []
+
+services:
+	# Auth
+	ori.core.auth.password.encoder:
+		factory: Orisai\Auth\Passwords\SodiumPasswordEncoder
+
+	ori.core.auth.policyManager:
+		factory: Orisai\Auth\Bridge\NetteDI\LazyPolicyManager
+		arguments:
+			serviceMap: []
+		autowired: false
+	ori.core.auth.dataCreator:
+		factory: OriCMF\Core\Auth\AuthorizationDataCreator
+		autowired: false
+		arguments:
+			privileges: %privileges%
+	ori.core.auth.data:
+		factory: @ori.core.auth.dataCreator::create
+		type: Orisai\Auth\Authorization\AuthorizationData
+	ori.core.auth.authorizer:
+		factory: Orisai\Auth\Authorization\PrivilegeAuthorizer
+		arguments:
+			policyManager: @ori.core.auth.policyManager
+
+	# Cache
+	ori.core.cache:
+		factory: Nette\Caching\Cache
+
+	# Config
+	ori.core.config.application:
+		factory: OriCMF\Core\Config\ApplicationConfig
+		arguments: [%application.name%]
+	ori.core.config.build:
+		factory: OriCMF\Core\Config\BuildConfig
+		arguments: [%application.build.name%, %application.build.version%, %application.build.stable%]
+
+	# Email
+	ori.core.email.mapper:
+		factory: OriCMF\Core\Email\EmailPostgresMapper
+		type: OriCMF\Core\Email\EmailMapper
+	ori.core.email.repository:
+		factory: OriCMF\Core\Email\EmailRepository
+
+	# Filesystem
+	ori.core.filesystem.internal.adapter:
+		factory: League\Flysystem\Local\LocalFilesystemAdapter
+		type: League\Flysystem\FilesystemAdapter
+		arguments:
+			location: %dataDir%
+	ori.core.filesystem.internal:
+		factory: OriCMF\Core\Files\InternalFileSystem
+		type: OriCMF\Core\Files\InternalFileSystem
+		arguments:
+			- @ori.core.filesystem.internal.adapter
+
+	ori.core.filesystem.public.adapter:
+		factory: League\Flysystem\Local\LocalFilesystemAdapter
+		type: League\Flysystem\FilesystemAdapter
+		arguments:
+			location: %wwwDir%/u
+	ori.core.filesystem.public:
+		factory: OriCMF\Core\Files\PublicFileSystem
+		type: OriCMF\Core\Files\PublicFileSystem
+		arguments:
+			- @ori.core.filesystem.public.adapter
+
+	ori.core.filesystem.mimeTypeDetector:
+		factory: League\MimeTypeDetection\FinfoMimeTypeDetector
+		arguments:
+			bufferSampleSize: 1048576 # 1 MB
+
+	# Migrations - commands lazy loading
+	migrations.createCommand:
+		tags:
+			console.command:
+				description: "Creates new migration file with proper name (e.g. 2015-03-14-130836-label.sql)"
+	migrations.continueCommand:
+		tags:
+			console.command:
+				description: "If table 'migrations' does not exist in current database, it is created automatically."
+	migrations.resetCommand:
+		tags:
+			console.command:
+				description: Drops current database and runs all migrations
+
+	# Password
+	ori.core.password.mapper:
+		factory: OriCMF\Core\Password\PasswordPostgresMapper
+		type: OriCMF\Core\Password\PasswordMapper
+	ori.core.password.repository:
+		factory: OriCMF\Core\Password\PasswordRepository
+
+	# Role
+	ori.core.role.mapper:
+		factory: OriCMF\Core\Role\RolePostgresMapper
+		type: OriCMF\Core\Role\RoleMapper
+	ori.core.role.repository:
+		factory: OriCMF\Core\Role\RoleRepository
+
+	# Role.Command
+	ori.core.role.command.roleCreate: OriCMF\Core\Role\Command\RoleCreateCommand
+
+	# SQL
+	ori.core.sql.logger:
+		factory: OriCMF\Core\SQL\SqlLogger
+		type: Nextras\Dbal\ILogger
+	ori.core.sql.modifier.arrayExpression:
+		factory: OriCMF\Core\SQL\Modifier\ArrayExpressionModifier
+	ori.core.sql.processorFactory:
+		factory: OriCMF\Core\SQL\SqlProcessorFactory
+		setup:
+			- addModifier(arrayExpression, @ori.core.sql.modifier.arrayExpression)
+
+	# User
+	ori.core.user.mapper:
+		factory: OriCMF\Core\User\UserPostgresMapper
+		type: OriCMF\Core\User\UserMapper
+	ori.core.user.repository:
+		factory: OriCMF\Core\User\UserRepository
+
+	# User.Command
+	ori.core.user.command.userRoleAdd: OriCMF\Core\User\Command\UserRoleAddCommand
+	ori.core.user.command.register: OriCMF\Core\User\Command\UserRegisterCommand
+
+	# User.Credentials
+	ori.core.user.credentials.handlerManager:
+		factory: OriCMF\Core\User\Credentials\CredentialHandlerManager
+		arguments:
+			handlers:
+				email: OriCMF\Core\User\Credentials\EmailCredentialHandler()
+				password: OriCMF\Core\User\Credentials\PasswordCredentialHandler()
+
+	# User.Login
+	ori.core.user.login.verifier: OriCMF\Core\User\Login\LoginVerifier
+
+	# User.Register
+	ori.core.user.register.registrar: OriCMF\Core\User\Register\UserRegistrar
+	ori.core.user.register.getter: OriCMF\Core\User\Register\UserRegistrarGetter
+
+tracy:
+	netteMailer: false
+	strictMode: true
