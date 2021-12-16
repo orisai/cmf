@@ -1,0 +1,23 @@
+{templateType OriCMF\Admin\Error\ErrorTemplate}
+{layout OriCMF\Admin\Base\Presenter\BaseAdminPresenter::LAYOUT_PATH}
+
+{block content}
+	<style n:syntax="off" n:nonce>
+		.error-template {padding: 40px 15px;text-align: center;} .error-actions {margin-top:15px;margin-bottom:15px;} .error-actions .btn {
+			margin-right: 10px;
+		}
+	</style>
+	<div class="container">
+		<div class="row">
+			<div class="error-template">
+				<h1>{$title}</h1>
+				<div class="error-details">{$message}</div>
+				<div class="error-actions">
+					<a href="{alink OriCMF\Admin\Dashboard\DashboardPresenter::createLink()}"
+					   class="btn btn-primary">
+						<i class="mdi mdi-home"></i> {_'ori.ui.httpError.homeButton'} </a>
+				</div>
+			</div>
+		</div>
+	</div>
+{/block}

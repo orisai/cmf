@@ -4,12 +4,12 @@ namespace OriCMF\UI\Routing;
 
 use Nette\Application\Routers\RouteList;
 use Nette\Routing\Router;
-use OriCMF\UI\Admin\Dashboard\DashboardPresenter;
-use OriCMF\UI\Admin\Error\ErrorPresenter as AdminErrorPresenter;
-use OriCMF\UI\Admin\Login\LoginPresenter as AdminLoginPresenter;
-use OriCMF\UI\Front\Error\ErrorPresenter as FrontErrorPresenter;
-use OriCMF\UI\Front\Homepage\HomepagePresenter;
-use OriCMF\UI\Front\Login\LoginPresenter as FrontLoginPresenter;
+use OriCMF\Admin\Dashboard\DashboardPresenter;
+use OriCMF\Admin\Error\ErrorPresenter as AdminErrorPresenter;
+use OriCMF\Admin\Login\LoginPresenter as AdminLoginPresenter;
+use OriCMF\Front\Error\ErrorPresenter as FrontErrorPresenter;
+use OriCMF\Front\Homepage\HomepagePresenter;
+use OriCMF\Front\Login\LoginPresenter as FrontLoginPresenter;
 use OriCMF\UI\Robots\RobotsPresenter;
 
 final class CmfUIRouterProvider implements RouterProvider

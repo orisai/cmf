@@ -6,7 +6,7 @@ use Nette\Application\BadRequestException;
 use Nette\Application\Request;
 use Nette\Application\UI\Presenter;
 use Nette\Utils\Strings;
-use OriCMF\UI\Front\Error\ErrorPresenter as FrontErrorPresenter;
+use OriCMF\Front\Error\ErrorPresenter as FrontErrorPresenter;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 use Throwable;

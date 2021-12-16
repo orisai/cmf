@@ -71,20 +71,20 @@ routing:
 services:
 	# Admin
 	ori.ui.admin.auth.identityRenewer:
-		factory: OriCMF\UI\Admin\Auth\AdminIdentityRenewer
+		factory: OriCMF\Admin\Auth\AdminIdentityRenewer
 		autowired: false
 	ori.ui.admin.auth.firewall:
-		factory: OriCMF\UI\Admin\Auth\AdminFirewall
+		factory: OriCMF\Admin\Auth\AdminFirewall
 		arguments:
 			storage: @ori.ui.auth.loginStorage
 			renewer: @ori.ui.admin.auth.identityRenewer
 
 	ori.ui.admin.dashboard.presenter:
-		factory: OriCMF\UI\Admin\Dashboard\DashboardPresenter
+		factory: OriCMF\Admin\Dashboard\DashboardPresenter
 	ori.ui.admin.error.presenter:
-		factory: OriCMF\UI\Admin\Error\ErrorPresenter
+		factory: OriCMF\Admin\Error\ErrorPresenter
 	ori.ui.admin.login.presenter:
-		factory: OriCMF\UI\Admin\Login\LoginPresenter
+		factory: OriCMF\Admin\Login\LoginPresenter
 
 	# Auth
 	ori.ui.auth.loginStorage:
@@ -122,7 +122,7 @@ services:
 	ori.ui.error.forward.presenter:
 		factory: OriCMF\UI\Error\ErrorForwardPresenter
 		setup:
-			- addErrorPresenter(':OriCMF\UI\Admin\Error\ErrorPresenter:default', '#(.*)(\\|:)(Admin|Administration)(\\|:)(.*)#')
+			- addErrorPresenter(':OriCMF\Admin\Error\ErrorPresenter:default', '#(.*)(\\|:)(Admin|Administration)(\\|:)(.*)#')
 
 	# Form
 	ori.ui.form.factory:
@@ -130,20 +130,20 @@ services:
 
 	# Front
 	ori.ui.front.auth.identityRenewer:
-		factory: OriCMF\UI\Front\Auth\FrontIdentityRenewer
+		factory: OriCMF\Front\Auth\FrontIdentityRenewer
 		autowired: false
 	ori.ui.front.auth.firewall:
-		factory: OriCMF\UI\Front\Auth\FrontFirewall
+		factory: OriCMF\Front\Auth\FrontFirewall
 		arguments:
 			storage: @ori.ui.auth.loginStorage
 			renewer: @ori.ui.front.auth.identityRenewer
 
 	ori.ui.front.error.presenter:
-		factory: OriCMF\UI\Front\Error\ErrorPresenter
+		factory: OriCMF\Front\Error\ErrorPresenter
 	ori.ui.front.homepage.presenter:
-		factory: OriCMF\UI\Front\Homepage\HomepagePresenter
+		factory: OriCMF\Front\Homepage\HomepagePresenter
 	ori.ui.front.login.presenter:
-		factory: OriCMF\UI\Front\Login\LoginPresenter
+		factory: OriCMF\Front\Login\LoginPresenter
 
 	# Presenter
 	application.presenterFactory:
