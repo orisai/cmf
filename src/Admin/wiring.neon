@@ -1,6 +1,6 @@
 parameters:
 	privileges:
-		- administration.entry
+		- ori.administration.entry
 
 services:
 	# Auth

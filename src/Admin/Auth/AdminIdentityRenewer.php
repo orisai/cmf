@@ -46,7 +46,7 @@ final class AdminIdentityRenewer implements IdentityRenewer
 
 		$newIdentity = UserIdentity::fromUser($user, $newPuppeteer);
 
-		if (!$this->authorizer->isAllowed($newIdentity, 'administration.entry')) {
+		if (!$this->authorizer->isAllowed($newIdentity, 'ori.administration.entry')) {
 			throw IdentityExpired::create();
 		}
 
