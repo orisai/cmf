@@ -205,14 +205,14 @@ services:
 			- addModifier(arrayExpression, @ori.core.sql.modifier.arrayExpression)
 
 	# User
-	ori.core.user.mapper:
+	ori.user.mapper:
 		factory: OriCMF\Core\User\UserPostgresMapper
 		type: OriCMF\Core\User\UserMapper
-	ori.core.user.repository:
+	ori.user.repository:
 		factory: OriCMF\Core\User\UserRepository
 
 	# User.Credentials
-	ori.core.user.credentials.handlerManager:
+	ori.user.credentials.handlerManager:
 		factory: OriCMF\Core\User\Credentials\CredentialHandlerManager
 		arguments:
 			handlers:
@@ -220,11 +220,11 @@ services:
 				password: OriCMF\Core\User\Credentials\PasswordCredentialHandler()
 
 	# User.Login
-	ori.core.user.login.verifier: OriCMF\Core\User\Login\LoginVerifier
+	ori.user.login.verifier: OriCMF\Core\User\Login\LoginVerifier
 
 	# User.Register
-	ori.core.user.register.registrar: OriCMF\Core\User\Register\UserRegistrar
-	ori.core.user.register.getter: OriCMF\Core\User\Register\UserRegistrarGetter
+	ori.user.register.registrar: OriCMF\Core\User\Register\UserRegistrar
+	ori.user.register.getter: OriCMF\Core\User\Register\UserRegistrarGetter
 
 tracy:
 	netteMailer: false

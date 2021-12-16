@@ -1,0 +1,72 @@
+#
+# Admin
+#
+ori.admin.title: Administrace
+
+#
+# DataGrid
+#
+
+ori.grid.search: Hledat
+ori.grid.search.cancel: Zrušit
+ori.grid.actions: Akce
+ori.grid.global.title: Hromadná akce
+ori.grid.global.do: Provést
+ori.grid.global.choose: '- vyberte hromadnou akci -'
+
+#
+# HTTP Error
+#
+
+ori.httpError.homeButton: Zpátky na domovskou stránku
+
+# 400 Bad Request
+ori.httpError.400.title: Chybný požadavek
+ori.httpError.400.message: 'Váš prohlížeč zaslal požadavek, který tento server nemůže zpracovat.'
+
+# 403 Forbidden
+ori.httpError.403.title: Přístup zamítnut
+ori.httpError.403.message: 'Nemáte oprávnění pro zobrazení této strany. Prosím zkontaktujte nás, pokud si myslíte, že se jedná o chybu.'
+
+# 404 Not Found
+ori.httpError.404.title: Nenalezeno
+ori.httpError.404.message: 'Strana, kterou hledáte, nebyla nalezena. Je možné, že je adresa URL špatná, nebo strana již neexistuje.'
+
+# 410 Gone
+ori.httpError.410.title: Nenalezeno
+ori.httpError.410.message: 'Strana, kterou hledáte byla smazána. Omlouváme se vám za komplikace.'
+
+# 500 Internal Server Error
+ori.httpError.500.title: Chyba serveru
+ori.httpError.500.message: '''
+	Omlouváme se! Na serveru se vyskytla chyba a nebyl schopen zpracovat váš požadavek.
+	O chybě víme a pracujeme na ní. Zkuste to prosím později.
+'''
+
+#
+# Login
+#
+
+ori.login.logout.reason.inactivity: 'Byl(a) jste odhlášen(a) z důvodu neaktivity.'
+ori.login.email.alreadyInUse: Emailová adresa je již využívána jiným účtem.
+ori.login.invalidCredentials: Nesprávné přihlašovací údaje
+ori.login.inactive.newAccount: Váš účet zatím nebyl aktivován.
+ori.login.inactive.deactivatedAccount: Váš účet byl deaktivován.
+
+#
+# Pagination
+#
+
+ori.pagination.first: První
+ori.pagination.last: Poslední
+ori.pagination.previous: Předchozí
+ori.pagination.next: Následující
+ori.pagination.results: "{from} až {to} z {total} výsledků"
+
+#
+# User
+#
+
+ori.user.state.new: Nový
+ori.user.state.active: Aktivní
+ori.user.state.disabled: Deaktivovaný

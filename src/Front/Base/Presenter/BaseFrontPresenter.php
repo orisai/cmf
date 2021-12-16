@@ -31,7 +31,7 @@ abstract class BaseFrontPresenter extends BasePresenter
 
 		$expired = $this->firewall->getLastExpiredLogin();
 		if ($expired !== null && $expired->getLogoutReason() === $this->firewall::REASON_INACTIVITY) {
-			$this->flashMessage($this->translator->translate('ori.ui.login.logout.reason.inactivity'));
+			$this->flashMessage($this->translator->translate('ori.login.logout.reason.inactivity'));
 		}
 
 		$this->actionRedirect(LoginPresenter::createLink(

@@ -112,7 +112,7 @@
 		{/foreach}
 		{if $hasActionsColumn}
 			<th scope="col" class="px-6 pt-3 pb-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-				<span class="sr-only">{_ori.ui.grid.actions}</span>
+				<span class="sr-only">{_ori.grid.actions}</span>
 			</th>
 		{/if}
 	</tr>
@@ -203,7 +203,7 @@
 	<nav class="bg-gray-50 px-4 py-2 flex items-center justify-between sm:px-6" aria-label="Pagination">
 		<div class="hidden sm:block">
 			<p class="text-sm text-gray-500">
-				{_ori.ui.pagination.results, [
+				{_ori.pagination.results, [
 					from: $paginator->getItemCount() === 0 ? $paginator->getOffset() : $paginator->getOffset() + 1,
 					to: $paginator->getOffset() + $paginator->getLength(),
 					total: $paginator->getItemCount()
@@ -213,12 +213,12 @@
 		<div class="flex-1 flex justify-between sm:justify-end">
 			<a href="{link pagination!, page: $paginator->page - 1}" n:tag-if="!$paginator->isFirst()" class="ajax">
 				<span class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 {if $paginator->isFirst()}opacity-75{/if}">
-					{_ori.ui.pagination.previous}
+					{_ori.pagination.previous}
 				</span>
 			</a>
 			<a href="{link pagination!, page: $paginator->page + 1}" n:tag-if="!$paginator->isLast()" class="ajax">
 				<span class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 {if $paginator->isLast()}opacity-75{/if}">
-					{_ori.ui.pagination.next}
+					{_ori.pagination.next}
 				</span>
 			</a>
 		</div>

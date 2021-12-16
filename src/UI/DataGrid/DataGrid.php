@@ -315,11 +315,11 @@ final class DataGrid extends BaseControl
 			$filterFormFactoryCb = $this->filterFormFactory;
 			$form['filter'] = $filterContainer = $filterFormFactoryCb();
 			if (!isset($filterContainer['filter'])) {
-				$filterContainer->addSubmit('filter', $t('ori.ui.grid.search'));
+				$filterContainer->addSubmit('filter', $t('ori.grid.search'));
 			}
 
 			if (!isset($filterContainer['cancel'])) {
-				$filterContainer->addSubmit('cancel', $t('ori.ui.grid.search.cancel'));
+				$filterContainer->addSubmit('cancel', $t('ori.grid.search.cancel'));
 			}
 
 			$this->prepareFilterDefaults($filterContainer);
@@ -331,10 +331,10 @@ final class DataGrid extends BaseControl
 		if ($this->globalActions !== []) {
 			$actions = array_map(static fn (array $row): string => $row[0], $this->globalActions);
 			$form['actions'] = $actionsContainer = new Container();
-			$actionsContainer->addSelect('action', $t('ori.ui.grid.global.title'), $actions)
-				->setPrompt($t('ori.ui.grid.global.choose'));
+			$actionsContainer->addSelect('action', $t('ori.grid.global.title'), $actions)
+				->setPrompt($t('ori.grid.global.choose'));
 			$actionsContainer->addCheckboxList('items', '', []);
-			$actionsContainer->addSubmit('process', $t('ori.ui.grid.global.do'));
+			$actionsContainer->addSubmit('process', $t('ori.grid.global.do'));
 		}
 
 		$form->onSubmit[] = fn (Form $form) => $this->processForm($form);
