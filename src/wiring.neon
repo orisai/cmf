@@ -5,6 +5,10 @@ includes:
 	- Admin/wiring.neon
 	- Front/wiring.neon
 
+localization:
+	directories:
+		- %vendorDir%/orisai/cmf/src/**/translations/**
+
 migrations:
 	groups:
 		ori.core.structure:

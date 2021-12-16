@@ -44,10 +44,6 @@ latte:
 	debugger: %debug.panels.latte%
 	strictTypes: true
 
-localization:
-	directories:
-		- %vendorDir%/orisai/cmf/src/**/translations/**
-
 parameters:
 	catchExceptions:
 		ui: false
