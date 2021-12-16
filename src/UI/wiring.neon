@@ -60,8 +60,6 @@ parameters:
 				inspector: false
 				routing: false
 				session: false
-	privileges:
-		- administration.entry
 
 routing:
 	debug: %debug.panels.ui.routing%

@@ -4,3 +4,10 @@ includes:
 	- UI/wiring.neon
 	- Admin/wiring.neon
 	- Front/wiring.neon
+
+migrations:
+	groups:
+		ori.core.structure:
+			directory: %vendorDir%/orisai/cmf/src/upgrade/migrations/structures
+		ori.core.basicData:
+			directory: %vendorDir%/orisai/cmf/src/upgrade/migrations/basic-data

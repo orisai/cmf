@@ -1,3 +1,7 @@
+parameters:
+	privileges:
+		- administration.entry
+
 services:
 	# Auth
 	ori.admin.auth.identityRenewer:

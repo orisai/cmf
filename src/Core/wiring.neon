@@ -49,11 +49,6 @@ migrations:
 	driver: pgsql
 	dbal: nextras
 	withDummyData: %debugMode%
-	groups:
-		ori.core.structure:
-			directory: %vendorDir%/orisai/cmf/src/upgrade/migrations/structures
-		ori.core.basicData:
-			directory: %vendorDir%/orisai/cmf/src/upgrade/migrations/basic-data
 
 monolog:
 	debug: %debugMode%
