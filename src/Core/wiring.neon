@@ -43,7 +43,7 @@ localization:
 		newMessages: %debugMode%
 		panel: %debug.panels.localization%
 	directories:
-		- %vendorDir%/orisai/cmf-core/src/**/translations/**
+		- %vendorDir%/orisai/cmf/src/**/translations/**
 
 migrations:
 	driver: pgsql
@@ -51,9 +51,9 @@ migrations:
 	withDummyData: %debugMode%
 	groups:
 		ori.core.structure:
-			directory: %vendorDir%/orisai/cmf-core/src/upgrade/migrations/structures
+			directory: %vendorDir%/orisai/cmf/src/upgrade/migrations/structures
 		ori.core.basicData:
-			directory: %vendorDir%/orisai/cmf-core/src/upgrade/migrations/basic-data
+			directory: %vendorDir%/orisai/cmf/src/upgrade/migrations/basic-data
 
 monolog:
 	debug: %debugMode%

@@ -46,7 +46,7 @@ latte:
 
 localization:
 	directories:
-		- %vendorDir%/orisai/cmf-ui/src/**/translations/**
+		- %vendorDir%/orisai/cmf/src/**/translations/**
 
 parameters:
 	catchExceptions:
@@ -116,7 +116,7 @@ services:
 		implement: OriCMF\UI\Control\Title\TitleControlFactory
 
 	# DataGrid
-	pri.ui.dataGrid.factory: OriCMF\UI\DataGrid\DataGridFactory
+	ori.ui.dataGrid.factory: OriCMF\UI\DataGrid\DataGridFactory
 
 	# Error
 	ori.ui.error.forward.presenter:

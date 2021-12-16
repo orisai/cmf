@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE latte PUBLIC "-//LATTE//Latte plugin XML V0.0.1//EN" ".idea/intellij-latte/xmlSources/Latte.dtd">
-<latte version="1" vendor="orisai/cmf-ui">
+<latte version="1" vendor="orisai/cmf">
 	<tags>
 		<!-- Links -->
 		<tag name="alink" type="UNPAIRED">
