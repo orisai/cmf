@@ -1,0 +1,25 @@
+services:
+	# Auth
+	ori.admin.auth.identityRenewer:
+		factory: OriCMF\Admin\Auth\AdminIdentityRenewer
+		autowired: false
+	ori.admin.auth.firewall:
+		factory: OriCMF\Admin\Auth\AdminFirewall
+		arguments:
+			storage: @ori.ui.auth.loginStorage
+			renewer: @ori.admin.auth.identityRenewer
+
+	# Dashboard
+	ori.admin.dashboard.presenter:
+		factory: OriCMF\Admin\Dashboard\DashboardPresenter
+
+	# Error
+	ori.admin.error.presenter:
+		factory: OriCMF\Admin\Error\ErrorPresenter
+	ori.ui.error.forward.presenter:
+		setup:
+			- addErrorPresenter(':OriCMF\Admin\Error\ErrorPresenter:default', '#(.*)(\\|:)(Admin|Administration)(\\|:)(.*)#')
+
+	# Login
+	ori.admin.login.presenter:
+		factory: OriCMF\Admin\Login\LoginPresenter
