@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace OriCMF\Core\User\Command;
+namespace OriCMF\Console\User;
 
 use OriCMF\Core\Email\Email;
 use OriCMF\Core\Password\Password;

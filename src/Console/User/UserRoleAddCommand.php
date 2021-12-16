@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace OriCMF\Core\User\Command;
+namespace OriCMF\Console\User;
 
 use Nextras\Orm\Model\IModel;
 use OriCMF\Core\Email\EmailRepository;

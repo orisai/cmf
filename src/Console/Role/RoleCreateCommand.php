@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace OriCMF\Core\Role\Command;
+namespace OriCMF\Console\Role;
 
 use Nextras\Orm\Model\IModel;
 use OriCMF\Core\Role\Role;

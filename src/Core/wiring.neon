@@ -198,9 +198,6 @@ services:
 	ori.core.role.repository:
 		factory: OriCMF\Core\Role\RoleRepository
 
-	# Role.Command
-	ori.core.role.command.roleCreate: OriCMF\Core\Role\Command\RoleCreateCommand
-
 	# SQL
 	ori.core.sql.logger:
 		factory: OriCMF\Core\SQL\SqlLogger
@@ -218,10 +215,6 @@ services:
 		type: OriCMF\Core\User\UserMapper
 	ori.core.user.repository:
 		factory: OriCMF\Core\User\UserRepository
-
-	# User.Command
-	ori.core.user.command.userRoleAdd: OriCMF\Core\User\Command\UserRoleAddCommand
-	ori.core.user.command.register: OriCMF\Core\User\Command\UserRegisterCommand
 
 	# User.Credentials
 	ori.core.user.credentials.handlerManager:

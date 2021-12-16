@@ -1,3 +1,4 @@
 includes:
 	- Core/wiring.neon
+	- Console/wiring.neon
 	- UI/wiring.neon
