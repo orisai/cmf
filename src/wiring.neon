@@ -11,7 +11,7 @@ localization:
 
 migrations:
 	groups:
-		ori.core.structure:
+		ori.structure:
 			directory: %vendorDir%/orisai/cmf/src/upgrade/migrations/structures
-		ori.core.basicData:
+		ori.basicData:
 			directory: %vendorDir%/orisai/cmf/src/upgrade/migrations/basic-data
