@@ -101,7 +101,7 @@ services:
 		factory: Orisai\Auth\Passwords\SodiumPasswordEncoder
 
 	ori.core.auth.policyManager:
-		factory: Orisai\Auth\Bridge\NetteDI\LazyPolicyManager
+		factory: OriNette\Auth\DI\LazyPolicyManager
 		arguments:
 			serviceMap: []
 		autowired: false

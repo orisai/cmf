@@ -65,7 +65,7 @@ routing:
 services:
 	# Auth
 	ori.ui.auth.loginStorage:
-		factory: Orisai\Auth\Bridge\NetteHttp\SessionLoginStorage
+		factory: OriNette\Auth\SessionLoginStorage
 		autowired: false
 
 	# Control

@@ -51,6 +51,7 @@
 		"orisai/exceptions": "^1.0.0",
 		"orisai/localization": "^1.0.0",
 		"orisai/nette-application": "^1.0.0",
+		"orisai/nette-auth": "^1.0.0",
 		"orisai/nette-console": "^1.0.0",
 		"orisai/nette-di": "^1.0.0",
 		"orisai/nette-http-client": "v1.x-dev",
