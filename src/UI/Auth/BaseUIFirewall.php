@@ -7,7 +7,7 @@ use OriCMF\Core\User\User;
 use OriCMF\Core\User\UserRepository;
 use Orisai\Auth\Authentication\BaseFirewall;
 use Orisai\Auth\Authentication\Exception\NotLoggedIn;
-use Orisai\Auth\Authentication\IdentityRenewer;
+use Orisai\Auth\Authentication\IdentityRefresher;
 use Orisai\Auth\Authentication\LoginStorage;
 use Orisai\Auth\Authorization\Authorizer;
 
@@ -24,12 +24,12 @@ abstract class BaseUIFirewall extends BaseFirewall
 	public function __construct(
 		private UserRepository $userRepository,
 		LoginStorage $storage,
-		IdentityRenewer $renewer,
+		IdentityRefresher $refresher,
 		Authorizer $authorizer,
 		Clock|null $clock = null,
 	)
 	{
-		parent::__construct($storage, $renewer, $authorizer, $clock);
+		parent::__construct($storage, $refresher, $authorizer, $clock);
 	}
 
 	public function getUser(): User

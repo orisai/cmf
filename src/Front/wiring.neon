@@ -1,13 +1,13 @@
 services:
 	# Auth
-	ori.front.auth.identityRenewer:
-		factory: OriCMF\Front\Auth\FrontIdentityRenewer
+	ori.front.auth.identityRefresher:
+		factory: OriCMF\Front\Auth\FrontIdentityRefresher
 		autowired: false
 	ori.front.auth.firewall:
 		factory: OriCMF\Front\Auth\FrontFirewall
 		arguments:
 			storage: @ori.ui.auth.loginStorage
-			renewer: @ori.front.auth.identityRenewer
+			refresher: @ori.front.auth.identityRefresher
 
 	# Error
 	ori.front.error.presenter:

@@ -4,14 +4,14 @@ parameters:
 
 services:
 	# Auth
-	ori.admin.auth.identityRenewer:
-		factory: OriCMF\Admin\Auth\AdminIdentityRenewer
+	ori.admin.auth.identityRefresher:
+		factory: OriCMF\Admin\Auth\AdminIdentityRefresher
 		autowired: false
 	ori.admin.auth.firewall:
 		factory: OriCMF\Admin\Auth\AdminFirewall
 		arguments:
 			storage: @ori.ui.auth.loginStorage
-			renewer: @ori.admin.auth.identityRenewer
+			refresher: @ori.admin.auth.identityRefresher
 
 	# Dashboard
 	ori.admin.dashboard.presenter:

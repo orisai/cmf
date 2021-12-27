@@ -7,21 +7,21 @@ use OriCMF\Core\User\UserState;
 use OriCMF\UI\Auth\UserIdentity;
 use Orisai\Auth\Authentication\Exception\IdentityExpired;
 use Orisai\Auth\Authentication\Identity;
-use Orisai\Auth\Authentication\IdentityRenewer;
+use Orisai\Auth\Authentication\IdentityRefresher;
 use Orisai\Auth\Authorization\PrivilegeAuthorizer;
 use function assert;
 
 /**
- * @phpstan-implements IdentityRenewer<UserIdentity>
+ * @phpstan-implements IdentityRefresher<UserIdentity>
  */
-final class AdminIdentityRenewer implements IdentityRenewer
+final class AdminIdentityRefresher implements IdentityRefresher
 {
 
 	public function __construct(private UserRepository $userRepository, private PrivilegeAuthorizer $authorizer)
 	{
 	}
 
-	public function renewIdentity(Identity $identity): UserIdentity
+	public function refresh(Identity $identity): UserIdentity
 	{
 		assert($identity instanceof UserIdentity);
 
@@ -36,7 +36,7 @@ final class AdminIdentityRenewer implements IdentityRenewer
 
 		$puppeteer = $identity->getPuppeteer();
 		$newPuppeteer = $puppeteer !== null
-			? $this->renewIdentity($puppeteer)
+			? $this->refresh($puppeteer)
 			: null;
 
 		// User was controlled by puppeteer which is not available anymore
