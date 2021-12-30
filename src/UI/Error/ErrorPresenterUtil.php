@@ -15,6 +15,7 @@ trait ErrorPresenterUtil
 
 	private bool $is4xx;
 
+	/** @var int<400, 599> */
 	private int $code;
 
 	public function action(Throwable|null $throwable = null): void

@@ -9,8 +9,10 @@ class Filter
 
 	private OrderFilter $order;
 
+	/** @var int<1, max>|null */
 	private int|null $limitCount = null;
 
+	/** @var int<0, max>|null */
 	private int|null $limitOffset = null;
 
 	public function __construct()
@@ -29,6 +31,10 @@ class Filter
 		return $this->order;
 	}
 
+	/**
+	 * @param int<1, max> $count
+	 * @param int<0, max>|null $offset
+	 */
 	public function limit(int $count, int|null $offset = null): void
 	{
 		$this->limitCount = $count;
@@ -36,7 +42,7 @@ class Filter
 	}
 
 	/**
-	 * @return array{int|null, int|null}
+	 * @return array{int<1, max>|null, int<0, max>|null}
 	 */
 	public function getLimit(): array
 	{

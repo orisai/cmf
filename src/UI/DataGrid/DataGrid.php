@@ -44,6 +44,7 @@ final class DataGrid extends BaseControl
 	#[Persistent]
 	public string $orderType = self::ORDER_ASC;
 
+	/** @var int<1, max> */
 	#[Persistent]
 	public int $page = 1;
 
@@ -72,6 +73,7 @@ final class DataGrid extends BaseControl
 
 	protected bool $sendOnlyRowParentSnippet = false;
 
+	/** @var int<1, max> */
 	protected int $itemsPerPage = 50;
 
 	/**
@@ -128,13 +130,13 @@ final class DataGrid extends BaseControl
 		$this->paginatorItemsCountCallback = null;
 	}
 
+	/**
+	 * @param int<1, max> $count
+	 */
 	public function setItemsPerPage(int $count): void
 	{
 		$this->itemsPerPage = $count;
-
-		if ($this->paginator !== null) {
-			$this->paginator->setItemsPerPage($this->itemsPerPage);
-		}
+		$this->paginator?->setItemsPerPage($this->itemsPerPage);
 	}
 
 	public function render(): void
