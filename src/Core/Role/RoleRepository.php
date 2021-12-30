@@ -3,15 +3,14 @@
 namespace OriCMF\Core\Role;
 
 use Nextras\Orm\Entity\Entity;
-use Nextras\Orm\Repository\IDependencyProvider;
 use OriCMF\Core\ORM\BaseRepository;
 
 final class RoleRepository extends BaseRepository
 {
 
-	public function __construct(RoleMapper $mapper, IDependencyProvider|null $dependencyProvider = null)
+	public function __construct(RoleMapper $mapper)
 	{
-		parent::__construct($mapper, $dependencyProvider);
+		parent::__construct($mapper);
 	}
 
 	/**

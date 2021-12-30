@@ -4,7 +4,6 @@ namespace OriCMF\Core\User;
 
 use Nextras\Orm\Collection\ICollection;
 use Nextras\Orm\Entity\Entity;
-use Nextras\Orm\Repository\IDependencyProvider;
 use OriCMF\Core\ORM\BaseRepository;
 use OriCMF\Core\ORM\Functions\JsonAnyKeyOrValueExistsFunction;
 use Orisai\Auth\Authorization\PrivilegeProcessor;
@@ -12,9 +11,9 @@ use Orisai\Auth\Authorization\PrivilegeProcessor;
 final class UserRepository extends BaseRepository
 {
 
-	public function __construct(UserMapper $mapper, IDependencyProvider|null $dependencyProvider = null)
+	public function __construct(UserMapper $mapper)
 	{
-		parent::__construct($mapper, $dependencyProvider);
+		parent::__construct($mapper);
 	}
 
 	/**

@@ -3,15 +3,14 @@
 namespace OriCMF\Core\Email;
 
 use Nextras\Orm\Entity\Entity;
-use Nextras\Orm\Repository\IDependencyProvider;
 use OriCMF\Core\ORM\BaseRepository;
 
 final class EmailRepository extends BaseRepository
 {
 
-	public function __construct(EmailMapper $mapper, IDependencyProvider|null $dependencyProvider = null)
+	public function __construct(EmailMapper $mapper)
 	{
-		parent::__construct($mapper, $dependencyProvider);
+		parent::__construct($mapper);
 	}
 
 	/**

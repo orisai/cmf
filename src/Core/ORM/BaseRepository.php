@@ -7,6 +7,7 @@ use Nextras\Orm\Collection\Functions\IQueryBuilderFunction;
 use Nextras\Orm\Collection\ICollection;
 use Nextras\Orm\Entity\IEntity;
 use Nextras\Orm\Exception\NoResultException;
+use Nextras\Orm\Mapper\IMapper;
 use Nextras\Orm\Repository\Repository;
 use OriCMF\Core\ORM\Filter\Filter;
 use OriCMF\Core\ORM\Filter\FindFilter;
@@ -23,6 +24,11 @@ abstract class BaseRepository extends Repository
 		JsonAnyKeyOrValueExistsFunction::class,
 		ToManyNotEqualFunction::class,
 	];
+
+	public function __construct(IMapper $mapper)
+	{
+		parent::__construct($mapper);
+	}
 
 	/**
 	 * @todo - make it repository independent
