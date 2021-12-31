@@ -13,10 +13,6 @@ use Orisai\Auth\Authorization\Authorizer;
 
 /**
  * @phpstan-extends BaseFirewall<UserIdentity>
- *
- * @method login(UserIdentity $identity)
- * @method renewIdentity(UserIdentity $identity)
- * @method UserIdentity getIdentity()
  */
 abstract class BaseUIFirewall extends BaseFirewall
 {
