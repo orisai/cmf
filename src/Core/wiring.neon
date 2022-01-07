@@ -165,20 +165,6 @@ services:
 		arguments:
 			bufferSampleSize: 1048576 # 1 MB
 
-	# Migrations - commands lazy loading
-	migrations.createCommand:
-		tags:
-			console.command:
-				description: "Creates new migration file with proper name (e.g. 2015-03-14-130836-label.sql)"
-	migrations.continueCommand:
-		tags:
-			console.command:
-				description: "If table 'migrations' does not exist in current database, it is created automatically."
-	migrations.resetCommand:
-		tags:
-			console.command:
-				description: Drops current database and runs all migrations
-
 	# Password
 	ori.core.password.mapper:
 		factory: OriCMF\Core\Password\PasswordPostgresMapper

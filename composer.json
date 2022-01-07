@@ -44,7 +44,7 @@
 		"nette/schema": "^1.2.0",
 		"nette/utils": "^3.2.0",
 		"nextras/dbal": "~4.0.0",
-		"nextras/migrations": "~3.1.0",
+		"nextras/migrations": "~3.1.4",
 		"nextras/orm": "~4.0.0",
 		"orisai/auth": "^1.0.0",
 		"orisai/data-sources": "^1.0.0",
