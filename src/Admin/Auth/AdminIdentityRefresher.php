@@ -3,53 +3,31 @@
 namespace OriCMF\Admin\Auth;
 
 use OriCMF\Core\User\UserRepository;
-use OriCMF\Core\User\UserState;
+use OriCMF\UI\Auth\BaseUIIdentityRefresher;
 use OriCMF\UI\Auth\UserIdentity;
 use OriCMF\UI\Auth\UserIdentityCreator;
 use Orisai\Auth\Authentication\Exception\IdentityExpired;
 use Orisai\Auth\Authentication\Identity;
-use Orisai\Auth\Authentication\IdentityRefresher;
 use Orisai\Auth\Authorization\PrivilegeAuthorizer;
-use function assert;
 
-/**
- * @phpstan-implements IdentityRefresher<UserIdentity>
- */
-final class AdminIdentityRefresher implements IdentityRefresher
+final class AdminIdentityRefresher extends BaseUIIdentityRefresher
 {
 
 	public function __construct(
-		private UserRepository $userRepository,
+		UserRepository $userRepository,
 		private PrivilegeAuthorizer $authorizer,
 		private UserIdentityCreator $identityCreator,
 	)
 	{
+		parent::__construct($userRepository);
 	}
 
 	public function refresh(Identity $identity): UserIdentity
 	{
-		assert($identity instanceof UserIdentity);
-
-		$user = $this->userRepository->getBy([
-			'id' => $identity->getId(),
-			'state' => UserState::ACTIVE(),
-		]);
-
-		if ($user === null) {
-			throw IdentityExpired::create();
-		}
-
-		$puppeteer = $identity->getPuppeteer();
-		$newPuppeteer = $puppeteer !== null
-			? $this->refresh($puppeteer)
-			: null;
-
-		// User was controlled by puppeteer which is not available anymore
-		if ($puppeteer !== null && $newPuppeteer === null) {
-			throw IdentityExpired::create();
-		}
-
-		$newIdentity = $this->identityCreator->create($user, $newPuppeteer);
+		$newIdentity = $this->identityCreator->create(
+			$this->getUser($identity),
+			$this->refreshPuppeteer($identity),
+		);
 
 		if (!$this->authorizer->isAllowed($newIdentity, 'ori.administration.entry')) {
 			throw IdentityExpired::create();
