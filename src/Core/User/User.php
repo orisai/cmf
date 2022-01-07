@@ -15,14 +15,15 @@ use function random_int;
 
 /**
  * @uses EnumValueWrapper
- * @property-read string                  $id        {primary}
- * @property-read DateTimeImmutable       $createdAt {default now}
+ * @property-read string                  $id         {primary}
+ * @property-read DateTimeImmutable       $createdAt  {default now}
  * @property string                       $fullName
  * @property string                       $userName
- * @property OneHasMany&array<Email>      $emails    {1:m Email::$user, cascade=[persist, remove]}
- * @property-read ManyHasMany&array<Role> $roles     {m:m Role, isMain=true, oneSided=true, cascade=[persist]}
- * @property-read string|null             $type      Distinguish between real users and automatic ones (system, APIs)
- * @property UserState                    $state     {wrapper EnumValueWrapper}
+ * @property OneHasMany&array<Email>      $emails     {1:m Email::$user, cascade=[persist, remove]}
+ * @property-read ManyHasMany&array<Role> $roles      {m:m Role, isMain=true, oneSided=true, cascade=[persist]}
+ * @property-read array<string>           $privileges {virtual}
+ * @property-read string|null             $type       Distinguish between real users and automatic ones (system, APIs)
+ * @property UserState                    $state      {wrapper EnumValueWrapper}
  */
 final class User extends Entity
 {
@@ -46,6 +47,16 @@ final class User extends Entity
 	public function getPrimaryEmail(): Email|null
 	{
 		return $this->emails->toCollection()->getBy(['type' => Email::TYPE_PRIMARY]);
+	}
+
+	/**
+	 * @return array<string>
+	 *
+	 * @todo - user privileges
+	 */
+	protected function getterPrivileges(): array
+	{
+		return [];
 	}
 
 }

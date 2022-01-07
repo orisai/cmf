@@ -2,11 +2,8 @@
 
 namespace OriCMF\UI\Auth;
 
-use OriCMF\Core\Role\Role;
-use OriCMF\Core\User\User;
 use Orisai\Auth\Authentication\StringIdentity;
 use Orisai\Exceptions\Logic\InvalidState;
-use function array_map;
 
 final class UserIdentity extends StringIdentity
 {
@@ -22,16 +19,6 @@ final class UserIdentity extends StringIdentity
 			throw InvalidState::create()
 				->withMessage('Parent identity is not allowed to have its own parent identity.');
 		}
-	}
-
-	public static function fromUser(User $user, UserIdentity|null $puppeteer = null): self
-	{
-		$roles = array_map(
-			static fn (Role $role): string => $role->name,
-			$user->roles->getIterator()->fetchAll(),
-		);
-
-		return new self($user->id, $roles, $puppeteer);
 	}
 
 	public function getPuppeteer(): UserIdentity|null

@@ -67,6 +67,8 @@ services:
 	ori.ui.auth.loginStorage:
 		factory: OriNette\Auth\SessionLoginStorage
 		autowired: false
+	ori.ui.auth.identityCreator:
+		factory: OriCMF\UI\Auth\UserIdentityCreator
 
 	# Control
 	ori.ui.control.body.factory:

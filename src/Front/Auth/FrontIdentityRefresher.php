@@ -5,6 +5,7 @@ namespace OriCMF\Front\Auth;
 use OriCMF\Core\User\UserRepository;
 use OriCMF\Core\User\UserState;
 use OriCMF\UI\Auth\UserIdentity;
+use OriCMF\UI\Auth\UserIdentityCreator;
 use Orisai\Auth\Authentication\Exception\IdentityExpired;
 use Orisai\Auth\Authentication\Identity;
 use Orisai\Auth\Authentication\IdentityRefresher;
@@ -16,7 +17,10 @@ use function assert;
 final class FrontIdentityRefresher implements IdentityRefresher
 {
 
-	public function __construct(private UserRepository $userRepository)
+	public function __construct(
+		private UserRepository $userRepository,
+		private UserIdentityCreator $identityCreator,
+	)
 	{
 	}
 
@@ -43,7 +47,7 @@ final class FrontIdentityRefresher implements IdentityRefresher
 			throw IdentityExpired::create();
 		}
 
-		return UserIdentity::fromUser($user, $newPuppeteer);
+		return $this->identityCreator->create($user, $newPuppeteer);
 	}
 
 }

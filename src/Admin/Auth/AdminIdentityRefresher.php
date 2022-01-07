@@ -5,6 +5,7 @@ namespace OriCMF\Admin\Auth;
 use OriCMF\Core\User\UserRepository;
 use OriCMF\Core\User\UserState;
 use OriCMF\UI\Auth\UserIdentity;
+use OriCMF\UI\Auth\UserIdentityCreator;
 use Orisai\Auth\Authentication\Exception\IdentityExpired;
 use Orisai\Auth\Authentication\Identity;
 use Orisai\Auth\Authentication\IdentityRefresher;
@@ -17,7 +18,11 @@ use function assert;
 final class AdminIdentityRefresher implements IdentityRefresher
 {
 
-	public function __construct(private UserRepository $userRepository, private PrivilegeAuthorizer $authorizer)
+	public function __construct(
+		private UserRepository $userRepository,
+		private PrivilegeAuthorizer $authorizer,
+		private UserIdentityCreator $identityCreator,
+	)
 	{
 	}
 
@@ -44,7 +49,7 @@ final class AdminIdentityRefresher implements IdentityRefresher
 			throw IdentityExpired::create();
 		}
 
-		$newIdentity = UserIdentity::fromUser($user, $newPuppeteer);
+		$newIdentity = $this->identityCreator->create($user, $newPuppeteer);
 
 		if (!$this->authorizer->isAllowed($newIdentity, 'ori.administration.entry')) {
 			throw IdentityExpired::create();
