@@ -4,7 +4,7 @@ namespace OriCMF\UI\DataGrid;
 
 use Nette\Application\UI\Form;
 use Nette\Utils\Paginator;
-use OriCMF\UI\Control\Base\BaseControlTemplate;
+use OriCMF\UI\Control\BaseControlTemplate;
 
 /**
  * @property-read DataGrid $control

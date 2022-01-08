@@ -2,7 +2,7 @@
 
 namespace OriCMF\Admin\Login;
 
-use OriCMF\UI\Presenter\Base\BasePresenterTemplate;
+use OriCMF\UI\Presenter\BasePresenterTemplate;
 
 class LoginTemplate extends BasePresenterTemplate
 {

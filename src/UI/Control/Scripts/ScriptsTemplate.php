@@ -2,7 +2,7 @@
 
 namespace OriCMF\UI\Control\Scripts;
 
-use OriCMF\UI\Control\Base\BaseControlTemplate;
+use OriCMF\UI\Control\BaseControlTemplate;
 
 final class ScriptsTemplate extends BaseControlTemplate
 {

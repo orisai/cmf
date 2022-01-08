@@ -2,7 +2,7 @@
 
 namespace OriCMF\UI\Control\Links;
 
-use OriCMF\UI\Control\Base\BaseControl;
+use OriCMF\UI\Control\BaseControl;
 use function asort;
 
 /**

@@ -1,10 +1,10 @@
 <?php declare(strict_types = 1);
 
-namespace Tests\OriCMF\Unit\UI\Presenter;
+namespace Tests\OriCMF\Unit\UI;
 
 use Generator;
-use OriCMF\UI\Presenter\ActionLink;
-use OriCMF\UI\Presenter\Base\BasePresenter;
+use OriCMF\UI\ActionLink;
+use OriCMF\UI\Presenter\BasePresenter;
 use Orisai\Exceptions\Logic\InvalidArgument;
 use PHPUnit\Framework\TestCase;
 

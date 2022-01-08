@@ -3,7 +3,7 @@
 namespace OriCMF\UI\Control\NoScript;
 
 use Nette\Utils\Html;
-use OriCMF\UI\Control\Base\BaseControl;
+use OriCMF\UI\Control\BaseControl;
 
 /**
  * @property-read NoScriptTemplate $template

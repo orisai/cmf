@@ -2,7 +2,7 @@
 
 namespace OriCMF\Admin\Error;
 
-use OriCMF\UI\Presenter\Base\BasePresenterTemplate;
+use OriCMF\UI\Presenter\BasePresenterTemplate;
 
 final class ErrorTemplate extends BasePresenterTemplate
 {

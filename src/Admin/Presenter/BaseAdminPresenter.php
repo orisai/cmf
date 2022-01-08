@@ -1,19 +1,19 @@
 <?php declare(strict_types = 1);
 
-namespace OriCMF\Front\Base\Presenter;
+namespace OriCMF\Admin\Presenter;
 
-use OriCMF\Front\Auth\FrontFirewall;
-use OriCMF\Front\Login\LoginPresenter;
-use OriCMF\UI\Presenter\Base\BasePresenter;
+use OriCMF\Admin\Auth\AdminFirewall;
+use OriCMF\Admin\Login\LoginPresenter;
+use OriCMF\UI\Presenter\BasePresenter;
 
-abstract class BaseFrontPresenter extends BasePresenter
+abstract class BaseAdminPresenter extends BasePresenter
 {
 
 	public const LAYOUT_PATH = __DIR__ . '/@layout.latte';
 
-	public FrontFirewall $firewall;
+	protected AdminFirewall $firewall;
 
-	public function injectFront(FrontFirewall $firewall): void
+	public function injectAdmin(AdminFirewall $firewall): void
 	{
 		$this->firewall = $firewall;
 	}
@@ -50,7 +50,7 @@ abstract class BaseFrontPresenter extends BasePresenter
 		}
 	}
 
-	public function getFirewall(): FrontFirewall
+	public function getFirewall(): AdminFirewall
 	{
 		return $this->firewall;
 	}
@@ -59,12 +59,8 @@ abstract class BaseFrontPresenter extends BasePresenter
 	{
 		parent::beforeRender();
 
-		if ($this->applicationConfig->getBuildConfig()->isStable()) {
-			$this['document-head-meta']->setRobots(['index', 'follow']);
-		} else {
-			$this->getHttpResponse()->addHeader('X-Robots-Tag', 'none');
-			$this['document-head-meta']->setRobots(['nofollow', 'noindex']);
-		}
+		$this['document-head-meta']->setRobots(['noindex', 'nofollow']);
+		$this['document-head-title']->setModule($this->translator->translate('ori.admin.title'));
 	}
 
 }

@@ -11,7 +11,7 @@ parameters:
 		  path: ../src/UI/Form/Form.php
 		# Layout is string|bool|null, check is correct
 		- message: '#^Strict comparison using === between string and null will always evaluate to false\.$#'
-		  path: ../src/UI/Presenter/Base/BasePresenter.php
+		  path: ../src/UI/Presenter/BasePresenter.php
 		  count: 1
 		# ¯\_(ツ)_/¯
 		- message: '#^Only booleans are allowed in a ternary operator condition, int given\.$#'

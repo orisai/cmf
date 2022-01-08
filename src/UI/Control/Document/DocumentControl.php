@@ -3,7 +3,7 @@
 namespace OriCMF\UI\Control\Document;
 
 use Nette\Utils\Html;
-use OriCMF\UI\Control\Base\BaseControl;
+use OriCMF\UI\Control\BaseControl;
 use OriCMF\UI\Control\Body\BodyControl;
 use OriCMF\UI\Control\Body\BodyControlFactory;
 use OriCMF\UI\Control\Head\HeadControl;

@@ -2,7 +2,7 @@
 
 namespace OriCMF\UI\Control\Icons;
 
-use OriCMF\UI\Control\Base\BaseControlTemplate;
+use OriCMF\UI\Control\BaseControlTemplate;
 
 final class IconsTemplate extends BaseControlTemplate
 {

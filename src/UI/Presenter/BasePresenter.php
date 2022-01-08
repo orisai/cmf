@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace OriCMF\UI\Presenter\Base;
+namespace OriCMF\UI\Presenter;
 
 use Nette\Application\AbortException;
 use Nette\Application\BadRequestException;
@@ -10,10 +10,10 @@ use Nette\Application\UI\Template;
 use Nette\Bridges\ApplicationLatte\TemplateFactory;
 use Nette\FileNotFoundException;
 use OriCMF\Core\Config\ApplicationConfig;
+use OriCMF\UI\ActionLink;
 use OriCMF\UI\Auth\BaseUIFirewall;
 use OriCMF\UI\Control\Document\DocumentControl;
 use OriCMF\UI\Control\Document\DocumentControlFactory;
-use OriCMF\UI\Presenter\ActionLink;
 use OriCMF\UI\Template\Exception\NoTemplateFound;
 use OriCMF\UI\Template\Locator\PresenterTemplateLocator;
 use Orisai\Exceptions\Logic\InvalidState;

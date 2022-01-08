@@ -5,7 +5,7 @@
 		<!-- Links -->
 		<tag name="alink" type="UNPAIRED">
 			<arguments>
-				<argument name="link" types="PHP_TYPE" validType="OriCMF\UI\Presenter\ActionLink" required="true"/>
+				<argument name="link" types="PHP_TYPE" validType="OriCMF\UI\ActionLink" required="true"/>
 			</arguments>
 		</tag>
 		<!-- Forms -->

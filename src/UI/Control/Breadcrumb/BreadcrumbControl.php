@@ -2,7 +2,7 @@
 
 namespace OriCMF\UI\Control\Breadcrumb;
 
-use OriCMF\UI\Control\Base\BaseControl;
+use OriCMF\UI\Control\BaseControl;
 
 /**
  * @property-read BreadcrumbTemplate $template

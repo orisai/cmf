@@ -3,8 +3,8 @@
 namespace OriCMF\Front\Login;
 
 use Nette\Application\Attributes\Persistent;
-use OriCMF\Front\Base\Presenter\BaseFrontPresenter;
-use OriCMF\UI\Presenter\ActionLink;
+use OriCMF\Front\Presenter\BaseFrontPresenter;
+use OriCMF\UI\ActionLink;
 use OriCMF\UI\Presenter\NoLogin;
 
 /**

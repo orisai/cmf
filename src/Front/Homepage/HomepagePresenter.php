@@ -2,8 +2,8 @@
 
 namespace OriCMF\Front\Homepage;
 
-use OriCMF\Front\Base\Presenter\BaseFrontPresenter;
-use OriCMF\UI\Presenter\ActionLink;
+use OriCMF\Front\Presenter\BaseFrontPresenter;
+use OriCMF\UI\ActionLink;
 
 /**
  * @property-read HomepageTemplate $template

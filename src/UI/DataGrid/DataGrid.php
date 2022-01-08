@@ -13,7 +13,7 @@ use Nette\Forms\Controls\Button;
 use Nette\Forms\Controls\SelectBox;
 use Nette\Forms\Controls\SubmitButton;
 use Nette\Utils\Paginator;
-use OriCMF\UI\Control\Base\BaseControl;
+use OriCMF\UI\Control\BaseControl;
 use Orisai\Exceptions\Logic\InvalidArgument;
 use function array_intersect;
 use function array_map;

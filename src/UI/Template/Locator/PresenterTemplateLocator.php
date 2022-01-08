@@ -3,7 +3,7 @@
 namespace OriCMF\UI\Template\Locator;
 
 use Nette\Application\UI\Presenter;
-use OriCMF\UI\Presenter\Base\BasePresenter;
+use OriCMF\UI\Presenter\BasePresenter;
 use OriCMF\UI\Template\Exception\NoTemplateFound;
 use Orisai\Utils\Reflection\Classes;
 use function is_file;

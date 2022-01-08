@@ -2,7 +2,7 @@
 
 namespace OriCMF\UI\Control\Meta;
 
-use OriCMF\UI\Control\Base\BaseControlTemplate;
+use OriCMF\UI\Control\BaseControlTemplate;
 
 final class MetaTemplate extends BaseControlTemplate
 {

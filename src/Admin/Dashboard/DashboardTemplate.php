@@ -2,7 +2,7 @@
 
 namespace OriCMF\Admin\Dashboard;
 
-use OriCMF\UI\Presenter\Base\BasePresenterTemplate;
+use OriCMF\UI\Presenter\BasePresenterTemplate;
 
 final class DashboardTemplate extends BasePresenterTemplate
 {

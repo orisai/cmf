@@ -2,7 +2,7 @@
 
 namespace OriCMF\UI\Control\Breadcrumb;
 
-use OriCMF\UI\Control\Base\BaseControlTemplate;
+use OriCMF\UI\Control\BaseControlTemplate;
 
 final class BreadcrumbTemplate extends BaseControlTemplate
 {

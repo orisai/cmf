@@ -2,7 +2,7 @@
 
 namespace OriCMF\Admin\Error;
 
-use OriCMF\Admin\Base\Presenter\BaseAdminPresenter;
+use OriCMF\Admin\Presenter\BaseAdminPresenter;
 use OriCMF\UI\Error\ErrorPresenterUtil;
 
 /**

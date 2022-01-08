@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace OriCMF\UI\Control\Base;
+namespace OriCMF\UI\Control;
 
 use OriCMF\UI\Template\Locator\ControlTemplateLocator;
 use OriCMF\UI\Template\UITemplate;

@@ -1,12 +1,12 @@
 <?php declare(strict_types = 1);
 
-namespace OriCMF\UI\Control\Base;
+namespace OriCMF\UI\Control;
 
 use Nette\Application\UI\Control;
 use Nette\Application\UI\Template as PlainTemplate;
 use OriCMF\UI\Auth\BaseUIFirewall;
 use OriCMF\UI\Form\FormFactory;
-use OriCMF\UI\Presenter\Base\BasePresenter;
+use OriCMF\UI\Presenter\BasePresenter;
 use Orisai\Exceptions\Logic\InvalidState;
 use Orisai\Exceptions\Message;
 use Orisai\Localization\Translator;

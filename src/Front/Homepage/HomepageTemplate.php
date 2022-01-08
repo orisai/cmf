@@ -2,7 +2,7 @@
 
 namespace OriCMF\Front\Homepage;
 
-use OriCMF\UI\Presenter\Base\BasePresenterTemplate;
+use OriCMF\UI\Presenter\BasePresenterTemplate;
 
 final class HomepageTemplate extends BasePresenterTemplate
 {

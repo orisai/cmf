@@ -2,7 +2,7 @@
 
 namespace OriCMF\UI\Control\Title;
 
-use OriCMF\UI\Control\Base\BaseControl;
+use OriCMF\UI\Control\BaseControl;
 use function sprintf;
 
 /**

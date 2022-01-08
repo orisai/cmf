@@ -2,7 +2,7 @@
 
 namespace OriCMF\Front\Error;
 
-use OriCMF\Front\Base\Presenter\BaseFrontPresenter;
+use OriCMF\Front\Presenter\BaseFrontPresenter;
 use OriCMF\UI\Error\ErrorPresenterUtil;
 use OriCMF\UI\Presenter\NoLogin;
 use Throwable;

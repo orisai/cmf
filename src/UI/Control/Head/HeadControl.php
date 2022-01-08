@@ -2,7 +2,7 @@
 
 namespace OriCMF\UI\Control\Head;
 
-use OriCMF\UI\Control\Base\BaseControl;
+use OriCMF\UI\Control\BaseControl;
 use OriCMF\UI\Control\Icons\IconsControl;
 use OriCMF\UI\Control\Icons\IconsControlFactory;
 use OriCMF\UI\Control\Links\LinksControl;

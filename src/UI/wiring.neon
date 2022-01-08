@@ -24,7 +24,7 @@ applicationMap:
 	enabled: %debug.panels.ui.applicationMap%
 
 decorator:
-	OriCMF\UI\Control\Base\BaseControl:
+	OriCMF\UI\Control\BaseControl:
 		setup:
 			- setBase()
 

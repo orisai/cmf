@@ -2,7 +2,7 @@
 
 namespace OriCMF\UI\Control\Meta;
 
-use OriCMF\UI\Control\Base\BaseControl;
+use OriCMF\UI\Control\BaseControl;
 use function implode;
 use function ksort;
 

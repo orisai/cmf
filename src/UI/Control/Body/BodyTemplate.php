@@ -3,7 +3,7 @@
 namespace OriCMF\UI\Control\Body;
 
 use Nette\Utils\Html;
-use OriCMF\UI\Control\Base\BaseControlTemplate;
+use OriCMF\UI\Control\BaseControlTemplate;
 
 final class BodyTemplate extends BaseControlTemplate
 {

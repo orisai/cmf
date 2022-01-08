@@ -2,8 +2,8 @@
 
 namespace OriCMF\Admin\Dashboard;
 
-use OriCMF\Admin\Base\Presenter\BaseAdminPresenter;
-use OriCMF\UI\Presenter\ActionLink;
+use OriCMF\Admin\Presenter\BaseAdminPresenter;
+use OriCMF\UI\ActionLink;
 
 /**
  * @property-read DashboardTemplate $template

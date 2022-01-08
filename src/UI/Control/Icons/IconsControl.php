@@ -2,7 +2,7 @@
 
 namespace OriCMF\UI\Control\Icons;
 
-use OriCMF\UI\Control\Base\BaseControl;
+use OriCMF\UI\Control\BaseControl;
 use function implode;
 use function strcmp;
 use function uasort;

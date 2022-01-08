@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace OriCMF\UI\Presenter;
+namespace OriCMF\UI;
 
 use Nette\Application\IPresenter;
 use Orisai\Exceptions\Logic\InvalidArgument;
