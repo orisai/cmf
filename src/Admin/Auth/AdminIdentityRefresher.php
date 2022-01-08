@@ -37,6 +37,11 @@ final class AdminIdentityRefresher extends BaseUIIdentityRefresher
 		);
 
 		if (!$this->authorizer->isAllowed($newIdentity, 'ori.administration.entry')) {
+			// Controlled user is not allowed to entry administration, return puppeteer to their identity
+			if ($puppeteer !== null) {
+				return $puppeteer;
+			}
+
 			throw IdentityExpired::create();
 		}
 
