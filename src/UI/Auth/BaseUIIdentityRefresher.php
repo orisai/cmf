@@ -35,6 +35,11 @@ abstract class BaseUIIdentityRefresher implements IdentityRefresher
 	}
 
 	/**
+	 * WARNING: Null has to be returned for no puppeteer only.
+	 *          Returning null for missing puppeteer privileges would
+	 *          cause puppeteer to stay logged in current identity and
+	 *          forget about their original (own) identity.
+	 *
 	 * @throws IdentityExpired
 	 */
 	protected function refreshPuppeteer(Identity $identity): UserIdentity|null
