@@ -27,9 +27,8 @@ use function is_string;
 final class DataGrid extends BaseControl
 {
 
-	public const ORDER_ASC = 'asc';
-
-	public const ORDER_DESC = 'desc';
+	public const ORDER_ASC = 'asc',
+		ORDER_DESC = 'desc';
 
 	public const TEMPLATE_PATH = __DIR__ . '/DataGrid.latte';
 
@@ -49,32 +48,32 @@ final class DataGrid extends BaseControl
 	public int $page = 1;
 
 	/** @var array<string, mixed> */
-	protected array $filterDataSource = [];
+	private array $filterDataSource = [];
 
 	/** @var array<string, Column> */
-	protected array $columns = [];
+	private array $columns = [];
 
 	/** @var (Closure(): Container)|null */
-	protected Closure|null $filterFormFactory = null;
+	private Closure|null $filterFormFactory = null;
 
 	/** @var array<mixed> */
-	protected array $filterDefaults = [];
+	private array $filterDefaults = [];
 
 	/** @var array<string, array{string, (Closure(array<(int|string)>, $this): void)}> */
-	protected array $globalActions = [];
+	private array $globalActions = [];
 
-	protected Paginator|null $paginator = null;
+	private Paginator|null $paginator = null;
 
 	/** @var (Closure(SearchParameters): (int|null))|null */
-	protected Closure|null $paginatorItemsCountCallback = null;
+	private Closure|null $paginatorItemsCountCallback = null;
 
 	/** @var array<mixed>|null */
-	protected array|null $data = null;
+	private array|null $data = null;
 
-	protected bool $sendOnlyRowParentSnippet = false;
+	private bool $sendOnlyRowParentSnippet = false;
 
 	/** @var int<1, max> */
-	protected int $itemsPerPage = 50;
+	private int $itemsPerPage = 50;
 
 	/**
 	 * @param Closure(SearchParameters): array<mixed> $dataSource
@@ -198,7 +197,7 @@ final class DataGrid extends BaseControl
 	/**
 	 * @return array<array<mixed>>
 	 */
-	protected function getAllData(): array
+	private function getAllData(): array
 	{
 		if ($this->data !== null) {
 			return $this->data;
@@ -208,7 +207,7 @@ final class DataGrid extends BaseControl
 			$this->orderColumn = null;
 		}
 
-		$parameters = $this->createParameters(false);
+		$parameters = $this->createParameters();
 
 		if ($this->paginator !== null) {
 			assert($this->paginatorItemsCountCallback !== null);
@@ -218,38 +217,7 @@ final class DataGrid extends BaseControl
 		return $this->data = ($this->dataSource)($parameters);
 	}
 
-	/**
-	 * @return array<mixed>
-	 */
-	protected function getRowDataByPrimaryCellValue(string $value): array
-	{
-		if ($this->data === null) {
-			$fetchOnlyRow = $this->presenter->isAjax();
-			$parameters = $this->createParameters($fetchOnlyRow);
-
-			if ($this->orderColumn !== null && !isset($this->columns[$this->orderColumn])) {
-				$this->orderColumn = null;
-			}
-
-			if (!$fetchOnlyRow && $this->paginator !== null) {
-				assert($this->paginatorItemsCountCallback !== null);
-				$this->configurePage($this->paginator, $this->paginatorItemsCountCallback, $parameters);
-			}
-
-			$this->data = ($this->dataSource)($parameters);
-		}
-
-		foreach ($this->data as $row) {
-			if ($this->getCellValue($row, $this->rowPrimaryKey) === $value) {
-				return $row;
-			}
-		}
-
-		throw InvalidArgument::create()
-			->withMessage("Row with primary key value '$value' not found.");
-	}
-
-	protected function createParameters(bool $fetchOnlyRow): SearchParameters
+	private function createParameters(): SearchParameters
 	{
 		$find = [];
 		foreach ($this->filterDataSource as $column => $value) {
@@ -261,9 +229,7 @@ final class DataGrid extends BaseControl
 			$order[$this->orderColumn] = new OrderParameter($this->orderColumn, $this->orderType);
 		}
 
-		$paginator = $fetchOnlyRow ? null : $this->paginator;
-
-		return new SearchParameters($find, $order, $paginator);
+		return new SearchParameters($find, $order, $this->paginator);
 	}
 
 	/**
@@ -296,7 +262,7 @@ final class DataGrid extends BaseControl
 		}
 
 		if ($need) {
-			throw new InvalidArgumentException("Result row does not have '{$column}' column.");
+			throw new InvalidArgumentException("Result row does not have '$column' column.");
 		}
 
 		return null;
@@ -345,7 +311,7 @@ final class DataGrid extends BaseControl
 		return $form;
 	}
 
-	protected function processForm(Form $form): void
+	private function processForm(Form $form): void
 	{
 		$rowPrimaryKey = $this->rowPrimaryKey;
 
@@ -429,7 +395,7 @@ final class DataGrid extends BaseControl
 			}
 
 			$value = $control->getValue();
-			if (!self::isEmptyValue($value)) {
+			if (!$this->isEmptyValue($value)) {
 				$this->filterDefaults[$name] = $value;
 			}
 		}
@@ -448,7 +414,7 @@ final class DataGrid extends BaseControl
 			//			- sestavení parametrů filtru musí fungovat stejně nezávisle na výchozích parametrech, použije se tahle implementace
 			//		- alternativně se mohou vypisovat všechny hodnoty do url a nedávat do ní pouze prázdné
 			//			- tím by bylo chování url neměnné a fixnul by se problém se selectem s výchozí hodnotou, který chci nastavit prázdný
-			if (!self::isEmptyValue($value)) {
+			if (!$this->isEmptyValue($value)) {
 				$filtered[$key] = $value;
 			}
 		}
@@ -456,7 +422,7 @@ final class DataGrid extends BaseControl
 		return $filtered;
 	}
 
-	private static function isEmptyValue(mixed $value): bool
+	private function isEmptyValue(mixed $value): bool
 	{
 		return $value === null || $value === '' || $value === [] || $value === false;
 	}
