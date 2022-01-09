@@ -142,8 +142,9 @@ final class DataGrid extends BaseControl
 	public function render(): void
 	{
 		if ($this->filterFormFactory !== null) {
-			assert($this['form']['filter'] instanceof Container);
-			$this['form']['filter']->setDefaults($this->filter);
+			$filterContainer = $this['form']['filter'];
+			assert($filterContainer instanceof Container);
+			$filterContainer->setDefaults($this->filter);
 		}
 
 		$this->template->form = $this['form'];
@@ -245,7 +246,7 @@ final class DataGrid extends BaseControl
 		}
 
 		throw InvalidArgument::create()
-			->withMessage("Row with primary key value {$value} not found.");
+			->withMessage("Row with primary key value '$value' not found.");
 	}
 
 	protected function createParameters(bool $fetchOnlyRow): SearchParameters
@@ -348,12 +349,13 @@ final class DataGrid extends BaseControl
 	{
 		$rowPrimaryKey = $this->rowPrimaryKey;
 
-		if (isset($form['filter'])) {
-			assert($form['filter'] instanceof Container);
-			assert($form['filter']['filter'] instanceof SubmitButton);
-			assert($form['filter']['cancel'] instanceof SubmitButton);
-			if ($form['filter']['filter']->isSubmittedBy()) {
-				$values = $form['filter']->getValues('array');
+		$filterContainer = $form['filter'] ?? null;
+		if ($filterContainer !== null) {
+			assert($filterContainer instanceof Container);
+			assert(($filterButton = $filterContainer['filter']) instanceof SubmitButton);
+			assert(($cancelButton = $filterContainer['cancel']) instanceof SubmitButton);
+			if ($filterButton->isSubmittedBy()) {
+				$values = $filterContainer->getValues('array');
 				assert(is_array($values));
 				$values = $this->filterFormFilter($values);
 				if ($this->paginator !== null) {
@@ -363,24 +365,25 @@ final class DataGrid extends BaseControl
 
 				$this->filter = $this->filterDataSource = $values;
 				$this->redrawControl('rows');
-			} elseif ($form['filter']['cancel']->isSubmittedBy()) {
+			} elseif ($cancelButton->isSubmittedBy()) {
 				if ($this->paginator !== null) {
 					$this->page = 1;
 					$this->paginator->setPage(1);
 				}
 
 				$this->filter = $this->filterDataSource = $this->filterDefaults;
-				$form['filter']->setValues($this->filter, true);
+				$filterContainer->setValues($this->filter, true);
 				$this->redrawControl('rows');
 			}
 		}
 
-		if (isset($form['actions'])) {
-			assert($form['actions'] instanceof Container);
-			assert($form['actions']['process'] instanceof SubmitButton);
-			if ($form['actions']['process']->isSubmittedBy()) {
-				assert($form['actions']['action'] instanceof SelectBox);
-				$action = $form['actions']['action']->getValue();
+		$actionsContainer = $form['actions'] ?? null;
+		if ($actionsContainer !== null) {
+			assert($actionsContainer instanceof Container);
+			assert(($processButton = $actionsContainer['process']) instanceof SubmitButton);
+			if ($processButton->isSubmittedBy()) {
+				assert(($actionInput = $actionsContainer['action']) instanceof SelectBox);
+				$action = $actionInput->getValue();
 				if ($action !== null) {
 					$rows = [];
 					foreach ($this->getAllData() as $row) {
@@ -391,7 +394,7 @@ final class DataGrid extends BaseControl
 					[, $callback] = $this->globalActions[$action];
 					$callback($ids, $this);
 					$this->data = null;
-					$form['actions']->setValues(['action' => null, 'items' => []]);
+					$actionsContainer->setValues(['action' => null, 'items' => []]);
 				}
 			}
 		}
@@ -407,9 +410,7 @@ final class DataGrid extends BaseControl
 	public function loadState(array $params): void
 	{
 		parent::loadState($params);
-		if ($this->paginator !== null) {
-			$this->paginator->setPage($this->page);
-		}
+		$this->paginator?->setPage($this->page);
 	}
 
 	public function handlePagination(): void

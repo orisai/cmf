@@ -82,23 +82,24 @@ abstract class BasePresenter extends Presenter
 	{
 		parent::beforeRender();
 
-		$this['document']->addAttribute('class', 'no-js');
-		$this['document']->setAttribute('lang', $this->translator->getCurrentLocale()->getTag());
-		$this['document']['head']['meta']->addOpenGraph('type', 'website');
+		$document = $this['document'];
+		$document->addAttribute('class', 'no-js');
+		$document->setAttribute('lang', $this->translator->getCurrentLocale()->getTag());
+		$document['head']['meta']->addOpenGraph('type', 'website');
 
 		$siteName = $this->applicationConfig->getName();
 		if ($siteName !== null) {
-			$this['document']->setSiteName($siteName);
+			$document->setSiteName($siteName);
 		}
 
-		$this->configureCanonicalUrl();
+		$this->configureCanonicalUrl($document);
 
 		$this->template->firewall = $this->getFirewall();
 	}
 
-	protected function configureCanonicalUrl(): void
+	protected function configureCanonicalUrl(DocumentControl $document): void
 	{
-		$this['document']->setCanonicalUrl(
+		$document->setCanonicalUrl(
 			$this->link('//this', ['backlink' => null]),
 		);
 	}

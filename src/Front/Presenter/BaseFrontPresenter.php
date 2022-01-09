@@ -59,11 +59,12 @@ abstract class BaseFrontPresenter extends BasePresenter
 	{
 		parent::beforeRender();
 
+		$meta = $this['document-head-meta'];
 		if ($this->applicationConfig->getBuildConfig()->isStable()) {
-			$this['document-head-meta']->setRobots(['index', 'follow']);
+			$meta->setRobots(['index', 'follow']);
 		} else {
 			$this->getHttpResponse()->addHeader('X-Robots-Tag', 'none');
-			$this['document-head-meta']->setRobots(['nofollow', 'noindex']);
+			$meta->setRobots(['nofollow', 'noindex']);
 		}
 	}
 

@@ -4,6 +4,7 @@ namespace OriCMF\UI\Error;
 
 use Nette\Application\BadRequestException;
 use Nette\Http\IResponse;
+use OriCMF\UI\Control\Document\DocumentControl;
 use Throwable;
 use function in_array;
 
@@ -64,7 +65,7 @@ trait ErrorPresenterUtil
 		$this['document']->setTitle($title);
 	}
 
-	protected function configureCanonicalUrl(): void
+	protected function configureCanonicalUrl(DocumentControl $document): void
 	{
 		// Error presenter has no canonical url
 	}

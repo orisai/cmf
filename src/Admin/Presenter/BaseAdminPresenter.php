@@ -59,8 +59,9 @@ abstract class BaseAdminPresenter extends BasePresenter
 	{
 		parent::beforeRender();
 
-		$this['document-head-meta']->setRobots(['noindex', 'nofollow']);
-		$this['document-head-title']->setModule($this->translator->translate('ori.admin.title'));
+		$head = $this['document-head'];
+		$head['meta']->setRobots(['noindex', 'nofollow']);
+		$head['title']->setModule($this->translator->translate('ori.admin.title'));
 	}
 
 }
