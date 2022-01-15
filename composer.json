@@ -28,7 +28,7 @@
 	],
 	"require": {
 		"php": ">=8.0.0 <8.2.0",
-		"brick/date-time": "^0.3.0",
+		"brick/date-time": "^0.4.0",
 		"brick/math": "^0.9.2",
 		"brick/money": "^0.5.2",
 		"latte/latte": "^2.10.0",
