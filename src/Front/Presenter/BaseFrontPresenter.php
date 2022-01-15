@@ -5,6 +5,7 @@ namespace OriCMF\Front\Presenter;
 use OriCMF\Front\Auth\FrontFirewall;
 use OriCMF\Front\Login\LoginPresenter;
 use OriCMF\UI\Presenter\BasePresenter;
+use Orisai\Auth\Authentication\LogoutCode;
 
 abstract class BaseFrontPresenter extends BasePresenter
 {
@@ -30,7 +31,7 @@ abstract class BaseFrontPresenter extends BasePresenter
 		}
 
 		$expired = $this->firewall->getLastExpiredLogin();
-		if ($expired !== null && $expired->getLogoutCode() === $this->firewall::LOGOUT_INACTIVITY) {
+		if ($expired !== null && $expired->getLogoutCode()->name === LogoutCode::inactivity()->name) {
 			$this->flashMessage($this->translator->translate('ori.login.logout.reason.inactivity'));
 		}
 
