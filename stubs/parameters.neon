@@ -1,0 +1,7 @@
+# Stub file for IDE neon support
+parameters:
+
+	# orisai/installer parameters from AutomaticConfigurator
+	modules:
+		orisai/cmf:
+			dir: %rootDir%/vendor/orisai/cmf
