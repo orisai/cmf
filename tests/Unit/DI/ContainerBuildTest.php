@@ -3,7 +3,8 @@
 namespace Tests\OriCMF\Unit\DI;
 
 use Nette\DI\Container;
-use OriNette\DI\Boot\ManualConfigurator;
+use Orisai\Installer\AutomaticConfigurator;
+use Orisai\Installer\Tester\ModuleTester;
 use PHPUnit\Framework\TestCase;
 use function dirname;
 use function mkdir;
@@ -14,6 +15,8 @@ final class ContainerBuildTest extends TestCase
 
 	private string $rootDir;
 
+	private ModuleTester $tester;
+
 	protected function setUp(): void
 	{
 		parent::setUp();
@@ -22,14 +25,15 @@ final class ContainerBuildTest extends TestCase
 		if (PHP_VERSION_ID < 8_01_00) {
 			@mkdir("$this->rootDir/var/build");
 		}
+
+		$this->tester = new ModuleTester();
 	}
 
 	public function testBuild(): void
 	{
-		$configurator = new ManualConfigurator($this->rootDir);
+		$loader = $this->tester->generateLoader(__DIR__ . '/Orisai.php');
+		$configurator = new AutomaticConfigurator($this->rootDir, $loader);
 		$configurator->setForceReloadContainer();
-		$configurator->addConfig(__DIR__ . '/../../../src/wiring.neon');
-		$configurator->addConfig(__DIR__ . '/wiring.neon');
 
 		$container = $configurator->createContainer();
 
