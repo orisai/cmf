@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-use Orisai\Installer\Schema\PackageSchema;
+use Orisai\Installer\Schema\ModuleSchema;
 
-$schema = new PackageSchema();
+$schema = new ModuleSchema();
 
 $schema->addConfigFile(__DIR__ . '/src/wiring.neon');
 
