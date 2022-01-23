@@ -7,7 +7,6 @@ use Orisai\Installer\AutomaticConfigurator;
 use Orisai\Installer\Schema\ModuleSchema;
 use Orisai\Installer\Tester\ModuleTester;
 use PHPUnit\Framework\TestCase;
-use function assert;
 use function dirname;
 use function mkdir;
 use const PHP_VERSION_ID;
@@ -33,8 +32,7 @@ final class ContainerBuildTest extends TestCase
 
 	public function testBuild(): void
 	{
-		$schema = require __DIR__ . '/../../../src/Orisai.php';
-		assert($schema instanceof ModuleSchema);
+		$schema = new ModuleSchema();
 		$schema->addConfigFile(__DIR__ . '/wiring.neon');
 
 		$loader = $this->tester->generateLoader($schema);
