@@ -35,7 +35,7 @@ abstract class BaseFrontPresenter extends BasePresenter
 			$this->flashMessage($this->translator->translate('ori.login.logout.reason.inactivity'));
 		}
 
-		$this->actionRedirect(LoginPresenter::createLink(
+		$this->redirectToAction(LoginPresenter::createLink(
 			$this->storeRequest(),
 		));
 	}
@@ -47,7 +47,7 @@ abstract class BaseFrontPresenter extends BasePresenter
 		if (!$this->isLoginRequired()) {
 			$this->redirect('this');
 		} else {
-			$this->actionRedirect(LoginPresenter::createLink());
+			$this->redirectToAction(LoginPresenter::createLink());
 		}
 	}
 

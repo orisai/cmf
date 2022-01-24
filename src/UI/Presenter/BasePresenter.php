@@ -112,12 +112,12 @@ abstract class BasePresenter extends Presenter
 	/**
 	 * @return never
 	 */
-	protected function actionRedirect(ActionLink $link): void
+	protected function redirectToAction(ActionLink $link): void
 	{
 		$this->redirect($link->getDestination(), $link->getArguments());
 	}
 
-	protected function actionLink(ActionLink $link): string
+	protected function linkToAction(ActionLink $link): string
 	{
 		return $this->link($link->getDestination(), $link->getArguments());
 	}
