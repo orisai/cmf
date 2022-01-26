@@ -5,7 +5,7 @@ namespace Tests\OriCMF\Unit\DI;
 use Nette\DI\Container;
 use Orisai\Installer\AutomaticConfigurator;
 use Orisai\Installer\Schema\ModuleSchema;
-use Orisai\Installer\Tester\ModuleTester;
+use Orisai\Installer\Tester\InstallerTester;
 use PHPUnit\Framework\TestCase;
 use function dirname;
 use function mkdir;
@@ -16,7 +16,7 @@ final class ContainerBuildTest extends TestCase
 
 	private string $rootDir;
 
-	private ModuleTester $tester;
+	private InstallerTester $tester;
 
 	protected function setUp(): void
 	{
@@ -27,7 +27,7 @@ final class ContainerBuildTest extends TestCase
 			@mkdir("$this->rootDir/var/build");
 		}
 
-		$this->tester = new ModuleTester();
+		$this->tester = new InstallerTester();
 	}
 
 	public function testBuild(): void
