@@ -4,26 +4,26 @@ parameters:
 
 services:
 	# Auth
-	ori.admin.auth.identityRefresher:
+	ori.cmf.admin.auth.identityRefresher:
 		factory: OriCMF\Admin\Auth\AdminIdentityRefresher
 		autowired: false
-	ori.admin.auth.firewall:
+	ori.cmf.admin.auth.firewall:
 		factory: OriCMF\Admin\Auth\AdminFirewall
 		arguments:
-			storage: @ori.ui.auth.loginStorage
-			refresher: @ori.admin.auth.identityRefresher
+			storage: @ori.cmf.ui.auth.loginStorage
+			refresher: @ori.cmf.admin.auth.identityRefresher
 
 	# Dashboard
-	ori.admin.dashboard.presenter:
+	ori.cmf.admin.dashboard.presenter:
 		factory: OriCMF\Admin\Dashboard\DashboardPresenter
 
 	# Error
-	ori.admin.error.presenter:
+	ori.cmf.admin.error.presenter:
 		factory: OriCMF\Admin\Error\ErrorPresenter
-	ori.ui.error.forward.presenter:
+	ori.cmf.ui.error.forward.presenter:
 		setup:
 			- addErrorPresenter(':OriCMF\Admin\Error\ErrorPresenter:default', '#(.*)(\\|:)(Admin|Administration)(\\|:)(.*)#')
 
 	# Login
-	ori.admin.login.presenter:
+	ori.cmf.admin.login.presenter:
 		factory: OriCMF\Admin\Login\LoginPresenter

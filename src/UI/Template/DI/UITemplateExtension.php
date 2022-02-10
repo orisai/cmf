@@ -46,7 +46,7 @@ final class UITemplateExtension extends CompilerExtension
 	{
 		$templateFactory->onCreate[] = static function (Template $template) use ($container): void {
 			if ($template instanceof BaseControlTemplate) {
-				$controlTemplateLocator = $container->getByName('ori.ui.template.locator.control');
+				$controlTemplateLocator = $container->getByName('ori.cmf.ui.template.locator.control');
 				assert($controlTemplateLocator instanceof ControlTemplateLocator);
 				$template->setTemplateLocator($controlTemplateLocator);
 			}

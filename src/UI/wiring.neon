@@ -80,45 +80,45 @@ parameters:
 
 services:
 	# Auth
-	ori.ui.auth.loginStorage:
+	ori.cmf.ui.auth.loginStorage:
 		factory: OriNette\Auth\SessionLoginStorage
 		autowired: false
-	ori.ui.auth.identityCreator:
+	ori.cmf.ui.auth.identityCreator:
 		factory: OriCMF\UI\Auth\UserIdentityCreator
 
 	# Control
-	ori.ui.control.body.factory:
+	ori.cmf.ui.control.body.factory:
 		implement: OriCMF\UI\Control\Body\BodyControlFactory
-	ori.ui.control.breadcrumb.factory:
+	ori.cmf.ui.control.breadcrumb.factory:
 		implement: OriCMF\UI\Control\Breadcrumb\BreadcrumbControlFactory
-	ori.ui.control.document.factory:
+	ori.cmf.ui.control.document.factory:
 		implement: OriCMF\UI\Control\Document\DocumentControlFactory
-	ori.ui.control.head.factory:
+	ori.cmf.ui.control.head.factory:
 		implement: OriCMF\UI\Control\Head\HeadControlFactory
-	ori.ui.control.icons.factory:
+	ori.cmf.ui.control.icons.factory:
 		implement: OriCMF\UI\Control\Icons\IconsControlFactory
-	ori.ui.control.links.factory:
+	ori.cmf.ui.control.links.factory:
 		implement: OriCMF\UI\Control\Links\LinksControlFactory
-	ori.ui.control.meta.factory:
+	ori.cmf.ui.control.meta.factory:
 		implement: OriCMF\UI\Control\Meta\MetaControlFactory
-	ori.ui.control.noscript.factory:
+	ori.cmf.ui.control.noscript.factory:
 		implement: OriCMF\UI\Control\NoScript\NoScriptControlFactory
-	ori.ui.control.scripts.factory:
+	ori.cmf.ui.control.scripts.factory:
 		implement: OriCMF\UI\Control\Scripts\ScriptsControlFactory
-	ori.ui.control.styles.factory:
+	ori.cmf.ui.control.styles.factory:
 		implement: OriCMF\UI\Control\Styles\StylesControlFactory
-	ori.ui.control.title.factory:
+	ori.cmf.ui.control.title.factory:
 		implement: OriCMF\UI\Control\Title\TitleControlFactory
 
 	# DataGrid
-	ori.ui.dataGrid.factory: OriCMF\UI\DataGrid\DataGridFactory
+	ori.cmf.ui.dataGrid.factory: OriCMF\UI\DataGrid\DataGridFactory
 
 	# Error
-	ori.ui.error.forward.presenter:
+	ori.cmf.ui.error.forward.presenter:
 		factory: OriCMF\UI\Error\ErrorForwardPresenter
 
 	# Form
-	ori.ui.form.factory:
+	ori.cmf.ui.form.factory:
 		factory: OriCMF\UI\Form\FormFactory
 
 	# Presenter
@@ -129,15 +129,15 @@ services:
 			factory: OriNette\Application\Mapping\StrictPresenterFactoryCallback()
 
 	# Robots
-	ori.ui.robots.presenter:
+	ori.cmf.ui.robots.presenter:
 		factory: OriCMF\UI\Robots\RobotsPresenter
 
 	# Template
-	ori.ui.template.locator.control:
+	ori.cmf.ui.template.locator.control:
 		factory: OriCMF\UI\Template\Locator\ControlTemplateLocator
 		arguments:
 			rootDir: %rootDir%
-	ori.ui.template.locator.presenter:
+	ori.cmf.ui.template.locator.presenter:
 		factory: OriCMF\UI\Template\Locator\PresenterTemplateLocator
 		arguments:
 			rootDir: %rootDir%

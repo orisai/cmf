@@ -1,22 +1,22 @@
 services:
 	# Auth
-	ori.front.auth.identityRefresher:
+	ori.cmf.front.auth.identityRefresher:
 		factory: OriCMF\Front\Auth\FrontIdentityRefresher
 		autowired: false
-	ori.front.auth.firewall:
+	ori.cmf.front.auth.firewall:
 		factory: OriCMF\Front\Auth\FrontFirewall
 		arguments:
-			storage: @ori.ui.auth.loginStorage
-			refresher: @ori.front.auth.identityRefresher
+			storage: @ori.cmf.ui.auth.loginStorage
+			refresher: @ori.cmf.front.auth.identityRefresher
 
 	# Error
-	ori.front.error.presenter:
+	ori.cmf.front.error.presenter:
 		factory: OriCMF\Front\Error\ErrorPresenter
 
 	# Homepage
-	ori.front.homepage.presenter:
+	ori.cmf.front.homepage.presenter:
 		factory: OriCMF\Front\Homepage\HomepagePresenter
 
 	# Login
-	ori.front.login.presenter:
+	ori.cmf.front.login.presenter:
 		factory: OriCMF\Front\Login\LoginPresenter

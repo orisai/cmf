@@ -1,7 +1,7 @@
 services:
 	# Role
-	ori.console.role.createCommand: OriCMF\Console\Role\RoleCreateCommand
+	ori.cmf.console.role.createCommand: OriCMF\Console\Role\RoleCreateCommand
 
 	# User
-	ori.console.user.addRole.command: OriCMF\Console\User\UserRoleAddCommand
-	ori.console.user.register.command: OriCMF\Console\User\UserRegisterCommand
+	ori.cmf.console.user.addRole.command: OriCMF\Console\User\UserRoleAddCommand
+	ori.cmf.console.user.register.command: OriCMF\Console\User\UserRegisterCommand

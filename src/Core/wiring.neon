@@ -39,7 +39,7 @@ nextras.orm:
 
 ori.cmf.dbal:
 	debug: %debug.panels.dbal%
-	sqlProcessorFactory: @ori.core.sql.processorFactory
+	sqlProcessorFactory: @ori.cmf.core.sql.processorFactory
 
 orisai.console:
 	catchExceptions: %catchExceptions.console%
@@ -107,108 +107,108 @@ parameters:
 
 services:
 	# Auth
-	ori.core.auth.password.encoder:
+	ori.cmf.core.auth.password.encoder:
 		factory: Orisai\Auth\Passwords\SodiumPasswordEncoder
 
-	ori.core.auth.policyManager:
+	ori.cmf.core.auth.policyManager:
 		factory: OriNette\Auth\DI\LazyPolicyManager
 		arguments:
 			serviceMap: []
 		autowired: false
-	ori.core.auth.dataCreator:
+	ori.cmf.core.auth.dataCreator:
 		factory: OriCMF\Core\Auth\AuthorizationDataCreator
 		autowired: false
 		arguments:
 			privileges: %privileges%
-	ori.core.auth.data:
-		factory: @ori.core.auth.dataCreator::create
+	ori.cmf.core.auth.data:
+		factory: @ori.cmf.core.auth.dataCreator::create
 		type: Orisai\Auth\Authorization\AuthorizationData
-	ori.core.auth.authorizer:
+	ori.cmf.core.auth.authorizer:
 		factory: Orisai\Auth\Authorization\PrivilegeAuthorizer
 		arguments:
-			policyManager: @ori.core.auth.policyManager
+			policyManager: @ori.cmf.core.auth.policyManager
 
 	# Cache
-	ori.core.cache:
+	ori.cmf.core.cache:
 		factory: Nette\Caching\Cache
 
 	# Config
-	ori.core.config.application:
+	ori.cmf.core.config.application:
 		factory: OriCMF\Core\Config\ApplicationConfig
 		arguments: [%application.name%]
-	ori.core.config.build:
+	ori.cmf.core.config.build:
 		factory: OriCMF\Core\Config\BuildConfig
 		arguments: [%application.build.name%, %application.build.version%, %application.build.stable%]
 
 	# Email
-	ori.core.email.mapper:
+	ori.cmf.core.email.mapper:
 		factory: OriCMF\Core\Email\EmailPostgresMapper
 		type: OriCMF\Core\Email\EmailMapper
-	ori.core.email.repository:
+	ori.cmf.core.email.repository:
 		factory: OriCMF\Core\Email\EmailRepository
 
 	# Filesystem
-	ori.core.filesystem.internal.adapter:
+	ori.cmf.core.filesystem.internal.adapter:
 		factory: League\Flysystem\Local\LocalFilesystemAdapter
 		type: League\Flysystem\FilesystemAdapter
 		arguments:
 			location: %dataDir%
-	ori.core.filesystem.internal:
+	ori.cmf.core.filesystem.internal:
 		factory: OriCMF\Core\Files\InternalFileSystem
 		type: OriCMF\Core\Files\InternalFileSystem
 		arguments:
-			- @ori.core.filesystem.internal.adapter
+			- @ori.cmf.core.filesystem.internal.adapter
 
-	ori.core.filesystem.public.adapter:
+	ori.cmf.core.filesystem.public.adapter:
 		factory: League\Flysystem\Local\LocalFilesystemAdapter
 		type: League\Flysystem\FilesystemAdapter
 		arguments:
 			location: %wwwDir%/u
-	ori.core.filesystem.public:
+	ori.cmf.core.filesystem.public:
 		factory: OriCMF\Core\Files\PublicFileSystem
 		type: OriCMF\Core\Files\PublicFileSystem
 		arguments:
-			- @ori.core.filesystem.public.adapter
+			- @ori.cmf.core.filesystem.public.adapter
 
-	ori.core.filesystem.mimeTypeDetector:
+	ori.cmf.core.filesystem.mimeTypeDetector:
 		factory: League\MimeTypeDetection\FinfoMimeTypeDetector
 		arguments:
 			bufferSampleSize: 1048576 # 1 MB
 
 	# Password
-	ori.core.password.mapper:
+	ori.cmf.core.password.mapper:
 		factory: OriCMF\Core\Password\PasswordPostgresMapper
 		type: OriCMF\Core\Password\PasswordMapper
-	ori.core.password.repository:
+	ori.cmf.core.password.repository:
 		factory: OriCMF\Core\Password\PasswordRepository
 
 	# Role
-	ori.core.role.mapper:
+	ori.cmf.core.role.mapper:
 		factory: OriCMF\Core\Role\RolePostgresMapper
 		type: OriCMF\Core\Role\RoleMapper
-	ori.core.role.repository:
+	ori.cmf.core.role.repository:
 		factory: OriCMF\Core\Role\RoleRepository
 
 	# SQL
-	ori.core.sql.logger:
+	ori.cmf.core.sql.logger:
 		factory: OriCMF\Core\SQL\SqlLogger
 		type: Nextras\Dbal\ILogger
-	ori.core.sql.modifier.arrayExpression:
+	ori.cmf.core.sql.modifier.arrayExpression:
 		factory: OriCMF\Core\SQL\Modifier\ArrayExpressionModifier
-	ori.core.sql.processorFactory:
+	ori.cmf.core.sql.processorFactory:
 		factory: OriCMF\Core\SQL\SqlProcessorFactory
 		setup:
-			- addModifier(arrayExpression, @ori.core.sql.modifier.arrayExpression)
+			- addModifier(arrayExpression, @ori.cmf.core.sql.modifier.arrayExpression)
 
 	# User
-	ori.user.mapper:
+	ori.cmf.core.user.mapper:
 		factory: OriCMF\Core\User\UserPostgresMapper
 		type: OriCMF\Core\User\UserMapper
-	ori.user.repository:
+	ori.cmf.core.user.repository:
 		factory: OriCMF\Core\User\UserRepository
 
 	# User.Credentials
-	ori.user.credentials.handlerManager:
+	ori.cmf.core.user.credentials.handlerManager:
 		factory: OriCMF\Core\User\Credentials\CredentialHandlerManager
 		arguments:
 			handlers:
@@ -216,8 +216,8 @@ services:
 				password: OriCMF\Core\User\Credentials\PasswordCredentialHandler()
 
 	# User.Login
-	ori.user.login.verifier: OriCMF\Core\User\Login\LoginVerifier
+	ori.cmf.core.user.login.verifier: OriCMF\Core\User\Login\LoginVerifier
 
 	# User.Register
-	ori.user.register.registrar: OriCMF\Core\User\Register\UserRegistrar
-	ori.user.register.getter: OriCMF\Core\User\Register\UserRegistrarGetter
+	ori.cmf.core.user.register.registrar: OriCMF\Core\User\Register\UserRegistrar
+	ori.cmf.core.user.register.getter: OriCMF\Core\User\Register\UserRegistrarGetter
