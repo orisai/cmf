@@ -2,6 +2,7 @@
 
 namespace OriCMF\Front\Presenter;
 
+use OriCMF\Core\Config\BuildConfig;
 use OriCMF\Front\Auth\FrontFirewall;
 use OriCMF\Front\Login\LoginPresenter;
 use OriCMF\UI\Presenter\BasePresenter;
@@ -61,7 +62,7 @@ abstract class BaseFrontPresenter extends BasePresenter
 		parent::beforeRender();
 
 		$meta = $this['document-head-meta'];
-		if ($this->applicationConfig->getBuildConfig()->isStable()) {
+		if ($this->config->get(BuildConfig::class)->isStable()) {
 			$meta->setRobots(['index', 'follow']);
 		} else {
 			$this->getHttpResponse()->addHeader('X-Robots-Tag', 'none');

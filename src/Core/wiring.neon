@@ -12,6 +12,7 @@ extensions:
 	monolog: OriNette\Monolog\DI\MonologExtension
 	orm: Nextras\Orm\Bridges\NetteDI\OrmExtension
 	ormInitializer: OriCMF\Core\ORM\DI\OrmInitializerExtension
+	ori.cmf.config: OriCMF\Core\Config\DI\ConfigExtension
 	time: OriNette\Time\DI\TimeExtension
 	tracy: Tracy\Bridges\Nette\TracyExtension(%debugMode%, %consoleMode%)
 

@@ -10,6 +10,7 @@ use Nette\Application\UI\Template;
 use Nette\Bridges\ApplicationLatte\TemplateFactory;
 use Nette\FileNotFoundException;
 use OriCMF\Core\Config\ApplicationConfig;
+use OriCMF\Core\Config\ConfigProvider;
 use OriCMF\UI\ActionLink;
 use OriCMF\UI\Auth\BaseUIFirewall;
 use OriCMF\UI\Control\Document\DocumentControl;
@@ -46,20 +47,20 @@ abstract class BasePresenter extends Presenter
 
 	protected Translator $translator;
 
-	protected ApplicationConfig $applicationConfig;
+	protected ConfigProvider $config;
 
 	private PresenterTemplateLocator $templateLocator;
 
 	public function injectBase(
 		DocumentControlFactory $documentFactory,
 		Translator $translator,
-		ApplicationConfig $applicationConfig,
+		ConfigProvider $config,
 		PresenterTemplateLocator $templateLocator,
 	): void
 	{
 		$this->documentFactory = $documentFactory;
 		$this->translator = $translator;
-		$this->applicationConfig = $applicationConfig;
+		$this->config = $config;
 		$this->templateLocator = $templateLocator;
 	}
 
@@ -87,7 +88,7 @@ abstract class BasePresenter extends Presenter
 		$document->setAttribute('lang', $this->translator->getCurrentLocale()->getTag());
 		$document['head']['meta']->addOpenGraph('type', 'website');
 
-		$siteName = $this->applicationConfig->getName();
+		$siteName = $this->config->get(ApplicationConfig::class)->getName();
 		if ($siteName !== null) {
 			$document->setSiteName($siteName);
 		}

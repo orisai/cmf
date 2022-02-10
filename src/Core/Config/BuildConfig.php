@@ -2,7 +2,7 @@
 
 namespace OriCMF\Core\Config;
 
-class BuildConfig
+final class BuildConfig implements ConfigItemProvider
 {
 
 	public function __construct(private string|null $name, private string|null $version, private bool $stable)

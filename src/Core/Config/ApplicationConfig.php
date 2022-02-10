@@ -2,21 +2,16 @@
 
 namespace OriCMF\Core\Config;
 
-class ApplicationConfig
+final class ApplicationConfig implements ConfigItemProvider
 {
 
-	public function __construct(private string|null $name, private BuildConfig $buildConfig)
+	public function __construct(private string|null $name)
 	{
 	}
 
 	public function getName(): string|null
 	{
 		return $this->name;
-	}
-
-	public function getBuildConfig(): BuildConfig
-	{
-		return $this->buildConfig;
 	}
 
 }
