@@ -1,32 +1,25 @@
 extensions:
-	cache: OriCMF\Core\Cache\DI\CacheExtension(%tempDir%/nette)
-	console: OriNette\Console\DI\ConsoleExtension
-	datasource: Orisai\DataSources\Bridge\NetteDI\DataSourceExtension
-	dbal: OriCMF\Core\SQL\DI\DbalExtension
-	decorator: Nette\DI\Extensions\DecoratorExtension
 	di: Nette\DI\Extensions\DIExtension(%debugMode%)
-	httpClient: OriNette\HttpClient\DI\HttpClientExtension
-	inject: Nette\DI\Extensions\InjectExtension
-	localization: Orisai\Localization\Bridge\NetteDI\LocalizationExtension
-	migrations: Nextras\Migrations\Bridges\NetteDI\MigrationsExtension
-	monolog: OriNette\Monolog\DI\MonologExtension
-	orm: Nextras\Orm\Bridges\NetteDI\OrmExtension
-	ormInitializer: OriCMF\Core\ORM\DI\OrmInitializerExtension
+
+	nette.decorator: Nette\DI\Extensions\DecoratorExtension
+	nette.inject: Nette\DI\Extensions\InjectExtension
+
+	nextras.migrations: Nextras\Migrations\Bridges\NetteDI\MigrationsExtension
+	nextras.orm: Nextras\Orm\Bridges\NetteDI\OrmExtension
+
+	ori.cmf.cache: OriCMF\Core\Cache\DI\CacheExtension(%tempDir%/nette)
 	ori.cmf.config: OriCMF\Core\Config\DI\ConfigExtension
-	time: OriNette\Time\DI\TimeExtension
+	ori.cmf.dbal: OriCMF\Core\SQL\DI\DbalExtension
+	ori.cmf.ormInitializer: OriCMF\Core\ORM\DI\OrmInitializerExtension
+
+	orisai.console: OriNette\Console\DI\ConsoleExtension
+	orisai.datasource: Orisai\DataSources\Bridge\NetteDI\DataSourceExtension
+	orisai.httpClient: OriNette\HttpClient\DI\HttpClientExtension
+	orisai.localization: Orisai\Localization\Bridge\NetteDI\LocalizationExtension
+	orisai.monolog: OriNette\Monolog\DI\MonologExtension
+	orisai.time: OriNette\Time\DI\TimeExtension
+
 	tracy: Tracy\Bridges\Nette\TracyExtension(%debugMode%, %consoleMode%)
-
-console:
-	catchExceptions: %catchExceptions.console%
-	name: %application.name%
-	version: %application.build.version%
-	di:
-		parameters:
-			backup: %consoleMode%
-
-dbal:
-	debug: %debug.panels.dbal%
-	sqlProcessorFactory: @ori.core.sql.processorFactory
 
 di:
 	debugger: %debug.panels.di.container%
@@ -35,23 +28,39 @@ di:
 		tags: false
 		types: false
 
-httpClient:
+nextras.migrations:
+	driver: pgsql
+	dbal: nextras
+	withDummyData: %debugMode%
+
+nextras.orm:
+	model: Nextras\Orm\Model\Model
+	repositoryFinder: Nextras\Orm\Bridges\NetteDI\DIRepositoryFinder
+
+ori.cmf.dbal:
+	debug: %debug.panels.dbal%
+	sqlProcessorFactory: @ori.core.sql.processorFactory
+
+orisai.console:
+	catchExceptions: %catchExceptions.console%
+	name: %application.name%
+	version: %application.build.version%
+	di:
+		parameters:
+			backup: %consoleMode%
+
+orisai.httpClient:
 	debug:
 		panel: %debug.panels.httpClient%
 
-localization:
+orisai.localization:
 	debug:
 		newMessages: %debugMode%
 		panel: %debug.panels.localization%
 	directories:
 		- %vendorDir%/orisai/cmf/src/**/translations/**
 
-migrations:
-	driver: pgsql
-	dbal: nextras
-	withDummyData: %debugMode%
-
-monolog:
+orisai.monolog:
 	debug: %debugMode%
 
 	channels:
@@ -73,9 +82,9 @@ monolog:
 		introspection: Monolog\Processor\IntrospectionProcessor
 		web: Monolog\Processor\WebProcessor
 
-orm:
-	model: Nextras\Orm\Model\Model
-	repositoryFinder: Nextras\Orm\Bridges\NetteDI\DIRepositoryFinder
+tracy:
+	netteMailer: false
+	strictMode: true
 
 parameters:
 	catchExceptions:
@@ -212,7 +221,3 @@ services:
 	# User.Register
 	ori.user.register.registrar: OriCMF\Core\User\Register\UserRegistrar
 	ori.user.register.getter: OriCMF\Core\User\Register\UserRegistrarGetter
-
-tracy:
-	netteMailer: false
-	strictMode: true

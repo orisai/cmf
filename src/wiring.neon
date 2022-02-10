@@ -5,11 +5,11 @@ includes:
 	- Admin/wiring.neon
 	- Front/wiring.neon
 
-localization:
+orisai.localization:
 	directories:
 		- %vendorDir%/orisai/cmf/src/**/translations/**
 
-migrations:
+nextras.migrations:
 	groups:
 		ori.structure:
 			directory: %vendorDir%/orisai/cmf/src/upgrade/migrations/structures

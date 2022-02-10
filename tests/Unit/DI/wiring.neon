@@ -1,8 +1,8 @@
-localization:
+orisai.localization:
 	locale:
 		default: en
 
-dbal:
+ori.cmf.dbal:
 	connections:
 		default:
 			driver: pgsql

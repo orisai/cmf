@@ -5,6 +5,7 @@ namespace OriCMF\Core\ORM\DI;
 use Nette\DI\CompilerExtension;
 use Nette\Schema\Expect;
 use Nette\Schema\Schema;
+use Nextras\Orm\Model\MetadataStorage;
 
 final class OrmInitializerExtension extends CompilerExtension
 {
@@ -14,12 +15,15 @@ final class OrmInitializerExtension extends CompilerExtension
 		return Expect::structure([]);
 	}
 
-	public function loadConfiguration(): void
+	public function beforeCompile(): void
 	{
-		parent::loadConfiguration();
+		parent::beforeCompile();
+		$builder = $this->getContainerBuilder();
 
-		// Prevents error caused by working with entities before MetadataStorage is created
-		$this->initialization->addBody('$this->getService(?);', ['orm.metadataStorage']);
+		// Prevents error caused by working with entities before MetadataStorage is instantiated
+		$this->initialization->addBody('$this->getService(?);', [
+			$builder->getDefinitionByType(MetadataStorage::class)->getName(),
+		]);
 	}
 
 }
