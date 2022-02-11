@@ -11,7 +11,7 @@ orisai.localization:
 
 nextras.migrations:
 	groups:
-		ori.structure:
+		ori.cmf.structure:
 			directory: %vendorDir%/orisai/cmf/src/upgrade/migrations/structures
-		ori.basicData:
+		ori.cmf.basicData:
 			directory: %vendorDir%/orisai/cmf/src/upgrade/migrations/basic-data
