@@ -10,7 +10,7 @@ final class UserPostgresMapper extends DbalMapper implements UserMapper
 
 	public function getTableName(): string
 	{
-		return 'ori.users';
+		return 'ori_cmf.users';
 	}
 
 	/**
@@ -19,7 +19,7 @@ final class UserPostgresMapper extends DbalMapper implements UserMapper
 	public function getManyHasManyParameters(PropertyMetadata $sourceProperty, DbalMapper $targetMapper): array
 	{
 		if ($sourceProperty->name === 'roles') {
-			return ['ori.user_roles', ['user_id', 'role_id']];
+			return ['ori_cmf.user_roles', ['user_id', 'role_id']];
 		}
 
 		return parent::getManyHasManyParameters($sourceProperty, $targetMapper);

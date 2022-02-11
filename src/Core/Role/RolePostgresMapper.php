@@ -9,7 +9,7 @@ final class RolePostgresMapper extends DbalMapper implements RoleMapper
 
 	public function getTableName(): string
 	{
-		return 'ori.roles';
+		return 'ori_cmf.roles';
 	}
 
 }
