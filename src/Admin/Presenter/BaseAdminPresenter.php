@@ -32,7 +32,7 @@ abstract class BaseAdminPresenter extends BasePresenter
 
 		$expired = $this->firewall->getLastExpiredLogin();
 		if ($expired !== null && $expired->getLogoutCode()->name === LogoutCode::inactivity()->name) {
-			$this->flashMessage($this->translator->translate('ori.login.logout.reason.inactivity'));
+			$this->flashMessage($this->translator->translate('ori.cmf.login.logout.reason.inactivity'));
 		}
 
 		$this->redirectToAction(LoginPresenter::createLink(
@@ -62,7 +62,7 @@ abstract class BaseAdminPresenter extends BasePresenter
 
 		$head = $this['document-head'];
 		$head['meta']->setRobots(['noindex', 'nofollow']);
-		$head['title']->setModule($this->translator->translate('ori.admin.title'));
+		$head['title']->setModule($this->translator->translate('ori.cmf.admin.title'));
 	}
 
 }

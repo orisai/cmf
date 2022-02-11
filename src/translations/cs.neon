@@ -1,44 +1,44 @@
 #
 # Admin
 #
-ori.admin.title: Administrace
+ori.cmf.admin.title: Administrace
 
 #
 # DataGrid
 #
 
-ori.grid.search: Hledat
-ori.grid.search.cancel: Zrušit
-ori.grid.actions: Akce
-ori.grid.global.title: Hromadná akce
-ori.grid.global.do: Provést
-ori.grid.global.choose: '- vyberte hromadnou akci -'
+ori.cmf.grid.search: Hledat
+ori.cmf.grid.search.cancel: Zrušit
+ori.cmf.grid.actions: Akce
+ori.cmf.grid.global.title: Hromadná akce
+ori.cmf.grid.global.do: Provést
+ori.cmf.grid.global.choose: '- vyberte hromadnou akci -'
 
 #
 # HTTP Error
 #
 
-ori.httpError.homeButton: Zpátky na domovskou stránku
+ori.cmf.httpError.homeButton: Zpátky na domovskou stránku
 
 # 400 Bad Request
-ori.httpError.400.title: Chybný požadavek
-ori.httpError.400.message: 'Váš prohlížeč zaslal požadavek, který tento server nemůže zpracovat.'
+ori.cmf.httpError.400.title: Chybný požadavek
+ori.cmf.httpError.400.message: 'Váš prohlížeč zaslal požadavek, který tento server nemůže zpracovat.'
 
 # 403 Forbidden
-ori.httpError.403.title: Přístup zamítnut
-ori.httpError.403.message: 'Nemáte oprávnění pro zobrazení této strany. Prosím zkontaktujte nás, pokud si myslíte, že se jedná o chybu.'
+ori.cmf.httpError.403.title: Přístup zamítnut
+ori.cmf.httpError.403.message: 'Nemáte oprávnění pro zobrazení této strany. Prosím zkontaktujte nás, pokud si myslíte, že se jedná o chybu.'
 
 # 404 Not Found
-ori.httpError.404.title: Nenalezeno
-ori.httpError.404.message: 'Strana, kterou hledáte, nebyla nalezena. Je možné, že je adresa URL špatná, nebo strana již neexistuje.'
+ori.cmf.httpError.404.title: Nenalezeno
+ori.cmf.httpError.404.message: 'Strana, kterou hledáte, nebyla nalezena. Je možné, že je adresa URL špatná, nebo strana již neexistuje.'
 
 # 410 Gone
-ori.httpError.410.title: Nenalezeno
-ori.httpError.410.message: 'Strana, kterou hledáte byla smazána. Omlouváme se vám za komplikace.'
+ori.cmf.httpError.410.title: Nenalezeno
+ori.cmf.httpError.410.message: 'Strana, kterou hledáte byla smazána. Omlouváme se vám za komplikace.'
 
 # 500 Internal Server Error
-ori.httpError.500.title: Chyba serveru
-ori.httpError.500.message: '''
+ori.cmf.httpError.500.title: Chyba serveru
+ori.cmf.httpError.500.message: '''
 	Omlouváme se! Na serveru se vyskytla chyba a nebyl schopen zpracovat váš požadavek.
 	O chybě víme a pracujeme na ní. Zkuste to prosím později.
 '''
@@ -47,26 +47,26 @@ ori.httpError.500.message: '''
 # Login
 #
 
-ori.login.logout.reason.inactivity: 'Byl(a) jste odhlášen(a) z důvodu neaktivity.'
-ori.login.email.alreadyInUse: Emailová adresa je již využívána jiným účtem.
-ori.login.invalidCredentials: Nesprávné přihlašovací údaje
-ori.login.inactive.newAccount: Váš účet zatím nebyl aktivován.
-ori.login.inactive.deactivatedAccount: Váš účet byl deaktivován.
+ori.cmf.login.logout.reason.inactivity: 'Byl(a) jste odhlášen(a) z důvodu neaktivity.'
+ori.cmf.login.email.alreadyInUse: Emailová adresa je již využívána jiným účtem.
+ori.cmf.login.invalidCredentials: Nesprávné přihlašovací údaje
+ori.cmf.login.inactive.newAccount: Váš účet zatím nebyl aktivován.
+ori.cmf.login.inactive.deactivatedAccount: Váš účet byl deaktivován.
 
 #
 # Pagination
 #
 
-ori.pagination.first: První
-ori.pagination.last: Poslední
-ori.pagination.previous: Předchozí
-ori.pagination.next: Následující
-ori.pagination.results: "{from} až {to} z {total} výsledků"
+ori.cmf.pagination.first: První
+ori.cmf.pagination.last: Poslední
+ori.cmf.pagination.previous: Předchozí
+ori.cmf.pagination.next: Následující
+ori.cmf.pagination.results: "{from} až {to} z {total} výsledků"
 
 #
 # User
 #
 
-ori.user.state.new: Nový
-ori.user.state.active: Aktivní
-ori.user.state.disabled: Deaktivovaný
+ori.cmf.user.state.new: Nový
+ori.cmf.user.state.active: Aktivní
+ori.cmf.user.state.disabled: Deaktivovaný

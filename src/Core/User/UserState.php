@@ -20,7 +20,7 @@ final class UserState extends TranslatableEnum
 
 	protected static function getTranslationPrefix(): string
 	{
-		return 'ori.user.state.';
+		return 'ori.cmf.user.state.';
 	}
 
 }

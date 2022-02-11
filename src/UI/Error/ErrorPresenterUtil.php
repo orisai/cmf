@@ -59,8 +59,8 @@ trait ErrorPresenterUtil
 
 		$this->setView($this->is4xx ? '4xx' : '5xx');
 
-		$this->template->title = $title = $t("ori.httpError.$this->code.title");
-		$this->template->message = $t("ori.httpError.$this->code.message");
+		$this->template->title = $title = $t("ori.cmf.httpError.$this->code.title");
+		$this->template->message = $t("ori.cmf.httpError.$this->code.message");
 
 		$this['document']->setTitle($title);
 	}

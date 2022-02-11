@@ -78,7 +78,7 @@ final class LoginVerifier
 	 */
 	private function throwInvalidCredentials(): void
 	{
-		throw InvalidCredentials::create(new TranslatableMessage('ori.login.invalidCredentials'));
+		throw InvalidCredentials::create(new TranslatableMessage('ori.cmf.login.invalidCredentials'));
 	}
 
 	/**
@@ -91,10 +91,10 @@ final class LoginVerifier
 		}
 
 		if ($user->state->is(UserState::NEW())) {
-			throw InactiveAccount::create($user, new TranslatableMessage('ori.login.inactive.newAccount'));
+			throw InactiveAccount::create($user, new TranslatableMessage('ori.cmf.login.inactive.newAccount'));
 		}
 
-		throw InactiveAccount::create($user, new TranslatableMessage('ori.login.inactive.deactivatedAccount'));
+		throw InactiveAccount::create($user, new TranslatableMessage('ori.cmf.login.inactive.deactivatedAccount'));
 	}
 
 }

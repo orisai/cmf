@@ -29,7 +29,7 @@ final class EmailCredentialHandler implements VerifyingCredentialHandler
 		if ($existing !== null && $existing->id !== $credential->id) {
 			throw CredentialAlreadyInUse::create(
 				$credential,
-				new TranslatableMessage('ori.login.email.alreadyInUse'),
+				new TranslatableMessage('ori.cmf.login.email.alreadyInUse'),
 			);
 		}
 
