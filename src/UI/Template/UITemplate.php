@@ -4,6 +4,7 @@ namespace OriCMF\UI\Template;
 
 use Latte\Engine;
 use Nette\Bridges\ApplicationLatte\Template;
+use OriCMF\Core\Config\ConfigProvider;
 use OriCMF\UI\Auth\BaseUIFirewall;
 
 /**
@@ -19,6 +20,8 @@ abstract class UITemplate extends Template
 
 	/** @var array<mixed> */
 	public array $flashes;
+
+	public ConfigProvider $config;
 
 	final public function __construct(Engine $latte)
 	{

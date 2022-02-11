@@ -10,9 +10,11 @@ use Nette\DI\CompilerExtension;
 use Nette\DI\Container;
 use Nette\DI\Definitions\FactoryDefinition;
 use Nette\DI\Definitions\ServiceDefinition;
+use OriCMF\Core\Config\ConfigProvider;
 use OriCMF\UI\Control\BaseControlTemplate;
 use OriCMF\UI\Template\Locator\ControlTemplateLocator;
 use OriCMF\UI\Template\UIMacros;
+use OriCMF\UI\Template\UITemplate;
 use function assert;
 
 final class UITemplateExtension extends CompilerExtension
@@ -29,7 +31,12 @@ final class UITemplateExtension extends CompilerExtension
 
 		$templateFactoryDefinition->addSetup(
 			[self::class, 'prepareTemplate'],
-			[$templateFactoryDefinition, '@' . Container::class, $builder->getByType(ControlTemplateLocator::class)],
+			[
+				$templateFactoryDefinition,
+				'@' . Container::class,
+				$builder->getByType(ConfigProvider::class),
+				$builder->getByType(ControlTemplateLocator::class),
+			],
 		);
 
 		$latteFactoryDefinition = $builder->getDefinitionByType(LatteFactory::class);
@@ -45,12 +52,19 @@ final class UITemplateExtension extends CompilerExtension
 	public static function prepareTemplate(
 		TemplateFactory $templateFactory,
 		Container $container,
-		string $serviceName,
+		string $configProvider,
+		string $templateLocator,
 	): void
 	{
-		$templateFactory->onCreate[] = static function (Template $template) use ($container, $serviceName): void {
+		$templateFactory->onCreate[] = static function (Template $template) use ($container, $configProvider, $templateLocator): void {
+			if ($template instanceof UITemplate) {
+				$config = $container->getService($configProvider);
+				assert($config instanceof ConfigProvider);
+				$template->config = $config;
+			}
+
 			if ($template instanceof BaseControlTemplate) {
-				$controlTemplateLocator = $container->getService($serviceName);
+				$controlTemplateLocator = $container->getService($templateLocator);
 				assert($controlTemplateLocator instanceof ControlTemplateLocator);
 				$template->setTemplateLocator($controlTemplateLocator);
 			}
