@@ -29,7 +29,7 @@ final class UITemplateExtension extends CompilerExtension
 
 		$templateFactoryDefinition->addSetup(
 			[self::class, 'prepareTemplate'],
-			[$templateFactoryDefinition, '@' . Container::class],
+			[$templateFactoryDefinition, '@' . Container::class, $builder->getByType(ControlTemplateLocator::class)],
 		);
 
 		$latteFactoryDefinition = $builder->getDefinitionByType(LatteFactory::class);
@@ -42,11 +42,15 @@ final class UITemplateExtension extends CompilerExtension
 			);
 	}
 
-	public static function prepareTemplate(TemplateFactory $templateFactory, Container $container): void
+	public static function prepareTemplate(
+		TemplateFactory $templateFactory,
+		Container $container,
+		string $serviceName,
+	): void
 	{
-		$templateFactory->onCreate[] = static function (Template $template) use ($container): void {
+		$templateFactory->onCreate[] = static function (Template $template) use ($container, $serviceName): void {
 			if ($template instanceof BaseControlTemplate) {
-				$controlTemplateLocator = $container->getByName('ori.cmf.ui.template.locator.control');
+				$controlTemplateLocator = $container->getService($serviceName);
 				assert($controlTemplateLocator instanceof ControlTemplateLocator);
 				$template->setTemplateLocator($controlTemplateLocator);
 			}
