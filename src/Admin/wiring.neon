@@ -1,6 +1,6 @@
 parameters:
 	privileges:
-		- ori.administration.entry
+		- ori.cmf.admin.entry
 
 services:
 	# Auth
