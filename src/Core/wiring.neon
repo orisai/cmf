@@ -109,12 +109,13 @@ services:
 	# Auth
 	ori.cmf.core.auth.password.encoder:
 		factory: Orisai\Auth\Passwords\SodiumPasswordEncoder
+		type: Orisai\Auth\Passwords\PasswordEncoder
 
 	ori.cmf.core.auth.policyManager:
 		factory: OriNette\Auth\DI\LazyPolicyManager
+		autowired: false
 		arguments:
 			serviceMap: []
-		autowired: false
 	ori.cmf.core.auth.dataCreator:
 		factory: OriCMF\Core\Auth\AuthorizationDataCreator
 		autowired: false
@@ -125,6 +126,7 @@ services:
 		type: Orisai\Auth\Authorization\AuthorizationData
 	ori.cmf.core.auth.authorizer:
 		factory: Orisai\Auth\Authorization\PrivilegeAuthorizer
+		type: Orisai\Auth\Authorization\Authorizer
 		arguments:
 			policyManager: @ori.cmf.core.auth.policyManager
 
@@ -151,22 +153,22 @@ services:
 	ori.cmf.core.filesystem.internal.adapter:
 		factory: League\Flysystem\Local\LocalFilesystemAdapter
 		type: League\Flysystem\FilesystemAdapter
+		autowired: false
 		arguments:
 			location: %dataDir%
 	ori.cmf.core.filesystem.internal:
 		factory: OriCMF\Core\Files\InternalFileSystem
-		type: OriCMF\Core\Files\InternalFileSystem
 		arguments:
 			- @ori.cmf.core.filesystem.internal.adapter
 
 	ori.cmf.core.filesystem.public.adapter:
 		factory: League\Flysystem\Local\LocalFilesystemAdapter
 		type: League\Flysystem\FilesystemAdapter
+		autowired: false
 		arguments:
 			location: %wwwDir%/u
 	ori.cmf.core.filesystem.public:
 		factory: OriCMF\Core\Files\PublicFileSystem
-		type: OriCMF\Core\Files\PublicFileSystem
 		arguments:
 			- @ori.cmf.core.filesystem.public.adapter
 
@@ -216,8 +218,11 @@ services:
 				password: OriCMF\Core\User\Credentials\PasswordCredentialHandler()
 
 	# User.Login
-	ori.cmf.core.user.login.verifier: OriCMF\Core\User\Login\LoginVerifier
+	ori.cmf.core.user.login.verifier:
+		factory: OriCMF\Core\User\Login\LoginVerifier
 
 	# User.Register
-	ori.cmf.core.user.register.registrar: OriCMF\Core\User\Register\UserRegistrar
-	ori.cmf.core.user.register.getter: OriCMF\Core\User\Register\UserRegistrarGetter
+	ori.cmf.core.user.register.registrar:
+		factory: OriCMF\Core\User\Register\UserRegistrar
+	ori.cmf.core.user.register.getter:
+		implement: OriCMF\Core\User\Register\UserRegistrarGetter

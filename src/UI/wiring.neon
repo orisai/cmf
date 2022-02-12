@@ -111,7 +111,8 @@ services:
 		implement: OriCMF\UI\Control\Title\TitleControlFactory
 
 	# DataGrid
-	ori.cmf.ui.dataGrid.factory: OriCMF\UI\DataGrid\DataGridFactory
+	ori.cmf.ui.dataGrid.factory:
+		implement: OriCMF\UI\DataGrid\DataGridFactory
 
 	# Error
 	ori.cmf.ui.error.forward.presenter:
