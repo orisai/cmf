@@ -48,6 +48,7 @@ final class AuthorizationDataCreator
 	private function buildData(): AuthorizationData
 	{
 		$dataBuilder = new AuthorizationDataBuilder();
+		$dataBuilder->throwOnUnknownPrivilege = false;
 
 		foreach ($this->privileges as $privilege) {
 			$dataBuilder->addPrivilege($privilege);
