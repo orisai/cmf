@@ -14,7 +14,6 @@ final class UrlUlid
 
 	private function __construct(private Ulid $ulid)
 	{
-
 	}
 
 	/**
