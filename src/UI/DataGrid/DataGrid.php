@@ -281,8 +281,7 @@ final class DataGrid extends BaseControl
 		$t = $this->translator->toFunction();
 
 		if ($this->filterFormFactory !== null) {
-			$filterFormFactoryCb = $this->filterFormFactory;
-			$form['filter'] = $filterContainer = $filterFormFactoryCb();
+			$form['filter'] = $filterContainer = ($this->filterFormFactory)();
 			if (!isset($filterContainer['filter'])) {
 				$filterContainer->addSubmit('filter', $t('ori.cmf.grid.search'));
 			}
@@ -318,8 +317,10 @@ final class DataGrid extends BaseControl
 		$filterContainer = $form['filter'] ?? null;
 		if ($filterContainer !== null) {
 			assert($filterContainer instanceof Container);
-			assert(($filterButton = $filterContainer['filter']) instanceof SubmitButton);
-			assert(($cancelButton = $filterContainer['cancel']) instanceof SubmitButton);
+			$filterButton = $filterContainer['filter'];
+			assert($filterButton instanceof SubmitButton);
+			$cancelButton = $filterContainer['cancel'];
+			assert($cancelButton instanceof SubmitButton);
 			if ($filterButton->isSubmittedBy()) {
 				$values = $filterContainer->getValues('array');
 				assert(is_array($values));
@@ -346,9 +347,11 @@ final class DataGrid extends BaseControl
 		$actionsContainer = $form['actions'] ?? null;
 		if ($actionsContainer !== null) {
 			assert($actionsContainer instanceof Container);
-			assert(($processButton = $actionsContainer['process']) instanceof SubmitButton);
+			$processButton = $actionsContainer['process'];
+			assert($processButton instanceof SubmitButton);
 			if ($processButton->isSubmittedBy()) {
-				assert(($actionInput = $actionsContainer['action']) instanceof SelectBox);
+				$actionInput = $actionsContainer['action'];
+				assert($actionInput instanceof SelectBox);
 				$action = $actionInput->getValue();
 				if ($action !== null) {
 					$rows = [];
