@@ -6,7 +6,7 @@ services:
 	ori.cmf.front.auth.firewall:
 		factory: OriCMF\Front\Auth\FrontFirewall
 		arguments:
-			storage: @ori.cmf.ui.auth.loginStorage
+			storage: @OriNette\Auth\Http\SessionLoginStorage
 			refresher: @ori.cmf.front.auth.identityRefresher
 
 	# Error

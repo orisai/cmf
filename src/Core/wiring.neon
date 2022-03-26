@@ -12,6 +12,7 @@ extensions:
 	ori.cmf.dbal: OriCMF\Core\SQL\DI\DbalExtension
 	ori.cmf.ormInitializer: OriCMF\Core\ORM\DI\OrmInitializerExtension
 
+	orisai.auth: OriNette\Auth\DI\AuthExtension
 	orisai.console: OriNette\Console\DI\ConsoleExtension
 	orisai.datasource: Orisai\DataSources\Bridge\NetteDI\DataSourceExtension
 	orisai.httpClient: OriNette\HttpClient\DI\HttpClientExtension
@@ -40,6 +41,11 @@ nextras.orm:
 ori.cmf.dbal:
 	debug: %debug.panels.dbal%
 	sqlProcessorFactory: @ori.cmf.core.sql.processorFactory
+
+orisai.auth:
+	authorizationData: @ori.cmf.core.auth.dataCreator::create
+	debug:
+		panel: %debug.panels.auth%
 
 orisai.console:
 	catchExceptions: %catchExceptions.console%
@@ -91,6 +97,7 @@ parameters:
 		console: false
 	debug:
 		panels:
+			auth: false
 			dbal: false
 			di:
 				container: true
@@ -107,28 +114,11 @@ parameters:
 
 services:
 	# Auth
-	ori.cmf.core.auth.password.encoder:
-		factory: Orisai\Auth\Passwords\SodiumPasswordEncoder
-		type: Orisai\Auth\Passwords\PasswordEncoder
-
-	ori.cmf.core.auth.policyManager:
-		factory: OriNette\Auth\DI\LazyPolicyManager
-		autowired: false
-		arguments:
-			serviceMap: []
 	ori.cmf.core.auth.dataCreator:
 		factory: OriCMF\Core\Auth\AuthorizationDataCreator
 		autowired: false
 		arguments:
 			privileges: %privileges%
-	ori.cmf.core.auth.data:
-		factory: @ori.cmf.core.auth.dataCreator::create
-		type: Orisai\Auth\Authorization\AuthorizationData
-	ori.cmf.core.auth.authorizer:
-		factory: Orisai\Auth\Authorization\PrivilegeAuthorizer
-		type: Orisai\Auth\Authorization\Authorizer
-		arguments:
-			policyManager: @ori.cmf.core.auth.policyManager
 
 	# Cache
 	ori.cmf.core.cache:

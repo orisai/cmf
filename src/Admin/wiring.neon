@@ -10,7 +10,7 @@ services:
 	ori.cmf.admin.auth.firewall:
 		factory: OriCMF\Admin\Auth\AdminFirewall
 		arguments:
-			storage: @ori.cmf.ui.auth.loginStorage
+			storage: @OriNette\Auth\Http\SessionLoginStorage
 			refresher: @ori.cmf.admin.auth.identityRefresher
 
 	# Dashboard

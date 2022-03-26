@@ -80,9 +80,6 @@ parameters:
 
 services:
 	# Auth
-	ori.cmf.ui.auth.loginStorage:
-		factory: OriNette\Auth\SessionLoginStorage
-		autowired: false
 	ori.cmf.ui.auth.identityCreator:
 		factory: OriCMF\UI\Auth\UserIdentityCreator
 
