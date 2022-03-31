@@ -24,22 +24,22 @@ final class AdminIdentityRefresher extends BaseUIIdentityRefresher
 
 	public function refresh(Identity $identity): UserIdentity
 	{
-		$puppeteer = $this->refreshPuppeteer($identity);
+		$impersonator = $this->refreshImpersonator($identity);
 
-		// Puppeteer is no longer allowed to puppet, return user to own identity
-		if ($puppeteer !== null && !$this->authorizer->isAllowed($puppeteer, Authorizer::ROOT_PRIVILEGE)) {
-			return $puppeteer;
+		// Impersonator is no longer allowed to impersonate, return user to own identity
+		if ($impersonator !== null && !$this->authorizer->isAllowed($impersonator, Authorizer::ROOT_PRIVILEGE)) {
+			return $impersonator;
 		}
 
 		$newIdentity = $this->identityCreator->create(
 			$this->getUser($identity),
-			$puppeteer,
+			$impersonator,
 		);
 
 		if (!$this->authorizer->isAllowed($newIdentity, 'ori.cmf.admin.entry')) {
-			// Controlled user is not allowed to entry administration, return puppeteer to their identity
-			if ($puppeteer !== null) {
-				return $puppeteer;
+			// Controlled user is not allowed to entry administration, return impersonator to their identity
+			if ($impersonator !== null) {
+				return $impersonator;
 			}
 
 			throw IdentityExpired::create();

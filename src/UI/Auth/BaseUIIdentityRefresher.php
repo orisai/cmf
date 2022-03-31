@@ -35,26 +35,26 @@ abstract class BaseUIIdentityRefresher implements IdentityRefresher
 	}
 
 	/**
-	 * WARNING: Null has to be returned for no puppeteer only.
-	 *          Returning null for missing puppeteer privileges would
-	 *          cause puppeteer to stay logged in current identity and
+	 * WARNING: Null has to be returned for no impersonator only.
+	 *          Returning null for missing impersonator privileges would
+	 *          cause impersonator to stay logged in current identity and
 	 *          forget about their original (own) identity.
 	 *
 	 * @throws IdentityExpired
 	 */
-	protected function refreshPuppeteer(Identity $identity): UserIdentity|null
+	protected function refreshImpersonator(Identity $identity): UserIdentity|null
 	{
 		if (!$identity instanceof UserIdentity) {
 			return null;
 		}
 
-		$puppeteer = $identity->getPuppeteer();
-		if ($puppeteer === null) {
+		$impersonator = $identity->getImpersonator();
+		if ($impersonator === null) {
 			return null;
 		}
 
-		// If puppeteer is not available anymore, exception is thrown
-		return $this->refresh($puppeteer);
+		// If impersonator is not available anymore, exception is thrown
+		return $this->refresh($impersonator);
 	}
 
 }

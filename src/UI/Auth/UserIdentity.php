@@ -4,6 +4,7 @@ namespace OriCMF\UI\Auth;
 
 use Orisai\Auth\Authentication\StringIdentity;
 use Orisai\Exceptions\Logic\InvalidState;
+use function array_key_exists;
 
 final class UserIdentity extends StringIdentity
 {
@@ -11,19 +12,19 @@ final class UserIdentity extends StringIdentity
 	/**
 	 * @param array<string> $roles
 	 */
-	public function __construct(string $id, array $roles, private UserIdentity|null $puppeteer = null)
+	public function __construct(string $id, array $roles, private UserIdentity|null $impersonator = null)
 	{
 		parent::__construct($id, $roles);
 
-		if ($puppeteer?->getPuppeteer() !== null) {
+		if ($impersonator?->getImpersonator() !== null) {
 			throw InvalidState::create()
-				->withMessage('Parent identity is not allowed to have its own parent identity.');
+				->withMessage('Impersonator identity is not allowed to have its own impersonator identity.');
 		}
 	}
 
-	public function getPuppeteer(): UserIdentity|null
+	public function getImpersonator(): UserIdentity|null
 	{
-		return $this->puppeteer;
+		return $this->impersonator;
 	}
 
 	/**
@@ -32,7 +33,7 @@ final class UserIdentity extends StringIdentity
 	public function __serialize(): array
 	{
 		$data = parent::__serialize();
-		$data['puppeteer'] = $this->puppeteer;
+		$data['impersonator'] = $this->impersonator;
 
 		return $data;
 	}
@@ -43,7 +44,9 @@ final class UserIdentity extends StringIdentity
 	public function __unserialize(array $data): void
 	{
 		parent::__unserialize($data);
-		$this->puppeteer = $data['puppeteer'];
+		$this->impersonator = array_key_exists('impersonator', $data)
+			? $data['impersonator']
+			: $data['puppeteer']; // BC
 	}
 
 }

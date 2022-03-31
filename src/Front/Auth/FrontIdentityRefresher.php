@@ -23,16 +23,16 @@ final class FrontIdentityRefresher extends BaseUIIdentityRefresher
 
 	public function refresh(Identity $identity): UserIdentity
 	{
-		$puppeteer = $this->refreshPuppeteer($identity);
+		$impersonator = $this->refreshImpersonator($identity);
 
-		// Puppeteer is no longer allowed to puppet, return user to own identity
-		if ($puppeteer !== null && !$this->authorizer->isAllowed($puppeteer, Authorizer::ROOT_PRIVILEGE)) {
-			return $puppeteer;
+		// Impersonator is no longer allowed to impersonate, return user to own identity
+		if ($impersonator !== null && !$this->authorizer->isAllowed($impersonator, Authorizer::ROOT_PRIVILEGE)) {
+			return $impersonator;
 		}
 
 		return $this->identityCreator->create(
 			$this->getUser($identity),
-			$puppeteer,
+			$impersonator,
 		);
 	}
 

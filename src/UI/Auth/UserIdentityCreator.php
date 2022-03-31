@@ -15,14 +15,14 @@ final class UserIdentityCreator
 	{
 	}
 
-	public function create(User $user, UserIdentity|null $puppeteer = null): UserIdentity
+	public function create(User $user, UserIdentity|null $impersonator = null): UserIdentity
 	{
 		$roles = array_map(
 			static fn (Role $role): string => $role->name,
 			$user->roles->getIterator()->fetchAll(),
 		);
 
-		$identity = new UserIdentity($user->id, $roles, $puppeteer);
+		$identity = new UserIdentity($user->id, $roles, $impersonator);
 
 		$this->setIdentityAuthData($user, $identity);
 
