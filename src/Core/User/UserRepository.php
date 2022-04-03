@@ -29,10 +29,12 @@ final class UserRepository extends BaseRepository
 	 */
 	public function findByPrivilege(string $privilege, bool $includePowerUser = true): ICollection
 	{
+		$parents = PrivilegeProcessor::getPrivilegeParents($privilege);
+
 		return $this->findBy([
 			JsonAnyKeyOrValueExistsFunction::class,
 			'roles->privileges',
-			PrivilegeProcessor::getPrivilegeParents($privilege, $includePowerUser),
+			$includePowerUser ? ['*'] + $parents : $parents,
 		]);
 	}
 

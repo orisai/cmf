@@ -33,10 +33,14 @@ final class UserIdentityCreator
 	{
 		$builder = new IdentityAuthorizationDataBuilder($this->data);
 		foreach ($user->privileges as $privilege) {
-			$builder->allow($identity, $privilege);
+			if ($privilege === '*') {
+				$builder->addRoot($identity);
+			} else {
+				$builder->allow($identity, $privilege);
+			}
 		}
 
-		$identity->setAuthData($builder->build($identity));
+		$identity->setAuthorizationData($builder->build($identity));
 	}
 
 }

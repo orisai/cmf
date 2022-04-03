@@ -60,7 +60,11 @@ final class AuthorizationDataCreator
 			$dataBuilder->addRole($role->name);
 
 			foreach ($role->privileges as $privilege) {
-				$dataBuilder->allow($role->name, $privilege);
+				if ($privilege === '*') {
+					$dataBuilder->addRoot($role->name);
+				} else {
+					$dataBuilder->allow($role->name, $privilege);
+				}
 			}
 		}
 

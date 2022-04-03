@@ -26,7 +26,7 @@ final class FrontIdentityRefresher extends BaseUIIdentityRefresher
 		$impersonator = $this->refreshImpersonator($identity);
 
 		// Impersonator is no longer allowed to impersonate, return user to own identity
-		if ($impersonator !== null && !$this->authorizer->isAllowed($impersonator, Authorizer::ROOT_PRIVILEGE)) {
+		if ($impersonator !== null && !$this->authorizer->isRoot($impersonator)) {
 			return $impersonator;
 		}
 
