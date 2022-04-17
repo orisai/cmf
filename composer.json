@@ -60,6 +60,7 @@
 		"orisai/nette-time": "^1.0.0",
 		"orisai/utils": "^1.0.0",
 		"symfony/console": "^6.0.0",
+		"symfony/filesystem": "^6.0.0",
 		"symfony/uid": "^6.0.0",
 		"tracy/tracy": "^2.8.0",
 		"webmozart/glob": "^4.3.0"

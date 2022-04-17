@@ -3,7 +3,7 @@
 namespace OriCMF\UI\Template\Exception;
 
 use Orisai\Exceptions\LogicalException;
-use Webmozart\PathUtil\Path;
+use Symfony\Component\Filesystem\Path;
 use function implode;
 
 final class NoTemplateFound extends LogicalException
