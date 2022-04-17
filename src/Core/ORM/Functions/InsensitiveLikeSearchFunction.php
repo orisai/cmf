@@ -55,7 +55,7 @@ final class InsensitiveLikeSearchFunction extends BaseCompareFunction
 				$valueInline = 'array[';
 				foreach ($value as $key => $item) {
 					$itemLike = $this->convertLikeToSql($item, 0);
-					$valueInline .= "UNACCENT({$itemLike}) " . 'COLLATE "ori"."strict"';
+					$valueInline .= "UNACCENT({$itemLike}) " . 'COLLATE "ori_cmf"."strict"';
 
 					if ($key !== $valueLastKey) {
 						$valueInline .= ', ';
@@ -74,7 +74,7 @@ final class InsensitiveLikeSearchFunction extends BaseCompareFunction
 
 		if (is_string($value)) {
 			return new DbalExpressionResult(
-				['UNACCENT(%ex) ILIKE UNACCENT(%_like_) COLLATE "ori"."strict"', $expression->args, $value],
+				['UNACCENT(%ex) ILIKE UNACCENT(%_like_) COLLATE "ori_cmf"."strict"', $expression->args, $value],
 			);
 		}
 
