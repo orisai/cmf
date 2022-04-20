@@ -127,8 +127,8 @@
 			{foreach $columns as $column}
 				<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
 					{if isset($form['filter'][$column->name])}
-						{ifset #"col-filter-{$column->name}"}
-							{include #"col-filter-{$column->name}", column: $column}
+						{ifset block col-filter-{$column->name}}
+							{include block col-filter-{$column->name}, column: $column}
 						{else}
 							{include col-filter, column: $column}
 						{/ifset}
@@ -175,12 +175,12 @@
 	{/ifset}
 	{foreach $columns as $column}
 		{var $cell = $control->getCellValue($row, $column->name, FALSE)}
-		{ifset #"col-{$column->name}"}
-			{include #"col-{$column->name}", row: $row, cell: $cell, iterator: $iterator}
+		{ifset block col-{$column->name}}
+			{include block col-{$column->name}, row: $row, cell: $cell, iterator: $iterator}
 		{else}
 			<td class="px-6 py-1 whitespace-nowrap text-sm text-gray-900">
-				{ifset #"cell-{$column->name}"}
-					{include #"cell-{$column->name}", row: $row, cell: $cell, iterator: $iterator}
+				{ifset block cell-{$column->name}}
+					{include block cell-{$column->name}, row: $row, cell: $cell, iterator: $iterator}
 				{else}
 					{$cell}
 				{/ifset}
