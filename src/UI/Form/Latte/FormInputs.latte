@@ -23,7 +23,7 @@
 				{do $parent = $parent->getParent()}
 			{/while}
 
-			{include #field-$inputClass $input, $inputName}
+			{include #field-{$inputClass} $input, $inputName}
 		{else}
 			<span>INPUT TYPE NOT SUPPORTED - HAS TO EXTEND {Nette\Forms\Controls\BaseControl::class}</span>
 		{/if}
