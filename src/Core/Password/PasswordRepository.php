@@ -2,7 +2,6 @@
 
 namespace OriCMF\Core\Password;
 
-use Nextras\Orm\Entity\Entity;
 use OriCMF\Core\ORM\BaseRepository;
 
 final class PasswordRepository extends BaseRepository
@@ -13,9 +12,6 @@ final class PasswordRepository extends BaseRepository
 		parent::__construct($mapper);
 	}
 
-	/**
-	 * @return array<int, class-string<Entity>>
-	 */
 	public static function getEntityClassNames(): array
 	{
 		return [Password::class];
