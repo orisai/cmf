@@ -5,8 +5,7 @@ namespace OriCMF\Core\User;
 use DateTimeImmutable;
 use Nette\Utils\Strings;
 use Nextras\Orm\Entity\Entity;
-use Nextras\Orm\Relationships\ManyHasMany;
-use Nextras\Orm\Relationships\OneHasMany;
+use Nextras\Orm\Relationships\HasMany;
 use OriCMF\Core\Email\Email;
 use OriCMF\Core\ORM\Wrapper\EnumValueWrapper;
 use OriCMF\Core\Role\Role;
@@ -19,8 +18,8 @@ use function random_int;
  * @property-read DateTimeImmutable       $createdAt  {default now}
  * @property string                       $fullName
  * @property string                       $userName
- * @property OneHasMany&array<Email>      $emails     {1:m Email::$user, cascade=[persist, remove]}
- * @property-read ManyHasMany&array<Role> $roles      {m:m Role, isMain=true, oneSided=true, cascade=[persist]}
+ * @property-read iterable<Email>&HasMany $emails     {1:m Email::$user, cascade=[persist, remove]}
+ * @property-read iterable<Role>&HasMany  $roles      {m:m Role, isMain=true, oneSided=true, cascade=[persist]}
  * @property-read array<string>           $privileges {virtual}
  * @property-read string|null             $type       Distinguish between real users and automatic ones (system, APIs)
  * @property UserState                    $state      {wrapper EnumValueWrapper}
