@@ -5,7 +5,7 @@ namespace OriCMF\UI\Form\Input;
 use Brick\DateTime\Instant;
 use Brick\DateTime\LocalDate;
 use Brick\DateTime\Parser\DateTimeParseException;
-use Brick\DateTime\TimeZone;
+use Brick\DateTime\TimeZoneRegion;
 use DateTimeInterface;
 use Nette\Forms\Controls\TextInput;
 use Orisai\Exceptions\Logic\InvalidArgument;
@@ -100,7 +100,7 @@ final class DateInput extends TextInput
 	private function fromInstant(Instant $instant): string
 	{
 		return $this->fromLocalDate(
-			$instant->atTimeZone(TimeZone::utc())->getDate(),
+			$instant->atTimeZone(TimeZoneRegion::utc())->getDate(),
 		);
 	}
 

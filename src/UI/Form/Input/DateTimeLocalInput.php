@@ -5,7 +5,7 @@ namespace OriCMF\UI\Form\Input;
 use Brick\DateTime\Instant;
 use Brick\DateTime\LocalDateTime;
 use Brick\DateTime\Parser\DateTimeParseException;
-use Brick\DateTime\TimeZone;
+use Brick\DateTime\TimeZoneRegion;
 use Brick\DateTime\ZonedDateTime;
 use DateTimeInterface;
 use Nette\Forms\Controls\TextInput;
@@ -102,7 +102,7 @@ final class DateTimeLocalInput extends TextInput
 	private function fromInstant(Instant $instant): string
 	{
 		return $this->fromZonedDateTime(
-			$instant->atTimeZone(TimeZone::utc()),
+			$instant->atTimeZone(TimeZoneRegion::utc()),
 		);
 	}
 
@@ -110,7 +110,7 @@ final class DateTimeLocalInput extends TextInput
 	{
 		return $this->fromDateTimeInterface(
 			$dateTime
-				->withTimeZoneSameInstant(TimeZone::parse('Europe/Prague'))
+				->withTimeZoneSameInstant(TimeZoneRegion::parse('Europe/Prague'))
 				->minusSeconds($dateTime->getSecond())
 				->toDateTime(),
 		);
@@ -124,8 +124,8 @@ final class DateTimeLocalInput extends TextInput
 	private function toZonedDateTime(string $localDateTime): ZonedDateTime
 	{
 		return LocalDateTime::parse($localDateTime)
-			->atTimeZone(TimeZone::parse('Europe/Prague'))
-			->withTimeZoneSameInstant(TimeZone::utc());
+			->atTimeZone(TimeZoneRegion::parse('Europe/Prague'))
+			->withTimeZoneSameInstant(TimeZoneRegion::utc());
 	}
 
 }
