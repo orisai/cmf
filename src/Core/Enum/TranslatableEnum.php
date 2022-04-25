@@ -16,7 +16,7 @@ abstract class TranslatableEnum extends Enum
 	/**
 	 * @return array<string, string>
 	 */
-	protected static function getTranslatableLabels(): array
+	private static function getTranslatableLabels(): array
 	{
 		$prefix = static::getTranslationPrefix();
 		$labels = [];
@@ -37,7 +37,7 @@ abstract class TranslatableEnum extends Enum
 
 	public function getLabel(Translator|null $translator = null): string
 	{
-		$label = static::getTranslatableLabels()[$this->getName()];
+		$label = self::getTranslatableLabels()[$this->getName()];
 
 		return $translator === null
 			? $label
@@ -49,7 +49,7 @@ abstract class TranslatableEnum extends Enum
 	 */
 	public static function getLabels(Translator|null $translator = null): array
 	{
-		$labels = static::getTranslatableLabels();
+		$labels = self::getTranslatableLabels();
 
 		return $translator === null
 			? $labels

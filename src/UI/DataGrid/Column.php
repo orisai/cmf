@@ -2,12 +2,12 @@
 
 namespace OriCMF\UI\DataGrid;
 
-class Column
+final class Column
 {
 
-	protected bool $sort = false;
+	private bool $sort = false;
 
-	public function __construct(public string $name, public string $label, protected DataGrid $grid)
+	public function __construct(public string $name, public string $label, private DataGrid $grid)
 	{
 	}
 
