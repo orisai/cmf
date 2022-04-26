@@ -102,8 +102,12 @@ services:
 		implement: OriCMF\UI\Control\NoScript\NoScriptControlFactory
 	ori.cmf.ui.control.scripts.factory:
 		implement: OriCMF\UI\Control\Scripts\ScriptsControlFactory
+		arguments:
+			build: %container.className%
 	ori.cmf.ui.control.styles.factory:
 		implement: OriCMF\UI\Control\Styles\StylesControlFactory
+		arguments:
+			build: %container.className%
 	ori.cmf.ui.control.title.factory:
 		implement: OriCMF\UI\Control\Title\TitleControlFactory
 
