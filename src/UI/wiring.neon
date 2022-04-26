@@ -135,6 +135,7 @@ services:
 		factory: OriCMF\UI\Robots\RobotsPresenter
 
 	# Template
+	ori.cmf.ui.template.creator: OriCMF\UI\Template\TemplateCreator
 	ori.cmf.ui.template.locator.control:
 		factory: OriCMF\UI\Template\Locator\ControlTemplateLocator
 		arguments:
