@@ -33,24 +33,14 @@ final class UrlUlid
 		return new self(Ulid::fromRfc4122($parameter));
 	}
 
-	public function toBase58(): string
+	public function toUri(): string
 	{
 		return $this->ulid->toBase58();
 	}
 
-	public function toUri(): string
-	{
-		return $this->toBase58();
-	}
-
-	public function toRfc4122(): string
-	{
-		return $this->ulid->toRfc4122();
-	}
-
 	public function toStorage(): string
 	{
-		return $this->toRfc4122();
+		return $this->ulid->toRfc4122();
 	}
 
 }
