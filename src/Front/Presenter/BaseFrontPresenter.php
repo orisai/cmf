@@ -5,6 +5,7 @@ namespace OriCMF\Front\Presenter;
 use OriCMF\Core\Config\BuildConfig;
 use OriCMF\Front\Auth\FrontFirewall;
 use OriCMF\Front\Login\LoginPresenter;
+use OriCMF\UI\Control\Menu\Menu;
 use OriCMF\UI\Presenter\BasePresenter;
 use Orisai\Auth\Authentication\LogoutCode;
 
@@ -15,9 +16,12 @@ abstract class BaseFrontPresenter extends BasePresenter
 
 	public FrontFirewall $firewall;
 
-	public function injectFront(FrontFirewall $firewall): void
+	private Menu $menu;
+
+	public function setFront(FrontFirewall $firewall, Menu $menu): void
 	{
 		$this->firewall = $firewall;
+		$this->menu = $menu;
 	}
 
 	protected function isLoginRequired(): bool
@@ -60,6 +64,8 @@ abstract class BaseFrontPresenter extends BasePresenter
 	protected function beforeRender(): void
 	{
 		parent::beforeRender();
+
+		$this->template->menu = $this->menu;
 
 		$meta = $this['document-head-meta'];
 		if ($this->config->get(BuildConfig::class)->isStable()) {

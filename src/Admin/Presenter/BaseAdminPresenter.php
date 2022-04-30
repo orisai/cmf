@@ -4,6 +4,7 @@ namespace OriCMF\Admin\Presenter;
 
 use OriCMF\Admin\Auth\AdminFirewall;
 use OriCMF\Admin\Login\LoginPresenter;
+use OriCMF\UI\Control\Menu\Menu;
 use OriCMF\UI\Presenter\BasePresenter;
 use Orisai\Auth\Authentication\LogoutCode;
 
@@ -14,9 +15,12 @@ abstract class BaseAdminPresenter extends BasePresenter
 
 	protected AdminFirewall $firewall;
 
-	public function injectAdmin(AdminFirewall $firewall): void
+	private Menu $menu;
+
+	public function setAdmin(AdminFirewall $firewall, Menu $menu): void
 	{
 		$this->firewall = $firewall;
+		$this->menu = $menu;
 	}
 
 	protected function isLoginRequired(): bool
@@ -59,6 +63,8 @@ abstract class BaseAdminPresenter extends BasePresenter
 	protected function beforeRender(): void
 	{
 		parent::beforeRender();
+
+		$this->template->menu = $this->menu;
 
 		$head = $this['document-head'];
 		$head['meta']->setRobots(['noindex', 'nofollow']);

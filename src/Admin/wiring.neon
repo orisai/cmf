@@ -2,6 +2,11 @@ parameters:
 	privileges:
 		- ori.cmf.admin.entry
 
+nette.decorator:
+	OriCMF\Admin\Presenter\BaseAdminPresenter:
+		setup:
+			- setAdmin(menu: @ori.cmf.admin.menu)
+
 services:
 	# Auth
 	ori.cmf.admin.auth.identityRefresher:
@@ -27,3 +32,8 @@ services:
 	# Login
 	ori.cmf.admin.login.presenter:
 		factory: OriCMF\Admin\Login\LoginPresenter
+
+	# Menu
+	ori.cmf.admin.menu:
+		factory: OriCMF\UI\Control\Menu\Menu
+		autowired: false

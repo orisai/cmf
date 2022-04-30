@@ -1,3 +1,8 @@
+nette.decorator:
+	OriCMF\Front\Presenter\BaseFrontPresenter:
+		setup:
+			- setFront(menu: @ori.cmf.front.menu)
+
 services:
 	# Auth
 	ori.cmf.front.auth.identityRefresher:
@@ -20,3 +25,8 @@ services:
 	# Login
 	ori.cmf.front.login.presenter:
 		factory: OriCMF\Front\Login\LoginPresenter
+
+	# Menu
+	ori.cmf.front.menu:
+		factory: OriCMF\UI\Control\Menu\Menu
+		autowired: false
