@@ -20,15 +20,17 @@ These all follow the same rules:
 - DI services - `vendor.package.<a.b.c>`
 - auth privileges - `vendor.package.<a.b.c>`
 - translation keys - `vendor.package.<a.b.c>`
+- session keys - `vendor.package.<a.b.c>`
 
 ### Unprefixed
 
 Prefixes would affect UX:
 
 - HTTP routes
-- CLI commands
 
 Not used as often, prefixes are not needed:
 
-- Latte macros
+- CLI commands
+- Cookies
+- Latte extensions, filters and functions
 - Probably others
