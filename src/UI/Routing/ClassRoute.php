@@ -9,9 +9,9 @@ use Nette\Routing\Route;
 final class ClassRoute extends Route
 {
 
-	private const PRESENTER_KEY = 'presenter';
+	private const PresenterKey = 'presenter';
 
-	private const UI_META = [
+	private const UIMeta = [
 		'action' => [
 			self::PATTERN => '[a-z][a-z0-9-]*',
 			self::FILTER_IN => [OriginalRoute::class, 'path2action'],
@@ -26,13 +26,13 @@ final class ClassRoute extends Route
 	 */
 	public function __construct(string $mask, string $class, array $metadata = [])
 	{
-		$metadata[self::PRESENTER_KEY] = $class;
+		$metadata[self::PresenterKey] = $class;
 
 		if (!isset($metadata['action'])) {
 			$metadata['action'] = 'default';
 		}
 
-		$this->defaultMeta += self::UI_META;
+		$this->defaultMeta += self::UIMeta;
 		parent::__construct($mask, $metadata);
 	}
 

@@ -11,7 +11,7 @@ use Orisai\Auth\Authentication\LogoutCode;
 abstract class BaseAdminPresenter extends BasePresenter
 {
 
-	public const LAYOUT_PATH = __DIR__ . '/@layout.latte';
+	public const LayoutPath = __DIR__ . '/@layout.latte';
 
 	protected AdminFirewall $firewall;
 

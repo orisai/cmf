@@ -5,18 +5,18 @@ namespace OriCMF\Core\User;
 use OriCMF\Core\Enum\TranslatableEnum;
 
 /**
- * @method static self NEW()
- * @method static self ACTIVE()
- * @method static self DISABLED()
+ * @method static self New()
+ * @method static self Active()
+ * @method static self Disabled()
  */
 final class UserState extends TranslatableEnum
 {
 
-	public const NEW = 'new';
+	public const New = 'new';
 
-	public const ACTIVE = 'active';
+	public const Active = 'active';
 
-	public const DISABLED = 'disabled';
+	public const Disabled = 'disabled';
 
 	protected static function getTranslationPrefix(): string
 	{

@@ -19,7 +19,7 @@ use function in_array;
 abstract class BaseRepository extends Repository
 {
 
-	private const FUNCTIONS = [
+	private const Functions = [
 		InsensitiveLikeSearchFunction::class,
 		JsonAnyKeyOrValueExistsFunction::class,
 		ToManyNotEqualFunction::class,
@@ -35,7 +35,7 @@ abstract class BaseRepository extends Repository
 	 */
 	protected function createCollectionFunction(string $name): IQueryBuilderFunction|IArrayFunction
 	{
-		if (in_array($name, self::FUNCTIONS, true)) {
+		if (in_array($name, self::Functions, true)) {
 			return new $name();
 		}
 

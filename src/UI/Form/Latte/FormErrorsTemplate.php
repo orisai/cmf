@@ -8,7 +8,7 @@ use Nette\Forms\Form;
 final class FormErrorsTemplate extends Template
 {
 
-	public const PATH = __DIR__ . '/FormErrors.latte';
+	public const Path = __DIR__ . '/FormErrors.latte';
 
 	public Form $form;
 

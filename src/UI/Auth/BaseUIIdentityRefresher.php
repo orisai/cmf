@@ -28,7 +28,7 @@ abstract class BaseUIIdentityRefresher implements IdentityRefresher
 	{
 		$user = $this->userRepository->getBy([
 			'id' => $identity->getId(),
-			'state' => UserState::ACTIVE(),
+			'state' => UserState::Active(),
 		]);
 
 		return $user ?? throw IdentityExpired::create();

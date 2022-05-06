@@ -37,7 +37,7 @@ final class UserRegistrar
 		}
 
 		if (!$credentials->verifyCredentialsOwner) {
-			$user->state = UserState::ACTIVE();
+			$user->state = UserState::Active();
 		}
 
 		$this->model->persistAndFlush($user);

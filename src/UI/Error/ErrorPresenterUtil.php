@@ -30,7 +30,7 @@ trait ErrorPresenterUtil
 			$code = $throwable->getCode();
 			$is4xx = $code >= 400 && $code <= 499;
 
-			if (!in_array($code, ErrorForwardPresenter::MESSAGE_SUPPORTED_CODES, true)) {
+			if (!in_array($code, ErrorForwardPresenter::MessageSupportedCodes, true)) {
 				$code = $is4xx
 					? 400
 					: 500;

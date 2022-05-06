@@ -27,10 +27,10 @@ use function is_string;
 final class DataGrid extends BaseControl
 {
 
-	public const ORDER_ASC = 'asc',
-		ORDER_DESC = 'desc';
+	public const OrderAsc = 'asc',
+		OrderDesc = 'desc';
 
-	public const TEMPLATE_PATH = __DIR__ . '/DataGrid.latte';
+	public const TemplatePath = __DIR__ . '/DataGrid.latte';
 
 	/** @var array<mixed> */
 	#[Persistent]
@@ -39,9 +39,9 @@ final class DataGrid extends BaseControl
 	#[Persistent]
 	public string|null $orderColumn = null;
 
-	/** @var self::ORDER_* */
+	/** @var self::Order* */
 	#[Persistent]
-	public string $orderType = self::ORDER_ASC;
+	public string $orderType = self::OrderAsc;
 
 	/** @var int<1, max> */
 	#[Persistent]

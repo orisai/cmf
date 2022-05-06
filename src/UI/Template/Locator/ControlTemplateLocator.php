@@ -12,7 +12,7 @@ use function preg_replace;
 final class ControlTemplateLocator
 {
 
-	public const DEFAULT_VIEW_NAME = 'default';
+	public const DefaultViewName = 'default';
 
 	public function __construct(private string $rootDir)
 	{
@@ -33,7 +33,7 @@ final class ControlTemplateLocator
 				break;
 			}
 
-			$fileName = $viewName === self::DEFAULT_VIEW_NAME
+			$fileName = $viewName === self::DefaultViewName
 				? $baseFileName
 				: "$baseFileName.$viewName";
 

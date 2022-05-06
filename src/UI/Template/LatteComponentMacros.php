@@ -37,7 +37,7 @@ LATTE_EXPR;
 
 		$expr = str_replace(
 			['@templateVar', '@templateClass', '@args', '@file', '@line'],
-			['$_ori_formInput_template', FormInputsTemplate::class, $node->args, FormInputsTemplate::PATH, $line],
+			['$_ori_formInput_template', FormInputsTemplate::class, $node->args, FormInputsTemplate::Path, $line],
 			$expr,
 		);
 
@@ -59,7 +59,7 @@ LATTE_EXPR;
 
 		$expr = str_replace(
 			['@templateVar', '@templateClass', '@args', '@file', '@line'],
-			['$_ori_formInput_template', FormErrorsTemplate::class, $node->args, FormErrorsTemplate::PATH, $line],
+			['$_ori_formInput_template', FormErrorsTemplate::class, $node->args, FormErrorsTemplate::Path, $line],
 			$expr,
 		);
 

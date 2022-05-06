@@ -12,7 +12,7 @@ final class Column
 	}
 
 	/**
-	 * @phpstan-param DataGrid::ORDER_*|null $defaultOrder
+	 * @phpstan-param DataGrid::Order*|null $defaultOrder
 	 * @return $this
 	 */
 	public function enableSort(string|null $defaultOrder = null): self
@@ -34,24 +34,24 @@ final class Column
 	public function getNewState(): string
 	{
 		if ($this->isAsc()) {
-			return DataGrid::ORDER_DESC;
+			return DataGrid::OrderDesc;
 		}
 
 		if ($this->isDesc()) {
 			return '';
 		}
 
-		return DataGrid::ORDER_ASC;
+		return DataGrid::OrderAsc;
 	}
 
 	public function isAsc(): bool
 	{
-		return $this->grid->orderColumn === $this->name && $this->grid->orderType === DataGrid::ORDER_ASC;
+		return $this->grid->orderColumn === $this->name && $this->grid->orderType === DataGrid::OrderAsc;
 	}
 
 	public function isDesc(): bool
 	{
-		return $this->grid->orderColumn === $this->name && $this->grid->orderType === DataGrid::ORDER_DESC;
+		return $this->grid->orderColumn === $this->name && $this->grid->orderType === DataGrid::OrderDesc;
 	}
 
 }

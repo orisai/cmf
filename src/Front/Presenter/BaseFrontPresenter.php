@@ -12,7 +12,7 @@ use Orisai\Auth\Authentication\LogoutCode;
 abstract class BaseFrontPresenter extends BasePresenter
 {
 
-	public const LAYOUT_PATH = __DIR__ . '/@layout.latte';
+	public const LayoutPath = __DIR__ . '/@layout.latte';
 
 	public FrontFirewall $firewall;
 

@@ -29,10 +29,10 @@ final class User extends Entity
 
 	// Not all possible are listed here, just the common ones
 	public const
-		TYPE_SYSTEM = 'system',
-		TYPE_REAL = null;
+		TypeSystem = 'system',
+		TypeReal = null;
 
-	public function __construct(string $fullName, string|null $type = self::TYPE_REAL)
+	public function __construct(string $fullName, string|null $type = self::TypeReal)
 	{
 		parent::__construct();
 		$this->setReadOnlyValue('id', (new Ulid())->toRfc4122());
@@ -40,12 +40,12 @@ final class User extends Entity
 		$this->fullName = $fullName;
 		$this->userName = Strings::webalize("$fullName-" . random_int(100, 9_999));
 		$this->setReadOnlyValue('type', $type);
-		$this->state = UserState::NEW();
+		$this->state = UserState::New();
 	}
 
 	public function getPrimaryEmail(): Email|null
 	{
-		return $this->emails->toCollection()->getBy(['type' => Email::TYPE_PRIMARY]);
+		return $this->emails->toCollection()->getBy(['type' => Email::TypePrimary]);
 	}
 
 	/**

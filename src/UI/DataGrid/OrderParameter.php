@@ -5,11 +5,11 @@ namespace OriCMF\UI\DataGrid;
 final class OrderParameter
 {
 
-	/** @phpstan-var DataGrid::ORDER_* */
+	/** @phpstan-var DataGrid::Order* */
 	private string $direction;
 
 	/**
-	 * @phpstan-param DataGrid::ORDER_* $direction
+	 * @phpstan-param DataGrid::Order* $direction
 	 */
 	public function __construct(private string $column, string $direction)
 	{
@@ -22,7 +22,7 @@ final class OrderParameter
 	}
 
 	/**
-	 * @phpstan-return DataGrid::ORDER_*
+	 * @phpstan-return DataGrid::Order*
 	 */
 	public function getDirection(): string
 	{
@@ -31,12 +31,12 @@ final class OrderParameter
 
 	public function isAsc(): bool
 	{
-		return $this->direction === DataGrid::ORDER_ASC;
+		return $this->direction === DataGrid::OrderAsc;
 	}
 
 	public function isDesc(): bool
 	{
-		return $this->direction === DataGrid::ORDER_DESC;
+		return $this->direction === DataGrid::OrderDesc;
 	}
 
 }

@@ -61,8 +61,8 @@ final class UserRegisterCommand extends Command
 		assert(is_bool($noVerify));
 
 		$user = new User($fullName);
-		$user->state = UserState::ACTIVE();
-		$email = new Email($emailAddress, Email::TYPE_PRIMARY, $user);
+		$user->state = UserState::Active();
+		$email = new Email($emailAddress, Email::TypePrimary, $user);
 		$password = new Password(
 			$this->passwordEncoder->encode($rawPassword),
 			$user,
