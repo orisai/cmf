@@ -6,7 +6,8 @@ use MabeEnum\Enum;
 use Orisai\Exceptions\Logic\InvalidArgument;
 use Orisai\Localization\Translator;
 use function array_map;
-use function is_scalar;
+use function is_int;
+use function is_string;
 
 abstract class TranslatableEnum extends Enum
 {
@@ -14,7 +15,7 @@ abstract class TranslatableEnum extends Enum
 	abstract protected static function getTranslationPrefix(): string;
 
 	/**
-	 * @return array<string, string>
+	 * @return array<int|string, string>
 	 */
 	private static function getTranslatableLabels(): array
 	{
@@ -24,12 +25,12 @@ abstract class TranslatableEnum extends Enum
 		foreach (static::getEnumerators() as $enumerator) {
 			$value = $enumerator->getValue();
 
-			if (!is_scalar($value)) {
+			if (!is_string($value) && !is_int($value)) {
 				throw InvalidArgument::create()
-					->withMessage('Only enums with scalar values can be translated.');
+					->withMessage('Only enums with int|string values can be translated.');
 			}
 
-			$labels[$enumerator->getName()] = $prefix . $value;
+			$labels[$value] = $prefix . $value;
 		}
 
 		return $labels;
@@ -37,7 +38,13 @@ abstract class TranslatableEnum extends Enum
 
 	public function getLabel(Translator|null $translator = null): string
 	{
-		$label = self::getTranslatableLabels()[$this->getName()];
+		$value = $this->getValue();
+		if (!is_string($value) && !is_int($value)) {
+			throw InvalidArgument::create()
+				->withMessage('Only enums with int|string values can be translated.');
+		}
+
+		$label = static::getTranslationPrefix() . $value;
 
 		return $translator === null
 			? $label
@@ -45,7 +52,7 @@ abstract class TranslatableEnum extends Enum
 	}
 
 	/**
-	 * @return array<string, string>
+	 * @return array<int|string, string>
 	 */
 	public static function getLabels(Translator|null $translator = null): array
 	{
