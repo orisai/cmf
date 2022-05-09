@@ -2,23 +2,20 @@
 
 namespace OriCMF\Core\User;
 
-use OriCMF\Core\Enum\TranslatableEnum;
+use OriCMF\Core\Enum\TranslatableBackedEnum;
 
-/**
- * @method static self New()
- * @method static self Active()
- * @method static self Disabled()
- */
-final class UserState extends TranslatableEnum
+enum UserState: string
 {
 
-	public const New = 'new';
+	use TranslatableBackedEnum;
 
-	public const Active = 'active';
+	case New = 'new';
 
-	public const Disabled = 'disabled';
+	case Active = 'active';
 
-	protected static function getTranslationPrefix(): string
+	case Disabled = 'disabled';
+
+	private static function getTranslationPrefix(): string
 	{
 		return 'ori.cmf.user.state.';
 	}

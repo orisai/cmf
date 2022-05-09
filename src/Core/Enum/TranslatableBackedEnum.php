@@ -2,34 +2,24 @@
 
 namespace OriCMF\Core\Enum;
 
-use MabeEnum\Enum;
-use Orisai\Exceptions\Logic\InvalidArgument;
 use Orisai\Localization\Translator;
 use function array_map;
-use function is_int;
-use function is_string;
 
-abstract class TranslatableEnum extends Enum
+trait TranslatableBackedEnum
 {
 
-	abstract protected static function getTranslationPrefix(): string;
+	abstract private static function getTranslationPrefix(): string;
 
 	/**
 	 * @return array<int|string, string>
 	 */
 	private static function getTranslatableLabels(): array
 	{
-		$prefix = static::getTranslationPrefix();
+		$prefix = self::getTranslationPrefix();
 		$labels = [];
 
-		foreach (static::getEnumerators() as $enumerator) {
-			$value = $enumerator->getValue();
-
-			if (!is_string($value) && !is_int($value)) {
-				throw InvalidArgument::create()
-					->withMessage('Only enums with int|string values can be translated.');
-			}
-
+		foreach (self::cases() as $enumerator) {
+			$value = $enumerator->value;
 			$labels[$value] = $prefix . $value;
 		}
 
@@ -38,13 +28,7 @@ abstract class TranslatableEnum extends Enum
 
 	public function getLabel(Translator|null $translator = null): string
 	{
-		$value = $this->getValue();
-		if (!is_string($value) && !is_int($value)) {
-			throw InvalidArgument::create()
-				->withMessage('Only enums with int|string values can be translated.');
-		}
-
-		$label = static::getTranslationPrefix() . $value;
+		$label = static::getTranslationPrefix() . $this->value;
 
 		return $translator === null
 			? $label

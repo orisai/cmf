@@ -86,11 +86,11 @@ final class LoginVerifier
 	 */
 	private function verifyActiveAccount(User $user): void
 	{
-		if ($user->state->is(UserState::Active())) {
+		if ($user->state === UserState::Active) {
 			return;
 		}
 
-		if ($user->state->is(UserState::New())) {
+		if ($user->state === UserState::New) {
 			throw InactiveAccount::create($user, new TranslatableMessage('ori.cmf.login.inactive.newAccount'));
 		}
 

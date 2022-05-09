@@ -2,27 +2,28 @@
 
 namespace OriCMF\Core\ORM\Wrapper;
 
-use MabeEnum\Enum;
+use BackedEnum;
 use Orisai\Exceptions\Logic\InvalidArgument;
 use function array_key_first;
 use function assert;
 use function count;
+use function is_int;
 use function is_string;
 use function is_subclass_of;
 
-final class EnumValueWrapper extends ValuePropertyWrapper
+final class BackedEnumWrapper extends ValuePropertyWrapper
 {
 
-	public function convertToRawValue(mixed $value): mixed
+	public function convertToRawValue(mixed $value): int|string
 	{
-		assert($value instanceof Enum);
+		assert($value instanceof BackedEnum);
 
-		return $value->getValue();
+		return $value->value;
 	}
 
-	public function convertFromRawValue(mixed $value): Enum
+	public function convertFromRawValue(mixed $value): BackedEnum
 	{
-		assert(is_string($value));
+		assert(is_int($value) || is_string($value));
 
 		$types = $this->propertyMetadata->types;
 
@@ -32,9 +33,9 @@ final class EnumValueWrapper extends ValuePropertyWrapper
 		}
 
 		$type = array_key_first($types);
-		assert(is_subclass_of($type, Enum::class));
+		assert(is_subclass_of($type, BackedEnum::class));
 
-		return $type::byValue($value);
+		return $type::from($value);
 	}
 
 }
