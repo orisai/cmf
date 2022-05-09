@@ -8,7 +8,7 @@ final class CredentialHandlerManager
 	/**
 	 * @param array<CredentialHandler> $handlers
 	 */
-	public function __construct(private array $handlers)
+	public function __construct(private readonly array $handlers)
 	{
 	}
 

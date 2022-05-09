@@ -14,9 +14,9 @@ final class UserRoleAddCommand extends Command
 {
 
 	public function __construct(
-		private IModel $model,
-		private RoleRepository $roleRepository,
-		private EmailRepository $emailRepository,
+		private readonly IModel $model,
+		private readonly RoleRepository $roleRepository,
+		private readonly EmailRepository $emailRepository,
 	)
 	{
 		parent::__construct();

@@ -5,7 +5,7 @@ namespace OriCMF\UI\DataGrid;
 final class FindParameter
 {
 
-	public function __construct(private string $column, private mixed $value)
+	public function __construct(private readonly string $column, private readonly mixed $value)
 	{
 	}
 

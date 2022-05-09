@@ -16,8 +16,8 @@ final class AuthorizationDataCreator
 	 * @param array<string> $privileges
 	 */
 	public function __construct(
-		private array $privileges,
-		private RoleRepository $roleRepository,
+		private readonly array $privileges,
+		private readonly RoleRepository $roleRepository,
 		private Cache $cache,
 	)
 	{

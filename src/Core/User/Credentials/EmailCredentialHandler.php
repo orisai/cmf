@@ -11,7 +11,7 @@ use Orisai\Localization\TranslatableMessage;
 final class EmailCredentialHandler implements VerifyingCredentialHandler
 {
 
-	public function __construct(private IModel $model, private EmailRepository $emailRepository)
+	public function __construct(private readonly IModel $model, private readonly EmailRepository $emailRepository)
 	{
 	}
 

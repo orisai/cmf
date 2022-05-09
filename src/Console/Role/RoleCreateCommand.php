@@ -17,9 +17,9 @@ final class RoleCreateCommand extends Command
 {
 
 	public function __construct(
-		private IModel $model,
-		private RoleRepository $roleRepository,
-		private AuthorizationData $data,
+		private readonly IModel $model,
+		private readonly RoleRepository $roleRepository,
+		private readonly AuthorizationData $data,
 	)
 	{
 		parent::__construct();

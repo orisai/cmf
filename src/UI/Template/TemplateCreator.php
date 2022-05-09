@@ -11,8 +11,8 @@ final class TemplateCreator
 {
 
 	public function __construct(
-		private TemplateFactory $templateFactory,
-		private LinkGenerator $linkGenerator,
+		private readonly TemplateFactory $templateFactory,
+		private readonly LinkGenerator $linkGenerator,
 	)
 	{
 	}

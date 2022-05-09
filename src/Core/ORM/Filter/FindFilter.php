@@ -18,7 +18,7 @@ class FindFilter
 	/** @var array<mixed> */
 	private array $conditions = [];
 
-	public function __construct(private string $logicalOperator = ICollection::AND)
+	public function __construct(private readonly string $logicalOperator = ICollection::AND)
 	{
 	}
 

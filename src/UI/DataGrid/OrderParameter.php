@@ -11,7 +11,7 @@ final class OrderParameter
 	/**
 	 * @phpstan-param DataGrid::Order* $direction
 	 */
-	public function __construct(private string $column, string $direction)
+	public function __construct(private readonly string $column, string $direction)
 	{
 		$this->direction = $direction;
 	}

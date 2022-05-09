@@ -23,9 +23,9 @@ final class UserRegisterCommand extends Command
 {
 
 	public function __construct(
-		private UserRegistrarGetter $userRegistrarGetter,
-		private PasswordEncoder $passwordEncoder,
-		private TranslatorGetter $translatorGetter,
+		private readonly UserRegistrarGetter $userRegistrarGetter,
+		private readonly PasswordEncoder $passwordEncoder,
+		private readonly TranslatorGetter $translatorGetter,
 	)
 	{
 		parent::__construct();

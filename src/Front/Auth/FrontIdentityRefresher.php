@@ -14,8 +14,8 @@ final class FrontIdentityRefresher extends BaseUIIdentityRefresher
 
 	public function __construct(
 		UserRepository $userRepository,
-		private Authorizer $authorizer,
-		private UserIdentityCreator $identityCreator,
+		private readonly Authorizer $authorizer,
+		private readonly UserIdentityCreator $identityCreator,
 	)
 	{
 		parent::__construct($userRepository);

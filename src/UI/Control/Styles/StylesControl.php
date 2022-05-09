@@ -14,7 +14,7 @@ class StylesControl extends BaseControl
 	/** @var array<string> */
 	private array $styles = [];
 
-	public function __construct(private string $build)
+	public function __construct(private readonly string $build)
 	{
 	}
 

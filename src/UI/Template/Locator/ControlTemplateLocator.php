@@ -14,7 +14,7 @@ final class ControlTemplateLocator
 
 	public const DefaultViewName = 'default';
 
-	public function __construct(private string $rootDir)
+	public function __construct(private readonly string $rootDir)
 	{
 	}
 

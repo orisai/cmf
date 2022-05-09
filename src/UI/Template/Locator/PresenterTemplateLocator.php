@@ -12,7 +12,7 @@ use function preg_replace;
 final class PresenterTemplateLocator
 {
 
-	public function __construct(private string $rootDir)
+	public function __construct(private readonly string $rootDir)
 	{
 	}
 

@@ -12,7 +12,7 @@ final class FormFactory
 
 	private bool $initialized = false;
 
-	public function __construct(private Translator $translator)
+	public function __construct(private readonly Translator $translator)
 	{
 	}
 

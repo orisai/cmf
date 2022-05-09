@@ -15,7 +15,7 @@ use function is_writable;
 final class CacheExtension extends CompilerExtension
 {
 
-	public function __construct(private string $tempDir)
+	public function __construct(private readonly string $tempDir)
 	{
 	}
 

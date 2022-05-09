@@ -5,7 +5,11 @@ namespace OriCMF\Core\Config;
 final class BuildConfig implements ConfigItemProvider
 {
 
-	public function __construct(private string|null $name, private string|null $version, private bool $stable)
+	public function __construct(
+		private readonly string|null $name,
+		private readonly string|null $version,
+		private readonly bool $stable,
+	)
 	{
 	}
 

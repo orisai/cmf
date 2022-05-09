@@ -20,7 +20,7 @@ abstract class BaseUIFirewall extends BaseFirewall
 {
 
 	public function __construct(
-		private UserRepository $userRepository,
+		private readonly UserRepository $userRepository,
 		LoginStorage $storage,
 		IdentityRefresher $refresher,
 		Authorizer $authorizer,

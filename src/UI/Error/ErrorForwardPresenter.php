@@ -25,7 +25,7 @@ final class ErrorForwardPresenter extends Presenter
 	 */
 	private array $errorPresenters = [];
 
-	public function __construct(private LoggerInterface $logger)
+	public function __construct(private readonly LoggerInterface $logger)
 	{
 		parent::__construct();
 	}

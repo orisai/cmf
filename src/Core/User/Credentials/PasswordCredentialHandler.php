@@ -10,7 +10,7 @@ use Orisai\Exceptions\Logic\InvalidState;
 final class PasswordCredentialHandler implements CredentialHandler
 {
 
-	public function __construct(private IModel $model, private PasswordRepository $passwordRepository)
+	public function __construct(private readonly IModel $model, private readonly PasswordRepository $passwordRepository)
 	{
 	}
 

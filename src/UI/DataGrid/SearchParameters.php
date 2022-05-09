@@ -11,7 +11,11 @@ final class SearchParameters
 	 * @param array<FindParameter>  $find
 	 * @param array<OrderParameter> $order
 	 */
-	public function __construct(private array $find, private array $order, private Paginator|null $paginator)
+	public function __construct(
+		private readonly array $find,
+		private readonly array $order,
+		private readonly Paginator|null $paginator,
+	)
 	{
 	}
 

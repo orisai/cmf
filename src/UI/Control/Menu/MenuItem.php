@@ -15,10 +15,10 @@ final class MenuItem
 	 * @param Closure(): ActionLink $destination
 	 */
 	public function __construct(
-		private string $title,
-		private Closure $destination,
-		private string|null $icon = null,
-		private string|null $privilege = null,
+		private readonly string $title,
+		private readonly Closure $destination,
+		private readonly string|null $icon = null,
+		private readonly string|null $privilege = null,
 	)
 	{
 	}

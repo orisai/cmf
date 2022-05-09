@@ -17,7 +17,7 @@ final class ScriptsControl extends BaseControl
 	 */
 	private array $scripts = [];
 
-	public function __construct(private string $build)
+	public function __construct(private readonly string $build)
 	{
 	}
 

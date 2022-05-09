@@ -16,10 +16,10 @@ final class LoginVerifier
 {
 
 	public function __construct(
-		private IModel $model,
-		private EmailRepository $emailRepository,
-		private PasswordRepository $passwordRepository,
-		private PasswordEncoder $passwordEncoder,
+		private readonly IModel $model,
+		private readonly EmailRepository $emailRepository,
+		private readonly PasswordRepository $passwordRepository,
+		private readonly PasswordEncoder $passwordEncoder,
 	)
 	{
 	}

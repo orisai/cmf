@@ -16,8 +16,8 @@ final class UserRegistrar
 {
 
 	public function __construct(
-		private IModel $model,
-		private CredentialHandlerManager $credentialHandlerManager,
+		private readonly IModel $model,
+		private readonly CredentialHandlerManager $credentialHandlerManager,
 	)
 	{
 	}

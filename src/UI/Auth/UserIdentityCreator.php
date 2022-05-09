@@ -11,7 +11,7 @@ use function array_map;
 final class UserIdentityCreator
 {
 
-	public function __construct(private AuthorizationData $data)
+	public function __construct(private readonly AuthorizationData $data)
 	{
 	}
 

@@ -12,7 +12,7 @@ use Symfony\Component\Uid\Ulid;
 final class UrlUlid
 {
 
-	private function __construct(private Ulid $ulid)
+	private function __construct(private readonly Ulid $ulid)
 	{
 	}
 

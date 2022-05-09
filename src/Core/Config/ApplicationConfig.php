@@ -5,7 +5,7 @@ namespace OriCMF\Core\Config;
 final class ApplicationConfig implements ConfigItemProvider
 {
 
-	public function __construct(private string|null $name)
+	public function __construct(private readonly string|null $name)
 	{
 	}
 
