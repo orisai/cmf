@@ -7,7 +7,7 @@ use OriCMF\UI\Auth\BaseUIFirewall;
 final class FrontFirewall extends BaseUIFirewall
 {
 
-	protected function getNamespace(): string
+	public function getNamespace(): string
 	{
 		return 'front';
 	}
