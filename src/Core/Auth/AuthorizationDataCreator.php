@@ -22,7 +22,7 @@ final class AuthorizationDataCreator
 	)
 	{
 		$this->cache = $cache->derive('ori.auth');
-		$this->roleRepository->onFlush[] = fn () => $this->rebuild();
+		$this->roleRepository->onFlush[] = $this->rebuild(...);
 	}
 
 	public function create(): AuthorizationData

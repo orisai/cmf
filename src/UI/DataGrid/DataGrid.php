@@ -305,7 +305,7 @@ final class DataGrid extends BaseControl
 			$actionsContainer->addSubmit('process', $t('ori.cmf.grid.global.do'));
 		}
 
-		$form->onSubmit[] = fn (Form $form) => $this->processForm($form);
+		$form->onSubmit[] = $this->processForm(...);
 
 		return $form;
 	}
