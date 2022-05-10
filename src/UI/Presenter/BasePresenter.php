@@ -110,10 +110,7 @@ abstract class BasePresenter extends Presenter
 		return $this->documentFactory->create();
 	}
 
-	/**
-	 * @return never
-	 */
-	protected function redirectToAction(ActionLink $link): void
+	protected function redirectToAction(ActionLink $link): never
 	{
 		$this->redirect($link->getDestination(), $link->getArguments());
 	}

@@ -73,10 +73,9 @@ final class LoginVerifier
 	}
 
 	/**
-	 * @return never
 	 * @throws InvalidCredentials
 	 */
-	private function throwInvalidCredentials(): void
+	private function throwInvalidCredentials(): never
 	{
 		throw InvalidCredentials::create(new TranslatableMessage('ori.cmf.login.invalidCredentials'));
 	}
