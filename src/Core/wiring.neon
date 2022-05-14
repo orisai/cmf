@@ -43,7 +43,8 @@ ori.cmf.dbal:
 	sqlProcessorFactory: @ori.cmf.core.sql.processorFactory
 
 orisai.auth:
-	authorizationData: @ori.cmf.core.auth.dataCreator::create
+	authorization:
+		data: @ori.cmf.core.auth.dataCreator::create
 	debug:
 		panel: %debug.panels.auth%
 
