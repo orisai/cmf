@@ -1,5 +1,5 @@
 DROP SCHEMA IF EXISTS ori CASCADE;
-CREATE SCHEMA ori;
+CREATE SCHEMA ori_cmf;
 
 -- ----------
 -- collations
