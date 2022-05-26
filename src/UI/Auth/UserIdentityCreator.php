@@ -31,6 +31,10 @@ final class UserIdentityCreator
 
 	private function setIdentityAuthData(User $user, UserIdentity $identity): void
 	{
+		if ($user->privileges === []) {
+			return;
+		}
+
 		$builder = new IdentityAuthorizationDataBuilder($this->data);
 		foreach ($user->privileges as $privilege) {
 			if ($privilege === '*') {
