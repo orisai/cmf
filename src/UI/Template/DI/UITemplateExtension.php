@@ -13,6 +13,7 @@ use Nette\DI\Definitions\ServiceDefinition;
 use OriCMF\Core\Config\ConfigProvider;
 use OriCMF\UI\Control\BaseControlTemplate;
 use OriCMF\UI\Template\Locator\ControlTemplateLocator;
+use OriCMF\UI\Template\UIFilters;
 use OriCMF\UI\Template\UIMacros;
 use OriCMF\UI\Template\UITemplate;
 use function assert;
@@ -44,7 +45,7 @@ final class UITemplateExtension extends CompilerExtension
 
 		$latteFactoryDefinition->getResultDefinition()
 			->addSetup(
-				[self::class, 'installMacros'],
+				[self::class, 'installExtension'],
 				['@self'],
 			);
 	}
@@ -71,8 +72,9 @@ final class UITemplateExtension extends CompilerExtension
 		};
 	}
 
-	public static function installMacros(Engine $engine): void
+	public static function installExtension(Engine $engine): void
 	{
+		$engine->addFilter('urlUlid', UIFilters::urlUlid(...));
 		$engine->onCompile[] = static function (Engine $engine): void {
 			UIMacros::install($engine->getCompiler());
 		};
