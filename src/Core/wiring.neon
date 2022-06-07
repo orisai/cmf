@@ -91,7 +91,10 @@ orisai.monolog:
 
 tracy:
 	netteMailer: false
-	strictMode: true
+	# Report everything in development mode
+	strictMode: 'E_ALL'
+	# Log everything in production mode
+	logSeverity: 'E_ALL'
 
 parameters:
 	catchExceptions:
