@@ -153,7 +153,7 @@ final class DataGrid extends BaseControl
 		$this->template->paginator = $this->paginator;
 		$this->template->sendOnlyRowParentSnippet = $this->sendOnlyRowParentSnippet;
 		// phpcs:ignore SlevomatCodingStandard.Operators.DisallowEqualOperators.DisallowedNotEqualOperator
-		$this->template->showFilterCancel = $this->filterDataSource != $this->filterDefaults; // != intentionally
+		$this->template->showFilterCancel = $this->filterDataSource != $this->filterDefaults; // @phpstan-ignore-line
 
 		$this->template->render();
 	}
