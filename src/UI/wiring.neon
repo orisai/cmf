@@ -60,7 +60,8 @@ ori.cmf.routing:
 		ori.core: OriCMF\UI\Routing\CmfUIRouterProvider
 
 orisai.application.map:
-	enabled: %debug.panels.ui.applicationMap%
+	debug:
+		panel: %debug.panels.ui.applicationMap%
 
 orisai.application.uiInspector:
 	enabled: %debug.panels.ui.inspector%
@@ -128,7 +129,7 @@ services:
 		factory: OriNette\Application\Mapping\DefaultPresenterFactory
 		type: OriNette\Application\Mapping\PresenterFactory
 		arguments:
-			factory: OriNette\Application\Mapping\StrictPresenterFactoryCallback()
+			factory: OriNette\Application\Mapping\DI\StrictPresenterFactoryCallback()
 
 	# Robots
 	ori.cmf.ui.robots.presenter:
