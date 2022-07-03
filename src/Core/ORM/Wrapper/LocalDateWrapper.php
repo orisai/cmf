@@ -18,7 +18,7 @@ final class LocalDateWrapper extends ValuePropertyWrapper
 
 		assert($value instanceof LocalDate);
 
-		return $value->toDateTimeImmutable();
+		return $value->toNativeDateTimeImmutable();
 	}
 
 	public function convertFromRawValue(mixed $value): LocalDate|null
@@ -29,7 +29,7 @@ final class LocalDateWrapper extends ValuePropertyWrapper
 
 		assert($value instanceof DateTimeInterface);
 
-		return LocalDate::fromDateTime($value);
+		return LocalDate::fromNativeDateTime($value);
 	}
 
 }

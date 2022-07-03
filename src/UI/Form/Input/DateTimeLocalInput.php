@@ -112,7 +112,7 @@ final class DateTimeLocalInput extends TextInput
 			$dateTime
 				->withTimeZoneSameInstant(TimeZoneRegion::parse('Europe/Prague'))
 				->minusSeconds($dateTime->getSecond())
-				->toDateTime(),
+				->toNativeDateTimeImmutable(),
 		);
 	}
 

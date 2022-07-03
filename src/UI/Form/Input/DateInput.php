@@ -107,7 +107,7 @@ final class DateInput extends TextInput
 	private function fromLocalDate(LocalDate $localDate): string
 	{
 		return $this->fromDateTimeInterface(
-			$localDate->toDateTime(),
+			$localDate->toNativeDateTimeImmutable(),
 		);
 	}
 

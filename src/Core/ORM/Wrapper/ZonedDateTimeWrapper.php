@@ -17,7 +17,7 @@ final class ZonedDateTimeWrapper extends ValuePropertyWrapper
 
 		assert($value instanceof ZonedDateTime);
 
-		return $value->toDateTime()->format('c');
+		return $value->toNativeDateTimeImmutable()->format('c');
 	}
 
 	public function convertFromRawValue(mixed $value): ZonedDateTime|null
@@ -28,7 +28,7 @@ final class ZonedDateTimeWrapper extends ValuePropertyWrapper
 
 		assert($value instanceof DateTimeInterface);
 
-		return ZonedDateTime::fromDateTime($value);
+		return ZonedDateTime::fromNativeDateTime($value);
 	}
 
 }
