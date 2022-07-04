@@ -11,6 +11,7 @@ extensions:
 	ori.cmf.uiTemplate: OriCMF\UI\Template\DI\UITemplateExtension
 
 	orisai.application.map: OriNette\Application\ApplicationMap\DI\ApplicationMapExtension
+	orisai.application.presenterFactory: OriNette\Application\Mapping\DI\PresenterFactoryExtension
 	orisai.application.uiInspector: OriNette\Application\Inspector\DI\InspectorExtension
 
 latte:
@@ -62,6 +63,9 @@ ori.cmf.routing:
 orisai.application.map:
 	debug:
 		panel: %debug.panels.ui.applicationMap%
+
+orisai.application.presenterFactory:
+	presenterConstructor: 'strict'
 
 orisai.application.uiInspector:
 	enabled: %debug.panels.ui.inspector%
@@ -123,13 +127,6 @@ services:
 	# Form
 	ori.cmf.ui.form.factory:
 		factory: OriCMF\UI\Form\FormFactory
-
-	# Presenter
-	nette.application.presenterFactory:
-		factory: OriNette\Application\Mapping\DefaultPresenterFactory
-		type: OriNette\Application\Mapping\PresenterFactory
-		arguments:
-			factory: OriNette\Application\Mapping\DI\StrictPresenterFactoryCallback()
 
 	# Robots
 	ori.cmf.ui.robots.presenter:
