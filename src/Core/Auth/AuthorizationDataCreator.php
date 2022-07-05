@@ -21,7 +21,7 @@ final class AuthorizationDataCreator
 		private Cache $cache,
 	)
 	{
-		$this->cache = $cache->derive('ori.auth');
+		$this->cache = $cache->derive('ori_cmf.auth');
 		$this->roleRepository->onFlush[] = $this->rebuild(...);
 	}
 

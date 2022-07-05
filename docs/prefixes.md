@@ -8,7 +8,7 @@ purpose of prevention fo these collisions Orisai CMF defines common rules for co
 | vendor/package | Vendor/Package | vendor_package  | vendor.package.<key> | Generic rules for any package                                  |
 | orisai/*       | Orisai/*       | orisai_*        | orisai.*.<key>       | Same as generic vendor/package rules                           |
 | orisai/nette-* | OriNette/*     | orisai_*        | orisai.*.<key>       | Nette extensions share same prefixes with their parent package |
-| orisai/cmf     | OriCMF         | ori_cmf         | ori.cmf.<key>        | CMF                                                            |
+| orisai/cmf     | OriCMF         | ori_cmf         | ori_cmf.<key>        | CMF                                                            |
 | orisai/ext-*   | OriExt/*       | ori_*           | ori.*.<key>          | CMF extensions                                                 |
 
 ### Generic
