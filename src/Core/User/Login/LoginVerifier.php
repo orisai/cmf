@@ -9,7 +9,7 @@ use OriCMF\Core\User\Credentials\Exception\InactiveAccount;
 use OriCMF\Core\User\Credentials\Exception\InvalidCredentials;
 use OriCMF\Core\User\User;
 use OriCMF\Core\User\UserState;
-use Orisai\Auth\Passwords\PasswordEncoder;
+use Orisai\Auth\Passwords\PasswordHasher;
 use Orisai\Localization\TranslatableMessage;
 
 final class LoginVerifier
@@ -19,7 +19,7 @@ final class LoginVerifier
 		private readonly IModel $model,
 		private readonly EmailRepository $emailRepository,
 		private readonly PasswordRepository $passwordRepository,
-		private readonly PasswordEncoder $passwordEncoder,
+		private readonly PasswordHasher $passwordHasher,
 	)
 	{
 	}
@@ -59,13 +59,13 @@ final class LoginVerifier
 			$this->throwInvalidCredentials();
 		}
 
-		if (!$this->passwordEncoder->isValid($rawPassword, $password->encodedPassword)) {
+		if (!$this->passwordHasher->isValid($rawPassword, $password->encodedPassword)) {
 			$this->throwInvalidCredentials();
 		}
 
 		// TODO - update also in re-verifier
-		if ($this->passwordEncoder->needsReEncode($password->encodedPassword)) {
-			$password->encodedPassword = $this->passwordEncoder->encode($rawPassword);
+		if ($this->passwordHasher->needsRehash($password->encodedPassword)) {
+			$password->encodedPassword = $this->passwordHasher->hash($rawPassword);
 			$this->model->persistAndFlush($password);
 		}
 

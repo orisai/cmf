@@ -9,7 +9,7 @@ use OriCMF\Core\User\Credentials\Exception\CredentialAlreadyInUse;
 use OriCMF\Core\User\Register\UserRegistrarGetter;
 use OriCMF\Core\User\User;
 use OriCMF\Core\User\UserState;
-use Orisai\Auth\Passwords\PasswordEncoder;
+use Orisai\Auth\Passwords\PasswordHasher;
 use Orisai\Localization\TranslatorGetter;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -24,7 +24,7 @@ final class UserRegisterCommand extends Command
 
 	public function __construct(
 		private readonly UserRegistrarGetter $userRegistrarGetter,
-		private readonly PasswordEncoder $passwordEncoder,
+		private readonly PasswordHasher $passwordHasher,
 		private readonly TranslatorGetter $translatorGetter,
 	)
 	{
@@ -64,7 +64,7 @@ final class UserRegisterCommand extends Command
 		$user->state = UserState::Active;
 		$email = new Email($emailAddress, Email::TypePrimary, $user);
 		$password = new Password(
-			$this->passwordEncoder->encode($rawPassword),
+			$this->passwordHasher->hash($rawPassword),
 			$user,
 		);
 
