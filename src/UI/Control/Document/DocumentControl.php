@@ -19,7 +19,7 @@ class DocumentControl extends BaseControl
 
 	public function __construct(
 		private readonly HeadControlFactory $headFactory,
-		readonly private BodyControlFactory $bodyFactory,
+		private readonly BodyControlFactory $bodyFactory,
 	)
 	{
 		$this->element = Html::el('html');
