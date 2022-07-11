@@ -124,6 +124,9 @@
 			{$input->getCaption()}
 		</label>
 	</div>
+	{if $input->getOption('hint') !== null}
+		<p class="mt-2 text-sm text-gray-500">{$input->getOption('hint')}</p>
+	{/if}
 {/define}
 
 {define field-Nette\Forms\Controls\TextInput Nette\Forms\Controls\TextInput $input, string $inputName}
