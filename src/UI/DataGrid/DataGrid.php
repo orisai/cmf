@@ -12,8 +12,6 @@ use Nette\Forms\Container;
 use Nette\Forms\Controls\Button;
 use Nette\Forms\Controls\SelectBox;
 use Nette\Forms\Controls\SubmitButton;
-use Nette\Utils\Json;
-use Nette\Utils\JsonException;
 use Nette\Utils\Paginator;
 use OriCMF\UI\Control\BaseControl;
 use Orisai\Exceptions\Logic\InvalidArgument;
@@ -34,8 +32,9 @@ final class DataGrid extends BaseControl
 
 	public const TemplatePath = __DIR__ . '/DataGrid.latte';
 
+	/** @var array<mixed> */
 	#[Persistent]
-	public string|null $filter = null;
+	public array $filter = [];
 
 	#[Persistent]
 	public string|null $orderColumn = null;
@@ -48,7 +47,7 @@ final class DataGrid extends BaseControl
 	#[Persistent]
 	public int $page = 1;
 
-	/** @var array<int|string, mixed> */
+	/** @var array<string, mixed> */
 	private array $filterDataSource = [];
 
 	/** @var array<string, Column> */
@@ -144,7 +143,7 @@ final class DataGrid extends BaseControl
 		if ($this->filterFormFactory !== null) {
 			$filterContainer = $this['form']['filter'];
 			assert($filterContainer instanceof Container);
-			$filterContainer->setDefaults($this->loadFilter());
+			$filterContainer->setDefaults($this->filter);
 		}
 
 		$this->template->form = $this['form'];
@@ -191,7 +190,7 @@ final class DataGrid extends BaseControl
 	{
 		parent::validateParent($parent);
 		$this->monitor(Presenter::class, function (): void {
-			$this->filterDataSource = $this->loadFilter();
+			$this->filterDataSource = $this->filter;
 		});
 	}
 
@@ -222,7 +221,7 @@ final class DataGrid extends BaseControl
 	{
 		$find = [];
 		foreach ($this->filterDataSource as $column => $value) {
-			$find[$column] = new FindParameter((string) $column, $value);
+			$find[$column] = new FindParameter($column, $value);
 		}
 
 		$order = [];
@@ -325,13 +324,13 @@ final class DataGrid extends BaseControl
 			if ($filterButton->isSubmittedBy()) {
 				$values = $filterContainer->getValues('array');
 				assert(is_array($values));
+				$values = $this->filterFormFilter($values);
 				if ($this->paginator !== null) {
 					$this->page = 1;
 					$this->paginator->setPage(1);
 				}
 
-				$this->filterDataSource = $values;
-				$this->saveFilter($values);
+				$this->filter = $this->filterDataSource = $values;
 				$this->redrawControl('rows');
 			} elseif ($cancelButton->isSubmittedBy()) {
 				if ($this->paginator !== null) {
@@ -339,9 +338,8 @@ final class DataGrid extends BaseControl
 					$this->paginator->setPage(1);
 				}
 
-				$this->filterDataSource = $this->filterDefaults;
-				$this->saveFilter($this->filterDefaults);
-				$filterContainer->setValues($this->filterDefaults, true);
+				$this->filter = $this->filterDataSource = $this->filterDefaults;
+				$filterContainer->setValues($this->filter, true);
 				$this->redrawControl('rows');
 			}
 		}
@@ -400,34 +398,36 @@ final class DataGrid extends BaseControl
 			}
 
 			$value = $control->getValue();
-			$this->filterDefaults[$name] = $value;
+			if (!$this->isEmptyValue($value)) {
+				$this->filterDefaults[$name] = $value;
+			}
 		}
 	}
 
 	/**
-	 * @return array<int|string, mixed>
+	 * @param array<mixed> $values
+	 * @return array<mixed>
 	 */
-	private function loadFilter(): array
+	private function filterFormFilter(array $values): array
 	{
-		if ($this->filter === null) {
-			return [];
+		$filtered = [];
+		foreach ($values as $key => $value) {
+			//TODO  - tady se filtrovalo i podle výchozí hodnoty
+			//			- žádoucí pro nynější způsob ukládání filtrů (filtr v url je minimální diff vůči výchozímu stavu filtrů)
+			//			- sestavení parametrů filtru musí fungovat stejně nezávisle na výchozích parametrech, použije se tahle implementace
+			//		- alternativně se mohou vypisovat všechny hodnoty do url a nedávat do ní pouze prázdné
+			//			- tím by bylo chování url neměnné a fixnul by se problém se selectem s výchozí hodnotou, který chci nastavit prázdný
+			if (!$this->isEmptyValue($value)) {
+				$filtered[$key] = $value;
+			}
 		}
 
-		try {
-			return Json::decode($this->filter, Json::FORCE_ARRAY);
-		} catch (JsonException) {
-			$this->filter = null;
-
-			return [];
-		}
+		return $filtered;
 	}
 
-	/**
-	 * @param array<int|string, mixed> $filter
-	 */
-	private function saveFilter(array $filter): void
+	private function isEmptyValue(mixed $value): bool
 	{
-		$this->filter = Json::encode($filter);
+		return $value === null || $value === '' || $value === [] || $value === false;
 	}
 
 }
