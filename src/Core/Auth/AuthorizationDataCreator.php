@@ -10,8 +10,6 @@ use Orisai\Auth\Authorization\AuthorizationDataBuilder;
 final class AuthorizationDataCreator
 {
 
-	private const CacheKey = 'data';
-
 	/**
 	 * @param array<string> $privileges
 	 */
@@ -19,6 +17,8 @@ final class AuthorizationDataCreator
 		private readonly array $privileges,
 		private readonly RoleRepository $roleRepository,
 		private Cache $cache,
+		private readonly string $containerName,
+		private readonly bool $debugMode,
 	)
 	{
 		$this->cache = $cache->derive('ori_cmf.auth');
@@ -27,14 +27,16 @@ final class AuthorizationDataCreator
 
 	public function create(): AuthorizationData
 	{
-		$data = $this->cache->load(self::CacheKey);
+		$data = $this->cache->load($this->getCacheKey());
 		if ($data instanceof AuthorizationData) {
 			return $data;
 		}
 
 		$data = $this->buildData();
 
-		$this->cache->save(self::CacheKey, $data);
+		$this->cache->save($this->getCacheKey(), $data, [
+			Cache::Expire => $this->debugMode ? '1 day' : null,
+		]);
 
 		return $data;
 	}
@@ -42,7 +44,7 @@ final class AuthorizationDataCreator
 	private function rebuild(): void
 	{
 		$data = $this->buildData();
-		$this->cache->save(self::CacheKey, $data);
+		$this->cache->save($this->getCacheKey(), $data);
 	}
 
 	private function buildData(): AuthorizationData
@@ -69,6 +71,11 @@ final class AuthorizationDataCreator
 		}
 
 		return $dataBuilder->build();
+	}
+
+	private function getCacheKey(): string
+	{
+		return 'data.' . $this->containerName;
 	}
 
 }

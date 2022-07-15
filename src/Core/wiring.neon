@@ -123,6 +123,8 @@ services:
 		autowired: false
 		arguments:
 			privileges: %privileges%
+			containerName: %container.className%
+			debugMode: %debugMode%
 
 	# Cache
 	ori.cmf.core.cache:
