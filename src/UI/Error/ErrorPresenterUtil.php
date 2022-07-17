@@ -7,6 +7,7 @@ use Nette\Http\IResponse;
 use OriCMF\UI\Control\Document\DocumentControl;
 use Throwable;
 use function in_array;
+use function Orisai\Localization\t;
 
 /**
  * @internal
@@ -55,12 +56,10 @@ trait ErrorPresenterUtil
 
 	public function render(Throwable|null $throwable = null): void
 	{
-		$t = $this->translator->toFunction();
-
 		$this->setView($this->is4xx ? '4xx' : '5xx');
 
-		$this->template->title = $title = $t("ori.cmf.httpError.$this->code.title");
-		$this->template->message = $t("ori.cmf.httpError.$this->code.message");
+		$this->template->title = $title = t("ori.cmf.httpError.$this->code.title");
+		$this->template->message = t("ori.cmf.httpError.$this->code.message");
 
 		$this['document']->setTitle($title);
 	}

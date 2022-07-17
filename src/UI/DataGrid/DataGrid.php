@@ -20,6 +20,7 @@ use function array_map;
 use function assert;
 use function is_array;
 use function is_string;
+use function Orisai\Localization\t;
 
 /**
  * @property-read DataGridTemplate $template
@@ -278,16 +279,15 @@ final class DataGrid extends BaseControl
 	protected function createComponentForm(): Form
 	{
 		$form = $this->formFactory->create();
-		$t = $this->translator->toFunction();
 
 		if ($this->filterFormFactory !== null) {
 			$form['filter'] = $filterContainer = ($this->filterFormFactory)();
 			if (!isset($filterContainer['filter'])) {
-				$filterContainer->addSubmit('filter', $t('ori.cmf.grid.search'));
+				$filterContainer->addSubmit('filter', t('ori.cmf.grid.search'));
 			}
 
 			if (!isset($filterContainer['cancel'])) {
-				$filterContainer->addSubmit('cancel', $t('ori.cmf.grid.search.cancel'));
+				$filterContainer->addSubmit('cancel', t('ori.cmf.grid.search.cancel'));
 			}
 
 			$this->prepareFilterDefaults($filterContainer);
@@ -299,10 +299,10 @@ final class DataGrid extends BaseControl
 		if ($this->globalActions !== []) {
 			$actions = array_map(static fn (array $row): string => $row[0], $this->globalActions);
 			$form['actions'] = $actionsContainer = new Container();
-			$actionsContainer->addSelect('action', $t('ori.cmf.grid.global.title'), $actions)
-				->setPrompt($t('ori.cmf.grid.global.choose'));
+			$actionsContainer->addSelect('action', t('ori.cmf.grid.global.title'), $actions)
+				->setPrompt(t('ori.cmf.grid.global.choose'));
 			$actionsContainer->addCheckboxList('items', '', []);
-			$actionsContainer->addSubmit('process', $t('ori.cmf.grid.global.do'));
+			$actionsContainer->addSubmit('process', t('ori.cmf.grid.global.do'));
 		}
 
 		$form->onSubmit[] = $this->processForm(...);
