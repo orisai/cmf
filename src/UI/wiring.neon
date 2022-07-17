@@ -11,6 +11,7 @@ extensions:
 	ori.cmf.uiTemplate: OriCMF\UI\Template\DI\UITemplateExtension
 
 	orisai.application.map: OriNette\Application\ApplicationMap\DI\ApplicationMapExtension
+	orisai.application.formMonitor: OriNette\Application\FormMonitor\DI\FormMonitorExtension
 	orisai.application.presenterFactory: OriNette\Application\Mapping\DI\PresenterFactoryExtension
 	orisai.application.uiInspector: OriNette\Application\Inspector\DI\InspectorExtension
 
@@ -64,6 +65,11 @@ orisai.application.map:
 	debug:
 		panel: %debug.panels.ui.applicationMap%
 
+orisai.application.formMonitor:
+	enabled: %debugMode%
+	debug:
+		panel: %debug.panels.ui.formMonitor%
+
 orisai.application.presenterFactory:
 	presenterConstructor: 'strict'
 
@@ -79,6 +85,7 @@ parameters:
 			ui:
 				application: false
 				applicationMap: false
+				formMonitor: true
 				inspector: false
 				routing: false
 				session: false
