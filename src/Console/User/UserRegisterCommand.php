@@ -10,7 +10,6 @@ use OriCMF\Core\User\Register\UserRegistrarGetter;
 use OriCMF\Core\User\User;
 use OriCMF\Core\User\UserState;
 use Orisai\Auth\Passwords\PasswordHasher;
-use Orisai\Localization\TranslatorGetter;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -18,6 +17,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use function assert;
 use function is_bool;
+use function Orisai\Localization\tm;
 
 final class UserRegisterCommand extends Command
 {
@@ -25,7 +25,6 @@ final class UserRegisterCommand extends Command
 	public function __construct(
 		private readonly UserRegistrarGetter $userRegistrarGetter,
 		private readonly PasswordHasher $passwordHasher,
-		private readonly TranslatorGetter $translatorGetter,
 	)
 	{
 		parent::__construct();
@@ -79,7 +78,7 @@ final class UserRegisterCommand extends Command
 			$message = $exception->getErrorMessage();
 
 			if ($message !== null) {
-				$output->writeln($message->translate($this->translatorGetter->get()));
+				$output->writeln(tm($message));
 			} else {
 				$output->writeln('One of the credentials is already used by existing user.');
 			}
