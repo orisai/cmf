@@ -21,9 +21,4 @@
 		</properties>
 	</rule>
 
-	<!-- PHP 8.1 - enums -->
-	<rule ref="SlevomatCodingStandard.Namespaces.UnusedUses.UnusedUse">
-		<exclude-pattern>*(State|Type).php</exclude-pattern>
-	</rule>
-
 </ruleset>

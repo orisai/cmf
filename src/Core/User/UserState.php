@@ -3,6 +3,7 @@
 namespace OriCMF\Core\User;
 
 use OriCMF\Core\Enum\TranslatableBackedEnum;
+use Orisai\Localization\TranslatableMessage;
 
 enum UserState: string
 {
@@ -15,9 +16,13 @@ enum UserState: string
 
 	case Disabled = 'disabled';
 
-	private static function getTranslationPrefix(): string
+	private static function getCaseLabel(self $case): TranslatableMessage
 	{
-		return 'ori.cmf.user.state.';
+		return match ($case) {
+			self::New => new TranslatableMessage('ori.cmf.user.state.new'),
+			self::Active => new TranslatableMessage('ori.cmf.user.state.active'),
+			self::Disabled => new TranslatableMessage('ori.cmf.user.state.disabled'),
+		};
 	}
 
 }

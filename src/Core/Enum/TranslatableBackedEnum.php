@@ -2,52 +2,30 @@
 
 namespace OriCMF\Core\Enum;
 
-use Orisai\Localization\Translator;
-use function array_map;
+use Orisai\Localization\TranslatableMessage;
+use function Orisai\Localization\tm;
 
 trait TranslatableBackedEnum
 {
 
-	abstract private static function getTranslationPrefix(): string;
+	abstract protected static function getCaseLabel(self $case): TranslatableMessage;
 
 	/**
 	 * @return array<int|string, string>
 	 */
-	private static function getTranslatableLabels(): array
+	public static function getLabels(string|null $languageTag = null): array
 	{
-		$prefix = self::getTranslationPrefix();
 		$labels = [];
-
 		foreach (self::cases() as $enumerator) {
-			$value = $enumerator->value;
-			$labels[$value] = $prefix . $value;
+			$labels[$enumerator->value] = tm(self::getCaseLabel($enumerator), languageTag: $languageTag);
 		}
 
 		return $labels;
 	}
 
-	public function getLabel(Translator|null $translator = null): string
+	public function getLabel(string|null $languageTag = null): string
 	{
-		$label = static::getTranslationPrefix() . $this->value;
-
-		return $translator === null
-			? $label
-			: $translator->translate($label);
-	}
-
-	/**
-	 * @return array<int|string, string>
-	 */
-	public static function getLabels(Translator|null $translator = null): array
-	{
-		$labels = self::getTranslatableLabels();
-
-		return $translator === null
-			? $labels
-			: array_map(
-				static fn (string $label): string => $translator->translate($label),
-				$labels,
-			);
+		return tm(self::getCaseLabel($this), languageTag: $languageTag);
 	}
 
 }
