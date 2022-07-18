@@ -14,9 +14,6 @@ use Throwable;
 final class ErrorForwardPresenter extends Presenter
 {
 
-	// Codes which are translated and shown to user
-	public const MessageSupportedCodes = [400, 403, 404, 410, 500];
-
 	private string $defaultErrorPresenter = ':' . FrontErrorPresenter::class . ':default';
 
 	/**
