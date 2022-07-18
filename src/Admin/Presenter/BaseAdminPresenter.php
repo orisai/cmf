@@ -7,6 +7,7 @@ use OriCMF\Admin\Login\LoginPresenter;
 use OriCMF\UI\Control\Menu\Menu;
 use OriCMF\UI\Presenter\BasePresenter;
 use Orisai\Auth\Authentication\LogoutCode;
+use function Orisai\Localization\t;
 
 abstract class BaseAdminPresenter extends BasePresenter
 {
@@ -36,7 +37,7 @@ abstract class BaseAdminPresenter extends BasePresenter
 
 		$expired = $this->firewall->getLastExpiredLogin();
 		if ($expired !== null && $expired->getLogoutCode()->name === LogoutCode::inactivity()->name) {
-			$this->flashMessage($this->translator->translate('ori.cmf.login.logout.reason.inactivity'));
+			$this->flashMessage(t('ori.cmf.login.logout.reason.inactivity'));
 		}
 
 		$this->redirectToAction(LoginPresenter::createLink(
@@ -68,7 +69,7 @@ abstract class BaseAdminPresenter extends BasePresenter
 
 		$head = $this['document-head'];
 		$head['meta']->setRobots(['noindex', 'nofollow']);
-		$head['title']->setModule($this->translator->translate('ori.cmf.admin.title'));
+		$head['title']->setModule(t('ori.cmf.admin.title'));
 	}
 
 }

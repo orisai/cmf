@@ -4,17 +4,14 @@ namespace OriCMF\UI\Form;
 
 use Nette\Forms\Controls\SelectBox;
 use Nette\Forms\Controls\UploadControl;
+use Nette\Forms\Form as NForm;
 use Nette\Forms\Validator;
-use Orisai\Localization\Translator;
+use function Orisai\Localization\t;
 
 final class FormFactory
 {
 
 	private bool $initialized = false;
-
-	public function __construct(private readonly Translator $translator)
-	{
-	}
 
 	private function initialize(): void
 	{
@@ -29,27 +26,27 @@ final class FormFactory
 
 	private function configureDefaultMessages(): void
 	{
-		Validator::$messages[Form::EQUAL] = $this->translator->translate('ori.cmf.ui.forms.equal');
-		Validator::$messages[Form::NOT_EQUAL] = $this->translator->translate('ori.cmf.ui.forms.notEqual');
-		Validator::$messages[Form::FILLED] = $this->translator->translate('ori.cmf.ui.forms.filled');
-		Validator::$messages[Form::BLANK] = $this->translator->translate('ori.cmf.ui.forms.blank');
-		Validator::$messages[Form::MIN_LENGTH] = $this->translator->translate('ori.cmf.ui.forms.minLength');
-		Validator::$messages[Form::MAX_LENGTH] = $this->translator->translate('ori.cmf.ui.forms.maxLength');
-		Validator::$messages[Form::LENGTH] = $this->translator->translate('ori.cmf.ui.forms.length');
-		Validator::$messages[Form::EMAIL] = $this->translator->translate('ori.cmf.ui.forms.email');
-		Validator::$messages[Form::URL] = $this->translator->translate('ori.cmf.ui.forms.url');
-		Validator::$messages[Form::INTEGER] = $this->translator->translate('ori.cmf.ui.forms.integer');
-		Validator::$messages[Form::FLOAT] = $this->translator->translate('ori.cmf.ui.forms.number');
-		Validator::$messages[Form::NUMERIC] = $this->translator->translate('ori.cmf.ui.forms.number');
-		Validator::$messages[Form::MIN] = $this->translator->translate('ori.cmf.ui.forms.min');
-		Validator::$messages[Form::MAX] = $this->translator->translate('ori.cmf.ui.forms.max');
-		Validator::$messages[Form::RANGE] = $this->translator->translate('ori.cmf.ui.forms.range');
-		Validator::$messages[Form::MAX_FILE_SIZE] = $this->translator->translate('ori.cmf.ui.forms.maxFileSize');
-		Validator::$messages[Form::MAX_POST_SIZE] = $this->translator->translate('ori.cmf.ui.forms.maxPostSize');
-		Validator::$messages[Form::MIME_TYPE] = $this->translator->translate('ori.cmf.ui.forms.mimeType');
-		Validator::$messages[Form::IMAGE] = $this->translator->translate('ori.cmf.ui.forms.image');
-		Validator::$messages[SelectBox::VALID] = $this->translator->translate('ori.cmf.ui.forms.select');
-		Validator::$messages[UploadControl::VALID] = $this->translator->translate('ori.cmf.ui.forms.upload');
+		Validator::$messages[NForm::EQUAL] = t('ori.cmf.ui.forms.equal');
+		Validator::$messages[NForm::NOT_EQUAL] = t('ori.cmf.ui.forms.notEqual');
+		Validator::$messages[NForm::FILLED] = t('ori.cmf.ui.forms.filled');
+		Validator::$messages[NForm::BLANK] = t('ori.cmf.ui.forms.blank');
+		Validator::$messages[NForm::MIN_LENGTH] = t('ori.cmf.ui.forms.minLength');
+		Validator::$messages[NForm::MAX_LENGTH] = t('ori.cmf.ui.forms.maxLength');
+		Validator::$messages[NForm::LENGTH] = t('ori.cmf.ui.forms.length');
+		Validator::$messages[NForm::EMAIL] = t('ori.cmf.ui.forms.email');
+		Validator::$messages[NForm::URL] = t('ori.cmf.ui.forms.url');
+		Validator::$messages[NForm::INTEGER] = t('ori.cmf.ui.forms.integer');
+		Validator::$messages[NForm::FLOAT] = t('ori.cmf.ui.forms.number');
+		Validator::$messages[NForm::NUMERIC] = t('ori.cmf.ui.forms.number');
+		Validator::$messages[NForm::MIN] = t('ori.cmf.ui.forms.min');
+		Validator::$messages[NForm::MAX] = t('ori.cmf.ui.forms.max');
+		Validator::$messages[NForm::RANGE] = t('ori.cmf.ui.forms.range');
+		Validator::$messages[NForm::MAX_FILE_SIZE] = t('ori.cmf.ui.forms.maxFileSize');
+		Validator::$messages[NForm::MAX_POST_SIZE] = t('ori.cmf.ui.forms.maxPostSize');
+		Validator::$messages[NForm::MIME_TYPE] = t('ori.cmf.ui.forms.mimeType');
+		Validator::$messages[NForm::IMAGE] = t('ori.cmf.ui.forms.image');
+		Validator::$messages[SelectBox::VALID] = t('ori.cmf.ui.forms.select');
+		Validator::$messages[UploadControl::VALID] = t('ori.cmf.ui.forms.upload');
 	}
 
 	public function create(): Form
