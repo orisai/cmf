@@ -5,6 +5,7 @@ namespace OriCMF\UI\Presenter;
 use Nette\Application\AbortException;
 use Nette\Application\BadRequestException;
 use Nette\Application\Responses\TextResponse;
+use Nette\Application\UI\Component;
 use Nette\Application\UI\Presenter;
 use Nette\Application\UI\Template;
 use Nette\Bridges\ApplicationLatte\TemplateFactory;
@@ -21,6 +22,7 @@ use Orisai\Exceptions\Logic\InvalidState;
 use Orisai\Exceptions\Logic\NotImplemented;
 use Orisai\Exceptions\Message;
 use Orisai\Localization\Translator;
+use function array_merge;
 use function assert;
 use function class_exists;
 use function implode;
@@ -101,8 +103,38 @@ abstract class BasePresenter extends Presenter
 	protected function configureCanonicalUrl(DocumentControl $document): void
 	{
 		$document->setCanonicalUrl(
-			$this->link('//this', ['backlink' => null]),
+			$this->link('//this', $this->getPersistentComponentParams($this)),
 		);
+	}
+
+	/**
+	 * @return array<string, null>
+	 */
+	private function getPersistentComponentParams(Component $component): array
+	{
+		$paramsByComponent = [];
+
+		$path = $component instanceof Presenter
+			? null
+			: $component->lookupPath(Presenter::class);
+
+		foreach ($component::getReflection()->getPersistentParams() as $name => $meta) {
+			$fullName = $path !== null
+				? "$path-$name"
+				: $name;
+
+			$paramsByComponent[][$fullName] = null;
+		}
+
+		foreach ($component->getComponents() as $subcomponent) {
+			if (!$subcomponent instanceof Component) {
+				continue;
+			}
+
+			$paramsByComponent[] = $this->getPersistentComponentParams($subcomponent);
+		}
+
+		return array_merge(...$paramsByComponent);
 	}
 
 	protected function createComponentDocument(): DocumentControl
