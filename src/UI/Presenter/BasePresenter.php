@@ -5,7 +5,6 @@ namespace OriCMF\UI\Presenter;
 use Nette\Application\AbortException;
 use Nette\Application\BadRequestException;
 use Nette\Application\Responses\TextResponse;
-use Nette\Application\UI\Component;
 use Nette\Application\UI\Presenter;
 use Nette\Application\UI\Template;
 use Nette\Bridges\ApplicationLatte\TemplateFactory;
@@ -18,11 +17,11 @@ use OriCMF\UI\Control\Document\DocumentControl;
 use OriCMF\UI\Control\Document\DocumentControlFactory;
 use OriCMF\UI\Template\Exception\NoTemplateFound;
 use OriCMF\UI\Template\Locator\PresenterTemplateLocator;
+use OriNette\Application\CanonicalLink\CanonicalLinker;
 use Orisai\Exceptions\Logic\InvalidState;
 use Orisai\Exceptions\Logic\NotImplemented;
 use Orisai\Exceptions\Message;
 use Orisai\Localization\Translator;
-use function array_merge;
 use function assert;
 use function class_exists;
 use function implode;
@@ -53,17 +52,21 @@ abstract class BasePresenter extends Presenter
 
 	private PresenterTemplateLocator $templateLocator;
 
-	public function injectBase(
+	private CanonicalLinker $canonicalLinker;
+
+	final public function injectBase(
 		DocumentControlFactory $documentFactory,
 		Translator $translator,
 		ConfigProvider $config,
 		PresenterTemplateLocator $templateLocator,
+		CanonicalLinker $canonicalLinker,
 	): void
 	{
 		$this->documentFactory = $documentFactory;
 		$this->translator = $translator;
 		$this->config = $config;
 		$this->templateLocator = $templateLocator;
+		$this->canonicalLinker = $canonicalLinker;
 	}
 
 	final protected function startup(): void
@@ -103,38 +106,8 @@ abstract class BasePresenter extends Presenter
 	protected function configureCanonicalUrl(DocumentControl $document): void
 	{
 		$document->setCanonicalUrl(
-			$this->link('//this', $this->getPersistentComponentParams($this)),
+			$this->link('//this', $this->canonicalLinker->getNonCanonicalParams($this)),
 		);
-	}
-
-	/**
-	 * @return array<string, null>
-	 */
-	private function getPersistentComponentParams(Component $component): array
-	{
-		$paramsByComponent = [];
-
-		$path = $component instanceof Presenter
-			? null
-			: $component->lookupPath(Presenter::class);
-
-		foreach ($component::getReflection()->getPersistentParams() as $name => $meta) {
-			$fullName = $path !== null
-				? "$path-$name"
-				: $name;
-
-			$paramsByComponent[][$fullName] = null;
-		}
-
-		foreach ($component->getComponents() as $subcomponent) {
-			if (!$subcomponent instanceof Component) {
-				continue;
-			}
-
-			$paramsByComponent[] = $this->getPersistentComponentParams($subcomponent);
-		}
-
-		return array_merge(...$paramsByComponent);
 	}
 
 	protected function createComponentDocument(): DocumentControl

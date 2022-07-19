@@ -95,6 +95,9 @@ services:
 	ori.cmf.ui.auth.identityCreator:
 		factory: OriCMF\UI\Auth\UserIdentityCreator
 
+	# Canonical linker
+	ori.cmf.ui.canonicalLinker: OriNette\Application\CanonicalLink\CanonicalLinker()
+
 	# Control
 	ori.cmf.ui.control.body.factory:
 		implement: OriCMF\UI\Control\Body\BodyControlFactory
