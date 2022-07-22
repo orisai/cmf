@@ -87,6 +87,7 @@ orisai.monolog:
 	processors:
 		hostname: Monolog\Processor\HostnameProcessor
 		introspection: Monolog\Processor\IntrospectionProcessor
+		user: OriCMF\Core\Log\LazyProcessor(ori.cmf.core.log.userProcessor)
 		web: Monolog\Processor\WebProcessor
 
 tracy:
@@ -172,6 +173,9 @@ services:
 		factory: League\MimeTypeDetection\FinfoMimeTypeDetector
 		arguments:
 			bufferSampleSize: 1048576 # 1 MB
+
+	# Log
+	ori.cmf.core.log.userProcessor: OriCMF\Core\Log\UserProcessor(typed(Orisai\Auth\Authentication\Firewall))
 
 	# Password
 	ori.cmf.core.password.mapper:
