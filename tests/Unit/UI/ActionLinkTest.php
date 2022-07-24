@@ -59,6 +59,36 @@ final class ActionLinkTest extends TestCase
 		);
 	}
 
+	public function testAbsolute(): void
+	{
+		$class = BasePresenter::class;
+		$link = ActionLink::fromClass($class);
+		self::assertSame(
+			$link->getDestination(),
+			":$class:default",
+		);
+
+		$link->setAbsolute();
+		self::assertSame(
+			$link->getDestination(),
+			"//:$class:default",
+		);
+
+		$link = ActionLink::fromMapping(':Foo:Bar:baz');
+		$link->setAbsolute();
+		self::assertSame(
+			$link->getDestination(),
+			'//:Foo:Bar:baz',
+		);
+
+		$link = ActionLink::fromMapping('//:Foo:Bar:baz');
+		$link->setAbsolute(false);
+		self::assertSame(
+			$link->getDestination(),
+			':Foo:Bar:baz',
+		);
+	}
+
 	public function testAnchor(): void
 	{
 		$link = ActionLink::fromMapping(':Foo:Bar:baz');

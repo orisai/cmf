@@ -5,9 +5,12 @@ namespace OriCMF\UI;
 use Nette\Application\IPresenter;
 use Orisai\Exceptions\Logic\InvalidArgument;
 use function str_starts_with;
+use function substr;
 
 final class ActionLink
 {
+
+	private bool $absolute = false;
 
 	private string|null $anchor = null;
 
@@ -32,10 +35,14 @@ final class ActionLink
 	 */
 	public static function fromMapping(string $destination, array $args = []): self
 	{
-		if (
-			!str_starts_with($destination, ':')
-			&& !str_starts_with($destination, '//:')
-		) {
+		if (str_starts_with($destination, '//')) {
+			$destination = substr($destination, 2);
+			$absolute = true;
+		} else {
+			$absolute = false;
+		}
+
+		if (!str_starts_with($destination, ':')) {
 			throw InvalidArgument::create()
 				->withMessage(
 					<<<'TXT'
@@ -45,12 +52,16 @@ TXT,
 				);
 		}
 
-		return new self($destination, $args);
+		$self = new self($destination, $args);
+		$self->absolute = $absolute;
+
+		return $self;
 	}
 
 	public function getDestination(): string
 	{
-		return $this->destination
+		return ($this->absolute ? '//' : '')
+			. $this->destination
 			. ($this->anchor !== null ? "#$this->anchor" : '');
 	}
 
@@ -60,6 +71,11 @@ TXT,
 	public function getArguments(): array
 	{
 		return $this->args;
+	}
+
+	public function setAbsolute(bool $absolute = true): void
+	{
+		$this->absolute = $absolute;
 	}
 
 	public function setAnchor(string|null $anchor): void
