@@ -73,6 +73,11 @@ TXT,
 		return $this->args;
 	}
 
+	public function addArgument(string $name, mixed $value): void
+	{
+		$this->args[$name] = $value;
+	}
+
 	public function setAbsolute(bool $absolute = true): void
 	{
 		$this->absolute = $absolute;
@@ -81,11 +86,6 @@ TXT,
 	public function setAnchor(string|null $anchor): void
 	{
 		$this->anchor = $anchor;
-	}
-
-	public function addArgument(string $name, mixed $value): void
-	{
-		$this->args[$name] = $value;
 	}
 
 }
