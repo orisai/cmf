@@ -73,19 +73,25 @@ TXT,
 		return $this->args;
 	}
 
-	public function addArgument(string $name, mixed $value): void
+	public function addArgument(string $name, mixed $value): self
 	{
 		$this->args[$name] = $value;
+
+		return $this;
 	}
 
-	public function setAbsolute(bool $absolute = true): void
+	public function setAbsolute(bool $absolute = true): self
 	{
 		$this->absolute = $absolute;
+
+		return $this;
 	}
 
-	public function setAnchor(string|null $anchor): void
+	public function setAnchor(string|null $anchor): self
 	{
 		$this->anchor = $anchor;
+
+		return $this;
 	}
 
 }
