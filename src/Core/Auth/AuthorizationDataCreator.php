@@ -6,8 +6,9 @@ use Nette\Caching\Cache;
 use OriCMF\Core\Role\RoleRepository;
 use Orisai\Auth\Authorization\AuthorizationData;
 use Orisai\Auth\Authorization\AuthorizationDataBuilder;
+use Orisai\Auth\Authorization\AuthorizationDataCreator as AuthorizationDataCreatorInterface;
 
-final class AuthorizationDataCreator
+final class AuthorizationDataCreator implements AuthorizationDataCreatorInterface
 {
 
 	/**

@@ -5,7 +5,7 @@ namespace OriCMF\Console\Role;
 use Nextras\Orm\Model\IModel;
 use OriCMF\Core\Role\Role;
 use OriCMF\Core\Role\RoleRepository;
-use Orisai\Auth\Authorization\AuthorizationData;
+use Orisai\Auth\Authorization\Authorizer;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -19,7 +19,7 @@ final class RoleCreateCommand extends Command
 	public function __construct(
 		private readonly IModel $model,
 		private readonly RoleRepository $roleRepository,
-		private readonly AuthorizationData $data,
+		private readonly Authorizer $authorizer,
 	)
 	{
 		parent::__construct();
@@ -73,7 +73,7 @@ final class RoleCreateCommand extends Command
 
 		$missingPrivileges = [];
 		foreach ($privilegeNames as $privilegeName) {
-			if (!$this->data->privilegeExists($privilegeName)) {
+			if (!$this->authorizer->getData()->privilegeExists($privilegeName)) {
 				$missingPrivileges[] = $privilegeName;
 			}
 		}

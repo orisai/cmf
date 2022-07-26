@@ -44,7 +44,7 @@ ori.cmf.dbal:
 
 orisai.auth:
 	authorization:
-		data: @ori.cmf.core.auth.dataCreator::create
+		dataCreator: @ori.cmf.core.auth.dataCreator
 	debug:
 		panel: %debug.panels.auth%
 
