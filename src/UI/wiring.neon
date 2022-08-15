@@ -118,11 +118,13 @@ services:
 	ori.cmf.ui.control.scripts.factory:
 		implement: OriCMF\UI\Control\Scripts\ScriptsControlFactory
 		arguments:
-			build: %container.className%
+			version: %container.compiledAt%
+			debug: %debugMode%
 	ori.cmf.ui.control.styles.factory:
 		implement: OriCMF\UI\Control\Styles\StylesControlFactory
 		arguments:
-			build: %container.className%
+			version: %container.compiledAt%
+			debug: %debugMode%
 	ori.cmf.ui.control.title.factory:
 		implement: OriCMF\UI\Control\Title\TitleControlFactory
 

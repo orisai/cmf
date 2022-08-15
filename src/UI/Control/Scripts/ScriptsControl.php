@@ -4,6 +4,7 @@ namespace OriCMF\UI\Control\Scripts;
 
 use OriCMF\UI\Control\BaseControl;
 use function md5;
+use function time;
 
 /**
  * @property-read ScriptsTemplate $template
@@ -17,13 +18,16 @@ final class ScriptsControl extends BaseControl
 	 */
 	private array $scripts = [];
 
-	public function __construct(private readonly string $build)
+	public function __construct(
+		private readonly string $version,
+		private readonly bool $debug,
+	)
 	{
 	}
 
 	public function addScript(string $src, bool $defer = false): self
 	{
-		$src .= '?v=' . md5($this->build);
+		$src .= '?v=' . md5($this->debug ? $this->version : (string) time());
 		$this->scripts[] = [$src, $defer];
 
 		return $this;

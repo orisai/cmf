@@ -4,6 +4,7 @@ namespace OriCMF\UI\Control\Styles;
 
 use OriCMF\UI\Control\BaseControl;
 use function md5;
+use function time;
 
 /**
  * @property-read StylesTemplate $template
@@ -14,7 +15,10 @@ class StylesControl extends BaseControl
 	/** @var array<string> */
 	private array $styles = [];
 
-	public function __construct(private readonly string $build)
+	public function __construct(
+		private readonly string $version,
+		private readonly bool $debug,
+	)
 	{
 	}
 
@@ -23,7 +27,7 @@ class StylesControl extends BaseControl
 	 */
 	public function addStyle(string $href): self
 	{
-		$this->styles[] = $href . '?v=' . md5($this->build);
+		$this->styles[] = $href . '?v=' . md5($this->debug ? $this->version : (string) time());
 
 		return $this;
 	}
