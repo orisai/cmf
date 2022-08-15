@@ -44,6 +44,7 @@
 			</div>
 		</div>
 	{else}
+
 		<div class="grid grid-cols-6 gap-2">
 
 			<div class="col-span-12">
@@ -70,10 +71,14 @@
 				</div>
 			{/foreach}
 
-			<div class="col-span-12">
-				{include fieldErrors $input}
-			</div>
+		</div>
 
+		{if $input->getOption('hint') !== null}
+			<p class="mt-2 text-sm text-gray-500">{$input->getOption('hint')}</p>
+		{/if}
+
+		<div class="col-span-12">
+			{include fieldErrors $input}
 		</div>
 	{/if}
 {/define}
@@ -104,11 +109,16 @@
 			</div>
 		{/foreach}
 
-		<div class="col-span-12">
-			{include fieldErrors $input}
-		</div>
-
 	</div>
+
+	{if $input->getOption('hint') !== null}
+		<p class="mt-2 text-sm text-gray-500">{$input->getOption('hint')}</p>
+	{/if}
+
+	<div class="col-span-12">
+		{include fieldErrors $input}
+	</div>
+
 {/define}
 
 {define field-Nette\Forms\Controls\Checkbox Nette\Forms\Controls\Checkbox $input, string $inputName}
@@ -124,9 +134,11 @@
 			{$input->getCaption()}
 		</label>
 	</div>
+
 	{if $input->getOption('hint') !== null}
 		<p class="mt-2 text-sm text-gray-500">{$input->getOption('hint')}</p>
 	{/if}
+
 {/define}
 
 {define field-Nette\Forms\Controls\TextInput Nette\Forms\Controls\TextInput $input, string $inputName}
@@ -134,30 +146,36 @@
 		{include disabled-field $input->getCaption(), $input->getValue()}
 	{else}
 		{include fieldLabel $input, $inputName}
+
 		<input n:name="$input"
 				class="mt-1 block w-full px-3 py-2 shadow-sm border rounded-md focus:outline-none sm:text-sm
 				{if $input->hasErrors()} text-red-900 placeholder-red-300 border-red-300 focus:border-red-500 focus:ring-red-500
 				{else} border-gray-300 focus:border-indigo-500 focus:ring-indigo-500
 				{/if}"
 		>
+
 		{if $input->getOption('hint') !== null}
 			<p class="mt-2 text-sm text-gray-500">{$input->getOption('hint')}</p>
 		{/if}
+
 		{include fieldErrors $input}
 	{/if}
 {/define}
 
 {define field-Nette\Forms\Controls\UploadControl Nette\Forms\Controls\UploadControl $input, string $inputName}
 	{include fieldLabel $input, $inputName}
+
 	<input n:name="$input"
 			class="mt-1 block w-full px-3 py-2 shadow-sm border rounded-md focus:outline-none sm:text-sm
 				{if $input->hasErrors()} text-red-900 placeholder-red-300 border-red-300 focus:border-red-500 focus:ring-red-500
 				{else} border-gray-300 focus:border-indigo-500 focus:ring-indigo-500
 				{/if}"
 	>
+
 	{if $input->getOption('hint') !== null}
 		<p class="mt-2 text-sm text-gray-500">{$input->getOption('hint')}</p>
 	{/if}
+
 	{include fieldErrors $input}
 {/define}
 
@@ -166,12 +184,18 @@
 		{include disabled-field $input->getCaption(), $input->getValue()}
 	{else}
 		{include fieldLabel $input, $inputName}
+
 		<textarea n:name="$input"
 				class="mt-1 block w-full px-3 py-2 shadow-sm border rounded-md focus:outline-none sm:text-sm
 					{if $input->hasErrors()} text-red-900 placeholder-red-300 border-red-300 focus:border-red-500 focus:ring-red-500
 					{else} border-gray-300 focus:border-indigo-500 focus:ring-indigo-500
 					{/if}"
 		/>
+
+		{if $input->getOption('hint') !== null}
+			<p class="mt-2 text-sm text-gray-500">{$input->getOption('hint')}</p>
+		{/if}
+
 		{include fieldErrors $input}
 	{/if}
 {/define}
@@ -181,7 +205,13 @@
 		{include disabled-field $input->getCaption(), $input->getSelectedItem()}
 	{else}
 		{include fieldLabel $input, $inputName}
+
 		{OriCMF\UI\Form\SvelteSelect\SvelteSelect::fromSelect($input)->toHtml()}
+
+		{if $input->getOption('hint') !== null}
+			<p class="mt-2 text-sm text-gray-500">{$input->getOption('hint')}</p>
+		{/if}
+
 		{include fieldErrors $input}
 	{/if}
 {/define}
