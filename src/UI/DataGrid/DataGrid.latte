@@ -67,7 +67,7 @@
 {define global-actions}
 	<div n:ifset="$form[actions]">
 		<div class="relative flex items-stretch w-full p-2">
-			<select n:name="$form[actions][action]" class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"/>
+			<select n:name="$form[actions][action]" class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"></select>
 			<button n:name="$form[actions][process]"
 					class="ml-2 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
 				{$form[actions][process]->getCaption()}
@@ -146,7 +146,7 @@
 {define col-filter}
 	{if $form[filter][$column->name] instanceof Nette\Forms\Controls\SelectBox}
 		<select n:name="$column->name"
-				class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"/>
+				class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"></select>
 	{elseif $form[filter][$column->name] instanceof Nette\Forms\Controls\MultiSelectBox}
 		{OriCMF\UI\Form\SvelteSelect\SvelteSelect::fromMultiSelect($form[filter][$column->name])->toHtml()}
 	{elseif $form[filter][$column->name] instanceof Nette\Forms\Controls\Checkbox}
