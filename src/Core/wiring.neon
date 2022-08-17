@@ -8,6 +8,7 @@ extensions:
 	nextras.orm: Nextras\Orm\Bridges\NetteDI\OrmExtension
 
 	ori.cmf.cache: OriCMF\Core\Cache\DI\CacheExtension(%tempDir%/nette)
+	ori.cmf.clock: OriCMF\Clock\DI\ClockExtension
 	ori.cmf.config: OriCMF\Core\Config\DI\ConfigExtension
 	ori.cmf.dbal: OriCMF\Core\SQL\DI\DbalExtension
 	ori.cmf.ormInitializer: OriCMF\Core\ORM\DI\OrmInitializerExtension
@@ -18,7 +19,6 @@ extensions:
 	orisai.httpClient: OriNette\HttpClient\DI\HttpClientExtension
 	orisai.localization: Orisai\Localization\Bridge\NetteDI\LocalizationExtension
 	orisai.monolog: OriNette\Monolog\DI\MonologExtension
-	orisai.time: OriNette\Time\DI\TimeExtension
 
 	tracy: Tracy\Bridges\Nette\TracyExtension(%debugMode%, %consoleMode%)
 

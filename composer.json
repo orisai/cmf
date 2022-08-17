@@ -56,7 +56,6 @@
 		"orisai/nette-di": "^1.0.0",
 		"orisai/nette-http-client": "^1.0.0",
 		"orisai/nette-monolog": "^1.0.0",
-		"orisai/nette-time": "^1.0.0",
 		"orisai/utils": "^1.0.0",
 		"symfony/console": "^6.0.0",
 		"symfony/filesystem": "^6.0.0",
