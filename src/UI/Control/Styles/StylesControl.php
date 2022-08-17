@@ -9,7 +9,7 @@ use function time;
 /**
  * @property-read StylesTemplate $template
  */
-class StylesControl extends BaseControl
+final class StylesControl extends BaseControl
 {
 
 	/** @var array<string> */

@@ -7,7 +7,7 @@ use OriCMF\UI\Control\BaseControl;
 /**
  * @property-read BreadcrumbTemplate $template
  */
-class BreadcrumbControl extends BaseControl
+final class BreadcrumbControl extends BaseControl
 {
 
 	/**

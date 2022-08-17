@@ -21,7 +21,7 @@ use OriCMF\UI\Control\Title\TitleControlFactory;
 /**
  * @property-read HeadTemplate $template
  */
-class HeadControl extends BaseControl
+final class HeadControl extends BaseControl
 {
 
 	public function __construct(

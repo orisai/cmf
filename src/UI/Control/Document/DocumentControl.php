@@ -12,7 +12,7 @@ use OriCMF\UI\Control\Head\HeadControlFactory;
 /**
  * @property-read DocumentTemplate $template
  */
-class DocumentControl extends BaseControl
+final class DocumentControl extends BaseControl
 {
 
 	private Html $element;

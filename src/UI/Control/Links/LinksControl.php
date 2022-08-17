@@ -8,7 +8,7 @@ use function asort;
 /**
  * @property-read LinksTemplate $template
  */
-class LinksControl extends BaseControl
+final class LinksControl extends BaseControl
 {
 
 	/** @var array<string> */

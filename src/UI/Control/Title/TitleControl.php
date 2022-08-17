@@ -8,7 +8,7 @@ use function sprintf;
 /**
  * @property-read TitleTemplate $template
  */
-class TitleControl extends BaseControl
+final class TitleControl extends BaseControl
 {
 
 	private string|null $site = null;

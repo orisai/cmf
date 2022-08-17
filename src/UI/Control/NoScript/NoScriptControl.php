@@ -8,7 +8,7 @@ use OriCMF\UI\Control\BaseControl;
 /**
  * @property-read NoScriptTemplate $template
  */
-class NoScriptControl extends BaseControl
+final class NoScriptControl extends BaseControl
 {
 
 	/** @var array<Html> */

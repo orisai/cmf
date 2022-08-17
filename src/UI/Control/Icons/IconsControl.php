@@ -10,7 +10,7 @@ use function uasort;
 /**
  * @property-read IconsTemplate $template
  */
-class IconsControl extends BaseControl
+final class IconsControl extends BaseControl
 {
 
 	private string|null $favicon = null;

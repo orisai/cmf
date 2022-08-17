@@ -8,7 +8,7 @@ use OriCMF\UI\Control\BaseControl;
 /**
  * @property-read BodyTemplate $template
  */
-class BodyControl extends BaseControl
+final class BodyControl extends BaseControl
 {
 
 	private Html $element;

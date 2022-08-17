@@ -9,7 +9,7 @@ use function ksort;
 /**
  * @property-read MetaTemplate $template
  */
-class MetaControl extends BaseControl
+final class MetaControl extends BaseControl
 {
 
 	/** @var array<string> */
