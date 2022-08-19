@@ -2,7 +2,6 @@
 
 namespace OriCMF\UI\Auth;
 
-use Brick\DateTime\Clock;
 use OriCMF\Core\User\User;
 use OriCMF\Core\User\UserRepository;
 use Orisai\Auth\Authentication\BaseFirewall;
@@ -10,6 +9,7 @@ use Orisai\Auth\Authentication\Exception\NotLoggedIn;
 use Orisai\Auth\Authentication\IdentityRefresher;
 use Orisai\Auth\Authentication\LoginStorage;
 use Orisai\Auth\Authorization\Authorizer;
+use Orisai\Clock\Clock;
 
 /**
  * @phpstan-extends BaseFirewall<UserIdentity>
