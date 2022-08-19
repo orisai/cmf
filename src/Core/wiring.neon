@@ -39,6 +39,9 @@ nextras.orm:
 	model: Nextras\Orm\Model\Model
 	repositoryFinder: Nextras\Orm\Bridges\NetteDI\DIRepositoryFinder
 
+ori.cmf.clock:
+	timezone: %timeZone%
+
 ori.cmf.dbal:
 	debug: %debug.panels.dbal%
 	sqlProcessorFactory: @ori.cmf.core.sql.processorFactory
@@ -117,6 +120,7 @@ parameters:
 			version: null
 			stable: false
 	privileges: []
+	timeZone: UTC
 
 services:
 	# Auth
@@ -131,6 +135,11 @@ services:
 	# Cache
 	ori.cmf.core.cache:
 		factory: Nette\Caching\Cache
+
+	# Clock
+	orisai.clock.clock:
+		arguments:
+			timeZone: \DateTimeZone(%timeZone%)
 
 	# Config
 	ori.cmf.core.config.application:
