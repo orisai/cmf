@@ -83,12 +83,12 @@ parameters:
 		panels:
 			latte: false
 			ui:
-				application: false
-				applicationMap: false
-				formMonitor: true
-				inspector: false
-				routing: false
-				session: false
+				application: %debugMode%
+				applicationMap: %debugMode%
+				formMonitor: %debugMode%
+				inspector: %debugMode%
+				routing: %debugMode%
+				session: %debugMode%
 
 services:
 	# Auth

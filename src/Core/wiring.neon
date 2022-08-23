@@ -106,13 +106,13 @@ parameters:
 		console: false
 	debug:
 		panels:
-			auth: false
-			dbal: false
+			auth: %debugMode%
+			dbal: %debugMode%
 			di:
-				container: true
-			httpClient: false
-			localization: false
-			monolog: false
+				container: %debugMode%
+			httpClient: %debugMode%
+			localization: %debugMode%
+			monolog: %debugMode%
 	application:
 		name: null
 		build:
