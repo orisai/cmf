@@ -10,31 +10,24 @@ use Psr\Log\LoggerInterface;
 final class SqlLogger implements ILogger
 {
 
-	public const ContextIdentifier = 'sql';
-
 	public function __construct(private readonly LoggerInterface $logger)
 	{
 	}
 
 	public function onConnect(): void
 	{
-		$this->logger->debug('Connected to database', [
-			self::ContextIdentifier => true,
-		]);
+		$this->logger->debug('Connected to database');
 	}
 
 	public function onDisconnect(): void
 	{
-		$this->logger->debug('Disconnected from database', [
-			self::ContextIdentifier => true,
-		]);
+		$this->logger->debug('Disconnected from database');
 	}
 
 	public function onQuery(string $sqlQuery, float $timeTaken, Result|null $result): void
 	{
 		$this->logger->info("Query: $sqlQuery", [
 			'time' => $timeTaken,
-			self::ContextIdentifier => true,
 		]);
 	}
 
@@ -42,7 +35,6 @@ final class SqlLogger implements ILogger
 	{
 		$context = [
 			'time' => $timeTaken,
-			self::ContextIdentifier => true,
 		];
 
 		if ($exception !== null) {
