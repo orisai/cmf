@@ -4,19 +4,22 @@ namespace OriCMF\Core\Log;
 
 use Monolog\LogRecord;
 use Monolog\Processor\ProcessorInterface;
-use OriCMF\Core\SQL\SqlLogger;
+use Orisai\Auth\Authentication\BaseFirewall;
+use Orisai\Auth\Authentication\Data\Logins;
 use Orisai\Auth\Authentication\Firewall;
 use Orisai\Auth\Authentication\Identity;
-use Orisai\Auth\Authentication\IdentityRefresher;
-use function debug_backtrace;
-use function is_a;
-use const DEBUG_BACKTRACE_IGNORE_ARGS;
+use Orisai\Auth\Authentication\LoginStorage;
+use ReflectionClass;
+use function assert;
 
 final class UserProcessor implements ProcessorInterface
 {
 
 	/** @var array<string, array{int|string|null, array<int|string, mixed>|string}> */
-	private array $cache = [];
+	private array $dataCache = [];
+
+	/** @var array<string, true> */
+	private array $upToDateCache = [];
 
 	/**
 	 * @param array<int, Firewall<Identity>> $firewalls
@@ -33,14 +36,18 @@ final class UserProcessor implements ProcessorInterface
 		$extras = [];
 		foreach ($this->firewalls as $firewall) {
 			$namespace = $firewall->getNamespace();
-			$id = $this->getUserId($firewall);
+			[$identity, $upToDate] = $this->getIdentity($firewall);
+			$id = $identity?->getId();
 
 			$cached = $this->fetchFromCache($namespace, $id);
 			if ($cached !== null) {
 				$extra = $cached;
 			} else {
 				$extra = $this->createExtra($firewall);
-				$this->storeInCache($namespace, $id, $extra);
+
+				if ($upToDate) {
+					$this->storeInCache($namespace, $id, $extra);
+				}
 			}
 
 			$extras[$namespace] = $extra;
@@ -54,17 +61,17 @@ final class UserProcessor implements ProcessorInterface
 	 */
 	private function fetchFromCache(string $namespace, int|string|null $id): string|array|null
 	{
-		if (!isset($this->cache[$namespace])) {
+		if (!isset($this->dataCache[$namespace])) {
 			return null;
 		}
 
-		if ($this->cache[$namespace][0] !== $id) {
-			unset($this->cache[$namespace]);
+		if ($this->dataCache[$namespace][0] !== $id) {
+			unset($this->dataCache[$namespace]);
 
 			return null;
 		}
 
-		return $this->cache[$namespace][1];
+		return $this->dataCache[$namespace][1];
 	}
 
 	/**
@@ -72,42 +79,68 @@ final class UserProcessor implements ProcessorInterface
 	 */
 	private function storeInCache(string $namespace, int|string|null $id, string|array $extra): void
 	{
-		$this->cache[$namespace] = [$id, $extra];
+		$this->dataCache[$namespace] = [$id, $extra];
 	}
 
 	/**
 	 * @param Firewall<Identity> $firewall
+	 * @return array{Identity|null, bool}
 	 */
-	private function getUserId(Firewall $firewall): int|string|null
+	private function getIdentity(Firewall $firewall): array
 	{
-		return $firewall->isLoggedIn()
-			? $firewall->getIdentity()->getId()
+		$isset = isset($this->upToDateCache[$firewall->getNamespace()]);
+
+		if ($firewall instanceof BaseFirewall && !$isset) {
+			$reflection = new ReflectionClass(BaseFirewall::class);
+
+			$logins = $reflection->getProperty('logins')->getValue($firewall);
+			assert($logins instanceof Logins || $logins === null);
+
+			if ($logins === null) {
+				$storage = $reflection->getProperty('storage')->getValue($firewall);
+				assert($storage instanceof LoginStorage);
+				$logins = $storage->getLogins($firewall->getNamespace());
+
+				return [$logins->getCurrentLogin()?->getIdentity(), false];
+			}
+		}
+
+		if (!$isset) {
+			$this->upToDateCache[$firewall->getNamespace()] = true;
+		}
+
+		$identity = $firewall->isLoggedIn()
+			? $firewall->getIdentity()
 			: null;
+
+		return [$identity, true];
 	}
 
 	/**
 	 * @param Firewall<Identity> $firewall
-	 * @return string|array<int|string, mixed>
+	 * @return string|array<string, mixed>
 	 */
 	private function createExtra(Firewall $firewall): string|array
 	{
-		return $firewall->isLoggedIn() ? [
-			'id' => $firewall->getIdentity()->getId(),
+		[$identity, $upToDate] = $this->getIdentity($firewall);
+
+		return $identity !== null ? [
+			'id' => $identity->getId(),
+			'upToDate' => $upToDate,
 		] : '[Not logged in]';
 	}
 
 	public function __invoke(LogRecord $record): LogRecord
 	{
-		// Prevent looping with query logger in IdentityRefresher calls
-		if (($record->extra[SqlLogger::ContextIdentifier] ?? false) === true) {
-			foreach (debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS) as $item) {
-				if (isset($item['class']) && is_a($item['class'], IdentityRefresher::class, true)) {
-					return $record;
-				}
-			}
+		static $loops = false;
+
+		if ($loops) {
+			return $record;
 		}
 
+		$loops = true;
 		$record->extra['user'] = $this->getExtras();
+		$loops = false;
 
 		return $record;
 	}
