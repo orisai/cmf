@@ -1,6 +1,4 @@
 nette.application:
-	catchExceptions: %catchExceptions.ui%
-	debugger: %debug.panels.ui.application%
 	errorPresenter: OriCMF\Error\UI\ErrorForwardPresenter
 
 services:
