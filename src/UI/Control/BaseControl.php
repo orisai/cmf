@@ -9,7 +9,6 @@ use OriCMF\UI\Form\FormFactory;
 use OriCMF\UI\Presenter\BasePresenter;
 use Orisai\Exceptions\Logic\InvalidState;
 use Orisai\Exceptions\Message;
-use Orisai\Localization\Translator;
 use function assert;
 use function class_exists;
 use function is_string;
@@ -25,15 +24,12 @@ use function preg_replace;
 abstract class BaseControl extends Control
 {
 
-	protected Translator $translator;
-
 	protected FormFactory $formFactory;
 
 	private BaseUIFirewall|null $firewall = null;
 
-	public function setBase(Translator $translator, FormFactory $formFactory): void
+	public function setBase(FormFactory $formFactory): void
 	{
-		$this->translator = $translator;
 		$this->formFactory = $formFactory;
 	}
 

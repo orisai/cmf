@@ -46,7 +46,7 @@ abstract class BasePresenter extends Presenter
 
 	private DocumentControlFactory $documentFactory;
 
-	protected Translator $translator;
+	private Translator $translator;
 
 	protected ConfigProvider $config;
 
