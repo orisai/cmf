@@ -1,0 +1,7 @@
+services:
+	# DB
+	ori.cmf.email.db.mapper:
+		factory: OriCMF\Email\DB\EmailPostgresMapper
+		type: OriCMF\Email\DB\EmailMapper
+	ori.cmf.email.db.repository:
+		factory: OriCMF\Email\DB\EmailRepository

@@ -1,0 +1,5 @@
+ori.cmf.login.logout.reason.inactivity: 'Byl(a) jste odhlášen(a) z důvodu neaktivity.'
+ori.cmf.login.email.alreadyInUse: Emailová adresa je již využívána jiným účtem.
+ori.cmf.login.invalidCredentials: Nesprávné přihlašovací údaje
+ori.cmf.login.inactive.newAccount: Váš účet zatím nebyl aktivován.
+ori.cmf.login.inactive.deactivatedAccount: Váš účet byl deaktivován.

@@ -8,8 +8,8 @@ use Nette\PhpGenerator\PhpLiteral;
 use Nette\Schema\Expect;
 use Nette\Schema\Schema;
 use OriCMF\UI\Config\AdminConfig;
-use OriCMF\UI\Config\FrontConfig;
 use OriCMF\UI\Config\LoginConfig;
+use OriCMF\UI\Config\PublicConfig;
 use OriCMF\UI\Config\UIConfig;
 use stdClass;
 use function serialize;
@@ -31,7 +31,7 @@ final class UIExtension extends CompilerExtension
 					)->default(null),
 				]),
 			]),
-			'front' => Expect::structure([
+			'public' => Expect::structure([
 				'login' => Expect::structure([
 					'expiration' => Expect::anyOf(
 						Expect::string(),
@@ -55,9 +55,9 @@ final class UIExtension extends CompilerExtension
 					$this->textTimeToInt($config->admin->login->expiration),
 				),
 			),
-			new FrontConfig(
+			new PublicConfig(
 				new LoginConfig(
-					$this->textTimeToInt($config->front->login->expiration),
+					$this->textTimeToInt($config->public->login->expiration),
 				),
 			),
 		);

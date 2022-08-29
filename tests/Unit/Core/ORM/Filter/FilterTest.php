@@ -2,7 +2,7 @@
 
 namespace Tests\OriCMF\Unit\Core\ORM\Filter;
 
-use OriCMF\Core\ORM\Filter\Filter;
+use OriCMF\ORM\Filter\Filter;
 use PHPUnit\Framework\TestCase;
 
 final class FilterTest extends TestCase

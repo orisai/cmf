@@ -1,0 +1,5 @@
+ori.cmf.login.logout.reason.inactivity: 'You have been signed out due to inactivity.'
+ori.cmf.login.email.alreadyInUse: Email address is already used by another account.
+ori.cmf.login.invalidCredentials: Incorrect credentials
+ori.cmf.login.inactive.newAccount: Your account is not activated yet.
+ori.cmf.login.inactive.deactivatedAccount: Your account was deactivated.

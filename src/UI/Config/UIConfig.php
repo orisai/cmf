@@ -5,7 +5,7 @@ namespace OriCMF\UI\Config;
 final class UIConfig
 {
 
-	public function __construct(private AdminConfig $adminConfig, private FrontConfig $frontConfig)
+	public function __construct(private AdminConfig $adminConfig, private PublicConfig $publicConfig)
 	{
 	}
 
@@ -14,9 +14,9 @@ final class UIConfig
 		return $this->adminConfig;
 	}
 
-	public function getFront(): FrontConfig
+	public function getPublic(): PublicConfig
 	{
-		return $this->frontConfig;
+		return $this->publicConfig;
 	}
 
 	/**
@@ -26,7 +26,7 @@ final class UIConfig
 	{
 		return [
 			'admin' => $this->adminConfig,
-			'front' => $this->frontConfig,
+			'public' => $this->publicConfig,
 		];
 	}
 
@@ -36,7 +36,7 @@ final class UIConfig
 	public function __unserialize(array $data): void
 	{
 		$this->adminConfig = $data['admin'];
-		$this->frontConfig = $data['front'];
+		$this->publicConfig = $data['public'];
 	}
 
 }

@@ -1,0 +1,9 @@
+services:
+
+	# Config
+	ori.cmf.app.config.application:
+		factory: OriCMF\App\Config\ApplicationConfig
+		arguments: [%application.name%]
+	ori.cmf.app.config.build:
+		factory: OriCMF\App\Config\BuildConfig
+		arguments: [%application.build.name%, %application.build.version%, %application.build.stable%]

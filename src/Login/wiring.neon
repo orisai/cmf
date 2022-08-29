@@ -1,0 +1,12 @@
+services:
+	# Admin
+	ori.cmf.login.admin.presenter:
+		factory: OriCMF\Login\Admin\LoginPresenter
+
+	# Logic
+	ori.cmf.core.user.login.verifier:
+		factory: OriCMF\Login\Logic\LoginVerifier
+
+	# Public
+	ori.cmf.login.public.presenter:
+		factory: OriCMF\Login\Public\LoginPresenter

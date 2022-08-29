@@ -4,8 +4,8 @@ namespace OriCMF\UI\Template;
 
 use Latte\Engine;
 use Nette\Bridges\ApplicationLatte\Template;
-use OriCMF\Core\Config\ConfigProvider;
-use OriCMF\UI\Auth\BaseUIFirewall;
+use OriCMF\Auth\UI\BaseUIFirewall;
+use OriCMF\Config\ConfigProvider;
 
 /**
  * @method bool isLinkCurrent(string $destination = null, array $args = [])

@@ -1,0 +1,19 @@
+nette.application:
+	catchExceptions: %catchExceptions.ui%
+	debugger: %debug.panels.ui.application%
+	errorPresenter: OriCMF\Error\UI\ErrorForwardPresenter
+
+services:
+	# Admin
+	ori.cmf.error.admin.presenter:
+		factory: OriCMF\Error\Admin\ErrorPresenter
+
+	# Public
+	ori.cmf.error.public.presenter:
+		factory: OriCMF\Error\Public\ErrorPresenter
+
+	# UI
+	ori.cmf.error.ui.forward.presenter:
+		factory: OriCMF\Error\UI\ErrorForwardPresenter
+		setup:
+			- addErrorPresenter(':OriCMF\Error\Admin\ErrorPresenter:default', '#(.*)(\\|:)(Admin|Administration)(\\|:)(.*)#')

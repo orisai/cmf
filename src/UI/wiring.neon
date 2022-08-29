@@ -1,103 +1,20 @@
 extensions:
-	latte: Nette\Bridges\ApplicationDI\LatteExtension(%buildDir%/latte, %debugMode%)
-
-	nette.application: Nette\Bridges\ApplicationDI\ApplicationExtension(%debugMode%)
-	nette.http: Nette\Bridges\HttpDI\HttpExtension(%consoleMode%)
-	nette.session: Nette\Bridges\HttpDI\SessionExtension(%debugMode%, %consoleMode%)
-
 	ori.cmf.latteComponents: OriCMF\UI\Template\DI\LatteComponentsExtension
 	ori.cmf.routing: OriCMF\UI\Routing\DI\RoutingExtension
 	ori.cmf.ui: OriCMF\UI\Config\DI\UIExtension
 	ori.cmf.uiTemplate: OriCMF\UI\Template\DI\UITemplateExtension
-
-	orisai.application.map: OriNette\Application\ApplicationMap\DI\ApplicationMapExtension
-	orisai.application.formMonitor: OriNette\Application\FormMonitor\DI\FormMonitorExtension
-	orisai.application.presenterFactory: OriNette\Application\Mapping\DI\PresenterFactoryExtension
-	orisai.application.uiInspector: OriNette\Application\Inspector\DI\InspectorExtension
-
-latte:
-	debugger: %debug.panels.latte%
-	strictTypes: true
-
-nette.application:
-	catchExceptions: %catchExceptions.ui%
-	debugger: %debug.panels.ui.application%
-	errorPresenter: OriCMF\UI\Error\ErrorForwardPresenter
-	mapping:
-		*: ['', *, *\*Presenter]
-	scanComposer: false
-	scanDirs: false
-	silentLinks: false
 
 nette.decorator:
 	OriCMF\UI\Control\BaseControl:
 		setup:
 			- setBase()
 
-nette.http:
-	csp:
-		base-uri: self
-		form-action: self
-		frame-ancestors: none
-	headers:
-		Referrer-Policy: strict-origin-when-cross-origin
-		X-Content-Type-Options: nosniff
-		X-Frame-Options: DENY
-		X-Powered-By: Orisai CMF
-		X-XSS-Protection: '1; mode=block'
-
-nette.session:
-	autoStart: smart
-	cookiePath: @Nette\Http\IRequest::getUrl()::getBasePath()
-	cookieSamesite: Lax
-	debugger: %debug.panels.ui.session%
-	expiration: 14 days
-	name: SID
-	sid_bits_per_character: 6
-	sid_length: 128
-
 ori.cmf.routing:
 	debug: %debug.panels.ui.routing%
 	providers:
 		ori.core: OriCMF\UI\Routing\CmfUIRouterProvider
 
-orisai.application.map:
-	debug:
-		panel: %debug.panels.ui.applicationMap%
-
-orisai.application.formMonitor:
-	enabled: %debugMode%
-	debug:
-		panel: %debug.panels.ui.formMonitor%
-
-orisai.application.presenterFactory:
-	presenterConstructor: 'strict'
-
-orisai.application.uiInspector:
-	enabled: %debug.panels.ui.inspector%
-
-parameters:
-	catchExceptions:
-		ui: false
-	debug:
-		panels:
-			latte: false
-			ui:
-				application: %debugMode%
-				applicationMap: %debugMode%
-				formMonitor: %debugMode%
-				inspector: %debugMode%
-				routing: %debugMode%
-				session: %debugMode%
-
 services:
-	# Auth
-	ori.cmf.ui.auth.identityCreator:
-		factory: OriCMF\UI\Auth\UserIdentityCreator
-
-	# Canonical linker
-	ori.cmf.ui.canonicalLinker: OriNette\Application\CanonicalLink\CanonicalLinker()
-
 	# Control
 	ori.cmf.ui.control.body.factory:
 		implement: OriCMF\UI\Control\Body\BodyControlFactory
@@ -132,17 +49,9 @@ services:
 	ori.cmf.ui.dataGrid.factory:
 		implement: OriCMF\UI\DataGrid\DataGridFactory
 
-	# Error
-	ori.cmf.ui.error.forward.presenter:
-		factory: OriCMF\UI\Error\ErrorForwardPresenter
-
 	# Form
 	ori.cmf.ui.form.factory:
 		factory: OriCMF\UI\Form\FormFactory
-
-	# Robots
-	ori.cmf.ui.robots.presenter:
-		factory: OriCMF\UI\Robots\RobotsPresenter
 
 	# Template
 	ori.cmf.ui.template.creator: OriCMF\UI\Template\TemplateCreator

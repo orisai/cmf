@@ -1,0 +1,30 @@
+services:
+	# FS internal
+	ori.cmf.files.fs.internal.adapter:
+		factory: League\Flysystem\Local\LocalFilesystemAdapter
+		type: League\Flysystem\FilesystemAdapter
+		autowired: false
+		arguments:
+			location: %dataDir%
+	ori.cmf.files.fs.internal:
+		factory: OriCMF\Files\InternalFileSystem
+		arguments:
+			- @ori.cmf.files.fs.internal.adapter
+
+	# FS public
+	ori.cmf.files.fs.public.adapter:
+		factory: League\Flysystem\Local\LocalFilesystemAdapter
+		type: League\Flysystem\FilesystemAdapter
+		autowired: false
+		arguments:
+			location: %wwwDir%/u
+	ori.cmf.files.fs.public:
+		factory: OriCMF\Files\PublicFileSystem
+		arguments:
+			- @ori.cmf.files.fs.public.adapter
+
+	# Mime type
+	ori.cmf.files.fs.mimeTypeDetector:
+		factory: League\MimeTypeDetection\FinfoMimeTypeDetector
+		arguments:
+			bufferSampleSize: 1048576 # 1 MB

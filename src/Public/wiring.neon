@@ -1,0 +1,10 @@
+nette.decorator:
+	OriCMF\Public\Presenter\BasePublicPresenter:
+		setup:
+			- setPublic(menu: @ori.cmf.public.menu)
+
+services:
+	# Menu
+	ori.cmf.public.menu:
+		factory: OriCMF\UI\Control\Menu\Menu
+		autowired: false

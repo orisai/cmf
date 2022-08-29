@@ -2,8 +2,8 @@
 
 namespace OriCMF\Admin\Presenter;
 
-use OriCMF\Admin\Auth\AdminFirewall;
-use OriCMF\Admin\Login\LoginPresenter;
+use OriCMF\Auth\Admin\AdminFirewall;
+use OriCMF\Login\Admin\LoginPresenter;
 use OriCMF\UI\Control\Menu\Menu;
 use OriCMF\UI\Presenter\BasePresenter;
 use Orisai\Auth\Authentication\LogoutCode;

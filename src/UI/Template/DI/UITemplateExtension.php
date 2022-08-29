@@ -10,7 +10,7 @@ use Nette\DI\CompilerExtension;
 use Nette\DI\Container;
 use Nette\DI\Definitions\FactoryDefinition;
 use Nette\DI\Definitions\ServiceDefinition;
-use OriCMF\Core\Config\ConfigProvider;
+use OriCMF\Config\ConfigProvider;
 use OriCMF\UI\Control\BaseControlTemplate;
 use OriCMF\UI\Template\Locator\ControlTemplateLocator;
 use OriCMF\UI\Template\UIFilters;

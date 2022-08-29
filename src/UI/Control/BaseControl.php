@@ -4,7 +4,7 @@ namespace OriCMF\UI\Control;
 
 use Nette\Application\UI\Control;
 use Nette\Application\UI\Template as PlainTemplate;
-use OriCMF\UI\Auth\BaseUIFirewall;
+use OriCMF\Auth\UI\BaseUIFirewall;
 use OriCMF\UI\Form\FormFactory;
 use OriCMF\UI\Presenter\BasePresenter;
 use Orisai\Exceptions\Logic\InvalidState;

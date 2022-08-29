@@ -1,0 +1,20 @@
+#
+# DataGrid
+#
+
+ori.cmf.grid.search: Search
+ori.cmf.grid.search.cancel: Cancel
+ori.cmf.grid.actions: Actions
+ori.cmf.grid.global.title: Global action
+ori.cmf.grid.global.do: Do
+ori.cmf.grid.global.choose: '- select global action -'
+
+#
+# Pagination
+#
+
+ori.cmf.pagination.first: First
+ori.cmf.pagination.last: Last
+ori.cmf.pagination.previous: Previous
+ori.cmf.pagination.next: Next
+ori.cmf.pagination.results: "{from} to {to} of {total} results"

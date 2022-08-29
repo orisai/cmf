@@ -4,13 +4,13 @@ namespace OriCMF\UI\Routing;
 
 use Nette\Application\Routers\RouteList;
 use Nette\Routing\Router;
-use OriCMF\Admin\Dashboard\DashboardPresenter;
-use OriCMF\Admin\Error\ErrorPresenter as AdminErrorPresenter;
-use OriCMF\Admin\Login\LoginPresenter as AdminLoginPresenter;
-use OriCMF\Front\Error\ErrorPresenter as FrontErrorPresenter;
-use OriCMF\Front\Homepage\HomepagePresenter;
-use OriCMF\Front\Login\LoginPresenter as FrontLoginPresenter;
-use OriCMF\UI\Robots\RobotsPresenter;
+use OriCMF\Error\Admin\ErrorPresenter as AdminErrorPresenter;
+use OriCMF\Error\Public\ErrorPresenter as PublicErrorPresenter;
+use OriCMF\Home\Admin\HomePresenter as AdminHomePresenter;
+use OriCMF\Home\Public\HomePresenter as PublicHomePresenter;
+use OriCMF\Login\Admin\LoginPresenter as AdminLoginPresenter;
+use OriCMF\Login\Public\LoginPresenter as PublicLoginPresenter;
+use OriCMF\Robots\RobotsPresenter;
 
 final class CmfUIRouterProvider implements RouterProvider
 {
@@ -21,11 +21,11 @@ final class CmfUIRouterProvider implements RouterProvider
 
 		$router->add(new ClassRoute('/admin/login', AdminLoginPresenter::class));
 		$router->add(new ClassRoute('/admin/error', AdminErrorPresenter::class));
-		$router->add(new ClassRoute('/admin', DashboardPresenter::class));
+		$router->add(new ClassRoute('/admin', AdminHomePresenter::class));
 
-		$router->add(new ClassRoute('/login', FrontLoginPresenter::class));
-		$router->add(new ClassRoute('/error', FrontErrorPresenter::class));
-		$router->add(new ClassRoute('/', HomepagePresenter::class));
+		$router->add(new ClassRoute('/login', PublicLoginPresenter::class));
+		$router->add(new ClassRoute('/error', PublicErrorPresenter::class));
+		$router->add(new ClassRoute('/', PublicHomePresenter::class));
 
 		$router->add(new ClassRoute('/robots.txt', RobotsPresenter::class));
 

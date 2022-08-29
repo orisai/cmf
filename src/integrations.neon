@@ -1,0 +1,153 @@
+extensions:
+	di: Nette\DI\Extensions\DIExtension(%debugMode%)
+
+	latte: Nette\Bridges\ApplicationDI\LatteExtension(%buildDir%/latte, %debugMode%)
+
+	nette.application: Nette\Bridges\ApplicationDI\ApplicationExtension(%debugMode%)
+	nette.decorator: Nette\DI\Extensions\DecoratorExtension
+	nette.http: Nette\Bridges\HttpDI\HttpExtension(%consoleMode%)
+	nette.inject: Nette\DI\Extensions\InjectExtension
+	nette.session: Nette\Bridges\HttpDI\SessionExtension(%debugMode%, %consoleMode%)
+
+	nextras.migrations: Nextras\Migrations\Bridges\NetteDI\MigrationsExtension
+	nextras.orm: Nextras\Orm\Bridges\NetteDI\OrmExtension
+
+	orisai.application.map: OriNette\Application\ApplicationMap\DI\ApplicationMapExtension
+	orisai.application.formMonitor: OriNette\Application\FormMonitor\DI\FormMonitorExtension
+	orisai.application.presenterFactory: OriNette\Application\Mapping\DI\PresenterFactoryExtension
+	orisai.application.uiInspector: OriNette\Application\Inspector\DI\InspectorExtension
+	orisai.auth: OriNette\Auth\DI\AuthExtension
+	orisai.console: OriNette\Console\DI\ConsoleExtension
+	orisai.clock: OriNette\Clock\DI\ClockExtension
+	orisai.datasource: Orisai\DataSources\Bridge\NetteDI\DataSourceExtension
+	orisai.httpClient: OriNette\HttpClient\DI\HttpClientExtension
+	orisai.localization: Orisai\Localization\Bridge\NetteDI\LocalizationExtension
+	orisai.monolog: OriNette\Monolog\DI\MonologExtension
+
+	tracy: Tracy\Bridges\Nette\TracyExtension(%debugMode%, %consoleMode%)
+
+di:
+	debugger: %debug.panels.di.container%
+	export:
+		parameters: false
+		tags: false
+		types: false
+
+latte:
+	debugger: %debug.panels.latte%
+	strictTypes: true
+
+nette.application:
+	catchExceptions: %catchExceptions.ui%
+	debugger: %debug.panels.ui.application%
+	mapping:
+		*: ['', *, *\*Presenter]
+	scanComposer: false
+	scanDirs: false
+	silentLinks: false
+
+nette.http:
+	csp:
+		base-uri: self
+		form-action: self
+		frame-ancestors: none
+	headers:
+		Referrer-Policy: strict-origin-when-cross-origin
+		X-Content-Type-Options: nosniff
+		X-Frame-Options: DENY
+		X-Powered-By: Orisai CMF
+		X-XSS-Protection: '1; mode=block'
+
+nette.session:
+	autoStart: smart
+	cookiePath: @Nette\Http\IRequest::getUrl()::getBasePath()
+	cookieSamesite: Lax
+	debugger: %debug.panels.ui.session%
+	expiration: 14 days
+	name: SID
+	sid_bits_per_character: 6
+	sid_length: 128
+
+nextras.migrations:
+	driver: pgsql
+	dbal: nextras
+	withDummyData: %debugMode%
+
+nextras.orm:
+	model: Nextras\Orm\Model\Model
+	repositoryFinder: Nextras\Orm\Bridges\NetteDI\DIRepositoryFinder
+
+orisai.application.map:
+	debug:
+		panel: %debug.panels.ui.applicationMap%
+
+orisai.application.formMonitor:
+	enabled: %debugMode%
+	debug:
+		panel: %debug.panels.ui.formMonitor%
+
+orisai.application.presenterFactory:
+	presenterConstructor: 'strict'
+
+orisai.application.uiInspector:
+	enabled: %debug.panels.ui.inspector%
+
+orisai.auth:
+	debug:
+		panel: %debug.panels.auth%
+
+orisai.console:
+	catchExceptions: %catchExceptions.console%
+	name: %application.name%
+	version: %application.build.version%
+	di:
+		parameters:
+			backup: %consoleMode%
+
+orisai.httpClient:
+	debug:
+		panel: %debug.panels.httpClient%
+
+orisai.localization:
+	debug:
+		newMessages: %debugMode%
+		panel: %debug.panels.localization%
+
+orisai.monolog:
+	debug: %debugMode%
+
+	channels:
+
+		main:
+			autowired: true
+
+	# No default handlers, just bridge with Tracy
+	handlers: []
+
+	bridge:
+		fromTracy:
+			- main
+		toTracy: true
+		tracyPanel: %debug.panels.monolog%
+
+	processors:
+		hostname: Monolog\Processor\HostnameProcessor
+		introspection: Monolog\Processor\IntrospectionProcessor
+		web: Monolog\Processor\WebProcessor
+
+tracy:
+	netteMailer: false
+	# Report everything in development mode
+	strictMode: 'E_ALL'
+	# Log everything in production mode
+	logSeverity: 'E_ALL'
+
+services:
+
+	# Clock
+	orisai.clock.clock:
+		arguments:
+			timeZone: \DateTimeZone(%timeZone%)
+
+	# Canonical linker
+	orisai.application.canonicalLinker: OriNette\Application\CanonicalLink\CanonicalLinker()

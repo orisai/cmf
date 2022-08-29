@@ -1,0 +1,5 @@
+services:
+	ori.cmf.registration.logic.registrar:
+		factory: OriCMF\Registration\Logic\UserRegistrar
+	ori.cmf.registration.logic.registrar.getter:
+		implement: OriCMF\Registration\Logic\UserRegistrarGetter

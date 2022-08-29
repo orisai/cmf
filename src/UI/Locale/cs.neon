@@ -1,0 +1,20 @@
+#
+# DataGrid
+#
+
+ori.cmf.grid.search: Hledat
+ori.cmf.grid.search.cancel: Zrušit
+ori.cmf.grid.actions: Akce
+ori.cmf.grid.global.title: Hromadná akce
+ori.cmf.grid.global.do: Provést
+ori.cmf.grid.global.choose: '- vyberte hromadnou akci -'
+
+#
+# Pagination
+#
+
+ori.cmf.pagination.first: První
+ori.cmf.pagination.last: Poslední
+ori.cmf.pagination.previous: Předchozí
+ori.cmf.pagination.next: Následující
+ori.cmf.pagination.results: "{from} až {to} z {total} výsledků"

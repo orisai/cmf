@@ -1,0 +1,7 @@
+services:
+	# DB
+	ori.cmf.password.db.mapper:
+		factory: OriCMF\Password\DB\PasswordPostgresMapper
+		type: OriCMF\Password\DB\PasswordMapper
+	ori.cmf.password.db.repository:
+		factory: OriCMF\Password\DB\PasswordRepository

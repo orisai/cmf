@@ -1,0 +1,43 @@
+orisai.auth:
+	authorization:
+		dataCreator: @ori.cmf.auth.logic.dataCreator
+
+orisai.monolog:
+	processors:
+		auth: OriCMF\Logging\LazyProcessor(ori.cmf.auth.logic.authProcessor)
+
+services:
+	# Admin
+	ori.cmf.auth.admin.identityRefresher:
+		factory: OriCMF\Auth\Admin\AdminIdentityRefresher
+		autowired: false
+	ori.cmf.auth.admin.firewall:
+		factory: OriCMF\Auth\Admin\AdminFirewall
+		arguments:
+			storage: @OriNette\Auth\Http\SessionLoginStorage
+			refresher: @ori.cmf.auth.admin.identityRefresher
+
+	# Logic
+	ori.cmf.auth.logic.authProcessor: OriCMF\Auth\Logic\AuthProcessor(typed(Orisai\Auth\Authentication\Firewall))
+
+	ori.cmf.auth.logic.dataCreator:
+		factory: OriCMF\Auth\Logic\AuthorizationDataCreator
+		autowired: false
+		arguments:
+			privileges: %privileges%
+			containerName: %container.className%
+			debugMode: %debugMode%
+
+	# Public
+	ori.cmf.auth.public.identityRefresher:
+		factory: OriCMF\Auth\Public\PublicIdentityRefresher
+		autowired: false
+	ori.cmf.auth.public.firewall:
+		factory: OriCMF\Auth\Public\PublicFirewall
+		arguments:
+			storage: @OriNette\Auth\Http\SessionLoginStorage
+			refresher: @ori.cmf.auth.public.identityRefresher
+
+	# UI
+	ori.cmf.auth.ui.identityCreator:
+		factory: OriCMF\Auth\UI\UserIdentityCreator

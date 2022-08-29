@@ -1,0 +1,6 @@
+extensions:
+	ori.cmf.cache: OriCMF\Cache\DI\CacheExtension(%tempDir%/nette)
+
+services:
+	ori.cmf.cache.cache:
+		factory: Nette\Caching\Cache

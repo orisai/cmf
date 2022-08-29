@@ -1,0 +1,8 @@
+services:
+	# Admin
+	ori.cmf.home.admin.presenter:
+		factory: OriCMF\Home\Admin\HomePresenter
+
+	# Public
+	ori.cmf.home.public.presenter:
+		factory: OriCMF\Home\Public\HomePresenter

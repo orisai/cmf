@@ -7,7 +7,7 @@ use Nextras\Orm\Collection\Functions\CompareGreaterThanFunction;
 use Nextras\Orm\Collection\Functions\CountAggregateFunction;
 use Nextras\Orm\Collection\Functions\SumAggregateFunction;
 use Nextras\Orm\Collection\ICollection;
-use OriCMF\Core\ORM\Filter\OrderFilter;
+use OriCMF\ORM\Filter\OrderFilter;
 use PHPUnit\Framework\TestCase;
 
 final class OrderFilterTest extends TestCase

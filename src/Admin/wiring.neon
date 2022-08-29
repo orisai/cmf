@@ -8,31 +8,6 @@ nette.decorator:
 			- setAdmin(menu: @ori.cmf.admin.menu)
 
 services:
-	# Auth
-	ori.cmf.admin.auth.identityRefresher:
-		factory: OriCMF\Admin\Auth\AdminIdentityRefresher
-		autowired: false
-	ori.cmf.admin.auth.firewall:
-		factory: OriCMF\Admin\Auth\AdminFirewall
-		arguments:
-			storage: @OriNette\Auth\Http\SessionLoginStorage
-			refresher: @ori.cmf.admin.auth.identityRefresher
-
-	# Dashboard
-	ori.cmf.admin.dashboard.presenter:
-		factory: OriCMF\Admin\Dashboard\DashboardPresenter
-
-	# Error
-	ori.cmf.admin.error.presenter:
-		factory: OriCMF\Admin\Error\ErrorPresenter
-	ori.cmf.ui.error.forward.presenter:
-		setup:
-			- addErrorPresenter(':OriCMF\Admin\Error\ErrorPresenter:default', '#(.*)(\\|:)(Admin|Administration)(\\|:)(.*)#')
-
-	# Login
-	ori.cmf.admin.login.presenter:
-		factory: OriCMF\Admin\Login\LoginPresenter
-
 	# Menu
 	ori.cmf.admin.menu:
 		factory: OriCMF\UI\Control\Menu\Menu

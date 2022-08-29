@@ -1,17 +1,64 @@
 includes:
-	- Core/wiring.neon
-	- Console/wiring.neon
-	- UI/wiring.neon
+	- integrations.neon
+
+	- App/wiring.neon
 	- Admin/wiring.neon
-	- Front/wiring.neon
+	- Auth/wiring.neon
+	- Cache/wiring.neon
+	- Clock/wiring.neon
+	- Config/wiring.neon
+	- Email/wiring.neon
+	- Error/wiring.neon
+	- Files/wiring.neon
+	- Home/wiring.neon
+	- Login/wiring.neon
+	- ORM/wiring.neon
+	- Password/wiring.neon
+	- Public/wiring.neon
+	- Registration/wiring.neon
+	- Robots/wiring.neon
+	- Role/wiring.neon
+	- SQL/wiring.neon
+	- UI/wiring.neon
+	- User/wiring.neon
 
 orisai.localization:
 	directories:
-		- %vendorDir%/orisai/cmf/src/**/translations/**
+		- %vendorDir%/orisai/cmf/src/**/Locale/**
 
 nextras.migrations:
 	groups:
 		ori.cmf.structure:
-			directory: %vendorDir%/orisai/cmf/src/upgrade/migrations/structures
+			directory: %vendorDir%/orisai/cmf/src/Upgrade/SQL/structures
 		ori.cmf.basicData:
-			directory: %vendorDir%/orisai/cmf/src/upgrade/migrations/basic-data
+			directory: %vendorDir%/orisai/cmf/src/Upgrade/SQL/basic-data
+
+parameters:
+	catchExceptions:
+		console: false
+		ui: false
+	debug:
+		panels:
+			auth: %debugMode%
+			dbal: %debugMode%
+			di:
+				container: %debugMode%
+			httpClient: %debugMode%
+			latte: false
+			localization: %debugMode%
+			monolog: %debugMode%
+			ui:
+				application: %debugMode%
+				applicationMap: %debugMode%
+				formMonitor: %debugMode%
+				inspector: %debugMode%
+				routing: %debugMode%
+				session: %debugMode%
+	application:
+		name: null
+		build:
+			name: null
+			version: null
+			stable: false
+	privileges: []
+	timeZone: UTC

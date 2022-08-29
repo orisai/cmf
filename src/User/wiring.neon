@@ -1,0 +1,21 @@
+services:
+	# CLI
+	ori.cmf.user.cli.addRole.command:
+		factory: OriCMF\User\CLI\UserRoleAddCommand
+	ori.cmf.user.cli.register.command:
+		factory: OriCMF\User\CLI\UserRegisterCommand
+
+	# DB
+	ori.cmf.user.db.mapper:
+		factory: OriCMF\User\DB\UserPostgresMapper
+		type: OriCMF\User\DB\UserMapper
+	ori.cmf.user.db.repository:
+		factory: OriCMF\User\DB\UserRepository
+
+	# Credentials
+	ori.cmf.user.credentials.handlerManager:
+		factory: OriCMF\User\Credentials\CredentialHandlerManager
+		arguments:
+			handlers:
+				email: OriCMF\User\Credentials\EmailCredentialHandler()
+				password: OriCMF\User\Credentials\PasswordCredentialHandler()

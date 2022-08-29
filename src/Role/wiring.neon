@@ -1,0 +1,11 @@
+services:
+	# CLI
+	ori.cmf.role.cli.createCommand:
+		factory: OriCMF\Role\CLI\RoleCreateCommand
+
+	# DB
+	ori.cmf.role.db.mapper:
+		factory: OriCMF\Role\DB\RolePostgresMapper
+		type: OriCMF\Role\DB\RoleMapper
+	ori.cmf.role.db.repository:
+		factory: OriCMF\Role\DB\RoleRepository

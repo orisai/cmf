@@ -1,0 +1,3 @@
+services:
+	ori.cmf.robots.presenter:
+		factory: OriCMF\Robots\RobotsPresenter
