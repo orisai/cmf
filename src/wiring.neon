@@ -24,14 +24,14 @@ includes:
 
 orisai.localization:
 	directories:
-		- %vendorDir%/orisai/cmf/src/**/Locale/**
+		- %modules.orisai_cmf.dir%/src/**/Locale/**
 
 nextras.migrations:
 	groups:
 		ori.cmf.structure:
-			directory: %vendorDir%/orisai/cmf/src/Upgrade/SQL/structures
+			directory: %modules.orisai_cmf.dir%/src/Upgrade/SQL/structures
 		ori.cmf.basicData:
-			directory: %vendorDir%/orisai/cmf/src/Upgrade/SQL/basic-data
+			directory: %modules.orisai_cmf.dir%/src/Upgrade/SQL/basic-data
 
 parameters:
 	catchExceptions:

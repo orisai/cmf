@@ -3,7 +3,7 @@
 namespace Tests\OriCMF\Unit\DI;
 
 use Nette\DI\Container;
-use Orisai\Installer\AutomaticConfigurator;
+use OriNette\DI\Boot\AutomaticConfigurator;
 use Orisai\Installer\Schema\ModuleSchema;
 use Orisai\Installer\Tester\InstallerTester;
 use PHPUnit\Framework\TestCase;
