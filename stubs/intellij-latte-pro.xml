@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE latte PUBLIC "-//LATTE//Latte plugin XML V0.0.1//EN" ".idea/intellij-latte/xmlSources/Latte.dtd">
+<!DOCTYPE latte PUBLIC "-//LATTE//Latte plugin XML V0.0.1//EN" ".idea/intellij-latte-pro/xmlSources/Latte.dtd">
 <latte version="1" vendor="orisai/cmf">
 	<tags>
 		<!-- Links -->
 		<tag name="alink" type="UNPAIRED">
 			<arguments>
-				<argument name="link" types="PHP_TYPE" validType="OriCMF\UI\ActionLink" required="true"/>
+				<argument name="link" types="PHP_EXPRESSION" validType="OriCMF\UI\ActionLink" required="true"/>
 			</arguments>
 		</tag>
 		<!-- Forms -->
