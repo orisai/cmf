@@ -48,6 +48,7 @@ nette.application:
 	silentLinks: false
 
 nette.http:
+	cookiePath: @Nette\Http\IRequest::getUrl()::getBasePath()
 	csp:
 		base-uri: self
 		form-action: self
