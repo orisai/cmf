@@ -5,7 +5,7 @@ namespace OriCMF\Password\DB;
 use DateTimeImmutable;
 use Nextras\Orm\Entity\Entity;
 use OriCMF\User\DB\User;
-use Symfony\Component\Uid\Ulid;
+use Symfony\Component\Uid\UuidV7;
 
 /**
  * @property-read string            $id        {primary}
@@ -20,7 +20,7 @@ final class Password extends Entity
 	{
 		parent::__construct();
 
-		$this->setReadOnlyValue('id', (new Ulid())->toRfc4122());
+		$this->setReadOnlyValue('id', (new UuidV7())->toRfc4122());
 		$this->encodedPassword = $encodedPassword;
 		$this->setReadOnlyValue('user', $user);
 	}

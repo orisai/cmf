@@ -5,7 +5,7 @@ namespace OriCMF\Role\DB;
 use DateTimeImmutable;
 use Nextras\Orm\Entity\Entity;
 use OriCMF\ORM\Wrapper\JsonWrapper;
-use Symfony\Component\Uid\Ulid;
+use Symfony\Component\Uid\UuidV7;
 
 /**
  * @uses JsonWrapper
@@ -22,7 +22,7 @@ final class Role extends Entity
 	{
 		parent::__construct();
 
-		$this->setReadOnlyValue('id', (new Ulid())->toRfc4122());
+		$this->setReadOnlyValue('id', (new UuidV7())->toRfc4122());
 		$this->name = $name;
 		$this->setReadOnlyValue('isImmutable', $isImmutable);
 		$this->privileges = [];
