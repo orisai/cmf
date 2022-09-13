@@ -9,7 +9,7 @@ use Nextras\Orm\Relationships\HasMany;
 use OriCMF\Email\DB\Email;
 use OriCMF\ORM\Wrapper\BackedEnumWrapper;
 use OriCMF\Role\DB\Role;
-use Symfony\Component\Uid\Ulid;
+use Symfony\Component\Uid\UuidV7;
 use function random_int;
 
 /**
@@ -35,7 +35,7 @@ final class User extends Entity
 	public function __construct(string $fullName, string|null $type = self::TypeReal)
 	{
 		parent::__construct();
-		$this->setReadOnlyValue('id', (new Ulid())->toRfc4122());
+		$this->setReadOnlyValue('id', (new UuidV7())->toRfc4122());
 
 		$this->fullName = $fullName;
 		$this->userName = Strings::webalize("$fullName-" . random_int(100, 9_999));

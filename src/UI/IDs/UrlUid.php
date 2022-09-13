@@ -4,7 +4,7 @@ namespace OriCMF\UI\IDs;
 
 use InvalidArgumentException;
 use Nette\Application\BadRequestException;
-use Symfony\Component\Uid\Ulid;
+use Symfony\Component\Uid\UuidV7;
 
 /**
  * Convert between url-friendly (base58) and storage-friendly (rfc4122) version of UID
@@ -12,7 +12,7 @@ use Symfony\Component\Uid\Ulid;
 final class UrlUid
 {
 
-	private function __construct(private readonly Ulid $uid)
+	private function __construct(private readonly UuidV7 $uid)
 	{
 	}
 
@@ -22,7 +22,7 @@ final class UrlUid
 	public static function fromUri(string $parameter): self
 	{
 		try {
-			return new self(Ulid::fromBase58($parameter));
+			return new self(UuidV7::fromBase58($parameter));
 		} catch (InvalidArgumentException) {
 			throw new BadRequestException();
 		}
@@ -30,7 +30,7 @@ final class UrlUid
 
 	public static function fromStorage(string $parameter): self
 	{
-		return new self(Ulid::fromRfc4122($parameter));
+		return new self(UuidV7::fromRfc4122($parameter));
 	}
 
 	public function toUri(): string

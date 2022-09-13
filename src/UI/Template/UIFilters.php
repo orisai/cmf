@@ -2,7 +2,7 @@
 
 namespace OriCMF\UI\Template;
 
-use Symfony\Component\Uid\Ulid;
+use Symfony\Component\Uid\UuidV7;
 
 /**
  * @internal
@@ -12,7 +12,7 @@ final class UIFilters
 
 	public static function urlUid(string $uid): string
 	{
-		return Ulid::fromRfc4122($uid)->toBase58();
+		return UuidV7::fromRfc4122($uid)->toBase58();
 	}
 
 }

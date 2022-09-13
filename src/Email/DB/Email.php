@@ -5,7 +5,7 @@ namespace OriCMF\Email\DB;
 use DateTimeImmutable;
 use Nextras\Orm\Entity\Entity;
 use OriCMF\User\DB\User;
-use Symfony\Component\Uid\Ulid;
+use Symfony\Component\Uid\UuidV7;
 
 /**
  * @property-read string            $id        {primary}
@@ -26,7 +26,7 @@ final class Email extends Entity
 	{
 		parent::__construct();
 
-		$this->setReadOnlyValue('id', (new Ulid())->toRfc4122());
+		$this->setReadOnlyValue('id', (new UuidV7())->toRfc4122());
 		$this->emailAddress = $emailAddress;
 		$this->type = $type;
 		$this->setReadOnlyValue('user', $user);
