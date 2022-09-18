@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE latte PUBLIC "-//LATTE//Latte plugin XML V0.0.1//EN" ".idea/intellij-latte-pro/xmlSources/Latte.dtd">
+<!-- TODO - Disabled due to https://github.com/mesour-intellij-plugins/latte-pro-issues/issues/60 -->
 <latte version="1" vendor="orisai/cmf">
 	<tags>
 		<!-- Links -->
