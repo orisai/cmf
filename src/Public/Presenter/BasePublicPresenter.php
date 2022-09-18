@@ -15,7 +15,7 @@ abstract class BasePublicPresenter extends BasePresenter
 
 	public const LayoutPath = __DIR__ . '/@layout.latte';
 
-	public PublicFirewall $firewall;
+	protected PublicFirewall $firewall;
 
 	private Menu $menu;
 
