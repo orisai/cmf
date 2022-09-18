@@ -13,8 +13,6 @@ use function Orisai\Localization\t;
 abstract class BasePublicPresenter extends BasePresenter
 {
 
-	public const LayoutPath = __DIR__ . '/@layout.latte';
-
 	protected PublicFirewall $firewall;
 
 	private Menu $menu;
@@ -66,6 +64,7 @@ abstract class BasePublicPresenter extends BasePresenter
 	{
 		parent::beforeRender();
 
+		$this->setLayout(__DIR__ . '/@layout.latte');
 		$this->template->menu = $this->menu;
 
 		$meta = $this['document-head-meta'];

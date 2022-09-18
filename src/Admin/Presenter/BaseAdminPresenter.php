@@ -12,8 +12,6 @@ use function Orisai\Localization\t;
 abstract class BaseAdminPresenter extends BasePresenter
 {
 
-	public const LayoutPath = __DIR__ . '/@layout.latte';
-
 	protected AdminFirewall $firewall;
 
 	private Menu $menu;
@@ -65,6 +63,7 @@ abstract class BaseAdminPresenter extends BasePresenter
 	{
 		parent::beforeRender();
 
+		$this->setLayout(__DIR__ . '/@layout.latte');
 		$this->template->menu = $this->menu;
 
 		$head = $this['document-head'];
