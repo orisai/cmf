@@ -7,12 +7,12 @@ use Nette\Application\BadRequestException;
 use Symfony\Component\Uid\Ulid;
 
 /**
- * Convert between url-friendly (base58) and storage-friendly (rfc4122) version of ulid
+ * Convert between url-friendly (base58) and storage-friendly (rfc4122) version of UID
  */
-final class UrlUlid
+final class UrlUid
 {
 
-	private function __construct(private readonly Ulid $ulid)
+	private function __construct(private readonly Ulid $uid)
 	{
 	}
 
@@ -35,12 +35,12 @@ final class UrlUlid
 
 	public function toUri(): string
 	{
-		return $this->ulid->toBase58();
+		return $this->uid->toBase58();
 	}
 
 	public function toStorage(): string
 	{
-		return $this->ulid->toRfc4122();
+		return $this->uid->toRfc4122();
 	}
 
 }

@@ -74,7 +74,7 @@ final class UITemplateExtension extends CompilerExtension
 
 	public static function installExtension(Engine $engine): void
 	{
-		$engine->addFilter('urlUlid', UIFilters::urlUlid(...));
+		$engine->addFilter('urlUid', UIFilters::urlUid(...));
 		$engine->onCompile[] = static function (Engine $engine): void {
 			UIMacros::install($engine->getCompiler());
 		};

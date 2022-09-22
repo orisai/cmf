@@ -27,7 +27,7 @@
 		</tag>
 	</tags>
 	<filters>
-		<!-- ULID -->
-		<filter name="urlUlid" description="Convert UUID from RFC 4122 (UUID-like) format to more URL-friendly base58"/>
+		<!-- UID -->
+		<filter name="urlUid" description="Convert UUID from RFC 4122 (UUID-like) format to more URL-friendly base58"/>
 	</filters>
 </latte>

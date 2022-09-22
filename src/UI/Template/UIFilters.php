@@ -10,9 +10,9 @@ use Symfony\Component\Uid\Ulid;
 final class UIFilters
 {
 
-	public static function urlUlid(string $ulid): string
+	public static function urlUid(string $uid): string
 	{
-		return Ulid::fromRfc4122($ulid)->toBase58();
+		return Ulid::fromRfc4122($uid)->toBase58();
 	}
 
 }
