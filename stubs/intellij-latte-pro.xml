@@ -1,28 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE latte PUBLIC "-//LATTE//Latte plugin XML V0.0.1//EN" ".idea/intellij-latte-pro/xmlSources/Latte.dtd">
-<!-- TODO - Disabled due to https://github.com/mesour-intellij-plugins/latte-pro-issues/issues/60 -->
 <latte version="1" vendor="orisai/cmf">
 	<tags>
 		<!-- Links -->
 		<tag name="alink" type="UNPAIRED">
 			<arguments>
-				<argument name="link" types="PHP_EXPRESSION" validType="OriCMF\UI\ActionLink" required="true"/>
+				<argument name="link" types="PHP_EXPRESSION" required="true"/>
 			</arguments>
 		</tag>
 		<!-- Forms -->
 		<tag name="formContext" type="UNPAIRED">
 			<arguments>
-				<argument name="form" types="PHP_EXPRESSION" validType="Nette\Forms\Form" required="true"/>
+				<argument name="form" types="PHP_EXPRESSION" required="true"/>
 			</arguments>
 		</tag>
 		<tag name="c:formField" type="UNPAIRED">
 			<arguments>
-				<argument name="input" types="PHP_EXPRESSION" validType="Nette\Forms\Control" required="true"/>
+				<argument name="input" types="PHP_EXPRESSION" required="true"/>
 			</arguments>
 		</tag>
 		<tag name="c:formErrors" type="UNPAIRED">
 			<arguments>
-				<argument name="input" types="PHP_EXPRESSION" validType="Nette\Forms\Form" required="true"/>
+				<argument name="input" types="PHP_EXPRESSION" required="true"/>
 			</arguments>
 		</tag>
 	</tags>
