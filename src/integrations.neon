@@ -34,7 +34,7 @@ di:
 		types: false
 
 latte:
-	debugger: %debug.panels.latte%
+	debugger: false
 	strictTypes: true
 
 nette.application:

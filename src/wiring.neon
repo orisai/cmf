@@ -44,7 +44,6 @@ parameters:
 			di:
 				container: %debugMode%
 			httpClient: %debugMode%
-			latte: false
 			localization: %debugMode%
 			monolog: %debugMode%
 			ui:
