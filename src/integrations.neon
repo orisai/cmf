@@ -13,6 +13,7 @@ extensions:
 	nextras.orm: Nextras\Orm\Bridges\NetteDI\OrmExtension
 
 	orisai.application.map: OriNette\Application\ApplicationMap\DI\ApplicationMapExtension
+	orisai.application.templateLocator: OriCMF\UI\TemplateLocator\DI\TemplateLocatorExtension
 	orisai.application.formMonitor: OriNette\Application\FormMonitor\DI\FormMonitorExtension
 	orisai.application.presenterFactory: OriNette\Application\Mapping\DI\PresenterFactoryExtension
 	orisai.application.uiInspector: OriNette\Application\Inspector\DI\InspectorExtension
@@ -80,6 +81,9 @@ nextras.orm:
 orisai.application.map:
 	debug:
 		panel: %debug.panels.ui.applicationMap%
+
+orisai.application.templateLocator:
+	rootDir: %rootDir%
 
 orisai.application.formMonitor:
 	enabled: %debugMode%

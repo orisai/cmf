@@ -10,16 +10,25 @@ use Nette\DI\CompilerExtension;
 use Nette\DI\Container;
 use Nette\DI\Definitions\FactoryDefinition;
 use Nette\DI\Definitions\ServiceDefinition;
+use Nette\Schema\Expect;
+use Nette\Schema\Schema;
 use OriCMF\Config\ConfigProvider;
-use OriCMF\UI\Control\BaseControlTemplate;
-use OriCMF\UI\Template\Locator\ControlTemplateLocator;
 use OriCMF\UI\Template\UIFilters;
 use OriCMF\UI\Template\UIMacros;
 use OriCMF\UI\Template\UITemplate;
+use stdClass;
 use function assert;
 
+/**
+ * @property-read stdClass $config
+ */
 final class UITemplateExtension extends CompilerExtension
 {
+
+	public function getConfigSchema(): Schema
+	{
+		return Expect::structure([]);
+	}
 
 	public function beforeCompile(): void
 	{
@@ -36,7 +45,6 @@ final class UITemplateExtension extends CompilerExtension
 				$templateFactoryDefinition,
 				'@' . Container::class,
 				$builder->getByType(ConfigProvider::class),
-				$builder->getByType(ControlTemplateLocator::class),
 			],
 		);
 
@@ -54,20 +62,13 @@ final class UITemplateExtension extends CompilerExtension
 		TemplateFactory $templateFactory,
 		Container $container,
 		string $configProvider,
-		string $templateLocator,
 	): void
 	{
-		$templateFactory->onCreate[] = static function (Template $template) use ($container, $configProvider, $templateLocator): void {
+		$templateFactory->onCreate[] = static function (Template $template) use ($container, $configProvider): void {
 			if ($template instanceof UITemplate) {
 				$config = $container->getService($configProvider);
 				assert($config instanceof ConfigProvider);
 				$template->config = $config;
-			}
-
-			if ($template instanceof BaseControlTemplate) {
-				$controlTemplateLocator = $container->getService($templateLocator);
-				assert($controlTemplateLocator instanceof ControlTemplateLocator);
-				$template->setTemplateLocator($controlTemplateLocator);
 			}
 		};
 	}

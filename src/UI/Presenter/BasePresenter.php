@@ -2,35 +2,25 @@
 
 namespace OriCMF\UI\Presenter;
 
-use Nette\Application\AbortException;
-use Nette\Application\BadRequestException;
-use Nette\Application\Responses\TextResponse;
 use Nette\Application\UI\Presenter;
-use Nette\Application\UI\Template;
 use Nette\Bridges\ApplicationLatte\TemplateFactory;
-use Nette\FileNotFoundException;
 use OriCMF\App\Config\ApplicationConfig;
 use OriCMF\Auth\UI\BaseUIFirewall;
 use OriCMF\Config\ConfigProvider;
 use OriCMF\UI\ActionLink;
 use OriCMF\UI\Control\Document\DocumentControl;
 use OriCMF\UI\Control\Document\DocumentControlFactory;
-use OriCMF\UI\Template\Exception\NoTemplateFound;
-use OriCMF\UI\Template\Locator\PresenterTemplateLocator;
+use OriCMF\UI\TemplateLocator\Template\FlexibleTemplatePresenter;
 use OriNette\Application\CanonicalLink\CanonicalLinker;
 use OriNette\Application\Presenter\ShortDefaultActionName;
 use Orisai\Exceptions\Logic\InvalidState;
-use Orisai\Exceptions\Logic\NotImplemented;
 use Orisai\Exceptions\Message;
 use Orisai\Localization\Translator;
 use function assert;
 use function class_exists;
-use function implode;
 use function is_string;
 use function is_subclass_of;
-use function preg_match;
 use function preg_replace;
-use function sprintf;
 
 /**
  * @method self getPresenter()
@@ -44,6 +34,7 @@ abstract class BasePresenter extends Presenter
 {
 
 	use ShortDefaultActionName;
+	use FlexibleTemplatePresenter;
 
 	public const LayoutPath = __DIR__ . '/@layout.latte';
 
@@ -53,22 +44,18 @@ abstract class BasePresenter extends Presenter
 
 	protected ConfigProvider $config;
 
-	private PresenterTemplateLocator $templateLocator;
-
 	private CanonicalLinker $canonicalLinker;
 
 	final public function injectBase(
 		DocumentControlFactory $documentFactory,
 		Translator $translator,
 		ConfigProvider $config,
-		PresenterTemplateLocator $templateLocator,
 		CanonicalLinker $canonicalLinker,
 	): void
 	{
 		$this->documentFactory = $documentFactory;
 		$this->translator = $translator;
 		$this->config = $config;
-		$this->templateLocator = $templateLocator;
 		$this->canonicalLinker = $canonicalLinker;
 	}
 
@@ -126,95 +113,6 @@ abstract class BasePresenter extends Presenter
 	protected function linkToAction(ActionLink $link): string
 	{
 		return $this->link($link->getDestination(), $link->getArguments());
-	}
-
-	/**
-	 * @return array<string>
-	 * @throws NotImplemented
-	 *
-	 * @internal
-	 */
-	public function formatLayoutTemplateFiles(): array
-	{
-		throw NotImplemented::create()
-			->withMessage(sprintf(
-				'Implementation of \'%s\' is in findLayoutTemplateFiles(), do not call method directly',
-				__METHOD__,
-			));
-	}
-
-	/**
-	 * @internal
-	 */
-	final public function findLayoutTemplateFile(): string|null
-	{
-		$layout = $this->getLayout();
-
-		if ($layout === false) {
-			return null;
-		}
-
-		if (is_string($layout) && preg_match('#/|\\\\#', $layout) === 1) {
-			return $layout;
-		}
-
-		if ($layout === true || $layout === null) {
-			$layout = 'layout';
-		}
-
-		try {
-			return $this->templateLocator->getLayoutTemplatePath($this, $layout);
-		} catch (NoTemplateFound $exception) {
-			$inlinePaths = implode("\n", $exception->getShortTriedPaths());
-
-			throw new FileNotFoundException(
-				"Layout not found. None of the following templates exists:\n$inlinePaths",
-				0,
-				$exception,
-			);
-		}
-	}
-
-	/**
-	 * @return array<string>
-	 * @throws NotImplemented
-	 *
-	 * @internal
-	 */
-	final public function formatTemplateFiles(): array
-	{
-		throw NotImplemented::create()
-			->withMessage(sprintf(
-				'Implementation of \'%s\' is in sendTemplates(), do not call method directly',
-				__METHOD__,
-			));
-	}
-
-	/**
-	 * @throws BadRequestException
-	 * @throws AbortException
-	 */
-	final public function sendTemplate(Template|null $template = null): void
-	{
-		$template ??= $this->getTemplate();
-
-		if ($template->getFile() === null) {
-			try {
-				$file = $this->templateLocator->getActionTemplatePath($this, $this->getView());
-			} catch (NoTemplateFound $exception) {
-				$inlinePaths = implode("\n", $exception->getShortTriedPaths());
-
-				throw new BadRequestException(
-					"Page not found. None of the following templates exists:\n$inlinePaths",
-					0,
-					$exception,
-				);
-			}
-
-			$template->setFile($file);
-		}
-
-		$this->sendResponse(new TextResponse($template));
 	}
 
 	protected function createTemplate(): BasePresenterTemplate

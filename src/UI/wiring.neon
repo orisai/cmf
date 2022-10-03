@@ -55,11 +55,3 @@ services:
 
 	# Template
 	ori.cmf.ui.template.creator: OriCMF\UI\Template\TemplateCreator
-	ori.cmf.ui.template.locator.control:
-		factory: OriCMF\UI\Template\Locator\ControlTemplateLocator
-		arguments:
-			rootDir: %rootDir%
-	ori.cmf.ui.template.locator.presenter:
-		factory: OriCMF\UI\Template\Locator\PresenterTemplateLocator
-		arguments:
-			rootDir: %rootDir%

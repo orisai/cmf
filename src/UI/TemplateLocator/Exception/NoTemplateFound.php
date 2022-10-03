@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace OriCMF\UI\Template\Exception;
+namespace OriCMF\UI\TemplateLocator\Exception;
 
 use Orisai\Exceptions\LogicalException;
 use Symfony\Component\Filesystem\Path;
