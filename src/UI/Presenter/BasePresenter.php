@@ -18,6 +18,7 @@ use OriCMF\UI\Control\Document\DocumentControlFactory;
 use OriCMF\UI\Template\Exception\NoTemplateFound;
 use OriCMF\UI\Template\Locator\PresenterTemplateLocator;
 use OriNette\Application\CanonicalLink\CanonicalLinker;
+use OriNette\Application\Presenter\ShortDefaultActionName;
 use Orisai\Exceptions\Logic\InvalidState;
 use Orisai\Exceptions\Logic\NotImplemented;
 use Orisai\Exceptions\Message;
@@ -41,6 +42,8 @@ use function sprintf;
  */
 abstract class BasePresenter extends Presenter
 {
+
+	use ShortDefaultActionName;
 
 	public const LayoutPath = __DIR__ . '/@layout.latte';
 
@@ -123,16 +126,6 @@ abstract class BasePresenter extends Presenter
 	protected function linkToAction(ActionLink $link): string
 	{
 		return $this->link($link->getDestination(), $link->getArguments());
-	}
-
-	public static function formatActionMethod(string $action): string
-	{
-		return parent::formatActionMethod($action !== self::DEFAULT_ACTION ? $action : '');
-	}
-
-	public static function formatRenderMethod(string $view): string
-	{
-		return parent::formatRenderMethod($view !== self::DEFAULT_ACTION ? $view : '');
 	}
 
 	/**
