@@ -6,6 +6,7 @@ use Latte\Compiler;
 use Latte\MacroNode;
 use Latte\Macros\MacroSet;
 use Latte\PhpWriter;
+use OriCMF\UI\HandleLink;
 use function str_replace;
 
 final class UIMacros extends MacroSet
@@ -22,9 +23,12 @@ final class UIMacros extends MacroSet
 		$expr = <<<'LATTE_EXPR'
 $_ori_link = @args;
 echo %escape(%modify(
-	$this->global->uiPresenter->link($_ori_link->getDestination(), $_ori_link->getArguments())
+	$_ori_link instanceof @HandleLink
+		? $_ori_link->get()
+		: $this->global->uiPresenter->link($_ori_link->getDestination(), $_ori_link->getArguments())
 ))@line;
 LATTE_EXPR;
+		$expr = str_replace('@HandleLink', HandleLink::class, $expr);
 		$expr = str_replace('@args', $node->args, $expr);
 
 		$line = $node->startLine

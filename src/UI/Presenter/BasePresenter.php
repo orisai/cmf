@@ -10,6 +10,7 @@ use OriCMF\Config\ConfigProvider;
 use OriCMF\UI\ActionLink;
 use OriCMF\UI\Control\Document\DocumentControl;
 use OriCMF\UI\Control\Document\DocumentControlFactory;
+use OriCMF\UI\HandleLink;
 use OriCMF\UI\TemplateLocator\Template\FlexibleTemplatePresenter;
 use OriNette\Application\CanonicalLink\CanonicalLinker;
 use OriNette\Application\Presenter\ShortDefaultActionName;
@@ -105,13 +106,21 @@ abstract class BasePresenter extends Presenter
 		return $this->documentFactory->create();
 	}
 
-	protected function redirectToAction(ActionLink $link): never
+	protected function redirectToAction(ActionLink|HandleLink $link): never
 	{
+		if ($link instanceof HandleLink) {
+			$this->redirectUrl($link->get());
+		}
+
 		$this->redirect($link->getDestination(), $link->getArguments());
 	}
 
-	protected function linkToAction(ActionLink $link): string
+	protected function linkToAction(ActionLink|HandleLink $link): string
 	{
+		if ($link instanceof HandleLink) {
+			return $link->get();
+		}
+
 		return $this->link($link->getDestination(), $link->getArguments());
 	}
 
