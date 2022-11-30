@@ -49,9 +49,9 @@ trait ErrorPresenterUtil
 			$code = $throwable->getCode();
 
 			if ($code >= 500) {
-				$code = IResponse::S500_INTERNAL_SERVER_ERROR;
+				$code = IResponse::S500_InternalServerError;
 			} elseif ($code < 400) {
-				$code = IResponse::S404_NOT_FOUND;
+				$code = IResponse::S404_NotFound;
 			}
 
 			return $code;
@@ -59,11 +59,11 @@ trait ErrorPresenterUtil
 
 		// Direct access, act as user error
 		if ($throwable === null) {
-			return IResponse::S404_NOT_FOUND;
+			return IResponse::S404_NotFound;
 		}
 
 		// Real error
-		return IResponse::S500_INTERNAL_SERVER_ERROR;
+		return IResponse::S500_InternalServerError;
 	}
 
 	/**
