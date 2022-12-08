@@ -33,7 +33,7 @@ final class DataGrid extends BaseControl
 
 	public const TemplatePath = __DIR__ . '/DataGrid.latte';
 
-	/** @var array<mixed> */
+	/** @var array<string, mixed> */
 	#[Persistent]
 	public array $filter = [];
 
@@ -57,7 +57,7 @@ final class DataGrid extends BaseControl
 	/** @var (Closure(): Container)|null */
 	private Closure|null $filterFormFactory = null;
 
-	/** @var array<mixed> */
+	/** @var array<string, mixed> */
 	private array $filterDefaults = [];
 
 	/** @var array<string, array{string, (Closure(array<(int|string)>, $this): void)}> */

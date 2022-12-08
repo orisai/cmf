@@ -10,7 +10,7 @@ use OriCMF\SQL\Modifier\ExpressionModifier;
 final class SqlProcessorFactory implements ISqlProcessorFactory
 {
 
-	/** @var array<ExpressionModifier> */
+	/** @var array<string, ExpressionModifier> */
 	private array $modifiers = [];
 
 	public function addModifier(string $modifier, ExpressionModifier $expressionModifier): void

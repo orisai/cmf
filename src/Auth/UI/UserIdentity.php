@@ -10,7 +10,7 @@ final class UserIdentity extends StringIdentity
 {
 
 	/**
-	 * @param array<string> $roles
+	 * @param array<int, string> $roles
 	 */
 	public function __construct(string $id, array $roles, private UserIdentity|null $impersonator = null)
 	{
