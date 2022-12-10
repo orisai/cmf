@@ -43,6 +43,7 @@ parameters:
 			dbal: %debugMode%
 			di:
 				container: %debugMode%
+			http: %debugMode%
 			httpClient: %debugMode%
 			localization: %debugMode%
 			monolog: %debugMode%
