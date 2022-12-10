@@ -146,6 +146,13 @@ tracy:
 	strictMode: 'E_ALL'
 	# Log everything in production mode
 	logSeverity: 'E_ALL'
+	keysToHide:
+		- SID
+		- ORISAI_DEBUG_SID
+		- password
+		- pass
+		- pwd
+		- secret
 
 services:
 
