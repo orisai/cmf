@@ -3,13 +3,11 @@
 namespace OriCMF\Clock\DI;
 
 use Brick\DateTime\Clock;
-use Brick\DateTime\Clock\SystemClock;
 use Nette\DI\CompilerExtension;
 use Nette\DI\ContainerBuilder;
-use Nette\DI\Definitions\ServiceDefinition;
 use Nette\Schema\Expect;
 use Nette\Schema\Schema;
-use OriCMF\Clock\ClockGetter;
+use OriCMF\Clock\NativeClock;
 use Orisai\Exceptions\Logic\InvalidArgument;
 use stdClass;
 use function date_default_timezone_get;
@@ -33,24 +31,15 @@ final class ClockExtension extends CompilerExtension
 		$builder = $this->getContainerBuilder();
 		$config = $this->config;
 
-		$clockDefinition = $this->registerClock($builder);
-		$this->registerClockGetter($clockDefinition);
+		$this->registerClock($builder);
 		$this->configureTimezone($config->timezone);
 	}
 
-	private function registerClock(ContainerBuilder $builder): ServiceDefinition
+	private function registerClock(ContainerBuilder $builder): void
 	{
-		return $builder->addDefinition($this->prefix('clock'))
-			->setFactory(SystemClock::class)
+		$builder->addDefinition($this->prefix('clock'))
+			->setFactory(NativeClock::class)
 			->setType(Clock::class);
-	}
-
-	private function registerClockGetter(ServiceDefinition $clockDefinition): void
-	{
-		$init = $this->getInitialization();
-		$init->addBody(ClockGetter::class . '::set($this->getService(?));', [
-			$clockDefinition->getName(),
-		]);
 	}
 
 	private function configureTimezone(string $timezone): void

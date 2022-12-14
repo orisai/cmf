@@ -1,2 +1,3 @@
 extensions:
+	orisai.clock: OriNette\Clock\DI\ClockExtension
 	ori.cmf.clock: OriCMF\Clock\DI\ClockExtension

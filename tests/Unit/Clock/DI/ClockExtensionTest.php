@@ -3,8 +3,8 @@
 namespace Tests\OriCMF\Unit\Clock\DI;
 
 use Brick\DateTime\Clock;
-use Brick\DateTime\Clock\SystemClock;
-use OriCMF\Clock\ClockGetter;
+use Brick\DateTime\Instant;
+use OriCMF\Clock\NativeClock;
 use OriNette\DI\Boot\ManualConfigurator;
 use Orisai\Exceptions\Logic\InvalidArgument;
 use PHPUnit\Framework\TestCase;
@@ -45,9 +45,10 @@ final class ClockExtensionTest extends TestCase
 		$container = $configurator->createContainer();
 
 		$clock = $container->getService('ori.cmf.clock.clock');
-		self::assertInstanceOf(SystemClock::class, $clock);
+		self::assertInstanceOf(NativeClock::class, $clock);
 		self::assertSame($clock, $container->getByType(Clock::class));
-		self::assertSame($clock, ClockGetter::get());
+
+		self::assertInstanceOf(Instant::class, $clock->getTime());
 
 		self::assertSame('UTC', date_default_timezone_get());
 		self::assertSame('UTC', ini_get('date.timezone'));
