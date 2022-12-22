@@ -4,7 +4,7 @@ namespace OriCMF\UI\Config\DI;
 
 use Brick\DateTime\Duration;
 use Nette\DI\CompilerExtension;
-use Nette\PhpGenerator\PhpLiteral;
+use Nette\PhpGenerator\Literal;
 use Nette\Schema\Expect;
 use Nette\Schema\Schema;
 use OriCMF\UI\Config\AdminConfig;
@@ -64,7 +64,7 @@ final class UIExtension extends CompilerExtension
 
 		$builder->addDefinition($this->prefix('config'))
 			->setFactory('\unserialize(\'?\')', [
-				new PhpLiteral(serialize($uiConfig)),
+				new Literal(serialize($uiConfig)),
 			])
 			->setType(UIConfig::class);
 	}

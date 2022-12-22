@@ -75,6 +75,7 @@ nextras.migrations:
 	driver: pgsql
 	dbal: nextras
 	withDummyData: %debugMode%
+	printer: psrLog
 
 nextras.orm:
 	model: Nextras\Orm\Model\Model
