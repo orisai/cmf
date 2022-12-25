@@ -2,6 +2,7 @@
 
 namespace OriCMF\UI\Control\Head;
 
+use Latte\Essential\RawPhpExtension;
 use OriCMF\UI\Control\BaseControl;
 use OriCMF\UI\Control\Icons\IconsControl;
 use OriCMF\UI\Control\Icons\IconsControlFactory;
@@ -38,6 +39,7 @@ final class HeadControl extends BaseControl
 
 	public function render(): void
 	{
+		$this->template->getLatte()->addExtension(new RawPhpExtension());
 		$this->template->render();
 	}
 

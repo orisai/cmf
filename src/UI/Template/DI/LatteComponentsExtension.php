@@ -2,11 +2,10 @@
 
 namespace OriCMF\UI\Template\DI;
 
-use Latte\Engine;
 use Nette\Bridges\ApplicationLatte\LatteFactory;
 use Nette\DI\CompilerExtension;
 use Nette\DI\Definitions\FactoryDefinition;
-use OriCMF\UI\Template\LatteComponentMacros;
+use OriCMF\UI\Template\LatteComponentsExtension as LatteExtension;
 use function assert;
 
 final class LatteComponentsExtension extends CompilerExtension
@@ -21,18 +20,15 @@ final class LatteComponentsExtension extends CompilerExtension
 		$latteFactoryDefinition = $builder->getDefinitionByType(LatteFactory::class);
 		assert($latteFactoryDefinition instanceof FactoryDefinition);
 
+		$extensionDefinition = $builder->addDefinition($this->prefix('extension'))
+			->setFactory(LatteExtension::class)
+			->setAutowired(false);
+
 		$latteFactoryDefinition->getResultDefinition()
 			->addSetup(
-				[self::class, 'installMacros'],
-				['@self'],
+				'addExtension',
+				[$extensionDefinition],
 			);
-	}
-
-	public static function installMacros(Engine $engine): void
-	{
-		$engine->onCompile[] = static function (Engine $engine): void {
-			LatteComponentMacros::install($engine->getCompiler());
-		};
 	}
 
 }

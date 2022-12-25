@@ -31,7 +31,7 @@
 		"brick/date-time": "^0.4.1",
 		"brick/math": "^0.10.2",
 		"brick/money": "^0.7.0",
-		"latte/latte": "^2.11.6",
+		"latte/latte": "^3.0.4",
 		"league/flysystem": "^3.11.0",
 		"league/mime-type-detection": "^1.11.0",
 		"monolog/monolog": "^3.2.0",

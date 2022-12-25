@@ -2,7 +2,6 @@
 
 namespace OriCMF\UI\Template\DI;
 
-use Latte\Engine;
 use Nette\Application\UI\Template;
 use Nette\Bridges\ApplicationLatte\LatteFactory;
 use Nette\Bridges\ApplicationLatte\TemplateFactory;
@@ -13,9 +12,8 @@ use Nette\DI\Definitions\ServiceDefinition;
 use Nette\Schema\Expect;
 use Nette\Schema\Schema;
 use OriCMF\Config\ConfigProvider;
-use OriCMF\UI\Template\UIFilters;
-use OriCMF\UI\Template\UIMacros;
 use OriCMF\UI\Template\UITemplate;
+use OriCMF\UI\Template\UITemplateExtension as LatteExtension;
 use stdClass;
 use function assert;
 
@@ -51,10 +49,14 @@ final class UITemplateExtension extends CompilerExtension
 		$latteFactoryDefinition = $builder->getDefinitionByType(LatteFactory::class);
 		assert($latteFactoryDefinition instanceof FactoryDefinition);
 
+		$extensionDefinition = $builder->addDefinition($this->prefix('extension'))
+			->setFactory(LatteExtension::class)
+			->setAutowired(false);
+
 		$latteFactoryDefinition->getResultDefinition()
 			->addSetup(
-				[self::class, 'installExtension'],
-				['@self'],
+				'addExtension',
+				[$extensionDefinition],
 			);
 	}
 
@@ -70,14 +72,6 @@ final class UITemplateExtension extends CompilerExtension
 				assert($config instanceof ConfigProvider);
 				$template->config = $config;
 			}
-		};
-	}
-
-	public static function installExtension(Engine $engine): void
-	{
-		$engine->addFilter('urlUid', UIFilters::urlUid(...));
-		$engine->onCompile[] = static function (Engine $engine): void {
-			UIMacros::install($engine->getCompiler());
 		};
 	}
 

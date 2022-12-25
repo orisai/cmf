@@ -2,6 +2,7 @@
 
 namespace OriCMF\UI\Presenter;
 
+use Latte\Essential\RawPhpExtension;
 use Nette\Application\UI\Presenter;
 use Nette\Bridges\ApplicationLatte\TemplateFactory;
 use OriCMF\App\Config\ApplicationConfig;
@@ -92,6 +93,7 @@ abstract class BasePresenter extends Presenter
 		$this->configureCanonicalUrl($document);
 
 		$this->template->firewall = $this->getFirewall();
+		$this->template->getLatte()->addExtension(new RawPhpExtension());
 	}
 
 	protected function configureCanonicalUrl(DocumentControl $document): void

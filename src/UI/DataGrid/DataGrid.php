@@ -4,6 +4,7 @@ namespace OriCMF\UI\DataGrid;
 
 use Closure;
 use InvalidArgumentException;
+use Latte\Essential\RawPhpExtension;
 use Nette\Application\Attributes\Persistent;
 use Nette\Application\UI\Form;
 use Nette\Application\UI\Presenter;
@@ -156,6 +157,7 @@ final class DataGrid extends BaseControl
 		// phpcs:ignore SlevomatCodingStandard.Operators.DisallowEqualOperators.DisallowedNotEqualOperator
 		$this->template->showFilterCancel = $this->filterDataSource != $this->filterDefaults; // @phpstan-ignore-line
 
+		$this->template->getLatte()->addExtension(new RawPhpExtension());
 		$this->template->render();
 	}
 
