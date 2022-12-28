@@ -107,7 +107,7 @@
 <Select {Item}
 		isMulti={isMulti}
 		items={selectItems}
-		selectedValue={selectSelectedItems}
+		value={selectSelectedItems}
 		inputAttributes={inputAttributes}
 		noOptionsMessage="Žádné položky"
 		placeholder={placeholder}
