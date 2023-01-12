@@ -17,7 +17,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use function assert;
 use function is_bool;
-use function Orisai\Localization\tm;
+use function Orisai\TranslationContracts\tm;
 
 final class UserRegisterCommand extends Command
 {

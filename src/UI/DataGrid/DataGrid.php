@@ -21,7 +21,7 @@ use function array_map;
 use function assert;
 use function is_array;
 use function is_string;
-use function Orisai\Localization\t;
+use function Orisai\TranslationContracts\t;
 
 /**
  * @property-read DataGridTemplate $template

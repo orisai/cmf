@@ -6,7 +6,7 @@ use Nette\Forms\Controls\SelectBox;
 use Nette\Forms\Controls\UploadControl;
 use Nette\Forms\Form as NForm;
 use Nette\Forms\Validator;
-use function Orisai\Localization\t;
+use function Orisai\TranslationContracts\t;
 
 final class FormFactory
 {

@@ -3,16 +3,16 @@
 namespace OriCMF\User\Credentials\Exception;
 
 use Orisai\Exceptions\DomainException;
-use Orisai\Localization\TranslatableMessage;
+use Orisai\TranslationContracts\Translatable;
 
 final class CredentialAlreadyInUse extends DomainException
 {
 
 	private object $credential;
 
-	private TranslatableMessage|null $errorMessage;
+	private Translatable|null $errorMessage;
 
-	public static function create(object $credential, TranslatableMessage|null $errorMessage = null): self
+	public static function create(object $credential, Translatable|null $errorMessage = null): self
 	{
 		$self = new self();
 		$self->credential = $credential;
@@ -26,7 +26,7 @@ final class CredentialAlreadyInUse extends DomainException
 		return $this->credential;
 	}
 
-	public function getErrorMessage(): TranslatableMessage|null
+	public function getErrorMessage(): Translatable|null
 	{
 		return $this->errorMessage;
 	}

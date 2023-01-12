@@ -5,9 +5,10 @@ namespace OriCMF\Error\UI;
 use Nette\Application\BadRequestException;
 use Nette\Http\IResponse;
 use OriCMF\UI\Control\Document\DocumentControl;
-use Orisai\Localization\TranslatableMessage;
+use Orisai\TranslationContracts\Translatable;
+use Orisai\TranslationContracts\TranslatableMessage;
 use Throwable;
-use function Orisai\Localization\tm;
+use function Orisai\TranslationContracts\tm;
 
 /**
  * @internal
@@ -67,7 +68,7 @@ trait ErrorPresenterUtil
 	}
 
 	/**
-	 * @return array{TranslatableMessage, TranslatableMessage}
+	 * @return array{Translatable, Translatable}
 	 */
 	private function getTranslations(Throwable|null $throwable): array
 	{

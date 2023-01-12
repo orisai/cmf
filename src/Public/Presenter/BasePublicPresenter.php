@@ -8,7 +8,7 @@ use OriCMF\Login\Public\LoginPresenter;
 use OriCMF\UI\Control\Menu\Menu;
 use OriCMF\UI\Presenter\BasePresenter;
 use Orisai\Auth\Authentication\LogoutCode;
-use function Orisai\Localization\t;
+use function Orisai\TranslationContracts\t;
 
 abstract class BasePublicPresenter extends BasePresenter
 {

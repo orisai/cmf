@@ -7,7 +7,7 @@ use OriCMF\Login\Admin\LoginPresenter;
 use OriCMF\UI\Control\Menu\Menu;
 use OriCMF\UI\Presenter\BasePresenter;
 use Orisai\Auth\Authentication\LogoutCode;
-use function Orisai\Localization\t;
+use function Orisai\TranslationContracts\t;
 
 abstract class BaseAdminPresenter extends BasePresenter
 {

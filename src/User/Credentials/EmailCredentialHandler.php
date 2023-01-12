@@ -6,7 +6,7 @@ use Nextras\Orm\Model\IModel;
 use OriCMF\Email\DB\Email;
 use OriCMF\Email\DB\EmailRepository;
 use OriCMF\User\Credentials\Exception\CredentialAlreadyInUse;
-use Orisai\Localization\TranslatableMessage;
+use Orisai\TranslationContracts\TranslatableMessage;
 
 final class EmailCredentialHandler implements VerifyingCredentialHandler
 {

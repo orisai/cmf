@@ -2,13 +2,13 @@
 
 namespace OriCMF\Translation;
 
-use Orisai\Localization\TranslatableMessage;
-use function Orisai\Localization\tm;
+use Orisai\TranslationContracts\Translatable;
+use function Orisai\TranslationContracts\tm;
 
 trait TranslatableBackedEnum
 {
 
-	abstract protected static function getCaseLabel(self $case): TranslatableMessage;
+	abstract protected static function getCaseLabel(self $case): Translatable;
 
 	/**
 	 * @return array<int|string, string>
@@ -17,7 +17,7 @@ trait TranslatableBackedEnum
 	{
 		$labels = [];
 		foreach (self::cases() as $enumerator) {
-			$labels[$enumerator->value] = tm(self::getCaseLabel($enumerator), languageTag: $languageTag);
+			$labels[$enumerator->value] = tm(self::getCaseLabel($enumerator), locale: $languageTag);
 		}
 
 		return $labels;
@@ -25,7 +25,7 @@ trait TranslatableBackedEnum
 
 	public function getLabel(string|null $languageTag = null): string
 	{
-		return tm(self::getCaseLabel($this), languageTag: $languageTag);
+		return tm(self::getCaseLabel($this), locale: $languageTag);
 	}
 
 }

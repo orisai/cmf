@@ -3,14 +3,14 @@
 namespace OriCMF\User\Credentials\Exception;
 
 use Orisai\Exceptions\DomainException;
-use Orisai\Localization\TranslatableMessage;
+use Orisai\TranslationContracts\Translatable;
 
 final class InvalidCredentials extends DomainException
 {
 
-	private TranslatableMessage $errorMessage;
+	private Translatable $errorMessage;
 
-	public static function create(TranslatableMessage $errorMessage): self
+	public static function create(Translatable $errorMessage): self
 	{
 		$self = new self();
 		$self->errorMessage = $errorMessage;
@@ -18,7 +18,7 @@ final class InvalidCredentials extends DomainException
 		return $self;
 	}
 
-	public function getErrorMessage(): TranslatableMessage
+	public function getErrorMessage(): Translatable
 	{
 		return $this->errorMessage;
 	}

@@ -10,7 +10,7 @@ use OriCMF\User\Credentials\Exception\InvalidCredentials;
 use OriCMF\User\DB\User;
 use OriCMF\User\DB\UserState;
 use Orisai\Auth\Passwords\PasswordHasher;
-use Orisai\Localization\TranslatableMessage;
+use Orisai\TranslationContracts\TranslatableMessage;
 
 final class LoginVerifier
 {

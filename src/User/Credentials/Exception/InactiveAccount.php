@@ -4,16 +4,16 @@ namespace OriCMF\User\Credentials\Exception;
 
 use OriCMF\User\DB\User;
 use Orisai\Exceptions\DomainException;
-use Orisai\Localization\TranslatableMessage;
+use Orisai\TranslationContracts\Translatable;
 
 final class InactiveAccount extends DomainException
 {
 
 	private User $user;
 
-	private TranslatableMessage $errorMessage;
+	private Translatable $errorMessage;
 
-	public static function create(User $user, TranslatableMessage $errorMessage): self
+	public static function create(User $user, Translatable $errorMessage): self
 	{
 		$self = new self();
 		$self->user = $user;
@@ -22,7 +22,7 @@ final class InactiveAccount extends DomainException
 		return $self;
 	}
 
-	public function getErrorMessage(): TranslatableMessage
+	public function getErrorMessage(): Translatable
 	{
 		return $this->errorMessage;
 	}
