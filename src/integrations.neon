@@ -25,6 +25,7 @@ extensions:
 	orisai.httpClient: OriNette\HttpClient\DI\HttpClientExtension
 	orisai.localization: Orisai\Localization\Bridge\NetteDI\LocalizationExtension
 	orisai.monolog: OriNette\Monolog\DI\MonologExtension
+	orisai.tracyPets: OriNette\TracyPets\DI\TracyPetsExtension
 
 	tracy: Tracy\Bridges\Nette\TracyExtension(%debugMode%, %consoleMode%)
 
