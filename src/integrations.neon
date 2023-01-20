@@ -20,7 +20,7 @@ extensions:
 	orisai.auth: OriNette\Auth\DI\AuthExtension
 	orisai.console: OriNette\Console\DI\ConsoleExtension
 	orisai.clock: OriNette\Clock\DI\ClockExtension
-	orisai.datasource: Orisai\DataSources\Bridge\NetteDI\DataSourceExtension
+	orisai.dataSources: OriNette\DataSources\DI\DataSourceExtension
 	orisai.http.panel: OriNette\Http\Tracy\DI\HttpPanelExtension
 	orisai.httpClient: OriNette\HttpClient\DI\HttpClientExtension
 	orisai.localization: Orisai\Localization\Bridge\NetteDI\LocalizationExtension

@@ -56,6 +56,7 @@
 		"orisai/nette-auth": "^1.0.0",
 		"orisai/nette-clock": "^1.0.0",
 		"orisai/nette-console": "^1.2.0",
+		"orisai/nette-data-sources": "^1.0.0",
 		"orisai/nette-di": "dev-f/installer as 1.2.3",
 		"orisai/nette-http": "^1.1.0",
 		"orisai/nette-http-client": "^1.0.0",
