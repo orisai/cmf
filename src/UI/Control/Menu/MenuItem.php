@@ -4,33 +4,36 @@ namespace OriCMF\UI\Control\Menu;
 
 use Closure;
 use OriCMF\UI\ActionLink;
+use Orisai\TranslationContracts\Translatable;
 
-/**
- * @todo - external url
- */
 final class MenuItem
 {
 
 	/**
-	 * @param Closure(): ActionLink $destination
+	 * @param Closure(): ActionLink|string $destination
 	 */
 	public function __construct(
-		private readonly string $title,
-		private readonly Closure $destination,
+		private readonly Translatable|string $title,
+		private readonly Closure|string $destination,
 		private readonly string|null $icon = null,
-		private readonly string|null $privilege = null,
+		private readonly string|null $requiredPrivilege = null,
+		private readonly bool $requiresRoot = false,
 	)
 	{
 	}
 
-	public function getTitle(): string
+	public function getTitle(): Translatable|string
 	{
 		return $this->title;
 	}
 
-	public function getDestination(): ActionLink
+	public function getDestination(): ActionLink|string
 	{
-		return ($this->destination)();
+		if ($this->destination instanceof Closure) {
+			return ($this->destination)();
+		}
+
+		return $this->destination;
 	}
 
 	public function getIcon(): string|null
@@ -38,9 +41,14 @@ final class MenuItem
 		return $this->icon;
 	}
 
-	public function getPrivilege(): string|null
+	public function getRequiredPrivilege(): string|null
 	{
-		return $this->privilege;
+		return $this->requiredPrivilege;
+	}
+
+	public function isRootRequired(): bool
+	{
+		return $this->requiresRoot;
 	}
 
 }
