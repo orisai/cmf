@@ -10,12 +10,13 @@ use OriCMF\Email\DB\Email;
 use OriCMF\ORM\Wrapper\BackedEnumWrapper;
 use OriCMF\Role\DB\Role;
 use Symfony\Component\Uid\UuidV7;
+use function Orisai\Clock\now;
 use function random_int;
 
 /**
  * @uses BackedEnumWrapper
  * @property-read string                  $id         {primary}
- * @property-read DateTimeImmutable       $createdAt  {default now}
+ * @property-read DateTimeImmutable       $createdAt
  * @property string                       $fullName
  * @property string                       $userName
  * @property-read iterable<Email>&HasMany $emails     {1:m Email::$user, cascade=[persist, remove]}
@@ -36,6 +37,7 @@ final class User extends Entity
 	{
 		parent::__construct();
 		$this->setReadOnlyValue('id', (new UuidV7())->toRfc4122());
+		$this->setReadOnlyValue('createdAt', now());
 
 		$this->fullName = $fullName;
 		$this->userName = Strings::webalize("$fullName-" . random_int(100, 9_999));
