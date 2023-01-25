@@ -1,5 +1,0 @@
-extensions:
-	ori.cmf.clock: OriCMF\Clock\DI\ClockExtension
-
-ori.cmf.clock:
-	timezone: unknown/timezone

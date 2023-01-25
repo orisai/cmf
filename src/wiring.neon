@@ -5,7 +5,6 @@ includes:
 	- Admin/wiring.neon
 	- Auth/wiring.neon
 	- Cache/wiring.neon
-	- Clock/wiring.neon
 	- Config/wiring.neon
 	- Email/wiring.neon
 	- Error/wiring.neon
