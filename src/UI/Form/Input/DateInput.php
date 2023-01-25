@@ -28,16 +28,26 @@ final class DateInput extends TextInput
 		$this->setHtmlType('date');
 	}
 
-	public function setMax(Instant $max): self
+	public function setMax(Instant|DateTimeInterface $max): self
 	{
-		$this->setHtmlAttribute('max', $this->fromInstant($max));
+		$this->setHtmlAttribute(
+			'max',
+			$max instanceof DateTimeInterface
+				? $this->fromDateTimeInterface($max)
+				: $this->fromInstant($max),
+		);
 
 		return $this;
 	}
 
-	public function setMin(Instant $min): self
+	public function setMin(Instant|DateTimeInterface $min): self
 	{
-		$this->setHtmlAttribute('min', $this->fromInstant($min));
+		$this->setHtmlAttribute(
+			'min',
+			$min instanceof DateTimeInterface
+				? $this->fromDateTimeInterface($min)
+				: $this->fromInstant($min),
+		);
 
 		return $this;
 	}
