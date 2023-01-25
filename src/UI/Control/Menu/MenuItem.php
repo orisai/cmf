@@ -11,6 +11,7 @@ final class MenuItem
 
 	/**
 	 * @param Closure(): ActionLink|string $destination
+	 * @param list<MenuItem>               $items
 	 */
 	public function __construct(
 		private readonly Translatable|string $title,
@@ -18,6 +19,7 @@ final class MenuItem
 		private readonly string|null $icon = null,
 		private readonly string|null $requiredPrivilege = null,
 		private readonly bool $requiresRoot = false,
+		private readonly array $items = [],
 	)
 	{
 	}
@@ -49,6 +51,14 @@ final class MenuItem
 	public function isRootRequired(): bool
 	{
 		return $this->requiresRoot;
+	}
+
+	/**
+	 * @return list<MenuItem>
+	 */
+	public function getItems(): array
+	{
+		return $this->items;
 	}
 
 }
