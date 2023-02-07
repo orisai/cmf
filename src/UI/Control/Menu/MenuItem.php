@@ -12,6 +12,7 @@ final class MenuItem
 	/**
 	 * @param Closure(): ActionLink|string $destination
 	 * @param list<MenuItem>               $items
+	 * @param int<0, max>                  $notificationsCount
 	 */
 	public function __construct(
 		private readonly Translatable|string $title,
@@ -20,6 +21,7 @@ final class MenuItem
 		private readonly string|null $requiredPrivilege = null,
 		private readonly bool $requiresRoot = false,
 		private readonly array $items = [],
+		private readonly int|null $notificationsCount = null,
 	)
 	{
 	}
@@ -59,6 +61,11 @@ final class MenuItem
 	public function getItems(): array
 	{
 		return $this->items;
+	}
+
+	public function getNotificationsCount(): int|null
+	{
+		return $this->notificationsCount;
 	}
 
 }
