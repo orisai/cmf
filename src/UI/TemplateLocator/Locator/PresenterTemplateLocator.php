@@ -3,10 +3,20 @@
 namespace OriCMF\UI\TemplateLocator\Locator;
 
 use Nette\Application\UI\Presenter;
+use OriCMF\Admin\Presenter\BaseAdminPresenter;
+use OriCMF\Public\Presenter\BasePublicPresenter;
+use OriCMF\UI\Presenter\BasePresenter;
 use OriCMF\UI\TemplateLocator\Exception\NoTemplateFound;
 
 final class PresenterTemplateLocator extends BaseTemplateLocator
 {
+
+	private const BreakClasses = [
+		Presenter::class,
+		BasePresenter::class,
+		BaseAdminPresenter::class,
+		BasePublicPresenter::class,
+	];
 
 	/**
 	 * @throws NoTemplateFound
@@ -17,7 +27,7 @@ final class PresenterTemplateLocator extends BaseTemplateLocator
 			$presenter,
 			"@$layoutName",
 			'Presenter',
-			Presenter::class,
+			self::BreakClasses,
 			Presenter::DEFAULT_ACTION,
 		);
 	}
@@ -31,7 +41,7 @@ final class PresenterTemplateLocator extends BaseTemplateLocator
 			$presenter,
 			$viewName,
 			'Presenter',
-			Presenter::class,
+			self::BreakClasses,
 			Presenter::DEFAULT_ACTION,
 		);
 	}

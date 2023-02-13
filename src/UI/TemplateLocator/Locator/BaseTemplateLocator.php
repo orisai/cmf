@@ -4,6 +4,7 @@ namespace OriCMF\UI\TemplateLocator\Locator;
 
 use OriCMF\UI\TemplateLocator\Exception\NoTemplateFound;
 use Orisai\Utils\Reflection\Classes;
+use function in_array;
 use function is_file;
 use function preg_replace;
 
@@ -18,14 +19,14 @@ abstract class BaseTemplateLocator
 	}
 
 	/**
-	 * @param class-string $breakClass
+	 * @param list<class-string> $breakClasses
 	 * @throws NoTemplateFound
 	 */
 	protected function getPath(
 		object $templatedClass,
 		string $viewName,
 		string $baseClassSuffix,
-		string $breakClass,
+		array $breakClasses,
 		string $defaultName,
 	): string
 	{
@@ -39,10 +40,6 @@ abstract class BaseTemplateLocator
 		);
 
 		foreach ($classes as $class) {
-			if ($class === $breakClass) {
-				break;
-			}
-
 			$fileName = $viewName === $defaultName
 				? $baseFileName
 				: "$baseFileName.$viewName";
@@ -52,6 +49,10 @@ abstract class BaseTemplateLocator
 
 			if (is_file($templatePath)) {
 				return $templatePath;
+			}
+
+			if (in_array($class, $breakClasses, true)) {
+				break;
 			}
 
 			$triedPaths[] = $templatePath;
