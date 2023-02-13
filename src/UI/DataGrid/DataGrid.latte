@@ -96,7 +96,7 @@
 		{/ifset}
 		{foreach $columns as $column}
 			<th scope="col"
-				class="px-6 pt-3 pb-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+				class="px-6 pt-3 pb-1 text-left text-sm font-medium text-gray-500">
 				<a n:tag-if="$column->canSort()"
 						href="{link sort!, orderColumn: $column->name, orderType: $column->getNewState()}"
 						class="ajax text-indigo-600 hover:text-indigo-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
@@ -112,7 +112,7 @@
 			</th>
 		{/foreach}
 		{if $hasActionsColumn}
-			<th scope="col" class="px-6 pt-3 pb-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+			<th scope="col" class="px-6 pt-3 pb-1 text-left text-sm font-medium text-gray-500">
 				<span class="sr-only">{_ori.cmf.grid.actions}</span>
 			</th>
 		{/if}
