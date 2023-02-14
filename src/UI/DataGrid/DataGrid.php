@@ -27,9 +27,6 @@ use function Orisai\TranslationContracts\t;
 final class DataGrid extends BaseControl
 {
 
-	public const OrderAsc = 'asc',
-		OrderDesc = 'desc';
-
 	public const TemplatePath = __DIR__ . '/DataGrid.latte';
 
 	/** @var array<string, mixed> */
@@ -39,9 +36,8 @@ final class DataGrid extends BaseControl
 	#[Persistent]
 	public string|null $orderColumn = null;
 
-	/** @var self::Order* */
 	#[Persistent]
-	public string $orderType = self::OrderAsc;
+	public ColumnOrder $orderType = ColumnOrder::Asc;
 
 	/** @var int<1, max> */
 	#[Persistent]
