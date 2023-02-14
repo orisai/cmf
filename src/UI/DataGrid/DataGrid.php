@@ -7,8 +7,6 @@ use InvalidArgumentException;
 use Latte\Essential\RawPhpExtension;
 use Nette\Application\Attributes\Persistent;
 use Nette\Application\UI\Form;
-use Nette\Application\UI\Presenter;
-use Nette\ComponentModel\IContainer;
 use Nette\Forms\Container;
 use Nette\Forms\Controls\Button;
 use Nette\Forms\Controls\SelectBox;
@@ -187,14 +185,6 @@ final class DataGrid extends BaseControl
 		if ($snippet === null || $snippet === 'rows') {
 			$this->sendOnlyRowParentSnippet = $redraw;
 		}
-	}
-
-	protected function validateParent(IContainer $parent): void
-	{
-		parent::validateParent($parent);
-		$this->monitor(Presenter::class, function (): void {
-			$this->filterDataSource = $this->filter;
-		});
 	}
 
 	/**
@@ -381,6 +371,7 @@ final class DataGrid extends BaseControl
 	public function loadState(array $params): void
 	{
 		parent::loadState($params);
+		$this->filterDataSource = $this->filter;
 		$this->paginator?->setPage($this->page);
 	}
 
