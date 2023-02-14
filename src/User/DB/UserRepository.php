@@ -3,8 +3,8 @@
 namespace OriCMF\User\DB;
 
 use Nextras\Orm\Collection\ICollection;
-use OriCMF\ORM\BaseRepository;
-use OriCMF\ORM\Functions\JsonAnyKeyOrValueExistsFunction;
+use OriCMF\Orm\BaseRepository;
+use OriCMF\Orm\Functions\JsonAnyKeyOrValueExistsFunction;
 use Orisai\Auth\Authorization\PrivilegeProcessor;
 
 final class UserRepository extends BaseRepository

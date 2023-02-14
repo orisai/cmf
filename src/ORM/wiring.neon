@@ -1,2 +1,0 @@
-extensions:
-	ori.cmf.orm.initializer: OriCMF\ORM\DI\OrmInitializerExtension

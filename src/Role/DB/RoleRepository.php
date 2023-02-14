@@ -2,7 +2,7 @@
 
 namespace OriCMF\Role\DB;
 
-use OriCMF\ORM\BaseRepository;
+use OriCMF\Orm\BaseRepository;
 
 final class RoleRepository extends BaseRepository
 {

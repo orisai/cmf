@@ -6,18 +6,18 @@ includes:
 	- Auth/wiring.neon
 	- Cache/wiring.neon
 	- Config/wiring.neon
+	- Dbal/wiring.neon
 	- Email/wiring.neon
 	- Error/wiring.neon
 	- Files/wiring.neon
 	- Home/wiring.neon
 	- Login/wiring.neon
-	- ORM/wiring.neon
+	- Orm/wiring.neon
 	- Password/wiring.neon
 	- Public/wiring.neon
 	- Registration/wiring.neon
 	- Robots/wiring.neon
 	- Role/wiring.neon
-	- SQL/wiring.neon
 	- UI/wiring.neon
 	- User/wiring.neon
 

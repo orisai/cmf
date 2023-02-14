@@ -2,7 +2,7 @@
 
 namespace OriCMF\Password\DB;
 
-use OriCMF\ORM\BaseRepository;
+use OriCMF\Orm\BaseRepository;
 
 final class PasswordRepository extends BaseRepository
 {

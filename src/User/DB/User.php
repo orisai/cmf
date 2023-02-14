@@ -7,7 +7,7 @@ use Nette\Utils\Strings;
 use Nextras\Orm\Entity\Entity;
 use Nextras\Orm\Relationships\HasMany;
 use OriCMF\Email\DB\Email;
-use OriCMF\ORM\Wrapper\BackedEnumWrapper;
+use OriCMF\Orm\Wrapper\BackedEnumWrapper;
 use OriCMF\Role\DB\Role;
 use Symfony\Component\Uid\UuidV7;
 use function Orisai\Clock\now;

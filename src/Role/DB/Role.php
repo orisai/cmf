@@ -4,7 +4,7 @@ namespace OriCMF\Role\DB;
 
 use DateTimeImmutable;
 use Nextras\Orm\Entity\Entity;
-use OriCMF\ORM\Wrapper\JsonWrapper;
+use OriCMF\Orm\Wrapper\JsonWrapper;
 use Symfony\Component\Uid\UuidV7;
 use function Orisai\Clock\now;
 

@@ -2,7 +2,7 @@
 
 namespace OriCMF\Email\DB;
 
-use OriCMF\ORM\BaseRepository;
+use OriCMF\Orm\BaseRepository;
 
 final class EmailRepository extends BaseRepository
 {

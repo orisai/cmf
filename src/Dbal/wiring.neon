@@ -1,0 +1,17 @@
+extensions:
+	ori.cmf.dbal: OriCMF\Dbal\DI\DbalExtension
+
+ori.cmf.dbal:
+	debug: %debug.panels.dbal%
+	sqlProcessorFactory: @ori.cmf.dbal.processorFactory
+
+services:
+	ori.cmf.dbal.logger:
+		factory: OriCMF\Dbal\SqlLogger
+		type: Nextras\Dbal\ILogger
+	ori.cmf.dbal.modifier.arrayExpression:
+		factory: OriCMF\Dbal\Modifier\ArrayExpressionModifier
+	ori.cmf.dbal.processorFactory:
+		factory: OriCMF\Dbal\SqlProcessorFactory
+		setup:
+			- addModifier(arrayExpression, @ori.cmf.dbal.modifier.arrayExpression)
