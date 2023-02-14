@@ -19,7 +19,7 @@ final class ControlTemplateLocator extends BaseComponentTemplateLocator
 		return $this->getPath(
 			$control,
 			$viewName,
-			'Control',
+			'',
 			[
 				Control::class,
 				BaseControl::class,

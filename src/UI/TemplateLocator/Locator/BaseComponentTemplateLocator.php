@@ -30,16 +30,18 @@ abstract class BaseComponentTemplateLocator
 		string $defaultName,
 	): string
 	{
-		$classes = Classes::getClassList($templatedClass::class);
+		$baseFileName = Classes::getShortName($templatedClass::class);
+
+		if ($baseClassSuffix !== '') {
+			$baseFileName = preg_replace(
+				"#$baseClassSuffix$#",
+				'',
+				$baseFileName,
+			);
+		}
+
 		$triedPaths = [];
-
-		$baseFileName = preg_replace(
-			"#$baseClassSuffix$#",
-			'',
-			Classes::getShortName($templatedClass::class),
-		);
-
-		foreach ($classes as $class) {
+		foreach (Classes::getClassList($templatedClass::class) as $class) {
 			$fileName = $viewName === $defaultName
 				? $baseFileName
 				: "$baseFileName.$viewName";

@@ -40,7 +40,7 @@ final class PresenterTemplateLocator extends BaseComponentTemplateLocator
 		return $this->getPath(
 			$presenter,
 			$viewName,
-			'Presenter',
+			'',
 			self::BreakClasses,
 			Presenter::DEFAULT_ACTION,
 		);
