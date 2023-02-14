@@ -123,12 +123,6 @@ final class DataGrid extends BaseControl
 		$this->paginatorItemsCountCallback = $itemsCountCallback;
 	}
 
-	public function removePagination(): void
-	{
-		$this->paginator = null;
-		$this->paginatorItemsCountCallback = null;
-	}
-
 	/**
 	 * @param int<1, max> $count
 	 */
