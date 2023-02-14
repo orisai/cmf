@@ -11,7 +11,7 @@ use function preg_replace;
 /**
  * @internal
  */
-abstract class BaseTemplateLocator
+abstract class BaseComponentTemplateLocator
 {
 
 	public function __construct(private readonly string $rootDir)

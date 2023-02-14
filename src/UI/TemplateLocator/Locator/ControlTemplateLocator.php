@@ -6,7 +6,7 @@ use Nette\Application\UI\Control;
 use OriCMF\UI\Control\BaseControl;
 use OriCMF\UI\TemplateLocator\Exception\NoTemplateFound;
 
-final class ControlTemplateLocator extends BaseTemplateLocator
+final class ControlTemplateLocator extends BaseComponentTemplateLocator
 {
 
 	public const DefaultViewName = 'default';

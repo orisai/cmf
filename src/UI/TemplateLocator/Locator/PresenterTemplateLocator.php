@@ -8,7 +8,7 @@ use OriCMF\Public\Presenter\BasePublicPresenter;
 use OriCMF\UI\Presenter\BasePresenter;
 use OriCMF\UI\TemplateLocator\Exception\NoTemplateFound;
 
-final class PresenterTemplateLocator extends BaseTemplateLocator
+final class PresenterTemplateLocator extends BaseComponentTemplateLocator
 {
 
 	private const BreakClasses = [
