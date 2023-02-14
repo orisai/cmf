@@ -1,10 +1,10 @@
 <?php declare(strict_types = 1);
 
-namespace OriCMF\UI\Template;
+namespace OriCMF\UI\Template\Latte;
 
 use Latte\Extension;
-use OriCMF\UI\Template\Nodes\FormErrorsNode;
-use OriCMF\UI\Template\Nodes\FormFieldNode;
+use OriCMF\UI\Template\Latte\Nodes\FormErrorsNode;
+use OriCMF\UI\Template\Latte\Nodes\FormFieldNode;
 
 final class LatteComponentsExtension extends Extension
 {

@@ -5,7 +5,7 @@ namespace OriCMF\UI\Template\DI;
 use Nette\Bridges\ApplicationLatte\LatteFactory;
 use Nette\DI\CompilerExtension;
 use Nette\DI\Definitions\FactoryDefinition;
-use OriCMF\UI\Template\LatteComponentsExtension as LatteExtension;
+use OriCMF\UI\Template\Latte\LatteComponentsExtension as LatteExtension;
 use function assert;
 
 final class LatteComponentsExtension extends CompilerExtension

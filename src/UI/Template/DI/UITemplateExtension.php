@@ -12,8 +12,8 @@ use Nette\DI\Definitions\ServiceDefinition;
 use Nette\Schema\Expect;
 use Nette\Schema\Schema;
 use OriCMF\Config\ConfigProvider;
+use OriCMF\UI\Template\Latte\UITemplateExtension as LatteExtension;
 use OriCMF\UI\Template\UITemplate;
-use OriCMF\UI\Template\UITemplateExtension as LatteExtension;
 use stdClass;
 use function assert;
 

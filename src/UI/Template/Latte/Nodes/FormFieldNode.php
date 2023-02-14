@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace OriCMF\UI\Template\Nodes;
+namespace OriCMF\UI\Template\Latte\Nodes;
 
 use Generator;
 use Latte\Compiler\Nodes\Php\ExpressionNode;

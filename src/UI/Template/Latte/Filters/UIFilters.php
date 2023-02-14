@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace OriCMF\UI\Template;
+namespace OriCMF\UI\Template\Latte\Filters;
 
 use Symfony\Component\Uid\UuidV7;
 

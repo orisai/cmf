@@ -24,7 +24,7 @@ parameters:
 
 		# Types in callables
 		- message: '#^Method (.+)UITemplateExtension\:\:getFilters\(\) return type has no signature specified for callable\.$#'
-		  path: ../src/UI/Template/UITemplateExtension.php
+		  path: ../src/UI/Template/Latte/UITemplateExtension.php
 		  count: 1
 
 		# PHPStan bug - since phpstan/phpstan v1.9.16, phpstan-nette does not recognize type of component in a trait
