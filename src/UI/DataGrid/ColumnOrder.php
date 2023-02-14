@@ -9,4 +9,6 @@ enum ColumnOrder: string
 
 	case Desc = 'desc';
 
+	case Undefined = 'undefined';
+
 }

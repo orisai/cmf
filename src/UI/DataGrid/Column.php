@@ -30,14 +30,14 @@ final class Column
 		return $this->sort;
 	}
 
-	public function getNewState(): ColumnOrder|null
+	public function getNewState(): ColumnOrder
 	{
 		if ($this->isAsc()) {
 			return ColumnOrder::Desc;
 		}
 
 		if ($this->isDesc()) {
-			return null;
+			return ColumnOrder::Undefined;
 		}
 
 		return ColumnOrder::Asc;

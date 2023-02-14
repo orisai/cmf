@@ -37,7 +37,7 @@ final class DataGrid extends BaseControl
 	public string|null $orderColumn = null;
 
 	#[Persistent]
-	public ColumnOrder $orderType = ColumnOrder::Asc;
+	public ColumnOrder $orderType = ColumnOrder::Undefined;
 
 	/** @var int<1, max> */
 	#[Persistent]
