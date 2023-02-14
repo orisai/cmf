@@ -4,7 +4,7 @@ namespace OriCMF\UI\Control\Icons;
 
 use OriCMF\UI\Control\BaseControlTemplate;
 
-final class IconsTemplate extends BaseControlTemplate
+final class IconsControlTemplate extends BaseControlTemplate
 {
 
 	public IconsControl $control;

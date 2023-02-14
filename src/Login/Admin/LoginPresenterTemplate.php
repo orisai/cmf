@@ -1,10 +1,10 @@
 <?php declare(strict_types = 1);
 
-namespace OriCMF\Login\Public;
+namespace OriCMF\Login\Admin;
 
 use OriCMF\UI\Presenter\BasePresenterTemplate;
 
-class LoginTemplate extends BasePresenterTemplate
+class LoginPresenterTemplate extends BasePresenterTemplate
 {
 
 	public LoginPresenter $control;

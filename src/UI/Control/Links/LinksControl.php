@@ -6,7 +6,7 @@ use OriCMF\UI\Control\BaseControl;
 use function asort;
 
 /**
- * @property-read LinksTemplate $template
+ * @property-read LinksControlTemplate $template
  */
 final class LinksControl extends BaseControl
 {

@@ -8,7 +8,7 @@ use OriCMF\UI\ActionLink;
 use OriCMF\UI\Presenter\NoLogin;
 
 /**
- * @property-read LoginTemplate $template
+ * @property-read LoginPresenterTemplate $template
  */
 class LoginPresenter extends BaseAdminPresenter
 {

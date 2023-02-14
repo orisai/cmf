@@ -10,7 +10,7 @@ use OriCMF\UI\Control\Head\HeadControl;
 use OriCMF\UI\Control\Head\HeadControlFactory;
 
 /**
- * @property-read DocumentTemplate $template
+ * @property-read DocumentControlTemplate $template
  */
 final class DocumentControl extends BaseControl
 {

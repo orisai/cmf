@@ -6,7 +6,7 @@ use Nette\Utils\Html;
 use OriCMF\UI\Control\BaseControl;
 
 /**
- * @property-read NoScriptTemplate $template
+ * @property-read NoScriptControlTemplate $template
  */
 final class NoScriptControl extends BaseControl
 {

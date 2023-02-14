@@ -4,7 +4,7 @@ namespace OriCMF\UI\Control\Head;
 
 use OriCMF\UI\Control\BaseControlTemplate;
 
-final class HeadTemplate extends BaseControlTemplate
+final class HeadControlTemplate extends BaseControlTemplate
 {
 
 	public HeadControl $control;

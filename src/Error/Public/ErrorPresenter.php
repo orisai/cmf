@@ -8,7 +8,7 @@ use OriCMF\UI\Presenter\NoLogin;
 use Throwable;
 
 /**
- * @property-read ErrorTemplate $template
+ * @property-read ErrorPresenterTemplate $template
  */
 final class ErrorPresenter extends BasePublicPresenter
 {

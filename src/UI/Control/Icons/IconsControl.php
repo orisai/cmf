@@ -8,7 +8,7 @@ use function strcmp;
 use function uasort;
 
 /**
- * @property-read IconsTemplate $template
+ * @property-read IconsControlTemplate $template
  */
 final class IconsControl extends BaseControl
 {

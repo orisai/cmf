@@ -11,9 +11,7 @@ use Orisai\Exceptions\Logic\InvalidState;
 use Orisai\Exceptions\Message;
 use function assert;
 use function class_exists;
-use function is_string;
 use function is_subclass_of;
-use function preg_replace;
 
 /**
  * @method BasePresenter getPresenter()
@@ -54,14 +52,7 @@ abstract class BaseControl extends Control
 	 */
 	public function formatTemplateClass(): string
 	{
-		$class = preg_replace('#Control$#', 'Template', static::class);
-		assert(is_string($class));
-
-		if ($class === static::class) {
-			$class .= 'Template';
-		}
-
-		return $this->checkTemplateClass($class);
+		return $this->checkTemplateClass(static::class . 'Template');
 	}
 
 	/**

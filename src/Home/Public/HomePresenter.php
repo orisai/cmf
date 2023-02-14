@@ -6,7 +6,7 @@ use OriCMF\Public\Presenter\BasePublicPresenter;
 use OriCMF\UI\ActionLink;
 
 /**
- * @property-read HomeTemplate $template
+ * @property-read HomePresenterTemplate $template
  */
 final class HomePresenter extends BasePublicPresenter
 {

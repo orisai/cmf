@@ -7,7 +7,7 @@ use function md5;
 use function time;
 
 /**
- * @property-read StylesTemplate $template
+ * @property-read StylesControlTemplate $template
  */
 final class StylesControl extends BaseControl
 {

@@ -6,7 +6,7 @@ use OriCMF\UI\Control\BaseControl;
 use function sprintf;
 
 /**
- * @property-read TitleTemplate $template
+ * @property-read TitleControlTemplate $template
  */
 final class TitleControl extends BaseControl
 {

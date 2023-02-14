@@ -7,7 +7,7 @@ use function implode;
 use function ksort;
 
 /**
- * @property-read MetaTemplate $template
+ * @property-read MetaControlTemplate $template
  */
 final class MetaControl extends BaseControl
 {

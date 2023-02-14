@@ -7,7 +7,7 @@ use function md5;
 use function time;
 
 /**
- * @property-read ScriptsTemplate $template
+ * @property-read ScriptsControlTemplate $template
  */
 final class ScriptsControl extends BaseControl
 {

@@ -1,10 +1,10 @@
 <?php declare(strict_types = 1);
 
-namespace OriCMF\Error\Admin;
+namespace OriCMF\Error\Public;
 
 use OriCMF\UI\Presenter\BasePresenterTemplate;
 
-final class ErrorTemplate extends BasePresenterTemplate
+final class ErrorPresenterTemplate extends BasePresenterTemplate
 {
 
 	public ErrorPresenter $control;

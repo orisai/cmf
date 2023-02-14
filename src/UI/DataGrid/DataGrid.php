@@ -24,7 +24,7 @@ use function is_string;
 use function Orisai\TranslationContracts\t;
 
 /**
- * @property-read DataGridTemplate $template
+ * @property-read DataGridControlTemplate $template
  */
 final class DataGrid extends BaseControl
 {

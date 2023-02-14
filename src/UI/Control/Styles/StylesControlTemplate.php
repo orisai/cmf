@@ -4,7 +4,7 @@ namespace OriCMF\UI\Control\Styles;
 
 use OriCMF\UI\Control\BaseControlTemplate;
 
-final class StylesTemplate extends BaseControlTemplate
+final class StylesControlTemplate extends BaseControlTemplate
 {
 
 	public StylesControl $control;

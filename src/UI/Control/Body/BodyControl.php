@@ -6,7 +6,7 @@ use Nette\Utils\Html;
 use OriCMF\UI\Control\BaseControl;
 
 /**
- * @property-read BodyTemplate $template
+ * @property-read BodyControlTemplate $template
  */
 final class BodyControl extends BaseControl
 {

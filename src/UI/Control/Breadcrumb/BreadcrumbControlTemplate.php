@@ -4,7 +4,7 @@ namespace OriCMF\UI\Control\Breadcrumb;
 
 use OriCMF\UI\Control\BaseControlTemplate;
 
-final class BreadcrumbTemplate extends BaseControlTemplate
+final class BreadcrumbControlTemplate extends BaseControlTemplate
 {
 
 	public BreadcrumbControl $control;

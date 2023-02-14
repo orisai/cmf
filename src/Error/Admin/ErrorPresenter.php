@@ -6,7 +6,7 @@ use OriCMF\Admin\Presenter\BaseAdminPresenter;
 use OriCMF\Error\UI\ErrorPresenterUtil;
 
 /**
- * @property-read ErrorTemplate $template
+ * @property-read ErrorPresenterTemplate $template
  */
 final class ErrorPresenter extends BaseAdminPresenter
 {

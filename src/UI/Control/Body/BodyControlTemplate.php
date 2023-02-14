@@ -5,7 +5,7 @@ namespace OriCMF\UI\Control\Body;
 use Nette\Utils\Html;
 use OriCMF\UI\Control\BaseControlTemplate;
 
-final class BodyTemplate extends BaseControlTemplate
+final class BodyControlTemplate extends BaseControlTemplate
 {
 
 	public BodyControl $control;

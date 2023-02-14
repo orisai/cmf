@@ -9,7 +9,7 @@ use OriCMF\UI\Control\BaseControlTemplate;
 /**
  * @property-read DataGrid $control
  */
-final class DataGridTemplate extends BaseControlTemplate
+final class DataGridControlTemplate extends BaseControlTemplate
 {
 
 	public DataGrid $control;

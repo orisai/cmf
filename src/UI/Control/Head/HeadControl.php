@@ -20,7 +20,7 @@ use OriCMF\UI\Control\Title\TitleControl;
 use OriCMF\UI\Control\Title\TitleControlFactory;
 
 /**
- * @property-read HeadTemplate $template
+ * @property-read HeadControlTemplate $template
  */
 final class HeadControl extends BaseControl
 {

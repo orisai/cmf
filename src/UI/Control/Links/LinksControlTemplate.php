@@ -4,7 +4,7 @@ namespace OriCMF\UI\Control\Links;
 
 use OriCMF\UI\Control\BaseControlTemplate;
 
-final class LinksTemplate extends BaseControlTemplate
+final class LinksControlTemplate extends BaseControlTemplate
 {
 
 	public LinksControl $control;
