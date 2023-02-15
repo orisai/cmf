@@ -1,0 +1,57 @@
+includes:
+	- ../vendor/phpstan/phpstan/conf/bleedingEdge.neon
+	- phpstan.baseline.neon
+
+parameters:
+	phpVersion: 80100
+	level: 8
+	tmpDir: ../var/tools/PHPStan
+	resultCachePath: %currentWorkingDirectory%/var/tools/PHPStan/resultCache.php
+
+	checkBenevolentUnionTypes: true
+	checkMissingCallableSignature: true
+	checkInternalClassCaseSensitivity: true
+	checkTooWideReturnTypesInProtectedAndPublicMethods: true
+
+	exceptions:
+		check:
+			missingCheckedExceptionInThrows: true
+			tooWideThrowType: true
+		checkedExceptionClasses:
+			- Orisai\Exceptions\Check\CheckedException
+
+	ignoreErrors:
+		# Intentionally broken
+		-
+			message: '#^Return type (.+) of method (.+)\:\:setTranslator\(\) should be covariant with (.+)#'
+			path: ../src/UI/Form/Form.php
+
+		# Layout is string|bool|null, check is correct
+		-
+			message: '#^Strict comparison using === between string and null will always evaluate to false\.$#'
+			path: ../src/UI/Presenter/BasePresenter.php
+			count: 1
+
+		# array works, iterable does not - probably phpstan-nextras issue?
+		-
+			message: '#^Parameter \#1 \$callback of function array_map expects \(callable\(Nextras\\Orm\\Entity\\IEntity\)\: mixed\)\|null, Closure\(OriCMF\\Role\\DB\\Role\)\: string given\.$#'
+			path: ../src/Auth/UI/UserIdentityCreator.php
+			count: 1
+
+		# Weakly typed underlying lib
+		-
+			message: '#^(.+)does not accept array(.+)$#'
+			path: ../src/UI/DataGrid/DataGrid.php
+			count: 1
+
+		# Types in callables
+		-
+			message: '#^Method (.+)UITemplateExtension\:\:getFilters\(\) return type has no signature specified for callable\.$#'
+			path: ../src/UI/Template/Latte/UITemplateExtension.php
+			count: 1
+
+		# PHPStan bug - since phpstan/phpstan v1.9.16, phpstan-nette does not recognize type of component in a trait
+		-
+			message: '#^Call to an undefined method Nette\\ComponentModel\\IComponent\:\:setTitle\(\).$#'
+			path: ../src/Error/UI/ErrorPresenterUtil.php
+			count: 1

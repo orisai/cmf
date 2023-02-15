@@ -1,0 +1,6 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertInstanceOf\\(\\) with 'Nette\\\\\\\\DI\\\\\\\\Container' and Nette\\\\DI\\\\Container will always evaluate to true\\.$#"
+			count: 1
+			path: ../tests/Unit/DI/ContainerBuildTest.php
