@@ -23,6 +23,7 @@ includes:
 
 orisai.localization:
 	directories:
+		- %vendorDir%/orisai/auth/src/Locale/**
 		- %modules.orisai_cmf.dir%/src/**/Locale/**
 
 nextras.migrations:

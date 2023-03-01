@@ -2,11 +2,9 @@
 
 namespace OriCMF\Auth\UI;
 
-use OriCMF\Role\DB\Role;
 use OriCMF\User\DB\User;
 use Orisai\Auth\Authorization\Authorizer;
 use Orisai\Auth\Authorization\IdentityAuthorizationDataBuilder;
-use function array_map;
 
 final class UserIdentityCreator
 {
@@ -17,10 +15,10 @@ final class UserIdentityCreator
 
 	public function create(User $user, UserIdentity|null $impersonator = null): UserIdentity
 	{
-		$roles = array_map(
-			static fn (Role $role): string => $role->name,
-			$user->roles->getIterator()->fetchAll(),
-		);
+		$roles = [];
+		foreach ($user->roles as $role) {
+			$roles[] = $role->name;
+		}
 
 		$identity = new UserIdentity($user->id, $roles, $impersonator);
 
