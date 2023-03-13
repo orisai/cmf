@@ -42,7 +42,7 @@
 		"nette/neon": "^3.3.3",
 		"nette/php-generator": "^4.0.5",
 		"nette/schema": "^1.2.3",
-		"nette/utils": "^3.2.8",
+		"nette/utils": "^3.2.8|^4.0.0",
 		"nextras/dbal": "~4.0.5",
 		"nextras/migrations": "~3.2.0",
 		"nextras/orm": "~4.0.6",
