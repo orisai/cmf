@@ -1,0 +1,5 @@
+orisai.scheduler:
+	errorHandler: [@ori.cmf.logging.schedulerLogger, 'log']
+
+services:
+	ori.cmf.logging.schedulerLogger: OriCMF\Logging\SchedulerLogger

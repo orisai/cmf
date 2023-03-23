@@ -25,6 +25,7 @@ extensions:
 	orisai.httpClient: OriNette\HttpClient\DI\HttpClientExtension
 	orisai.localization: Orisai\Localization\Bridge\NetteDI\LocalizationExtension
 	orisai.monolog: OriNette\Monolog\DI\MonologExtension
+	orisai.scheduler: OriNette\Scheduler\DI\SchedulerExtension
 	orisai.tracyPets: OriNette\TracyPets\DI\TracyPetsExtension
 
 	tracy: Tracy\Bridges\Nette\TracyExtension(%debugMode%, %consoleMode%)
@@ -169,3 +170,8 @@ services:
 
 	# Canonical linker
 	orisai.application.canonicalLinker: OriNette\Application\CanonicalLink\CanonicalLinker()
+
+	# Lock
+	symfony.lock.factory: Symfony\Component\Lock\LockFactory(
+		Symfony\Component\Lock\Store\FlockStore()
+	)

@@ -11,6 +11,7 @@ includes:
 	- Error/wiring.neon
 	- Files/wiring.neon
 	- Home/wiring.neon
+	- Logging/wiring.neon
 	- Login/wiring.neon
 	- Orm/wiring.neon
 	- Password/wiring.neon
