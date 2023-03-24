@@ -7,13 +7,16 @@ use Nette\Forms\Controls\SelectBox;
 use Nette\Forms\Helpers;
 use Nette\Utils\Html;
 use Nette\Utils\Json;
+use Orisai\Exceptions\Logic\InvalidState;
+use function get_debug_type;
+use function is_object;
 
 final class SvelteSelect
 {
 
 	private SelectBox|MultiSelectBox $select;
 
-	private bool $isMulti;
+	private bool $multiple;
 
 	private function __construct()
 	{
@@ -24,7 +27,7 @@ final class SvelteSelect
 	{
 		$self = new self();
 		$self->select = $select;
-		$self->isMulti = false;
+		$self->multiple = false;
 
 		return $self;
 	}
@@ -33,7 +36,7 @@ final class SvelteSelect
 	{
 		$self = new self();
 		$self->select = $multiSelect;
-		$self->isMulti = true;
+		$self->multiple = true;
 
 		return $self;
 	}
@@ -52,16 +55,24 @@ final class SvelteSelect
 		$rules = Helpers::exportRules($this->select->getRules());
 		$prompt = $this->select instanceof SelectBox ? $this->select->getPrompt() : false;
 
+		if (is_object($prompt)) {
+			$promptType = get_debug_type($prompt);
+
+			throw InvalidState::create()
+				->withMessage("Prompt object (of type '$promptType') is currently not supported.");
+		}
+
 		return Json::encode([
-			'items' => $this->select->getItems(),
-			'isMulti' => $this->isMulti,
+			'netteItems' => $this->select->getItems(),
+			'netteValue' => $this->select->getValue(),
+			'hasErrors' => $this->select->hasErrors(),
+			'multiple' => $this->multiple,
 			'id' => $this->select->getHtmlId(),
 			'name' => $this->select->getHtmlName(),
 			'required' => $this->select->isRequired(),
 			'disabled' => $this->select->isDisabled(),
 			'placeholder' => $prompt === false ? '' : $prompt,
-			'rules' => $rules === [] ? null : Json::encode($rules),
-			'selectedValue' => $this->select->getValue(),
+			'rules' => Json::encode($rules),
 		]);
 	}
 

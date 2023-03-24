@@ -1,26 +1,25 @@
-<script>
-	import Select from 'svelte-select';
-	import Item from './SelectItem.svelte';
+<script lang="ts">
 	import {onMount} from 'svelte';
+	import Select from 'svelte-select';
 
-	export let items;
-	export let selectedValue;
-	export let isMulti;
-	export let id;
-	export let name;
-	export let required;
-	export let disabled;
-	export let placeholder;
-	export let rules;
-	export let container;
+	export let netteItems: Object;
+	export let netteValue: string[] | string | null;
+	export let hasErrors: boolean;
+	export let multiple: boolean;
+	export let id: string;
+	export let name: string;
+	export let required: boolean;
+	export let disabled: boolean;
+	export let placeholder: string;
+	export let rules: Object[];
 
-	let listOpen = false;
-	let isFocused = false;
-	let filteredItems = [];
+	let checked: string[] = [];
+	let isChecked: Record<string, boolean> = {};
+	let items: Object[] = [];
+	let value = [];
 
-	$: {
-		if (isMulti && !listOpen && isFocused && filteredItems.length !== 0) listOpen = true
-	}
+	$: computeValue(checked);
+	$: computeIsChecked(checked);
 
 	const svelteId = id + '-svelte';
 	const inputAttributes = {
@@ -30,91 +29,172 @@
 		'data-nette-rules': rules,
 	};
 
-	let selectItems = [];
-	for (const [key, value] of Object.entries(items)) {
-		selectItems.push({
+	let selectClasses = 'ori-svelte-select mt-1 block w-full px-3 py-2 shadow-sm border rounded-md focus:outline-none sm:text-sm bg-white';
+	// TODO - not fully working, some parts of select have higher priority
+	if (hasErrors) {
+		selectClasses += ' text-red-900 placeholder-red-300 border-red-300 focus:border-red-500 focus:ring-red-500';
+	} else {
+		selectClasses += ' border-gray-300 focus:border-indigo-500 focus:ring-indigo-500';
+	}
+
+	for (const [key, item] of Object.entries(netteItems)) {
+		items.push({
 			'value': key,
-			'label': value,
+			'label': item,
 		})
 	}
 
-	let selectSelectedItems = [];
-	if (isMulti) {
-		for (const [key, value] of Object.entries(selectedValue)) {
-			selectSelectedItems.push({
-				'value': value,
+	if (multiple) {
+		for (const [key, item] of Object.entries(netteValue)) {
+			value.push({
+				'value': item,
 			})
+			checked.push(item);
 		}
 	} else {
-		if (selectedValue !== null) {
-			selectSelectedItems = items[selectedValue];
+		if (netteValue !== null) {
+			value = netteItems[netteValue];
+			checked.push(netteValue);
 		} else {
-			selectSelectedItems = null;
+			value = null;
 		}
 	}
 
-	function createSelect() {
-		const select = document.createElement('select');
-		select.id = id;
-		select.name = name;
-		select.multiple = isMulti;
-		select.classList.add('hidden');
-		return select;
-	}
-
-	function createOption(value) {
-		const option = document.createElement('option');
-		option.value = value;
-		option.selected = true;
-		return option;
-	}
-
-	onMount(function () {
+	onMount(function (): void {
 		const select = createSelect();
 
-		if (selectedValue !== null) {
-			if (isMulti) {
-				for (const [key, value] of Object.entries(selectedValue)) {
-					select.appendChild(createOption(value));
-				}
+		if (netteValue !== null) {
+			if (typeof netteValue === 'string') {
+				select.appendChild(createOption(netteValue));
 			} else {
-				select.appendChild(createOption(selectedValue));
+				for (const [key, item] of Object.entries(netteValue)) {
+					select.appendChild(createOption(item));
+				}
 			}
 		}
 
 		document.getElementById(svelteId).after(select);
 	});
 
-	function handleSelect(event) {
-		const select = createSelect();
+	function createSelect(): HTMLSelectElement {
+		const select = document.createElement('select');
+		select.id = id;
+		select.name = name;
+		select.multiple = multiple;
+		select.classList.add('hidden');
 
-		if (event.detail !== null) {
-			if (isMulti) {
-				event.detail.forEach(function (item) {
-					select.appendChild(createOption(item.value));
+		return select;
+	}
+
+	function createOption(item: string): HTMLOptionElement {
+		const option = document.createElement('option');
+		option.value = item;
+		option.selected = true;
+
+		return option;
+	}
+
+	function handleChange(event: CustomEvent): void {
+		const select = document.getElementById(id);
+
+		if (event.type === 'clear'
+			// TODO - workaround - removing triggers select instead of clear event
+			// https://svelte-select-examples.vercel.app/examples/advanced/multi-item-checkboxes
+			|| (!Array.isArray(event.detail) && isChecked[event.detail.value])
+		) {
+			if (Array.isArray(event.detail)) {
+				checked = [];
+				select.querySelectorAll(`option`).forEach((option: HTMLOptionElement) => {
+					select.removeChild(option);
 				});
 			} else {
+				select.querySelectorAll(`[value="${event.detail.value}"]`).forEach((option: HTMLOptionElement) => {
+					select.removeChild(option);
+				});
+			}
+		} else {
+			if (select.querySelector(`[value="${event.detail.value}"]`) === null) {
 				select.appendChild(createOption(event.detail.value));
 			}
 		}
 
-		document.getElementById(id).replaceWith(select);
+		if (!Array.isArray(event.detail)) {
+			checked.includes(event.detail.value)
+				? (checked = checked.filter((i) => i != event.detail.value))
+				: (checked = [...checked, event.detail.value]);
+		}
 	}
+
+	function computeIsChecked(checked: string[]): void {
+		isChecked = {};
+		checked.forEach((c) => (isChecked[c] = true));
+	}
+
+	function computeValue(checked: string[]): void {
+		if (!multiple) {
+			return;
+		}
+
+		value = checked.map((c) => items.find((i) => i.value === c));
+	}
+
 </script>
 
-<!-- todo - translate noOptionsMessage -->
-<!-- todo - error classes - text-red-900 placeholder-red-300 border-red-300 focus:border-red-500 focus:ring-red-500 -->
-<Select {Item}
-		isMulti={isMulti}
-		items={selectItems}
-		value={selectSelectedItems}
+<style lang="postcss">
+	:global(.ori-svelte-select) {
+		--height: 38px;
+	}
+
+	:global(.ori-svelte-select .value-container) {
+		column-gap: 0 !important;
+	}
+
+	:global(.ori-svelte-select.multi .value-container input) {
+		margin-left: 8px !important;
+	}
+
+	:global(.ori-svelte-select .multi-item) {
+		background: transparent !important;
+		padding: 0 !important;
+	}
+
+	:global(.ori-svelte-select .multi-item ~ .multi-item::before) {
+		content: ', ';
+	}
+
+	:global(.ori-svelte-select .multi-item):not(.active) {
+		outline-color: transparent !important;
+	}
+
+	:global(.ori-svelte-select .multi-item-clear) {
+		display: none !important;
+	}
+
+	.item {
+		pointer-events: none;
+	}
+</style>
+
+<Select
+		items={items}
+		value={value}
+		multiple={multiple}
+		closeListOnChange={!multiple}
+		filterSelectedItems={false}
 		inputAttributes={inputAttributes}
-		noOptionsMessage="Žádné položky"
 		placeholder={placeholder}
-		containerClasses="mt-1 block w-full px-3 py-2 shadow-sm border rounded-md focus:outline-none sm:text-sm bg-white border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 ori-svelte-select"
-		on:select={handleSelect}
-		bind:container
-		bind:listOpen
-		bind:isFocused
-		bind:filteredItems
-/>
+		class={selectClasses}
+		on:select={handleChange}
+		on:clear={handleChange}
+>
+	<div class="item" slot="item" let:item>
+		{#if multiple}
+			<label for={item.value}>
+				<input type="checkbox" id={item.value} bind:checked={isChecked[item.value]}/>
+				{item.label}
+			</label>
+		{:else}
+			{item.label}
+		{/if}
+	</div>
+</Select>
