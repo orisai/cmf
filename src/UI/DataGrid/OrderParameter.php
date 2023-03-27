@@ -5,15 +5,11 @@ namespace OriCMF\UI\DataGrid;
 final class OrderParameter
 {
 
-	/** @phpstan-var DataGrid::Order* */
-	private string $direction;
-
 	/**
 	 * @phpstan-param DataGrid::Order* $direction
 	 */
-	public function __construct(private readonly string $column, string $direction)
+	public function __construct(private readonly string $column, private readonly string $direction)
 	{
-		$this->direction = $direction;
 	}
 
 	public function getColumn(): string
