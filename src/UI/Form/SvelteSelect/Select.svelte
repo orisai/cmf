@@ -141,12 +141,20 @@
 </script>
 
 <style lang="postcss">
-	:global(.ori-svelte-select) {
-		--height: 38px;
-	}
-
 	:global(.ori-svelte-select .value-container) {
 		column-gap: 0 !important;
+		padding: 2px 0 !important;
+	}
+
+	:global(.ori-svelte-select .svelte-select-list) {
+		font-size: 14px !important;
+
+		& input[type=checkbox] {
+			border-radius: .25rem;
+			height: 1rem;
+			width: 1rem;
+			color: rgb(79 70 229 / 1);
+		}
 	}
 
 	:global(.ori-svelte-select.multi .value-container input) {
@@ -168,6 +176,10 @@
 
 	:global(.ori-svelte-select .multi-item-clear) {
 		display: none !important;
+	}
+
+	:global(.ori-svelte-select .multi-item-text) {
+		font-size: 14px !important;
 	}
 
 	.item {
