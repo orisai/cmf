@@ -12,7 +12,7 @@ final class UserIdentity extends StringIdentity
 	/**
 	 * @param list<string> $roles
 	 */
-	public function __construct(string $id, array $roles, private UserIdentity|null $impersonator = null)
+	public function __construct(string $id, array $roles, private self|null $impersonator = null)
 	{
 		parent::__construct($id, $roles);
 
@@ -22,7 +22,7 @@ final class UserIdentity extends StringIdentity
 		}
 	}
 
-	public function getImpersonator(): UserIdentity|null
+	public function getImpersonator(): self|null
 	{
 		return $this->impersonator;
 	}

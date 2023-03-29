@@ -117,7 +117,7 @@ class FindFilter
 	 */
 	private function logicalOperator(Closure $conditions, string $operator): void
 	{
-		$find = new FindFilter($operator);
+		$find = new self($operator);
 
 		$conditions($find);
 
