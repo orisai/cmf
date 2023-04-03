@@ -1,0 +1,136 @@
+#tracy-debug {
+	--tracy-color-background: #fff;
+	--tracy-color-background-hover: rgb(0 102 255 / 8%);
+	--tracy-color-blue: #2781f7;
+	--tracy-color-red: #f4081f;
+	--tracy-color-text: #595959;
+	--tracy-color-text-dark: #2c2c2c;
+}
+
+/*
+@media (prefers-color-scheme: dark) {
+	#tracy-debug {
+		--tracy-color-background: #22203c;
+		--tracy-color-background-hover: #302e54;
+		--tracy-color-background-hover-2: #464069;
+		--tracy-color-blue: #8dbeff;
+		--tracy-color-red: #ff939d;
+		--tracy-color-text: #bfbdd5;
+		--tracy-color-text-dark: #d4d2e5;
+	}
+
+	#tracy-debug-bar svg path[fill] {
+		fill: var(--tracy-color-blue) !important;
+	}
+
+	#tracy-debug-bar svg path[stroke] {
+		stroke: var(--tracy-color-blue) !important;
+	}
+
+	#tracy-debug #tracy-debug-logo path {
+		fill: var(--tracy-color-text-dark) !important;
+	}
+}
+ */
+
+#tracy-debug a:hover,
+#tracy-debug a:focus {
+	background-color: var(--tracy-color-background-hover);
+	color: var(--tracy-color-blue);
+	outline: none;
+}
+
+#tracy-debug-bar {
+	opacity: 1;
+	background: var(--tracy-color-background);
+	color: var(--tracy-color-text);
+	border: none;
+	line-height: 28px;
+	border-radius: 4px;
+	/* display: table; */
+}
+
+#tracy-debug-bar .tracy-row {
+	list-style: none none;
+	/* display: table-row; */
+}
+
+#tracy-debug-bar .tracy-row:not(:first-child) {
+	background: none;
+	opacity: 1;
+}
+
+#tracy-debug-bar .tracy-row[data-tracy-group="ajax"] {
+	animation: tracy-row-flash .4s ease;
+}
+
+@keyframes tracy-row-flash {
+	0% {
+		opacity: 0;
+	}
+}
+
+#tracy-debug-bar svg {
+	vertical-align: middle;
+}
+
+#tracy-debug-bar .tracy-row:first-child li:last-child {
+	padding-right: 2px;
+	text-align: right;
+}
+
+#tracy-debug-bar .tracy-row li {
+	/* display: table-cell; */
+}
+
+#tracy-debug-bar .tracy-row:not(:first-child) li:first-child {
+	cursor: default;
+}
+
+
+#tracy-debug-bar li a > span {
+	display: inline-flex;
+	align-items: center;
+	min-height: 28px;
+	vertical-align: middle;
+}
+
+#tracy-debug-bar li > a:hover {
+	background-color: var(--tracy-color-background-hover);
+	color: var(--tracy-color-blue);
+}
+
+#tracy-debug-bar .tracy-label {
+	color: var(--tracy-color-text);
+	margin-left: 4px;
+	margin-right: 4px;
+}
+
+#tracy-debug-bar .tracy-label:empty {
+	display: none;
+}
+
+#tracy-debug-bar a:hover .tracy-label {
+	color: var(--tracy-color-blue);
+}
+
+#tracy-debug .tracy-mode-float .tracy-icons {
+	display: flex;
+	top: 4px;
+	right: 4px;
+}
+
+#tracy-debug a[data-tracy-action] {
+	width: 24px;
+	height: 24px;
+	border-radius: 50%;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--tracy-color-text-dark);
+}
+
+#tracy-debug a[data-tracy-action]:hover {
+	background-color: var(--tracy-color-background-hover);
+	color: var(--tracy-color-blue);
+}
