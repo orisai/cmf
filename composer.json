@@ -45,7 +45,7 @@
 		"nette/utils": "^3.2.8|^4.0.0",
 		"nextras/dbal": "~4.0.5",
 		"nextras/migrations": "~3.2.0",
-		"nextras/orm": "~4.0.6",
+		"nextras/orm": "~4.0.7",
 		"orisai/auth": "^2.0.0",
 		"orisai/clock": "^1.1.0",
 		"orisai/data-sources": "^1.0.0",

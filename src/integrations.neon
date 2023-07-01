@@ -80,6 +80,7 @@ nextras.migrations:
 	printer: psrLog
 
 nextras.orm:
+	initializeMetadata: true
 	model: Nextras\Orm\Model\Model
 	repositoryFinder: Nextras\Orm\Bridges\NetteDI\DIRepositoryFinder
 

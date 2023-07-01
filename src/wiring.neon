@@ -13,7 +13,6 @@ includes:
 	- Home/wiring.neon
 	- Logging/wiring.neon
 	- Login/wiring.neon
-	- Orm/wiring.neon
 	- Password/wiring.neon
 	- Public/wiring.neon
 	- Registration/wiring.neon
