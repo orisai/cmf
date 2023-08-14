@@ -2,6 +2,7 @@
 
 namespace OriCMF\Auth\UI;
 
+use OriCMF\Auth\Logic\AuthorizationDataCreator;
 use OriCMF\User\DB\User;
 use Orisai\Auth\Authorization\Authorizer;
 use Orisai\Auth\Authorization\IdentityAuthorizationDataBuilder;
@@ -35,7 +36,7 @@ final class UserIdentityCreator
 
 		$builder = new IdentityAuthorizationDataBuilder($this->authorizer->getData());
 		foreach ($user->privileges as $privilege) {
-			if ($privilege === '*') {
+			if ($privilege === AuthorizationDataCreator::RootPrivilege) {
 				$builder->addRoot($identity);
 			} else {
 				$builder->allow($identity, $privilege);

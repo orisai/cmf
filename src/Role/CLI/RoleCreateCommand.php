@@ -3,6 +3,7 @@
 namespace OriCMF\Role\CLI;
 
 use Nextras\Orm\Model\IModel;
+use OriCMF\Auth\Logic\AuthorizationDataCreator;
 use OriCMF\Role\DB\Role;
 use OriCMF\Role\DB\RoleRepository;
 use Orisai\Auth\Authorization\Authorizer;
@@ -73,7 +74,10 @@ final class RoleCreateCommand extends Command
 
 		$missingPrivileges = [];
 		foreach ($privilegeNames as $privilegeName) {
-			if ($privilegeName !== '*' && !$this->authorizer->getData()->privilegeExists($privilegeName)) {
+			if (
+				$privilegeName !== AuthorizationDataCreator::RootPrivilege
+				&& !$this->authorizer->getData()->privilegeExists($privilegeName)
+			) {
 				$missingPrivileges[] = $privilegeName;
 			}
 		}

@@ -11,6 +11,8 @@ use Orisai\Auth\Authorization\AuthorizationDataCreator as AuthorizationDataCreat
 final class AuthorizationDataCreator implements AuthorizationDataCreatorInterface
 {
 
+	public const RootPrivilege = '*';
+
 	/**
 	 * @param array<string> $privileges
 	 */
@@ -63,7 +65,7 @@ final class AuthorizationDataCreator implements AuthorizationDataCreatorInterfac
 			$dataBuilder->addRole($role->name);
 
 			foreach ($role->privileges as $privilege) {
-				if ($privilege === '*') {
+				if ($privilege === self::RootPrivilege) {
 					$dataBuilder->addRoot($role->name);
 				} else {
 					$dataBuilder->allow($role->name, $privilege);

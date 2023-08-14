@@ -3,6 +3,7 @@
 namespace OriCMF\User\DB;
 
 use Nextras\Orm\Collection\ICollection;
+use OriCMF\Auth\Logic\AuthorizationDataCreator;
 use OriCMF\Orm\BaseRepository;
 use OriCMF\Orm\Functions\JsonAnyKeyOrValueExistsFunction;
 use Orisai\Auth\Authorization\PrivilegeProcessor;
@@ -23,14 +24,14 @@ final class UserRepository extends BaseRepository
 	/**
 	 * @return ICollection&iterable<User>
 	 */
-	public function findByPrivilege(string $privilege, bool $includePowerUser = true): ICollection
+	public function findByPrivilege(string $privilege, bool $includeRoot = true): ICollection
 	{
 		$parents = PrivilegeProcessor::getPrivilegeParents($privilege);
 
 		return $this->findBy([
 			JsonAnyKeyOrValueExistsFunction::class,
 			'roles->privileges',
-			$includePowerUser ? ['*'] + $parents : $parents,
+			$includeRoot ? [AuthorizationDataCreator::RootPrivilege] + $parents : $parents,
 		]);
 	}
 
