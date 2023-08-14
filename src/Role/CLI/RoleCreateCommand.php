@@ -73,7 +73,7 @@ final class RoleCreateCommand extends Command
 
 		$missingPrivileges = [];
 		foreach ($privilegeNames as $privilegeName) {
-			if (!$this->authorizer->getData()->privilegeExists($privilegeName)) {
+			if ($privilegeName !== '*' && !$this->authorizer->getData()->privilegeExists($privilegeName)) {
 				$missingPrivileges[] = $privilegeName;
 			}
 		}
