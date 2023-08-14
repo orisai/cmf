@@ -16,8 +16,6 @@
 
 	{if $hasBlock}
 		{if $input instanceof Nette\Forms\Controls\BaseControl}
-			{php $this->global->formsStack[] = $input->getForm(); }
-
 			{var $inputName = $input->getName()}
 			{var $parent = $input->getParent()}
 			{while $parent instanceof Nette\Forms\Container && !$parent instanceof Nette\Forms\Form}
@@ -25,7 +23,9 @@
 				{do $parent = $parent->getParent()}
 			{/while}
 
-			{include block field-{$inputClass} $input, $inputName}
+			{formContext $input->getForm()}
+				{include block field-{$inputClass} $input, $inputName}
+			{/formContext}
 		{else}
 			<span>INPUT TYPE NOT SUPPORTED - HAS TO EXTEND {Nette\Forms\Controls\BaseControl::class}</span>
 		{/if}
