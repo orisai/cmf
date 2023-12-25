@@ -21,11 +21,6 @@ parameters:
 			- Orisai\Exceptions\Check\CheckedException
 
 	ignoreErrors:
-		# Intentionally broken
-		-
-			message: '#^Return type (.+) of method (.+)\:\:setTranslator\(\) should be covariant with (.+)#'
-			path: ../src/UI/Form/Form.php
-
 		# Layout is string|bool|null, check is correct
 		-
 			message: '#^Strict comparison using === between string and null will always evaluate to false\.$#'
