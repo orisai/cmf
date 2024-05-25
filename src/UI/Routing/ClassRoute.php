@@ -13,9 +13,9 @@ final class ClassRoute extends Route
 
 	private const UIMeta = [
 		'action' => [
-			self::PATTERN => '[a-z][a-z0-9-]*',
-			self::FILTER_IN => [OriginalRoute::class, 'path2action'],
-			self::FILTER_OUT => [OriginalRoute::class, 'action2path'],
+			self::Pattern => '[a-z][a-z0-9-]*',
+			self::FilterIn => [OriginalRoute::class, 'path2action'],
+			self::FilterOut => [OriginalRoute::class, 'action2path'],
 		],
 	];
 

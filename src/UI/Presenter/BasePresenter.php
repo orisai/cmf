@@ -124,10 +124,10 @@ abstract class BasePresenter extends Presenter
 		return $this->link($link->getDestination(), $link->getArguments());
 	}
 
-	protected function createTemplate(): BasePresenterTemplate
+	protected function createTemplate(string|null $class = null): BasePresenterTemplate
 	{
 		$templateFactory = $this->getTemplateFactory();
-		$template = $templateFactory->createTemplate($this, $this->formatTemplateClass());
+		$template = $templateFactory->createTemplate($this, $class ?? $this->formatTemplateClass());
 		assert($template instanceof BasePresenterTemplate);
 
 		return $template;

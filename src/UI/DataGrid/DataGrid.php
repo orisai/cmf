@@ -345,7 +345,10 @@ final class DataGrid extends BaseControl
 						$rows[] = $this->getCellValue($row, $rowPrimaryKey);
 					}
 
-					$ids = array_intersect($rows, $form->getHttpData($form::DATA_TEXT, 'actions[items][]'));
+					$httpData = $form->getHttpData($form::DataText, 'actions[items][]');
+					assert(is_array($httpData));
+
+					$ids = array_intersect($rows, $httpData);
 					[, $callback] = $this->globalActions[$action];
 					$callback($ids, $this);
 					$this->data = null;

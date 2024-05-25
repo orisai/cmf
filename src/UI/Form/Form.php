@@ -14,7 +14,7 @@ class Form extends NetteForm
 	 * @deprecated Translate values passed into form directly instead
 	 * @internal
 	 */
-	public function setTranslator(Translator|null $translator = null): self
+	public function setTranslator(Translator|null $translator = null): static
 	{
 		throw Deprecated::create()
 			->withMessage('Do not use form built-in translator, translate values passed into form directly.');

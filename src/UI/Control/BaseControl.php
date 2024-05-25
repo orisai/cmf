@@ -36,10 +36,10 @@ abstract class BaseControl extends Control
 		return $this->firewall ??= $this->getPresenter()->getFirewall();
 	}
 
-	protected function createTemplate(): BaseControlTemplate
+	protected function createTemplate(string|null $class = null): BaseControlTemplate
 	{
 		$templateFactory = $this->getPresenter()->getTemplateFactory();
-		$template = $templateFactory->createTemplate($this, $this->formatTemplateClass());
+		$template = $templateFactory->createTemplate($this, $class ?? $this->formatTemplateClass());
 		assert($template instanceof BaseControlTemplate);
 
 		$template->firewall = $this->getFirewall();

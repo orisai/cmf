@@ -28,7 +28,7 @@ final class PresenterTemplateLocator extends BaseComponentTemplateLocator
 			"@$layoutName",
 			'Presenter',
 			self::BreakClasses,
-			Presenter::DEFAULT_ACTION,
+			Presenter::DefaultAction,
 		);
 	}
 
@@ -42,7 +42,7 @@ final class PresenterTemplateLocator extends BaseComponentTemplateLocator
 			$viewName,
 			'',
 			self::BreakClasses,
-			Presenter::DEFAULT_ACTION,
+			Presenter::DefaultAction,
 		);
 	}
 
