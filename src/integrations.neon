@@ -22,7 +22,6 @@ extensions:
 	orisai.clock: OriNette\Clock\DI\ClockExtension
 	orisai.dataSources: OriNette\DataSources\DI\DataSourceExtension
 	orisai.http.panel: OriNette\Http\Tracy\DI\HttpPanelExtension
-	orisai.httpClient: OriNette\HttpClient\DI\HttpClientExtension
 	orisai.localization: Orisai\Localization\Bridge\NetteDI\LocalizationExtension
 	orisai.monolog: OriNette\Monolog\DI\MonologExtension
 	orisai.scheduler: OriNette\Scheduler\DI\SchedulerExtension
@@ -116,10 +115,6 @@ orisai.console:
 
 orisai.http.panel:
 	enabled: %debug.panels.http%
-
-orisai.httpClient:
-	debug:
-		panel: %debug.panels.httpClient%
 
 orisai.localization:
 	debug:
