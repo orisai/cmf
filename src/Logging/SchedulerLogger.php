@@ -17,13 +17,18 @@ final class SchedulerLogger
 
 	public function log(Throwable $throwable, JobInfo $info, JobResult $result): void
 	{
+		$id = $info->getId();
 		$name = $info->getName();
-		$this->logger->error("Job $name failed", [
+
+		$this->logger->error("Job [$id] $name failed", [
 			'exception' => $throwable,
+			'id' => $id,
 			'name' => $name,
-			'expression' => $info->getExpression(),
+			'expression' => $info->getExtendedExpression(),
+			'runSecond' => $info->getRunSecond(),
 			'start' => $info->getStart()->format(DateTimeInterface::ATOM),
 			'end' => $result->getEnd()->format(DateTimeInterface::ATOM),
+			'forcedRun' => $info->isForcedRun(),
 		]);
 	}
 
