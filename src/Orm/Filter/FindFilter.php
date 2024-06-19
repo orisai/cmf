@@ -98,6 +98,7 @@ class FindFilter
 
 	/**
 	 * @param Closure(FindFilter): void $conditions
+	 * @param-immediately-invoked-callable $conditions
 	 */
 	public function and(Closure $conditions): void
 	{
@@ -106,6 +107,7 @@ class FindFilter
 
 	/**
 	 * @param Closure(FindFilter): void $conditions
+	 * @param-immediately-invoked-callable $conditions
 	 */
 	public function or(Closure $conditions): void
 	{
@@ -114,6 +116,7 @@ class FindFilter
 
 	/**
 	 * @param Closure(FindFilter): void $conditions
+	 * @param-immediately-invoked-callable $conditions
 	 */
 	private function logicalOperator(Closure $conditions, string $operator): void
 	{

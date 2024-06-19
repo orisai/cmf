@@ -77,6 +77,7 @@ final class DataGrid extends BaseControl
 
 	/**
 	 * @param Closure(SearchParameters): array<mixed> $dataSource
+	 * @param-later-invoked-callable $dataSource
 	 */
 	public function __construct(protected string $rowPrimaryKey, protected Closure $dataSource)
 	{
@@ -107,6 +108,7 @@ final class DataGrid extends BaseControl
 
 	/**
 	 * @param Closure(array<(int|string)>, $this): void $action
+	 * @param-later-invoked-callable $action
 	 */
 	public function addGlobalAction(string $name, string $label, Closure $action): void
 	{
@@ -114,6 +116,7 @@ final class DataGrid extends BaseControl
 	}
 
 	/**
+	 * @param-later-invoked-callable $itemsCountCallback
 	 * @phpstan-param Closure(SearchParameters): (int|null) $itemsCountCallback
 	 */
 	public function setPagination(Closure $itemsCountCallback): void
@@ -221,6 +224,7 @@ final class DataGrid extends BaseControl
 
 	/**
 	 * @param Closure(SearchParameters): (int|null) $paginatorItemsCountCallback
+	 * @param-immediately-invoked-callable $itemsCountCallback
 	 */
 	private function configurePage(
 		Paginator $paginator,
