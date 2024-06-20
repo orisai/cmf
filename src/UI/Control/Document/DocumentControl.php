@@ -81,17 +81,17 @@ final class DocumentControl extends BaseControl
 
 	public function getTitle(): string|null
 	{
-		return $this['head-title']->getMain();
+		return $this['head']['title']->getMain();
 	}
 
 	public function setAuthor(string $author): void
 	{
-		$this['head-meta']->setAuthor($author);
+		$this['head']['meta']->setAuthor($author);
 	}
 
 	public function setDescription(string $description): void
 	{
-		$meta = $this['head-meta'];
+		$meta = $this['head']['meta'];
 		$meta->setDescription($description);
 		$meta->addOpenGraph('description', $description);
 	}

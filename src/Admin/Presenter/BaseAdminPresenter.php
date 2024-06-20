@@ -66,7 +66,7 @@ abstract class BaseAdminPresenter extends BasePresenter
 		$this->setLayout(__DIR__ . '/@layout.latte');
 		$this->template->menu = $this->menu;
 
-		$head = $this['document-head'];
+		$head = $this['document']['head'];
 		$head['meta']->setRobots(['noindex', 'nofollow']);
 		$head['title']->setModule(t('ori.cmf.admin.title'));
 	}

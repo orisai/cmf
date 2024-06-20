@@ -67,7 +67,7 @@ abstract class BasePublicPresenter extends BasePresenter
 		$this->setLayout(__DIR__ . '/@layout.latte');
 		$this->template->menu = $this->menu;
 
-		$meta = $this['document-head-meta'];
+		$meta = $this['document']['head']['meta'];
 		if ($this->config->get(BuildConfig::class)->isStable()) {
 			$meta->setRobots(['index', 'follow']);
 		} else {

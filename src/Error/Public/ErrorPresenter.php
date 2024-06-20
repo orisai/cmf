@@ -21,7 +21,7 @@ final class ErrorPresenter extends BasePublicPresenter
 	public function render(Throwable|null $throwable = null): void
 	{
 		$this->utilRender($throwable);
-		$this['document-head-meta']->setRobots(['noindex']);
+		$this['document']['head']['meta']->setRobots(['noindex']);
 	}
 
 }
