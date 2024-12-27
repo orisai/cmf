@@ -29,12 +29,6 @@ parameters:
 			path: ../src/UI/Presenter/BasePresenter.php
 			count: 1
 
-		# Weakly typed underlying lib
-		-
-			message: '#^(.+)does not accept array(.+)$#'
-			path: ../src/UI/DataGrid/DataGrid.php
-			count: 1
-
 		# Types in callables
 		-
 			message: '#^Method (.+)UITemplateExtension\:\:getFilters\(\) return type has no signature specified for callable\.$#'

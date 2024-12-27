@@ -17,7 +17,7 @@ final class TitleControl extends BaseControl
 
 	private string|null $main = null;
 
-	private string|null $separator = '-';
+	private string $separator = '-';
 
 	private bool $revert = false;
 
@@ -97,8 +97,8 @@ final class TitleControl extends BaseControl
 		$main = $this->main;
 
 		if ($main === null || $site === null) {
-			$separator = null;
-		} elseif ($this->separator === null) {
+			$separator = '';
+		} elseif ($this->separator === '') {
 			$separator = ' ';
 		} else {
 			$separator = sprintf(' %s ', $this->separator);

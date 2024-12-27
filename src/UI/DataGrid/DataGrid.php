@@ -224,7 +224,7 @@ final class DataGrid extends BaseControl
 
 	/**
 	 * @param Closure(SearchParameters): (int|null) $paginatorItemsCountCallback
-	 * @param-immediately-invoked-callable $itemsCountCallback
+	 * @param-immediately-invoked-callable $paginatorItemsCountCallback
 	 */
 	private function configurePage(
 		Paginator $paginator,
