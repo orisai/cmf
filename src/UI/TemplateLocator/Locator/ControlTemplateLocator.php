@@ -9,7 +9,7 @@ use OriCMF\UI\TemplateLocator\Exception\NoTemplateFound;
 final class ControlTemplateLocator extends BaseComponentTemplateLocator
 {
 
-	public const DefaultViewName = 'default';
+	public const string DefaultViewName = 'default';
 
 	/**
 	 * @throws NoTemplateFound

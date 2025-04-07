@@ -11,7 +11,7 @@ use OriCMF\UI\TemplateLocator\Exception\NoTemplateFound;
 final class PresenterTemplateLocator extends BaseComponentTemplateLocator
 {
 
-	private const BreakClasses = [
+	private const array BreakClasses = [
 		Presenter::class,
 		BasePresenter::class,
 		BaseAdminPresenter::class,

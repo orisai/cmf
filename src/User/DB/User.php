@@ -29,9 +29,9 @@ final class User extends Entity
 {
 
 	// Not all possible are listed here, just the common ones
-	public const
-		TypeSystem = 'system',
-		TypeReal = null;
+	public const string TypeSystem = 'system';
+
+	public const null TypeReal = null;
 
 	public function __construct(string $fullName, string|null $type = self::TypeReal)
 	{

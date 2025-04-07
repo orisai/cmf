@@ -19,9 +19,9 @@ final class Email extends Entity
 {
 
 	// Not all possible are listed here, just the common ones
-	public const TypePrimary = 'primary';
+	public const string TypePrimary = 'primary';
 
-	public const TypeBilling = 'billing';
+	public const string TypeBilling = 'billing';
 
 	public function __construct(string $emailAddress, string $type, User $user)
 	{

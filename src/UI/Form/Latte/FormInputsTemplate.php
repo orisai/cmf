@@ -8,7 +8,7 @@ use Nette\Forms\Control;
 final class FormInputsTemplate extends Template
 {
 
-	public const Path = __DIR__ . '/FormInputs.latte';
+	public const string Path = __DIR__ . '/FormInputs.latte';
 
 	public Control $input;
 

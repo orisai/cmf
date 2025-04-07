@@ -36,7 +36,7 @@ abstract class BasePresenter extends Presenter
 	use ShortDefaultActionName;
 	use FlexibleTemplatePresenter;
 
-	public const LayoutPath = __DIR__ . '/@layout.latte';
+	public const string LayoutPath = __DIR__ . '/@layout.latte';
 
 	private DocumentControlFactory $documentFactory;
 

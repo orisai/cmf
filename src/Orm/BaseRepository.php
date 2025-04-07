@@ -19,7 +19,7 @@ use function in_array;
 abstract class BaseRepository extends Repository
 {
 
-	private const Functions = [
+	private const array Functions = [
 		InsensitiveLikeSearchFunction::class,
 		JsonAnyKeyOrValueExistsFunction::class,
 		ToManyNotEqualFunction::class,

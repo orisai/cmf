@@ -14,7 +14,7 @@ use Throwable;
 final class ErrorForwardPresenter extends Presenter
 {
 
-	private const DefaultErrorPresenter = ':' . PublicErrorPresenter::class . ':default';
+	private const string DefaultErrorPresenter = ':' . PublicErrorPresenter::class . ':default';
 
 	/**
 	 * @var array<array<string>>

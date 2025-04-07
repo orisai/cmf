@@ -9,9 +9,9 @@ use Nette\Routing\Route;
 final class ClassRoute extends Route
 {
 
-	private const PresenterKey = 'presenter';
+	private const string PresenterKey = 'presenter';
 
-	private const UIMeta = [
+	private const array UIMeta = [
 		'action' => [
 			self::Pattern => '[a-z][a-z0-9-]*',
 			self::FilterIn => [OriginalRoute::class, 'path2action'],

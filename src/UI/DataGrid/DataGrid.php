@@ -27,10 +27,10 @@ use function Orisai\TranslationContracts\t;
 final class DataGrid extends BaseControl
 {
 
-	public const OrderAsc = 'asc',
+	public const string OrderAsc = 'asc',
 		OrderDesc = 'desc';
 
-	public const TemplatePath = __DIR__ . '/DataGrid.latte';
+	public const string TemplatePath = __DIR__ . '/DataGrid.latte';
 
 	/** @var array<string, mixed> */
 	#[Persistent]

@@ -11,7 +11,7 @@ use Orisai\Auth\Authorization\AuthorizationDataCreator as AuthorizationDataCreat
 final class AuthorizationDataCreator implements AuthorizationDataCreatorInterface
 {
 
-	public const RootPrivilege = '*';
+	public const string RootPrivilege = '*';
 
 	/**
 	 * @param array<string> $privileges
