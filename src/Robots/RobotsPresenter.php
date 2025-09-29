@@ -14,9 +14,10 @@ final class RobotsPresenter implements IPresenter
 	{
 		$content = <<<'TXT'
 User-agent: *
-Disallow: /*?*fbclid=
-Disallow: /*?*fid=
-Disallow: /*?*do=
+Disallow: /*?fid=
+Disallow: /*&fid=
+Disallow: /*?do=
+Disallow: /*&do=
 TXT;
 
 		return new FileContentResponse('robots.txt', $content, 'text/plain', false);
